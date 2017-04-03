@@ -4,7 +4,7 @@ import bs4
 import os
 from collections import defaultdict
 
-token = '2PtHXnbMH-EAIrKUGitGgN2Edg1lmsLwjvU0jDaETseU8vCPdnxhV0AyslIW_vxD'
+token = 'your_token_here'
 
 def genius_get_artists(artist_name):
   """
