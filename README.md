@@ -1,4 +1,4 @@
-# Use Recurrent Neural Network to generate novel song lyrics"
+# Use Recurrent Neural Network to generate novel song lyrics
 
 Inspired by [tensorflow-rnn-shakespeare](https://github.com/martin-gorner/tensorflow-rnn-shakespeare)
 
