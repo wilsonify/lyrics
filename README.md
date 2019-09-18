@@ -1,162 +1,77 @@
-# Code for the Recurrent Neural Network in the presentation "Tensorflow and deep learning - without a PhD, Part 2"
+# Use Recurrent Neural Network to generate novel song lyrics"
 
-The presentation itself is available here:
+Inspired by [tensorflow-rnn-shakespeare](https://github.com/martin-gorner/tensorflow-rnn-shakespeare)
 
-* [Video](https://t.co/cIePWmdxVE)
-* [Slides](https://goo.gl/jrd7AR)
+## dependencies
+uses Tensorflow-gpu 1.14 compiled for compute_capability==3.0 
+which depends on python=3.6, nvidia-390-driver, cuda=9.0, cudnn=7, nccl=2.2 
 
 ## Usage:
+```
+source venv/bin/activate
+python rnn_train.py
+```
+trains a language model on a directory of txt files (song lyrics or otherwise).
 
 ```
-> python3 rnn_train.py
+tensorboard --logdir=config.log_dir
 ```
-The script **rnn_train.py** trains a language model on the complete works of William Shakespeare.
-You can also train on Tensorflow Python code. See comments in the file.
-
-The file **rnn_train_stateistuple.py** implements the same model using 
-the state_is_tuple=True option in tf.nn.rnn_cell.MultiRNNCell (default).
-Training is supposedly faster (by ~10%) but handling the state as
-a tuple is a bit more cumbersome.
+rnn_train.py** is set up to save training and validation data as "Tensorboard sumaries" in the "log" folder.
+They can be visualised with Tensorboard.
 
 ```
-> tensorboard --logdir=log
-```
-The training script **rnn_train.py** is set up to save training and validation
-data as "Tensorboard sumaries" in the "log" folder. They can be visualised with Tensorboard.
-In the screenshot below, you can see the RNN being trained on 6 epochs of Shakespeare.
-The training and valisation curves stay close together which means that overfitting is not a major issue here.
- You can try to add some dropout but it will not improve the situation much becasue it is already quite good.
- 
-![Image](https://martin-gorner.github.io/tensorflow-rnn-shakespeare/tensorboard_screenshot.png)
-```
-> python3 rnn_play.py
+python rnn_play.py
 ``` 
-   
-The script **rnn_play.py** uses a trained snapshot to generate a new "Shakespeare" play.  
+uses a trained snapshot (saved to checkpoints folder) to generate a new text.  
 You can also generate new "Tensorflow Python" code. See comments in the file.
 
-Snapshot files can be downloaded from here:  
-   
-[Fully trained](https://drive.google.com/file/d/0B5njS_LX6IsDQ1laeDJ6dktSb3M/view?usp=sharing)
-on Shakespeare or Tensorflow Python source.   
-   
-[Partially trained](https://drive.google.com/file/d/0B5njS_LX6IsDc2Y0X1VWc1pVTE0/view?usp=sharing)
-to see how they make progress in training.
+# Tests
+```
+python setup.py install
+python -m pytest
+```
+ 
+# generated Beatles
+```
+Well, it's a long with you
+I'm so slad at's time
+And I'm going to love you any old way
+
+[Verse 1]
+Got a good roasing for the day, the world
+If the sun you stile, hame whit me day
+I want to be your lover baby
+I want to be your man
+
+[Verse 2]
+Love you all the time
+I'clld so lave you while ever day
+I said, I love you
+And I'm always thinking of you
+Oh, oh, oh
+You treat me badly
+I love you madly
+You've really got a hold on me
+You've really got a hold on me, baby
+
+[Chorus]
+You've really got a hold on me
+DOoh, some insurance on me, baby
+Well, if you ever, ever say goodbye
+I'm gonna go right home and die
+Oh, if you want me, baby
+You've gotta come to me
+Mm honey
+Baby sawk home
+Seeks nowhing what sometnd cauld be baunt
+Nowhere man come your made yeah
+
+[Verse 2]
+The dud as aheit Is going to set you through
+Come on, pastencco in in nowhere, pain ag the haie
+You can stop theme soresede
+Who wan sun you know the walrus und
+Her lajj, don't you tell me why con't you tell me what you see
+It is no surprise now, what you see is me
 
 ```
-> python3 -m unittest tests.py
-```
-Unit tests can be run with the command above.
- 
-## FAQ
-
-### 1) Why not apply a softmax activation function to the outputs of the LSTM directly?
-That is because you need to convert vectors of size CELLSIZE to size ALPHASIZE.
-The reduction of dimensions is best performed by a learned layer.
-
-###  Why does it not work with just one cell? The RNN cell state should still enable state transitions, even without unrolling ?
-Yes, a cell is a state machine and can represent state transitions like
-the fact that an there is a pending open parenthesis and that it will need
-to be closed at some point. The problem is to make the network learn those
-transitions. The learning algorithm only modifies weights and biases. The input
-state of the cell cannot be modified by it: that is a big problem if the wrong
-predictions returned by the cell are caused by a bad input state. The solution
-is to unroll the cell into a sequence of replicas. Now the learning algorithm
-can change the weights and biases to influence the state flowing from one cell
-in the sequence to the next (with the exception of the input state of the first
-cell)
-
-###  3) OK, so this trained model will only be able to generate state transitions over a distance equal to the number of cells in an unrolled sequence, right ?
-No, it will be able to *learn* state transitions over that distance only.
-However, when we will use the model to generate text, it will be able to produce
-correct state transitions over longer distances. For example, if the unrolling
-size is 30, the model will be able to correctly open and close parentheses over
-distances of 100 characters or more. But you will have to teach it this trick
-using examples of 30 or less characters.
-
-###  4) So, now that I have unrolled the RNN cell, state passing is taken care of. I just have to call my train_step in a loop right ?
-Not quite, you sill need to save the last state of the unrolled sequence of
-cells, and feed it as the input state for the next minibatch in the traing loop.
-
-### 5) What is the proper way of batching training sequences ?
-All the character sequences in the first batch, must continue in the second
-batch and so on, because all the output states produced by the sequences in the
-first batch will be used as input states for the sequences of the second batch.
-txt.rnn_minibatch_sequencer is a utility provided for this purpose.
-It even continues sequences from one epoch to the next (apart from one sequence
-in the last batch of the epoch: the one where the training text finishes. There
-is no way to continue that one.) So there is no need to reset the state between
-epochs. The training will see at most one incoherent state per epoch, which is
-negligible.
-
-### 6) Any other gotcha's ?
-When saving and restoring the model, you must name your placeholders and name
-your nodes if you want to target them by name in the restored version (when you
-run a session.run([-nodes-], feed_dict={-placeholders-}) using the restored model.
-
-### 7) This is not serious. I want more math!
-If you want to go deeper in the math, the one piece you are missing is the explanation
-of retropropagation, i.e. the algorithm used to compute gradients across multiple layers
-of neurons. Google it! It's useful if you want to re-implement gradient descent on your
-own, or understand how it is done. And it's not that hard. If the explanations do not make
-sense to you, it's probably because the explanations are bad. Google more :-)
-
-The second piece of math I would advise you to read on is the math behind "sampled softmax"
-in RNNs. You need to write down the softmax equations, the loss functions, derive it, and
-then try to devise cheap ways of approximating this gradient. This is an [active area of
-research](http://sebastianruder.com/word-embeddings-softmax/index.html).
-
-The third interesting piece of mathematics is to understand why LSTMs converge while RNNs built with basic
-RNN blocks do not.
-
-Good mathematical hunting!﻿
-
-### 8) Show us some generated Shakespeare
-```
-         TITUS ANDRONICUS
-
-
-ACT I
- 
-SCENE III	An ante-chamber. The COUNT's palace.
- 
-[Enter CLEOMENES, with the Lord SAY]
- 
-Chamberlain
-    Let me see your worshing in my hands.
- 
-LUCETTA
-    I am a sign of me, and sorrow sounds it.
- 
-[Enter CAPULET and LADY MACBETH]
- 
-What manner of mine is mad, and soon arise?
- 
-JULIA
-    What shall by these things were a secret fool,
-    That still shall see me with the best and force?
- 
-Second Watchman
-    Ay, but we see them not at home: the strong and fair of thee,
-    The seasons are as safe as the time will be a soul,
-    That works out of this fearful sore of feather
-    To tell her with a storm of something storms
-    That have some men of man is now the subject.
-    What says the story, well say we have said to thee,
-    That shall she not, though that the way of hearts,
-    We have seen his service that we may be sad.
- 
-[Retains his house]
-ADRIANA What says my lord the Duke of Burgons of Tyre?
- 
-DOMITIUS ENOBARBUS
-    But, sir, you shall have such a sweet air from the state,
-    There is not so much as you see the store,
-    As if the base should be so foul as you.
- 
-DOMITIUS ENOY
-    If I do now, if you were not to seek to say,
-    That you may be a soldier's father for the field.
- 
-[Exit]
- ```
