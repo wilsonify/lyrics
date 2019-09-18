@@ -1,0 +1,9 @@
+setup.py
+recurrent/__init__.py
+recurrent/my_txtutils.py
+recurrent/rnn_play.py
+recurrent/rnn_train.py
+recurrent.egg-info/PKG-INFO
+recurrent.egg-info/SOURCES.txt
+recurrent.egg-info/dependency_links.txt
+recurrent.egg-info/top_level.txt
