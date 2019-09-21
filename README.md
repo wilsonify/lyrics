@@ -1,10 +1,29 @@
-# Use Recurrent Neural Network to generate novel song lyrics
+# lyrics is a project for using Recurrent Neural Networks to generate song lyrics
 
 Inspired by [tensorflow-rnn-shakespeare](https://github.com/martin-gorner/tensorflow-rnn-shakespeare)
 
-## dependencies
-uses Tensorflow-gpu 1.14 compiled for compute_capability==3.0 
-which depends on python=3.6, nvidia-390-driver, cuda=9.0, cudnn=7, nccl=2.2 
+## Installation
+You're going to need tensorflow-gpu==1.12 (old).
+this project is intened to use an old GPU (GTX 650 compute capability=3.0) 
+which is not officially supported by tensorflow, so compile tensorflow from source first.
+
+some notable tensorflow dependencies:
+```
+nccl==2.2
+cuDNN=7.7
+cuda=9.0
+nvidia-driver-390
+```
+
+```bash
+python -m virtualenv venv
+source venv/bin/activate
+python -m pip install pkg/tensorflow-1.12.0-cp36-cp36m-linux_x86_64.whl
+cd src/recurrent
+python setup.py setup.py install
+cd src/grapheme2phoneme/grapheme2phoneme
+python setup.py setup.py install
+```
 
 ## Usage:
 ```
@@ -30,7 +49,7 @@ You can also generate new "Tensorflow Python" code. See comments in the file.
 python setup.py install
 python -m pytest
 ```
- 
+
 # generated Beatles
 ```
 Well, it's a long with you
@@ -75,3 +94,6 @@ Her lajj, don't you tell me why con't you tell me what you see
 It is no surprise now, what you see is me
 
 ```
+
+## Contributing
+Pull requests are welcome.
