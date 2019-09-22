@@ -1,0 +1,11 @@
+version: '3'
+services:
+  some-rabbitmq:
+    image: rabbitmq:3-management-alpine
+    hostname: rabbit-host
+    ports:
+     - "32779:4369"
+     - "32778:5671"
+     - "32777:5672"
+     - "32776:15671"
+     - "32775:15672"
