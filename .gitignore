@@ -147,3 +147,6 @@ dmypy.json
 
 # don't upload song lyrics
 data/
+
+#codewind
+.cw-settings
