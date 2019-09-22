@@ -8,7 +8,7 @@ import sys
 
 import numpy as np
 
-from recurrent.recurrent import config
+from recurrent import config
 
 
 def convert_from_alphabet(character):

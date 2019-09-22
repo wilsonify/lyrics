@@ -1,5 +1,5 @@
 import pytest
-import graph
+from grapheme2phoneme import consumer
 
 
 def test_reduce_to_string(logger):
@@ -13,7 +13,7 @@ def test_reduce_to_string(logger):
              ['IH0', 'N'],
              ['DH', 'AE1', 'T'],
              ['N', 'AH1', 'M', 'B', 'ER0']]
-    output = app.reduce_to_string(input)
+    output = consumer.reduce_to_string(input)
     expected_output = "OW1 L AO1 R D AY1 W AA1 N T T UW1 B IY1 IH0 N DH AE1 T N AH1 M B ER0"
     assert output == expected_output
 
@@ -21,7 +21,7 @@ def test_reduce_to_string(logger):
 def test_grapheme2phoneme(logger):
     logger.info("test_grapheme2phoneme")
     input = "Words are flowing out like endless rain into a paper cup"
-    output = app.graphemes2phonemes(input)
+    output = consumer.graphemes2phonemes(input)
     expected_output = [
         ['W', 'ER1', 'D', 'Z'],
         ['AA1', 'R'],
@@ -39,7 +39,7 @@ def test_grapheme2phoneme(logger):
 
 def test_create_connection_channel(logger):
     logger.info("test_create_connection_channel")
-    channel = app.create_connection_channel()
+    channel = consumer.create_connection_channel()
 
 
 def test_route_callback(logger):

@@ -6,7 +6,7 @@ from logging.config import dictConfig
 import nltk
 import pika
 
-import throat
+from grapheme2phoneme import throat
 
 home = os.path.expanduser("~")
 local_data = os.path.join(home, "phoneme")
