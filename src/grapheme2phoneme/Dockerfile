@@ -6,4 +6,3 @@ RUN pip install -r requirements.txt
 RUN python setup.py install
 RUN python -m nltk.downloader cmudict
 CMD ["python", "grapheme2phoneme/consumer.py"]
-EXPOSE 5000
