@@ -5,12 +5,12 @@ from logging.config import dictConfig
 
 import nltk
 import pika
+from grapheme2phoneme import config
 from grapheme2phoneme import throat
 
 home = os.path.expanduser("~")
 local_data = os.path.join(home, "phoneme")
 os.makedirs(local_data, exist_ok=True)
-routing_key = "green"
 
 arpabet = nltk.corpus.cmudict.dict()
 
@@ -60,8 +60,8 @@ def create_connection_channel():
     logging.info("create_connection_channel")
     cred = pika.PlainCredentials("guest", "guest")
     connection_parameters = pika.ConnectionParameters(
-        host=os.getenv("AMQP_HOST", "localhost"),
-        port=os.getenv("AMQP_PORT", 5672),
+        host=config.amqp_host,
+        port=config.amqp_port,
         heartbeat=10000,
         blocked_connection_timeout=10001,
         credentials=cred,
@@ -95,11 +95,11 @@ def route_callback(ch, method, properties, body):
     try:
         callback(ch, method, properties, body)
         logging.info("done")
-        ch.basic_publish(exchange="done_green", routing_key=routing_key, body=body)
+        ch.basic_publish(exchange="done_green", routing_key=config.routing_key, body=body)
 
     except:
         logging.exception("failed to consume message")
-        ch.basic_publish(exchange="fail_green", routing_key=routing_key, body=body)
+        ch.basic_publish(exchange="fail_green", routing_key=config.routing_key, body=body)
 
 
 def process_payload(payload):
@@ -160,16 +160,5 @@ def main():
 
 
 if __name__ == "__main__":
-    logging_config_dict = dict(
-        version=1,
-        formatters={
-            "simple": {
-                "format": """%(asctime)s | %(filename)s | %(lineno)d | %(levelname)s | %(message)s"""
-            }
-        },
-        handlers={"console": {"class": "logging.StreamHandler", "formatter": "simple"}},
-        root={"handlers": ["console"], "level": logging.DEBUG},
-    )
-
-    dictConfig(logging_config_dict)
+    dictConfig(config.logging_config_dict)
     main()
