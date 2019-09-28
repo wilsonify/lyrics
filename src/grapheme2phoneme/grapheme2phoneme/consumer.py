@@ -60,8 +60,8 @@ def create_connection_channel():
     logging.info("create_connection_channel")
     cred = pika.PlainCredentials("guest", "guest")
     connection_parameters = pika.ConnectionParameters(
-        host=os.getenv("RABBIT_HOST", "localhost"),
-        port=os.getenv("RABBIT_PORT", 5672),
+        host=os.getenv("AMQP_HOST", "localhost"),
+        port=os.getenv("AMQP_PORT", 5672),
         heartbeat=10000,
         blocked_connection_timeout=10001,
         credentials=cred,

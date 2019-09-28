@@ -1,15 +1,18 @@
-import os
-import sys
 import glob
 import logging
+import os
 from logging.config import dictConfig
+
 import pika
 
 routing_key = "green"
 
 
 def create_connection_channel():
-    connection_parameters = pika.ConnectionParameters(host="172.17.0.2", port=5672)
+    connection_parameters = pika.ConnectionParameters(
+        host=os.getenv("AMQP_HOST", "172.17.0.1"),
+        port=os.getenv("AMQP_PORT", 5672)
+    )
     connection = pika.BlockingConnection(connection_parameters)
     channel = connection.channel()
     return channel

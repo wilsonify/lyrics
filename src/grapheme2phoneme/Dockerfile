@@ -1,6 +1,6 @@
 FROM python:3.7-alpine
-ENV RABBIT_HOST "172.17.0.1"
-ENV RABBIT_PORT "32777"
+ENV AMQP_HOST "172.17.0.1"
+ENV AMQP_PORT "32777"
 ADD . /grapheme2phoneme
 WORKDIR /grapheme2phoneme
 RUN chmod 644 grapheme2phoneme/consumer.py
