@@ -61,8 +61,8 @@ def create_connection_channel():
     logging.info("create_connection_channel")
     cred = pika.PlainCredentials("guest", "guest")
     connection_parameters = pika.ConnectionParameters(
-        host="172.17.0.2",
-        port=5672,
+        host="172.17.0.1",
+        port=32777,
         heartbeat=10000,
         blocked_connection_timeout=10001,
         credentials=cred,
