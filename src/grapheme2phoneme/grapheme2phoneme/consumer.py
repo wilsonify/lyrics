@@ -60,8 +60,8 @@ def create_connection_channel():
     logging.info("create_connection_channel")
     cred = pika.PlainCredentials("guest", "guest")
     connection_parameters = pika.ConnectionParameters(
-        host=os.getenv("RABBIT_HOST", "172.17.0.1"),
-        port=os.getenv("RABBIT_PORT", 32777),
+        host=os.getenv("RABBIT_HOST", "localhost"),
+        port=os.getenv("RABBIT_PORT", 5672),
         heartbeat=10000,
         blocked_connection_timeout=10001,
         credentials=cred,
