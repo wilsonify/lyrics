@@ -8,16 +8,12 @@ import pika
 from grapheme2phoneme import config
 from grapheme2phoneme import throat
 
-home = os.path.expanduser("~")
-local_data = os.path.join(home, "phoneme")
-os.makedirs(local_data, exist_ok=True)
-
 arpabet = nltk.corpus.cmudict.dict()
 
 
 def reduce_to_string(list_of_lists):
     def flatten(nested):
-        if nested == []:
+        if not nested:
             return nested
         if isinstance(nested[0], list):
             return flatten(nested[0]) + flatten(nested[1:])
@@ -32,6 +28,7 @@ def reduce_to_string(list_of_lists):
 def word2phoneme(grapheme):
     grapheme = grapheme.lower()
     grapheme = re.sub(pattern=r'\W+', repl="", string=grapheme)
+    # noinspection PyUnusedLocal
     phoneme = grapheme
     try:
         phoneme = arpabet[grapheme][0]
@@ -58,31 +55,23 @@ def graphemes2phonemes(body):
 
 def create_connection_channel():
     logging.info("create_connection_channel")
-    cred = pika.PlainCredentials("guest", "guest")
-    connection_parameters = pika.ConnectionParameters(
-        host=config.amqp_host,
-        port=config.amqp_port,
-        heartbeat=10000,
-        blocked_connection_timeout=10001,
-        credentials=cred,
-    )
 
-    connection = pika.BlockingConnection(connection_parameters)
+    connection = pika.BlockingConnection(config.connection_parameters)
 
     channel = connection.channel()
     channel.basic_qos(prefetch_count=1)
 
-    channel.exchange_declare(exchange="try_green", exchange_type="topic")
-    channel.exchange_declare(exchange="done_green", exchange_type="topic")
-    channel.exchange_declare(exchange="fail_green", exchange_type="topic")
+    channel.exchange_declare(exchange=config.try_exchange, exchange_type="topic")
+    channel.exchange_declare(exchange=config.done_exchange, exchange_type="topic")
+    channel.exchange_declare(exchange=config.fail_exchange, exchange_type="topic")
 
-    channel.queue_declare("try_green", durable=True, exclusive=False, auto_delete=False)
-    channel.queue_declare("done_green", durable=True, exclusive=False, auto_delete=False)
-    channel.queue_declare("fail_green", durable=True, exclusive=False, auto_delete=False)
+    channel.queue_declare(config.try_exchange, durable=True, exclusive=False, auto_delete=False)
+    channel.queue_declare(config.done_exchange, durable=True, exclusive=False, auto_delete=False)
+    channel.queue_declare(config.fail_exchange, durable=True, exclusive=False, auto_delete=False)
 
-    channel.queue_bind(queue="try_green", exchange="try_green", routing_key="green")
-    channel.queue_bind(queue="done_green", exchange="done_green", routing_key="green")
-    channel.queue_bind(queue="fail_green", exchange="fail_green", routing_key="green")
+    channel.queue_bind(queue=config.try_exchange, exchange=config.try_exchange, routing_key="green")
+    channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key="green")
+    channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key="green")
 
     return channel
 
@@ -95,11 +84,11 @@ def route_callback(ch, method, properties, body):
     try:
         callback(ch, method, properties, body)
         logging.info("done")
-        ch.basic_publish(exchange="done_green", routing_key=config.routing_key, body=body)
+        ch.basic_publish(exchange=config.done_exchange, routing_key=config.routing_key, body=body)
 
     except:
         logging.exception("failed to consume message")
-        ch.basic_publish(exchange="fail_green", routing_key=config.routing_key, body=body)
+        ch.basic_publish(exchange=config.fail_exchange, routing_key=config.routing_key, body=body)
 
 
 def process_payload(payload):
@@ -107,7 +96,7 @@ def process_payload(payload):
     payload_head, payload_tail = os.path.splitext(payload)
     payload_head_head, payload_head_tail = os.path.split(payload_head)
     result_file_name = payload_head_tail + '_phoneme.txt'
-    result_dir = os.path.join(local_data, payload_head_head, "phoneme")
+    result_dir = os.path.join(config.local_data, payload_head_head, "phoneme")
     result_path = os.path.join(result_dir, result_file_name)
     os.makedirs(result_dir, exist_ok=True)
     result = ""
@@ -153,7 +142,7 @@ def main():
     channel = create_connection_channel()
     print(" [*] Waiting for logs. To exit press CTRL+C")
     channel.basic_consume(
-        queue="try_green", on_message_callback=route_callback, auto_ack=True
+        queue=config.try_exchange, on_message_callback=route_callback, auto_ack=True
     )
 
     channel.start_consuming()

@@ -34,7 +34,7 @@ def match_and_replace(
     return "".join(characters)
 
 
-def make_regex_fragment_from_rules_English_to_phonemes_special_symbols(
+def make_regex_fragment_from_rules_english_to_phonemes_special_symbols(
         rule_pattern=None
 ):
     regex = r""
@@ -54,7 +54,7 @@ def make_rule_regex(
         # Use a non-capturing group to match the left context.
         rule += \
             r"(?:" + \
-            make_regex_fragment_from_rules_English_to_phonemes_special_symbols(
+            make_regex_fragment_from_rules_english_to_phonemes_special_symbols(
                 rule_pattern=left_context
             ) + \
             ")"
@@ -64,7 +64,7 @@ def make_rule_regex(
         # Add a lookahead pattern.
         rule += \
             r"(?=" + \
-            make_regex_fragment_from_rules_English_to_phonemes_special_symbols(
+            make_regex_fragment_from_rules_english_to_phonemes_special_symbols(
                 rule_pattern=right_context
             ) + \
             ")"

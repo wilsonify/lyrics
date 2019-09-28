@@ -1,31 +1,30 @@
 import glob
 import logging
+import os
 from logging.config import dictConfig
 
 import pika
 from grapheme2phoneme import config
 
 
-def create_connection_channel():
-    connection_parameters = pika.ConnectionParameters(
-        host=config.amqp_host,
-        port=config.amqp_port
-    )
-    connection = pika.BlockingConnection(connection_parameters)
-    channel = connection.channel()
-    return channel
-
-
-def main():
+def main(glob_pattern):
     logging.info("main")
-    channel = create_connection_channel()
+    connection = pika.BlockingConnection(config.connection_parameters)
+    channel = connection.channel()
 
-    for filename in glob.glob("/home/thom/phoneme/beatles_lyrics/*.txt"):
-        channel.basic_publish(exchange="try_green", routing_key=config.routing_key, body=filename)
+    for filename in glob.glob(glob_pattern):
+        channel.basic_publish(exchange=config.try_exchange, routing_key=config.routing_key, body=filename)
         logging.info(" [x] Sent %r:%r" % (config.routing_key, filename))
     channel.connection.close()
 
 
 if __name__ == "__main__":
     dictConfig(config.logging_config_dict)
-    main()
+    logging.debug("amqp_host = {}".format(config.amqp_host))
+    logging.debug("amqp_port = {}".format(config.amqp_port))
+    logging.debug("routing_key = {}".format(config.routing_key))
+    logging.debug("try_exchange = {}".format(config.try_exchange))
+    logging.debug("done_exchange = {}".format(config.done_exchange))
+    logging.debug("fail_exchange = {}".format(config.fail_exchange))
+    default_glob = os.path.join(config.local_data, "beatles_lyrics/*.txt")
+    main(glob_pattern=default_glob)

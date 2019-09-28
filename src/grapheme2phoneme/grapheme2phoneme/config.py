@@ -1,6 +1,8 @@
 import logging
 import os
 
+import pika
+
 logging_config_dict = dict(
     version=1,
     formatters={
@@ -12,6 +14,24 @@ logging_config_dict = dict(
     root={"handlers": ["console"], "level": logging.DEBUG},
 )
 
-amqp_host = os.getenv("AMQP_HOST", "172.17.0.1")
-amqp_port = os.getenv("AMQP_PORT", 5672)
+amqp_host = os.getenv("AMQP_HOST", "localhost")
+amqp_port = os.getenv("AMQP_PORT", 32777)
 routing_key = "green"
+try_exchange = "try_{}".format(routing_key)
+done_exchange = "done_{}".format(routing_key)
+fail_exchange = "fail_{}".format(routing_key)
+
+home = os.path.expanduser("~")
+local_data = os.path.join(home, "phoneme")
+os.makedirs(local_data, exist_ok=True)
+heartbeat = 10000
+timeout = 10001
+cred = pika.PlainCredentials("guest", "guest")
+
+connection_parameters = pika.ConnectionParameters(
+    host=amqp_host,
+    port=amqp_port,
+    heartbeat=heartbeat,
+    blocked_connection_timeout=timeout,
+    credentials=cred,
+)
