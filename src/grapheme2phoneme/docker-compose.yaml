@@ -1,6 +1,4 @@
 version: '3'
 services:
-  web:
+  grapheme2phoneme:
     build: .
-    ports:
-     - "5000:5000"
