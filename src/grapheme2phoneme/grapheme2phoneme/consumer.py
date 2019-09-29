@@ -84,11 +84,20 @@ def route_callback(ch, method, properties, body):
     try:
         callback(ch, method, properties, body)
         logging.info("done")
-        ch.basic_publish(exchange=config.done_exchange, routing_key=config.routing_key, body=body)
+        ch.basic_publish(
+            exchange=config.done_exchange,
+            routing_key=config.routing_key,
+            properties=properties,
+            body=body)
 
     except:
         logging.exception("failed to consume message")
-        ch.basic_publish(exchange=config.fail_exchange, routing_key=config.routing_key, body=body)
+        ch.basic_publish(
+            exchange=config.fail_exchange,
+            routing_key=config.routing_key,
+            properties=properties,
+            body=body
+        )
 
 
 def process_payload(payload):
