@@ -1,11 +1,26 @@
 import logging
+import os
 
-from phoneme2grapheme import nmt
 import pytest
+from phoneme2grapheme import nmt
+
+test_dir = os.path.dirname(__file__)
+data_dir = os.path.join(test_dir, "data")
 
 
 def test_smoke(logger):
     logging.info("is anything on fire?")
+
+
+@pytest.mark.parametrize(
+    ("input_str", "expected_output_str"),
+    (
+            (u"ŧħïş ïş ã ŧëşŧ", "ŧħis is a ŧesŧ"),
+            (u"¿Puedo tomar prestádo este libro?", "¿Puedo tomar prestado este libro?"),
+    ))
+def test_unicode_to_ascii(logger, input_str, expected_output_str):
+    output = nmt.unicode_to_ascii(input_str)
+    assert output == expected_output_str
 
 
 @pytest.mark.parametrize(
@@ -17,3 +32,11 @@ def test_smoke(logger):
 def test_preprocess_sentence(input_str, expected_output_str):
     output = nmt.preprocess_sentence(input_str)
     assert output == expected_output_str
+
+
+def test_create_dataset():
+    output = nmt.create_dataset(
+        path=os.path.join(data_dir, "spa.txt"),
+        _num_examples=5
+    )
+    assert type(output) == zip
