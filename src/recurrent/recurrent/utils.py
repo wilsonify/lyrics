@@ -7,7 +7,6 @@ import logging
 import sys
 
 import numpy as np
-
 from recurrent import config
 
 
@@ -21,7 +20,7 @@ def convert_from_alphabet(character):
     # 91-97 more punctuation
     # 97-122 lower-case letters
     # 123-126 more punctuation
-    
+
     :param character: one character
     :return: the encoded value
     """
@@ -64,8 +63,8 @@ def encode_text(string_to_encode):
     :param string_to_encode: a text string
     :return: encoded list of code points
     """
-    logging.debug("encode_text")
-    return list(map(lambda a: convert_from_alphabet(ord(a)), string_to_encode))
+    result = list(map(lambda a: convert_from_alphabet(ord(a)), string_to_encode))
+    return result
 
 
 def decode_to_text(encoded_str, avoid_tab_and_lf=False):
@@ -115,9 +114,7 @@ def rnn_minibatch_sequencer(raw_data, batch_size, sequence_size, nb_epochs):
     data_len = data.shape[0]
     # using (data_len-1) because we must provide for the sequence shifted by 1 too
     nb_batches = (data_len - 1) // (batch_size * sequence_size)
-    assert (
-            nb_batches > 0
-    ), "Not enough data, even for a single batch. Try using a smaller batch_size."
+    assert nb_batches > 0, "Not enough data, even for a single batch. Try using a smaller batch_size."
     rounded_data_len = nb_batches * batch_size * sequence_size
     xdata = np.reshape(
         data[0:rounded_data_len], [batch_size, nb_batches * sequence_size]
@@ -204,7 +201,7 @@ def print_learning_learned_comparison(
         epoch_string = "{:4d}".format(index) + " (epoch {}) ".format(epoch)
         loss_string = "loss: {:.5f}".format(losses[k])
         print_string = epoch_string + formatted_bookname + " │ {} │ {} │ {}"
-        print(print_string.format(decx, decy, loss_string))
+        logging.info(print_string.format(decx, decy, loss_string))
         index += sequence_len
     format_string = "└{:─^" + str(len(epoch_string)) + "}"
     format_string += "{:─^" + str(len(formatted_bookname)) + "}"
@@ -214,15 +211,16 @@ def print_learning_learned_comparison(
     footer = format_string.format(
         "INDEX", "BOOK NAME", "TRAINING SEQUENCE", "PREDICTED SEQUENCE", "LOSS"
     )
+
     logging.info("print statistics")
-    print(footer)
+    logging.info(footer)
     batch_index = start_index_in_epoch // (batch_size * sequence_len)
     batch_string = "batch {}/{} in epoch {},".format(batch_index, epoch_size, epoch)
     stats = "{: <28} batch loss: {:.5f}, batch accuracy: {:.5f}".format(
         batch_string, batch_loss, batch_accuracy
     )
-    print()
-    print("TRAINING STATS: {}".format(stats))
+    logging.info("\n")
+    logging.info("TRAINING STATS: %s", stats)
 
 
 class Progress:
@@ -243,7 +241,7 @@ class Progress:
         """
         logging.info("initialize Progress")
         self.maxi = maxi
-        self.p = self.__start_progress(
+        self.current_progress = self.__start_progress(
             maxi
         )()  # () to get the iterator from the generator
         self.header_printed = False
@@ -255,12 +253,12 @@ class Progress:
             self.__init__(self.maxi, self.size, self.msg)
         if not self.header_printed:
             self.__print_header()
-        next(self.p)
+        next(self.current_progress)
 
     def __print_header(self):
-        print()
+        logging.info("\n")
         format_string = "0%{: ^" + str(self.size - 6) + "}100%"
-        print(format_string.format(self.msg))
+        logging.info(format_string.format(self.msg))
         self.header_printed = True
 
     def __start_progress(self, maxi):
@@ -269,25 +267,25 @@ class Progress:
             # This will always print 100 dots in max invocations.
             dx = maxi
             dy = self.size
-            d = dy - dx
-            for x in range(maxi):
+            diff_y_x = dy - dx
+            for _ in range(maxi):
                 k = 0
-                while d >= 0:
+                while diff_y_x >= 0:
                     print("=", end="", flush=True)
                     k += 1
-                    d -= dx
-                d += dy
+                    diff_y_x -= dx
+                diff_y_x += dy
                 yield k
 
         return print_progress
 
 
-def read_data_files(directory, validation=True):
+def read_data_files(glob_pattern, validation=True):
     """
     Read data files according to the specified glob pattern
     Optionnaly set aside the last file as validation data.
     No validation data is returned if there are 5 files or less.
-    :param directory: for example "data/*.txt"
+    :param glob_pattern: for example "data/*.txt"
     :param validation: if True (default), sets the last file aside as validation data
     :return: training data, validation data, list of loaded file names with ranges
      If validation is
@@ -295,22 +293,20 @@ def read_data_files(directory, validation=True):
     logging.info("read_data_files")
     codetext = []
     bookranges = []
-    shakelist = glob.glob(directory, recursive=True)
-    for shakefile in shakelist:
-        shaketext = open(shakefile, "r")
-        print("Loading file " + shakefile)
-        start = len(codetext)
-        try:
-            codetext.extend(encode_text(shaketext.read()))
-        except (KeyError, IndexError, ValueError):
-            continue
-        end = len(codetext)
-        bookranges.append(
-            {"start": start, "end": end, "name": shakefile.rsplit("/", 1)[-1]}
-        )
-        shaketext.close()
-
-    if len(bookranges) == 0:
+    for text_file_path in glob.glob(glob_pattern):
+        logging.info("Loading file %s", text_file_path)
+        with open(text_file_path, "r") as text_file:
+            text_contents = text_file.read()
+            logging.debug("len(text_contents) = %d", len(text_contents))
+            text_encoded = encode_text(text_contents)
+            start = len(codetext)
+            codetext.extend(text_encoded)
+            end = len(codetext)
+            bookranges.append(
+                {"start": start, "end": end, "name": text_file_path.rsplit("/", 1)[-1]}
+            )
+    logging.debug("bookranges = {}".format(bookranges))
+    if not bookranges:
         sys.exit("No training data has been found. Aborting.")
 
     logging.debug("""
@@ -353,18 +349,32 @@ def read_data_files(directory, validation=True):
 
 
 def print_data_stats(datalen, valilen, epoch_size):
+    """
+    print some stats about the data
+    :param datalen:
+    :param valilen:
+    :param epoch_size:
+    :return:
+    """
     logging.debug("print_data_stats")
     datalen_mb = datalen / 1024.0 / 1024.0
     valilen_kb = valilen / 1024.0
-    print(
-        "Training text size is {:.2f}MB with {:.2f}KB set aside for validation.".format(
-            datalen_mb, valilen_kb
+    logging.info(
+        "Training text size is {:.2f}MB with {:.2f}KB set aside for validation. There will be {} batches per epoch".format(
+            datalen_mb,
+            valilen_kb,
+            epoch_size
         )
-        + " There will be {} batches per epoch".format(epoch_size)
     )
 
 
 def print_validation_header(validation_start, bookranges):
+    """
+    print some info about validation
+    :param validation_start:
+    :param bookranges:
+    :return:
+    """
     logging.debug("print_validation_header")
     bookindex = find_book_index(validation_start, bookranges)
     books = ""
@@ -372,34 +382,55 @@ def print_validation_header(validation_start, bookranges):
         books += bookranges[i]["name"]
         if i < len(bookranges) - 1:
             books += ", "
-    print("{: <60}".format("Validating on " + books), flush=True)
+    logging.info("Validating on %s", "{: <60}".format(books))
 
 
 def print_validation_stats(loss, accuracy):
+    """
+    print some stats in a nice format
+    :param loss:
+    :param accuracy:
+    :return:
+    """
     logging.debug("print_validation_stats")
-    print(
+    logging.info(
         "VALIDATION STATS: loss: {:.5f}, accuracy: {:.5f}".format(
-            loss, accuracy
-        )
-    )
+            loss,
+            accuracy
+        ))
 
 
 def print_text_generation_header():
+    """
+    print some text at the beginning
+    :return:
+    """
     logging.debug("print_text_generation_header")
-    print()
-    print("┌{:─^111}┐".format("Generating random text from learned state"))
+    logging.info("\n")
+    logging.info("┌{:─^111}┐ Generating random text from learned state")
 
 
 def print_text_generation_footer():
+    """
+    print some text at the end
+    :return:
+    """
     logging.debug("print_text_generation_footer")
-    print()
-    print("└{:─^111}┘".format("End of generation"))
+    logging.info("\n")
+    logging.info("└{:─^111}┘ End of generation")
 
 
-def frequency_limiter(n, multiple=1, modulo=0):
+def frequency_limiter(n_occurances, multiple=1, modulo=0):
+    """
+
+    :param n_occurances:
+    :param multiple:
+    :param modulo:
+    :return:
+    """
     logging.debug("frequency_limiter")
 
     def limit(i):
-        return i % (multiple * n) == modulo * multiple
+        return i % (multiple * n_occurances) == modulo * multiple
 
     return limit

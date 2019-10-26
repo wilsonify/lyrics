@@ -5,8 +5,8 @@ from logging.config import dictConfig
 import numpy as np
 import tensorflow as tf
 
-from recurrent.recurrent import config
-from recurrent.recurrent import utils
+from recurrent import config
+from recurrent import utils
 
 ALPHASIZE = config.ALPHASIZE
 NLAYERS = config.NLAYERS

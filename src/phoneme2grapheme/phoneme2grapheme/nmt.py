@@ -35,6 +35,8 @@ path_to_file = os.path.dirname(path_to_zip) + "/spa-eng/spa.txt"
 logging.debug("path_to_zip = {}".format(path_to_zip))
 logging.debug("path_to_file = {}".format(path_to_file))
 
+optimizer = tf.keras.optimizers.Adam()
+
 
 def unicode_to_ascii(s):
     """
@@ -42,6 +44,7 @@ def unicode_to_ascii(s):
     :param s:
     :return:
     """
+
     return "".join(
         c for c in unicodedata.normalize("NFD", s) if unicodedata.category(c) != "Mn"
     )
@@ -210,7 +213,7 @@ class Decoder(tf.keras.Model):
 
 def loss_function(real, pred):
     mask = tf.math.logical_not(tf.math.equal(real, 0))
-    loss_ = tf.losses.softmax_cross_entropy(real, pred)
+    loss_ = tf.keras.losses.sparse_categorical_crossentropy(real, pred)
 
     mask = tf.cast(mask, dtype=loss_.dtype)
     loss_ *= mask
@@ -485,8 +488,6 @@ if __name__ == "__main__":
     )
 
     # ## Define the optimizer and the loss function
-
-    optimizer = tf.train.AdamOptimizer()
 
     # ## Checkpoints (Object-based saving)
 

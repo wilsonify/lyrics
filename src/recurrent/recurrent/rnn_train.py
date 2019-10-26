@@ -1,3 +1,6 @@
+"""
+train a recurrent neural network
+"""
 import logging
 import math
 import os
@@ -6,11 +9,10 @@ from logging.config import dictConfig
 
 import numpy as np
 import tensorflow as tf
+from recurrent import config
+from recurrent import utils as txt
 from tensorflow.contrib import layers
-from tensorflow.contrib import rnn  # rnn stuff temporarily in contrib, moving back to code in TF 1.1
-
-from recurrent.recurrent import config
-from recurrent.recurrent import utils as txt
+from tensorflow.contrib import rnn
 
 ALPHASIZE = config.ALPHASIZE
 INTERNALSIZE = config.INTERNALSIZE
@@ -20,16 +22,16 @@ SEQLEN = 100
 BATCHSIZE = 100
 DISPLAY_FREQ = 50
 _50_BATCHES = DISPLAY_FREQ * BATCHSIZE * SEQLEN
-VALI_SEQLEN = 1 * 1024  # Sequence length for validation. State will be wrong at the start of each sequence.
+VALI_SEQLEN = 1 * 1024
+logging.info(
+    "Sequence length for validation = %d. State will be wrong at the start of each sequence.",
+    VALI_SEQLEN
+)
 
-parent_dir = os.path.dirname(__file__)
-package_dir = os.path.join(parent_dir, os.path.pardir)
-source_dir = os.path.join(package_dir, os.path.pardir)
-project_dir = os.path.join(source_dir, os.path.pardir)
-data_dir = os.path.join(project_dir, "data")
-training_dir = os.path.join(data_dir, "beatles_lyrics/*.txt")
-models_dir = os.path.join(project_dir, "models")
-checkpoints_dir = os.path.join(models_dir, "checkpoints")
+data_dir = config.data_dir
+models_dir = config.models_dir
+training_glob_pattern = config.training_glob_pattern
+checkpoints_dir = config.checkpoints_dir
 
 
 def main(validation=True):
@@ -52,16 +54,13 @@ def main(validation=True):
     tf.set_random_seed(0)
     learning_rate = 0.001
     dropout_pkeep = 0.8
-    logging.debug("parent_dir = {}".format(parent_dir))
-    logging.debug("package_dir = {}".format(package_dir))
-    logging.debug("source_dir = {}".format(source_dir))
-    logging.debug("project_dir = {}".format(project_dir))
-    logging.debug("data_dir = {}".format(data_dir))
-    logging.debug("training_dir = {}".format(training_dir))
-    logging.debug("models_dir = {}".format(models_dir))
-    logging.debug("checkpoints_dir = {}".format(checkpoints_dir))
+    logging.debug("data_dir = %s", data_dir)
+    logging.debug("training_dir = %s", training_glob_pattern)
+    logging.debug("models_dir = %s", models_dir)
+    logging.debug("checkpoints_dir = %s", checkpoints_dir)
+    logging.debug("training_glob_pattern = %s", training_glob_pattern)
 
-    codetext, valitext, bookranges = txt.read_data_files(training_dir, validation=validation)
+    codetext, valitext, bookranges = txt.read_data_files(training_glob_pattern, validation=validation)
 
     logging.info("display some stats on the data")
     epoch_size = len(codetext) // (BATCHSIZE * SEQLEN)
@@ -89,11 +88,10 @@ def main(validation=True):
     hin = tf.placeholder(tf.float32, [None, INTERNALSIZE * NLAYERS], name='hin')
     logging.debug("hin should have shape (BATCHSIZE, INTERNALSIZE * NLAYERS)")
 
-    logging.info(
-        "using a NLAYERS={} layers of GRU cells, unrolled SEQLEN={} times".format(
-            NLAYERS,
-            SEQLEN
-        ))
+    logging.info("using a NLAYERS=%d layers of GRU cells, unrolled SEQLEN=%d times",
+                 NLAYERS,
+                 SEQLEN
+                 )
     logging.info("dynamic_rnn infers SEQLEN from the size of the inputs initial_x_input")
 
     def get_a_cell(internal_size, keep_prob):
@@ -220,7 +218,7 @@ Only the last checkpoint is kept.
         so we cut it up and batch the pieces (slightly inaccurate)
         tested: validating with 5K sequences instead of 1K is only slightly more accurate, but a lot slower.
         """)
-        if step % _50_BATCHES == 0 and len(valitext) > 0:
+        if step % _50_BATCHES == 0 and valitext:
             bsize = len(valitext) // VALI_SEQLEN
             txt.print_validation_header(len(codetext), bookranges)
             vali_x, vali_y, _ = next(
@@ -239,7 +237,7 @@ Only the last checkpoint is kept.
             txt.print_text_generation_header()
             ry = np.array([[txt.convert_from_alphabet(ord("K"))]])
             rh = np.zeros([1, INTERNALSIZE * NLAYERS])
-            for k in range(1000):
+            for _ in range(1000):
                 ryo, rh = sess.run([initial_y_output, h_identity],
                                    feed_dict={x_input: ry, dropout_keep_probability: 1.0, hin: rh, batchsize: 1})
                 rc = txt.sample_from_probabilities(ryo, topn=10 if epoch <= 1 else 2)

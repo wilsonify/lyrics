@@ -1,8 +1,13 @@
 import logging
 import os
 
+home_dir = os.path.expanduser("~")
+project_dir = os.path.join(home_dir, "recurrent_data")
+data_dir = os.path.join(project_dir, "data")
+models_dir = os.path.join(project_dir, "models")
+checkpoints_dir = os.path.join(project_dir, "checkpoints")
 logging_dir = os.path.join(os.getcwd(), "logs")
-checkpoints_dir = os.path.join(os.getcwd(), "checkpoints")
+training_glob_pattern = os.path.join(data_dir, "beatles_lyrics/*.txt")
 
 # these must match what was saved !
 ALPHASIZE = 98  # size of the alphabet that we work with
@@ -17,7 +22,7 @@ logging_config_dict = dict(
         }
     },
     handlers={"console": {"class": "logging.StreamHandler", "formatter": "simple"}},
-    root={"handlers": ["console"], "level": logging.INFO},
+    root={"handlers": ["console"], "level": logging.DEBUG},
 )
 
 stop_length = 10000
