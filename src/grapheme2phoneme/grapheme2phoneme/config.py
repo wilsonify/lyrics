@@ -22,7 +22,7 @@ done_exchange = "done_{}".format(routing_key)
 fail_exchange = "fail_{}".format(routing_key)
 
 home = os.path.expanduser("~")
-local_data = os.path.join(home, "phoneme")
+local_data = os.path.join(home, "recurrent_data")
 os.makedirs(local_data, exist_ok=True)
 heartbeat = 10000
 timeout = 10001

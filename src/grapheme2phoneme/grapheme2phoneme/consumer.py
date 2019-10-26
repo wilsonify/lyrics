@@ -105,7 +105,7 @@ def process_payload(payload):
     payload_head, payload_tail = os.path.splitext(payload)
     payload_head_head, payload_head_tail = os.path.split(payload_head)
     result_file_name = payload_head_tail + '_phoneme.txt'
-    result_dir = os.path.join(config.local_data, payload_head_head, "phoneme")
+    result_dir = os.path.join(config.local_data, payload_head_head + "_phoneme")
     result_path = os.path.join(result_dir, result_file_name)
     os.makedirs(result_dir, exist_ok=True)
     result = ""
