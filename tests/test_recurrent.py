@@ -10,6 +10,11 @@ TST_BATCHSIZE = 13
 TST_EPOCHS = 5
 
 tests_dir = os.path.dirname(__file__)
+parent_dirname = os.path.join(tests_dir, os.pardir)
+
+
+# dictConfig(config.logging_config_dict)
+# logger = logging.getLogger()
 
 
 class RnnMinibatchSequencerTest(unittest.TestCase):
@@ -144,23 +149,17 @@ class TxtProgressTest(unittest.TestCase):
         return n, total
 
 
-def test_read_data_files_codetext(logger, song_lyrics_file_path):
+def test_read_data_files_codetext(song_lyrics_file_path):
     codetext, _, _ = txt.read_data_files(song_lyrics_file_path, validation=True)
     assert len(codetext) == 1281
 
 
-def test_read_data_files_valitext(logger, song_lyrics_dir_path):
+def test_read_data_files_valitext(song_lyrics_dir_path):
     glob_pattern = os.path.join(song_lyrics_dir_path, "*.txt")
     _, valitext, _ = txt.read_data_files(glob_pattern, validation=True)
     assert len(valitext) == 0
 
 
-def test_read_data_files_bookranges(logger, song_lyrics_file_path):
+def test_read_data_files_bookranges(song_lyrics_file_path):
     _, _, bookranges = txt.read_data_files(song_lyrics_file_path, validation=True)
     assert len(bookranges) == 1
-
-
-def test_test():
-    import glob
-    for text_file_path in glob.glob("/home/thom/recurrent_data/data/beatles_lyrics/*.txt"):
-        print(text_file_path)

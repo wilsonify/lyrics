@@ -3,26 +3,12 @@ import os
 from logging.config import dictConfig
 
 import pytest
+from recurrent import config
 
 dirname = os.path.dirname(__file__)
 parent_dirname = os.path.join(dirname, os.pardir)
-
-
-@pytest.fixture
-def logger():
-    logging_config_dict = dict(
-        version=1,
-        formatters={
-            "simple": {
-                "format": """%(asctime)s | %(filename)s | %(lineno)d | %(levelname)s | %(message)s"""
-            }
-        },
-        handlers={"console": {"class": "logging.StreamHandler", "formatter": "simple"}},
-        root={"handlers": ["console"], "level": logging.DEBUG},
-    )
-
-    dictConfig(logging_config_dict)
-    return logging.getLogger("")
+dictConfig(config.logging_config_dict)
+logger = logging.getLogger()
 
 
 @pytest.fixture
