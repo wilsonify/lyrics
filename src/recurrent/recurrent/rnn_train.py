@@ -85,17 +85,16 @@ def build_internal_state_model():
     encoder_input = layers.Input(shape=(None,))
     encoder_embedded = layers.Embedding(input_dim=encoder_vocab, output_dim=64)(encoder_input)
 
-    # Return states in addition to output
-    output, state_h, state_c = layers.LSTM(
-        64, return_state=True, name='encoder')(encoder_embedded)
+    LSTM_input_layer = layers.LSTM(64, return_state=True, name='encoder')
+    output, state_h, state_c = LSTM_input_layer(encoder_embedded)  # Return states in addition to output
     encoder_state = [state_h, state_c]
 
     decoder_input = layers.Input(shape=(None,))
     decoder_embedded = layers.Embedding(input_dim=decoder_vocab, output_dim=64)(decoder_input)
 
     # Pass the 2 states to a new LSTM layer, as initial state
-    decoder_output = layers.LSTM(
-        64, name='decoder')(decoder_embedded, initial_state=encoder_state)
+    LSTM_output_layer = layers.LSTM(64, name='decoder')
+    decoder_output = LSTM_output_layer(decoder_embedded, initial_state=encoder_state)
     output = layers.Dense(10, activation='softmax')(decoder_output)
 
     model = tf.keras.Model([encoder_input, decoder_input], output)
@@ -132,12 +131,24 @@ def build_simple_model():
 def load_mnist():
     mnist = tf.keras.datasets.mnist
     (x_train, y_train), (x_test, y_test) = mnist.load_data()
-    x_train = x_train.reshape(60000, 784).astype('float32') / 255
-    x_test = x_test.reshape(10000, 784).astype('float32') / 255
+
+    logging.debug("%r", "x_train.shape = {}".format(x_train.shape))
+    logging.debug("%r", "y_train.shape = {}".format(y_train.shape))
+    logging.debug("%r", "x_test.shape = {}".format(x_test.shape))
+    logging.debug("%r", "y_test.shape = {}".format(y_test.shape))
+
+    recurrent_shape = x_train.shape[1] * x_train.shape[2]
+    x_train = x_train.reshape(x_train.shape[0], recurrent_shape).astype('float32') / 255
+    x_test = x_test.reshape(x_test.shape[0], recurrent_shape).astype('float32') / 255
     train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
     test_dataset = tf.data.Dataset.from_tensor_slices((x_test, y_test))
+
     logging.debug("%r", "type(train_dataset) = {}".format(type(train_dataset)))
     logging.debug("%r", "type(test_dataset) = {}".format(type(test_dataset)))
+    logging.debug("%r", "x_train.shape = {}".format(x_train.shape))
+    logging.debug("%r", "y_train.shape = {}".format(y_train.shape))
+    logging.debug("%r", "x_test.shape = {}".format(x_test.shape))
+    logging.debug("%r", "y_test.shape = {}".format(y_test.shape))
 
     train_dataset = train_dataset.batch(BATCHSIZE)
     test_dataset = test_dataset.batch(BATCHSIZE)
