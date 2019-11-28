@@ -3,6 +3,7 @@ import unittest
 
 import numpy as np
 import recurrent.utils as txt
+from recurrent.rnn_train import load_mnist
 
 TST_TXTSIZE = 10000
 TST_SEQLEN = 10
@@ -58,73 +59,17 @@ class RnnMinibatchSequencerTest(unittest.TestCase):
                         msg="Text ignored at the end of an epoch must be smaller than one batch of sequences")
 
 
-class EncodingTest(unittest.TestCase):
-    def setUp(self):
-        self.test_text_known_chars = \
-            "PRIDE AND PREJUDICE" \
-            "\n" \
-            "By Jane Austen" \
-            "\n" \
-            "\n" \
-            "\n" \
-            "Chapter 1" \
-            "\n" \
-            "\n" \
-            "It is a truth universally acknowledged, that a single man in possession " \
-            "of a good fortune, must be in want of a wife." \
-            "\n\n" \
-            "However little known the feelings or views of such a man may be on his " \
-            "first entering a neighbourhood, this truth is so well fixed in the minds " \
-            "of the surrounding families, that he is considered the rightful property " \
-            "of some one or other of their daughters." \
-            "\n\n" \
-            "\"My dear Mr. Bennet,\" said his lady to him one day, \"have you heard that " \
-            "Netherfield Park is let at last?\"" \
-            "\n\n" \
-            "Mr. Bennet replied that he had not." \
-            "\n\n" \
-            "\"But it is,\" returned she; \"for Mrs. Long has just been here, and she " \
-            "told me all about it.\"" \
-            "\n\n" \
-            "Mr. Bennet made no answer." \
-            "\n\n" \
-            "\"Do you not want to know who has taken it?\" cried his wife impatiently." \
-            "\n\n" \
-            "\"_You_ want to tell me, and I have no objection to hearing it.\"" \
-            "\n\n" \
-            "This was invitation enough." \
-            "\n\n" \
-            "\"Why, my dear, you must know, Mrs. Long says that Netherfield is taken " \
-            "by a young man of large fortune from the north of England; that he came " \
-            "down on Monday in a chaise and four to see the place, and was so much " \
-            "delighted with it, that he agreed with Mr. Morris immediately; that he " \
-            "is to take possession before Michaelmas, and some of his servants are to " \
-            "be in the house by the end of next week.\"" \
-            "\n\n" \
-            "\"What is his name?\"" \
-            "\n\n" \
-            "\"Bingley.\"" \
-            "\n\n" \
-            "Testing punctuation: !\"#$%&\'()*+,-./0123456789:;<=>?@[\\]^_`{|}~" \
-            "\n" \
-            "Tab\x09Tab\x09Tab\x09Tab" \
-            "\n"
-        self.test_text_unknown_char = "Unknown char: \x0C"  # the unknown char 'new page'
+def test_encoding(text_known_chars):
+    encoded = txt.encode_text(text_known_chars)
+    decoded = txt.decode_to_text(encoded)
+    assert text_known_chars == decoded
 
-    def test_encoding(self):
-        encoded = txt.encode_text(self.test_text_known_chars)
-        decoded = txt.decode_to_text(encoded)
-        self.assertEqual(self.test_text_known_chars, decoded,
-                         msg="On a sequence of supported characters, encoding, "
-                             "then decoding should yield the original string.")
 
-    def test_unknown_encoding(self):
-        encoded = txt.encode_text(self.test_text_unknown_char)
-        decoded = txt.decode_to_text(encoded)
-        original_fix = self.test_text_unknown_char[:-1] + chr(0)
-        self.assertEqual(original_fix, decoded,
-                         msg="The last character of the test sequence is an unsupported "
-                             "character and should be encoded and decoded as 0.")
+def test_unknown_encoding(text_unknown_char):
+    encoded = txt.encode_text(text_unknown_char)
+    decoded = txt.decode_to_text(encoded)
+    original_fix = text_unknown_char[:-1] + chr(0)
+    assert original_fix == decoded
 
 
 class TxtProgressTest(unittest.TestCase):
@@ -163,3 +108,8 @@ def test_read_data_files_valitext(song_lyrics_dir_path):
 def test_read_data_files_bookranges(song_lyrics_file_path):
     _, _, bookranges = txt.read_data_files(song_lyrics_file_path, validation=True)
     assert len(bookranges) == 1
+
+
+def test_load_mnist():
+    train_dataset, test_dataset = load_mnist()
+    assert train_dataset
