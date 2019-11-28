@@ -10,7 +10,7 @@ logging_dir = os.path.join(os.getcwd(), "logs")
 training_glob_pattern = os.path.join(data_dir, "beatles_lyrics/*.txt")
 
 # these must match what was saved !
-ALPHASIZE = 98  # size of the alphabet that we work with
+ALPHASIZE = 103+2  # 103 valid phonemes plus space and newline
 NLAYERS = 3
 INTERNALSIZE = 512
 
@@ -25,4 +25,4 @@ logging_config_dict = dict(
     root={"handlers": ["console"], "level": logging.DEBUG},
 )
 
-stop_length = 10000
+STOPLENGTH = 10000

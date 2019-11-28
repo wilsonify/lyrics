@@ -49,7 +49,7 @@ def main():
 
         logging.debug("y should have shape [BATCHSIZE, SEQLEN] with BATCHSIZE=1 and SEQLEN=1")
 
-        for i in range(config.stop_length):
+        for i in range(config.STOPLENGTH):
             feed_dict = {
                 'x_input:0': y,
                 'dropout_keep_probability:0': 1.,
