@@ -1,23 +1,44 @@
 """
 train a recurrent neural network
+
+In TensorFlow 2.0, the built-in LSTM and GRU layers have been updated to leverage CuDNN kernels by default
+when a GPU is available.
+ With this change, the prior `keras.layers.CuDNNLSTM/CuDNNGRU` layers have been deprecated,
+  and you can build your model without worrying about the hardware it will run on.
+
+Since the CuDNN kernel is built with certain assumptions,
+ this means the layer **will not be able to use the CuDNN kernel
+ if you change the defaults of the built-in LSTM or GRU layers**. E.g.:
+
+- Changing the `activation` function from `tanh` to something else.
+- Changing the `recurrent_activation` function from `sigmoid` to something else.
+- Using `recurrent_dropout` > 0.
+- Setting `unroll` to True, which forces LSTM/GRU to decompose the inner
+  `tf.while_loop` into an unrolled `for` loop.
+- Setting `use_bias` to False.
+- Using masking when the input data is not strictly right padded
+ (if the mask corresponds to strictly right padded data, CuDNN can still be used. This is the most common case).
+
+For the detailed list of constraints,
+ please see the documentation for the
+[LSTM](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/layers/LSTM)
+ and
+[GRU](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/layers/GRU)
+ layers.
 """
 import logging
-import math
-import os
-import time
 from logging.config import dictConfig
 
-import numpy as np
 import tensorflow as tf
 from recurrent import config
-from recurrent import utils as txt
-from tensorflow.contrib import layers
-from tensorflow.contrib import rnn
+from tensorflow.keras import layers
 
 ALPHASIZE = config.ALPHASIZE
 INTERNALSIZE = config.INTERNALSIZE
 NLAYERS = config.NLAYERS
-
+learning_rate = 0.001
+dropout_pkeep = 0.8
+SHUFFLE_BUFFER_SIZE = 50
 SEQLEN = 100
 BATCHSIZE = 100
 DISPLAY_FREQ = 50
@@ -33,228 +54,112 @@ models_dir = config.models_dir
 training_glob_pattern = config.training_glob_pattern
 checkpoints_dir = config.checkpoints_dir
 
+batch_size = 64
+input_dim = 28
+units = 64
+output_size = 10
+encoder_vocab = 1000
+decoder_vocab = 2000
 
-def main(validation=True):
-    """
-    Usage:
-      Training only:
-            Leave all the parameters as they are
-            Disable validation to run a bit faster (set validation=False below)
-            You can follow progress in Tensorboard: tensorboard --log-dir=log
-      Training and experimentation (default):
-            Keep validation enabled
-            You can now play with the parameters anf follow the effects in Tensorboard
-            A good choice of parameters ensures that the testing and validation curves stay close
-            To see the curves drift apart ("overfitting") try to use an insufficient amount of
-            training data (shakedir = "shakespeare/t*.txt" for example)
+tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=config.logging_dir, histogram_freq=1)
 
-    :return:
-    """
-    logging.info("main")
-    tf.set_random_seed(0)
-    learning_rate = 0.001
-    dropout_pkeep = 0.8
-    logging.debug("data_dir = %s", data_dir)
-    logging.debug("training_dir = %s", training_glob_pattern)
-    logging.debug("models_dir = %s", models_dir)
-    logging.debug("checkpoints_dir = %s", checkpoints_dir)
-    logging.debug("training_glob_pattern = %s", training_glob_pattern)
 
-    codetext, valitext, bookranges = txt.read_data_files(training_glob_pattern, validation=validation)
+def build_bidirectional_model():
+    model = tf.keras.Sequential()
 
-    logging.info("display some stats on the data")
-    epoch_size = len(codetext) // (BATCHSIZE * SEQLEN)
-    txt.print_data_stats(len(codetext), len(valitext), epoch_size)
+    model.add(layers.Bidirectional(layers.LSTM(64, return_sequences=True),
+                                   input_shape=(5, 10)))
+    model.add(layers.Bidirectional(layers.LSTM(32)))
+    model.add(layers.Dense(10, activation='softmax'))
+    return model
 
-    logging.info("the model")
-    learning_rate_placeholder = tf.placeholder(tf.float32, name='learning_rate_placeholder')
-    dropout_keep_probability = tf.placeholder(tf.float32, name='dropout_keep_probability')
-    batchsize = tf.placeholder(tf.int32, name='batchsize')
 
-    logging.info("inputs")
-    x_input = tf.placeholder(tf.uint8, [None, None], name='x_input')
-    logging.debug("x_input should have shape (BATCHSIZE, SEQLEN)")
+def build_internal_state_model():
+    encoder_input = layers.Input(shape=(None,))
+    encoder_embedded = layers.Embedding(input_dim=encoder_vocab, output_dim=64)(encoder_input)
 
-    initial_x_input = tf.one_hot(x_input, ALPHASIZE, 1.0, 0.0)
-    logging.debug("initial_x_input should have shape (BATCHSIZE, SEQLEN, ALPHASIZE)")
+    # Return states in addition to output
+    output, state_h, state_c = layers.LSTM(
+        64, return_state=True, name='encoder')(encoder_embedded)
+    encoder_state = [state_h, state_c]
 
-    logging.info("expected outputs = same sequence shifted by 1 since we are trying to predict the next character")
-    y_output_ = tf.placeholder(tf.uint8, [None, None], name='y_output_')
-    logging.debug("y_output should have shape (BATCHSIZE, SEQLEN)")
-    initial_y_output = tf.one_hot(y_output_, ALPHASIZE, 1.0, 0.0)
-    logging.debug("initial_y_output should have shape (BATCHSIZE, SEQLEN, ALPHASIZE)")
+    decoder_input = layers.Input(shape=(None,))
+    decoder_embedded = layers.Embedding(input_dim=decoder_vocab, output_dim=64)(decoder_input)
 
-    logging.info("input state")
-    hin = tf.placeholder(tf.float32, [None, INTERNALSIZE * NLAYERS], name='hin')
-    logging.debug("hin should have shape (BATCHSIZE, INTERNALSIZE * NLAYERS)")
+    # Pass the 2 states to a new LSTM layer, as initial state
+    decoder_output = layers.LSTM(
+        64, name='decoder')(decoder_embedded, initial_state=encoder_state)
+    output = layers.Dense(10, activation='softmax')(decoder_output)
 
-    logging.info("using a NLAYERS=%d layers of GRU cells, unrolled SEQLEN=%d times",
-                 NLAYERS,
-                 SEQLEN
-                 )
-    logging.info("dynamic_rnn infers SEQLEN from the size of the inputs initial_x_input")
+    model = tf.keras.Model([encoder_input, decoder_input], output)
+    return model
 
-    def get_a_cell(internal_size, keep_prob):
-        onecell = rnn.GRUCell(internal_size)
-        dropcell = rnn.DropoutWrapper(onecell, input_keep_prob=keep_prob)
-        return dropcell
 
-    multicell = rnn.MultiRNNCell(
-        [get_a_cell(INTERNALSIZE, dropout_keep_probability) for _ in range(NLAYERS)],
-        state_is_tuple=False
+def build_stateful_model():
+    model = tf.keras.Sequential()
+    model.add(layers.Embedding(input_dim=1000, output_dim=64))
+
+    # The output of GRU will be a 3D tensor of shape (batch_size, timesteps, 256)
+    model.add(layers.GRU(256, return_sequences=True))
+
+    # The output of SimpleRNN will be a 2D tensor of shape (batch_size, 128)
+    model.add(layers.SimpleRNN(128))
+
+    model.add(layers.Dense(10, activation='softmax'))
+    return model
+
+
+def Build_simple_model():
+    # Add an Embedding layer expecting input vocab of size 1000, and
+    # output embedding dimension of size 64.
+    # Add a LSTM layer with 128 internal units.
+    # Add a Dense layer with 10 units and softmax activation.
+
+    model = tf.keras.Sequential()
+    model.add(layers.Embedding(input_dim=1000, output_dim=64))
+    model.add(layers.LSTM(128))
+    model.add(layers.Dense(10, activation='softmax'))
+    return model
+
+
+def load_mnist():
+    mnist = tf.keras.datasets.mnist
+    (x_train, y_train), (x_test, y_test) = mnist.load_data()
+    x_train = x_train.reshape(60000, 784).astype('float32') / 255
+    x_test = x_test.reshape(10000, 784).astype('float32') / 255
+    train_dataset = tf.data.Dataset.from_tensor_slices((x_train, y_train))
+    test_dataset = tf.data.Dataset.from_tensor_slices((x_test, y_test))
+    logging.debug("%r", "type(train_dataset) = {}".format(type(train_dataset)))
+    logging.debug("%r", "type(test_dataset) = {}".format(type(test_dataset)))
+
+    train_dataset = train_dataset.shuffle(SHUFFLE_BUFFER_SIZE).batch(BATCHSIZE)
+    test_dataset = test_dataset.batch(BATCHSIZE)
+    return train_dataset, test_dataset
+
+
+def main():
+    train_dataset, test_dataset = load_mnist()
+
+    model = Build_simple_model()
+    # model = build_stateful_model()
+    # model = build_internal_state_model()
+    # model = build_bidirectional_model()
+
+    print(model.summary())
+
+    model.compile(
+        loss='sparse_categorical_crossentropy',
+        optimizer='sgd',
+        metrics=['accuracy']
     )
-    dropmulticell = rnn.DropoutWrapper(multicell, output_keep_prob=dropout_keep_probability)
-    yr, h_identity = tf.nn.dynamic_rnn(dropmulticell, initial_x_input, dtype=tf.float32, initial_state=hin)
 
-    logging.debug("yr should have shape [ BATCHSIZE, SEQLEN, INTERNALSIZE ]")
-    logging.debug("h_identity should have shape [ BATCHSIZE, INTERNALSIZE*NLAYERS ]")
-    logging.info("this is the last state in the sequence")
+    model.fit(
+        train_dataset,
+        epochs=5,
+        callbacks=[tensorboard_callback]
+    )
 
-    h_identity = tf.identity(h_identity, name='h_identity')
-
-    logging.info("Softmax layer")
-
-    logging.info("Flatten the first two dimension of the output")
-    logging.debug("[ BATCHSIZE, SEQLEN, ALPHASIZE ] => [ BATCHSIZE x SEQLEN, ALPHASIZE ]")
-    yflat = tf.reshape(yr, [-1, INTERNALSIZE])  # [ BATCHSIZE x SEQLEN, INTERNALSIZE ]
-
-    logging.info("apply softmax readout layer.")
-    logging.debug("the weights and biases are shared across unrolled time steps")
-    logging.debug("a value coming from a cell or a minibatch is the same thing")
-
-    y_output_logits = layers.linear(yflat, ALPHASIZE)
-    logging.debug("y_output_logits [ BATCHSIZE x SEQLEN, ALPHASIZE ]")
-    y_output_flat = tf.reshape(initial_y_output, [-1, ALPHASIZE])
-    logging.debug("y_output_flat [ BATCHSIZE x SEQLEN, ALPHASIZE ]")
-    loss = tf.nn.softmax_cross_entropy_with_logits(logits=y_output_logits, labels=y_output_flat)
-    logging.debug("loss [ BATCHSIZE x SEQLEN ]")
-    loss = tf.reshape(loss, [batchsize, -1])
-    logging.debug("loss [ BATCHSIZE, SEQLEN ]")
-    initial_y_output = tf.nn.softmax(y_output_logits, name='initial_y_output')
-    logging.debug("initial_y_output [ BATCHSIZE x SEQLEN, ALPHASIZE ]")
-    y_output = tf.argmax(initial_y_output, 1)
-    logging.debug("y_output [ BATCHSIZE x SEQLEN ]")
-    y_output = tf.reshape(y_output, [batchsize, -1], name="y_output")
-    logging.debug("y_output [ BATCHSIZE, SEQLEN ]")
-    train_step = tf.train.AdamOptimizer(learning_rate_placeholder).minimize(loss)
-
-    logging.info("stats for display")
-    seqloss = tf.reduce_mean(loss, 1)
-    batchloss = tf.reduce_mean(seqloss)
-    accuracy = tf.reduce_mean(tf.cast(tf.equal(y_output_, tf.cast(y_output, tf.uint8)), tf.float32))
-    loss_summary = tf.summary.scalar("batch_loss", batchloss)
-    acc_summary = tf.summary.scalar("batch_accuracy", accuracy)
-    summaries = tf.summary.merge([loss_summary, acc_summary])
-
-    logging.info("""
-Init Tensorboard stuff. 
-This will save Tensorboard information into a different folder at each run named 'log/<timestamp>/'. 
-Two sets of data are saved so that you can compare training and validation curves visually in Tensorboard.
-    """)
-
-    timestamp = str(math.trunc(time.time()))
-    summary_writer = tf.summary.FileWriter("log/" + timestamp + "-training")
-    validation_writer = tf.summary.FileWriter("log/" + timestamp + "-validation")
-
-    logging.info("""
-Init for saving models.
-They will be saved into a directory named 'checkpoints' 
-Only the last checkpoint is kept.
-""")
-
-    os.makedirs(checkpoints_dir, exist_ok=True)
-    saver = tf.train.Saver(max_to_keep=1)
-
-    logging.info("for display: init the progress bar")
-    progress = txt.Progress(DISPLAY_FREQ, size=111 + 2, msg="Training on next " + str(DISPLAY_FREQ) + " batches")
-
-    logging.info("initial zero input state")
-    istate = np.zeros([BATCHSIZE, INTERNALSIZE * NLAYERS])  #
-    init = tf.global_variables_initializer()
-    sess = tf.Session()
-    sess.run(init)
-    step = 0
-
-    logging.info("training loop")
-    for x, y_, epoch in txt.rnn_minibatch_sequencer(codetext, BATCHSIZE, SEQLEN, nb_epochs=1000):
-        logging.info("train on one minibatch")
-        feed_dict = {
-            x_input: x,
-            y_output_: y_,
-            hin: istate,
-            learning_rate_placeholder: learning_rate,
-            dropout_keep_probability: dropout_pkeep,
-            batchsize: BATCHSIZE
-        }
-        _, y, ostate, smm = sess.run([train_step, y_output, h_identity, summaries], feed_dict=feed_dict)
-
-        logging.info("save training data for Tensorboard")
-        summary_writer.add_summary(smm, step)
-
-        logging.info("display a visual validation of progress (every 50 batches)")
-        if step % _50_BATCHES == 0:
-            feed_dict = {
-                x_input: x,
-                y_output_: y_,
-                hin: istate,
-                dropout_keep_probability: 1.0,  # no dropout for validation
-                batchsize: BATCHSIZE
-            }
-            y, l, bl, acc = sess.run([y_output, seqloss, batchloss, accuracy], feed_dict=feed_dict)
-            txt.print_learning_learned_comparison(
-                x,
-                y,
-                l,
-                bookranges,
-                bl,
-                acc,
-                epoch_size,
-                step,
-                epoch
-            )
-
-        logging.info("""run a validation step every 50 batches
-        The validation text should be a single sequence but that's too slow (1s per 1024 chars!),
-        so we cut it up and batch the pieces (slightly inaccurate)
-        tested: validating with 5K sequences instead of 1K is only slightly more accurate, but a lot slower.
-        """)
-        if step % _50_BATCHES == 0 and valitext:
-            bsize = len(valitext) // VALI_SEQLEN
-            txt.print_validation_header(len(codetext), bookranges)
-            vali_x, vali_y, _ = next(
-                txt.rnn_minibatch_sequencer(valitext, bsize, VALI_SEQLEN, 1))  # all data in 1 batch
-            vali_nullstate = np.zeros([bsize, INTERNALSIZE * NLAYERS])
-            feed_dict = {x_input: vali_x, y_output_: vali_y, hin: vali_nullstate, dropout_keep_probability: 1.0,
-                         # no dropout for validation
-                         batchsize: bsize}
-            ls, acc, smm = sess.run([batchloss, accuracy, summaries], feed_dict=feed_dict)
-            txt.print_validation_stats(ls, acc)
-            # save validation data for Tensorboard
-            validation_writer.add_summary(smm, step)
-
-        if step // 3 % _50_BATCHES == 0:
-            logging.info("display a short text generated with the current weights and biases (every 150 batches)")
-            txt.print_text_generation_header()
-            ry = np.array([[txt.convert_from_alphabet(ord("K"))]])
-            rh = np.zeros([1, INTERNALSIZE * NLAYERS])
-            for _ in range(1000):
-                ryo, rh = sess.run([initial_y_output, h_identity],
-                                   feed_dict={x_input: ry, dropout_keep_probability: 1.0, hin: rh, batchsize: 1})
-                rc = txt.sample_from_probabilities(ryo, topn=10 if epoch <= 1 else 2)
-                print(chr(txt.convert_to_alphabet(rc)), end="")
-                ry = np.array([[rc]])
-            txt.print_text_generation_footer()
-
-        if step // 10 % _50_BATCHES == 0:
-            logging.info(" save a checkpoint (every 500 batches)")
-            saver.save(sess, 'checkpoints/rnn_train_' + timestamp, global_step=step)
-
-        logging.info("display progress bar")
-        progress.step(reset=step % _50_BATCHES == 0)
-
-        logging.info("loop state around")
-        istate = ostate
-        step += BATCHSIZE * SEQLEN
+    model.evaluate(test_dataset)
 
 
 if __name__ == '__main__':
