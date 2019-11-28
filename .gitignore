@@ -145,8 +145,6 @@ dmypy.json
 #sonarqube
 .scannerwork/
 
-# don't upload song lyrics
-data/
-
+logs/
 #codewind
 .cw-settings
