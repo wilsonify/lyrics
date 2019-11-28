@@ -29,16 +29,17 @@ For the detailed list of constraints,
 import logging
 from logging.config import dictConfig
 
+import numpy as np
 import tensorflow as tf
 from recurrent import config
-from tensorflow.keras import layers
 
 ALPHASIZE = config.ALPHASIZE
 INTERNALSIZE = config.INTERNALSIZE
 NLAYERS = config.NLAYERS
+SEQLEN = 100
+
 LEARNING_RATE = 0.001
 DROPOUT_PKEEP = 0.8
-SEQLEN = 100
 BATCHSIZE = 100
 DISPLAY_FREQ = 50
 _50_BATCHES = DISPLAY_FREQ * BATCHSIZE * SEQLEN
@@ -69,33 +70,33 @@ def build_bidirectional_model():
     model = tf.keras.Sequential()
 
     model.add(
-        layers.Bidirectional(
-            layers.LSTM(
+        tf.keras.layers.Bidirectional(
+            tf.keras.layers.LSTM(
                 64,
                 return_sequences=True
             ), input_shape=(5, 10)
         )
     )
-    model.add(layers.Bidirectional(layers.LSTM(32)))
-    model.add(layers.Dense(10, activation='softmax'))
+    model.add(tf.keras.layers.Bidirectional(tf.keras.layers.LSTM(32)))
+    model.add(tf.keras.layers.Dense(10, activation='softmax'))
     return model
 
 
 def build_internal_state_model():
-    encoder_input = layers.Input(shape=(None,))
-    encoder_embedded = layers.Embedding(input_dim=encoder_vocab, output_dim=64)(encoder_input)
+    encoder_input = tf.keras.layers.Input(shape=(None,))
+    encoder_embedded = tf.keras.layers.Embedding(input_dim=encoder_vocab, output_dim=64)(encoder_input)
 
-    LSTM_input_layer = layers.LSTM(64, return_state=True, name='encoder')
-    output, state_h, state_c = LSTM_input_layer(encoder_embedded)  # Return states in addition to output
+    lstm_input_layer = tf.keras.layers.LSTM(64, return_state=True, name='encoder')
+    output, state_h, state_c = lstm_input_layer(encoder_embedded)  # Return states in addition to output
     encoder_state = [state_h, state_c]
 
-    decoder_input = layers.Input(shape=(None,))
-    decoder_embedded = layers.Embedding(input_dim=decoder_vocab, output_dim=64)(decoder_input)
+    decoder_input = tf.keras.layers.Input(shape=(None,))
+    decoder_embedded = tf.keras.layers.Embedding(input_dim=decoder_vocab, output_dim=64)(decoder_input)
 
     # Pass the 2 states to a new LSTM layer, as initial state
-    LSTM_output_layer = layers.LSTM(64, name='decoder')
-    decoder_output = LSTM_output_layer(decoder_embedded, initial_state=encoder_state)
-    output = layers.Dense(10, activation='softmax')(decoder_output)
+    lstm_output_layer = tf.keras.layers.LSTM(64, name='decoder')
+    decoder_output = lstm_output_layer(decoder_embedded, initial_state=encoder_state)
+    output = tf.keras.layers.Dense(10, activation='softmax')(decoder_output)
 
     model = tf.keras.Model([encoder_input, decoder_input], output)
     return model
@@ -103,15 +104,15 @@ def build_internal_state_model():
 
 def build_stateful_model():
     model = tf.keras.Sequential()
-    model.add(layers.Embedding(input_dim=1000, output_dim=64))
+    model.add(tf.keras.layers.Embedding(input_dim=ALPHASIZE, output_dim=INTERNALSIZE))
 
     # The output of GRU will be a 3D tensor of shape (batch_size, timesteps, 256)
-    model.add(layers.GRU(256, return_sequences=True))
+    model.add(tf.keras.layers.GRU(NLAYERS, return_sequences=True))
 
     # The output of SimpleRNN will be a 2D tensor of shape (batch_size, 128)
-    model.add(layers.SimpleRNN(128))
+    model.add(tf.keras.layers.SimpleRNN(SEQLEN))
 
-    model.add(layers.Dense(10, activation='softmax'))
+    model.add(tf.keras.layers.Dense(10, activation='softmax'))
     return model
 
 
@@ -122,9 +123,9 @@ def build_simple_model():
     # Add a Dense layer with 10 units and softmax activation.
 
     model = tf.keras.Sequential()
-    model.add(layers.Embedding(input_dim=ALPHASIZE, output_dim=INTERNALSIZE))
-    model.add(layers.LSTM(NLAYERS))
-    model.add(layers.Dense(ALPHASIZE, activation='softmax'))
+    model.add(tf.keras.layers.Embedding(input_dim=ALPHASIZE, output_dim=INTERNALSIZE))
+    model.add(tf.keras.layers.LSTM(NLAYERS))
+    model.add(tf.keras.layers.Dense(ALPHASIZE, activation='softmax'))
     return model
 
 
@@ -136,7 +137,9 @@ def load_mnist():
     logging.debug("%r", "y_train.shape = {}".format(y_train.shape))
     logging.debug("%r", "x_test.shape = {}".format(x_test.shape))
     logging.debug("%r", "y_test.shape = {}".format(y_test.shape))
-
+    boolean_cover = np.random.choice([0, 1], size=x_train.shape[0])
+    x_train = x_train[boolean_cover]
+    y_train = y_train[boolean_cover]
     recurrent_shape = x_train.shape[1] * x_train.shape[2]
     x_train = x_train.reshape(x_train.shape[0], recurrent_shape).astype('float32') / 255
     x_test = x_test.reshape(x_test.shape[0], recurrent_shape).astype('float32') / 255
@@ -158,8 +161,8 @@ def load_mnist():
 def main():
     train_dataset, test_dataset = load_mnist()
 
-    model = build_simple_model()
-    # model = build_stateful_model()
+    # model = build_simple_model()
+    model = build_stateful_model()
     # model = build_internal_state_model()
     # model = build_bidirectional_model()
 
