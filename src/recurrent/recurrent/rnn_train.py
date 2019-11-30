@@ -26,6 +26,7 @@ For the detailed list of constraints,
 [GRU](https://www.tensorflow.org/versions/r2.0/api_docs/python/tf/keras/layers/GRU)
  layers.
 """
+import datetime
 import logging
 from logging.config import dictConfig
 
@@ -62,8 +63,6 @@ data_dir = config.data_dir
 models_dir = config.models_dir
 training_glob_pattern = config.training_glob_pattern
 checkpoints_dir = config.checkpoints_dir
-
-tensorboard_callback = tf.keras.callbacks.TensorBoard()
 
 
 def build_bidirectional_model():
@@ -168,15 +167,20 @@ def main():
 
     print(model.summary())
 
+    logdir = "logs/scalars/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    logging.info("%r", "logdir = {}".format(logdir))
+    tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
+
     model.compile(
-        loss='sparse_categorical_crossentropy',
-        optimizer='sgd',
+        loss='mse',
+        optimizer='Adagrad',
         metrics=['accuracy']
     )
 
     model.fit(
         train_dataset,
         epochs=5,
+        validation_data=test_dataset,
         callbacks=[tensorboard_callback]
     )
 
