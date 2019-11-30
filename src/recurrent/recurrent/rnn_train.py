@@ -35,8 +35,8 @@ import tensorflow as tf
 from recurrent import config
 
 ALPHASIZE = config.ALPHASIZE
-INTERNALSIZE = config.INTERNALSIZE
-NLAYERS = config.NLAYERS
+INTERNALSIZE = 5
+NLAYERS = 2
 SEQLEN = 100
 
 LEARNING_RATE = 0.001
@@ -167,7 +167,7 @@ def main():
 
     print(model.summary())
 
-    logdir = "logs/scalars/" + datetime.datetime.now().strftime("%Y%m%d-%H%M%S")
+    logdir = "logs"
     logging.info("%r", "logdir = {}".format(logdir))
     tensorboard_callback = tf.keras.callbacks.TensorBoard(log_dir=logdir)
 
