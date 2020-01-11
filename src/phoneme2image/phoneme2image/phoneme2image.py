@@ -100,7 +100,7 @@ ALPHABET = [
 ]
 
 INT_TO_CHAR = dict(enumerate(ALPHABET))
-CHAR_TO_INT = {c: i for i, c in INT_TO_CHAR}
+CHAR_TO_INT = {c: i for i, c in INT_TO_CHAR.items()}
 
 ALPHASIZE = len(ALPHABET)
 ALAPHBET_SET = set(ALPHABET)
@@ -136,7 +136,6 @@ def decode(one_hot_tensor):
     phoneme_str = ""
     for index in indexes:
         logging.info(int(index))
-
         try:
             phoneme_str += " " + INT_TO_CHAR[int(index)]
         except KeyError:
@@ -161,8 +160,11 @@ def main():
         with open(text_path, 'r') as text_file:
             text_str = text_file.read()
             coded = encode(text_str)
-            plt.imshow(coded, cmap="gray")
-            plt.savefig(image_path)
+            greyscale = tf.ones(coded.shape)
+            coded_3d = tf.stack([coded, greyscale], axis=-1)
+            coded_3d_int = tf.dtypes.cast(coded_3d, tf.uint8)
+            image = tf.image.encode_png(coded_3d_int, compression=0)
+            tf.io.write_file(image_path, image)
 
 
 if __name__ == "__main__":
