@@ -8,93 +8,41 @@ import os
 from logging.config import dictConfig
 
 import tensorflow as tf
-from matplotlib import pyplot as plt
 from recurrent import config
 
 ALPHABET = [
-    'A',
-    'AA0',
-    'AA1',
-    'AA2',
-    'AE',
-    'AE0',
-    'AE1',
-    'AE2',
-    'AH',
-    'AH1',
-    'AH2',
-    'AO0',
-    'AO1',
-    'AO2',
-    'AW',
-    'AW0',
-    'AW1',
-    'AW2',
-    'AY0',
-    'AY1',
-    'AY2',
+    'A', 'AA0', 'AA1', 'AA2',
+    'AE', 'AE0', 'AE1', 'AE2', 'AH',
+    'AH1', 'AH2', 'AO0', 'AO1', 'AO2',
+    'AW', 'AW0', 'AW1', 'AW2', 'AY0', 'AY1', 'AY2',
     'B',
     'CH',
-    'D',
-    'DH',
-    'EE',
-    'EH',
-    'EH0',
-    'EH1',
-    'EH2',
-    'ER0',
-    'ER1',
-    'ER2',
-    'EY0',
-    'EY1',
-    'EY2',
+    'D', 'DH',
+    'EE', 'EH', 'EH0', 'EH1',
+    'EH2', 'ER0', 'ER1', 'ER2',
+    'EY0', 'EY1', 'EY2',
     'F',
     'G',
-    'H',
-    'HH',
-    'IH',
-    'IH0',
-    'IH1',
-    'IH2',
-    'IY0',
-    'IY1',
-    'IY2',
-    'J',
-    'JH',
+    'H', 'HH',
+    'IH', 'IH0', 'IH1', 'IH2',
+    'IY0', 'IY1', 'IY2',
+    'J', 'JH',
     'K',
     'L',
     'M',
-    'N',
-    'NG',
-    'OH',
-    'OO',
-    'OW0',
-    'OW1',
-    'OW2',
-    'OY0',
-    'OY1',
-    'OY2',
+    'N', 'NG',
+    'OH', 'OO', 'OW0', 'OW1',
+    'OW2', 'OY0', 'OY1', 'OY2',
     'P',
     'R',
-    'S',
-    'SH',
-    'T',
-    'TH',
-    'TZ',
-    'U',
-    'UH',
-    'UH0',
-    'UH1',
-    'UH2',
-    'UW0',
-    'UW1',
-    'UW2',
+    'S', 'SH',
+    'T', 'TH', 'TZ',
+    'U', 'UH', 'UH0', 'UH1',
+    'UH2', 'UW0', 'UW1', 'UW2',
     'V',
-    'W',
-    'WH',
+    'W', 'WH',
     'Y',
-    'Z',
-    'ZH',
+    'Z', 'ZH',
     ' ',
     '\n'
 ]
@@ -144,12 +92,22 @@ def decode(one_hot_tensor):
     return phoneme_str
 
 
+def text_string_to_image(text_str):
+    coded = encode(text_str)
+    greyscale = tf.ones(coded.shape)
+    coded_3d = tf.stack([coded, greyscale], axis=-1)
+    coded_3d_int = tf.dtypes.cast(coded_3d, tf.uint8)
+    image = tf.image.encode_png(coded_3d_int, compression=0)
+    return image
+
+
 def main():
     """
     main
     :return:
     """
-    for text_path in glob.glob("/home/thom/recurrent_data/data/beatles_lyrics_phoneme/*.txt"):
+    glob_pattern = os.path.join(config.data_dir, "beatles_lyrics_phoneme", "*.txt")
+    for text_path in glob.glob(glob_pattern):
         logging.info(text_path)
         text_head, _ = os.path.splitext(text_path)
         text_dir, text_tail = os.path.split(text_head)
@@ -159,11 +117,7 @@ def main():
         logging.info(image_path)
         with open(text_path, 'r') as text_file:
             text_str = text_file.read()
-            coded = encode(text_str)
-            greyscale = tf.ones(coded.shape)
-            coded_3d = tf.stack([coded, greyscale], axis=-1)
-            coded_3d_int = tf.dtypes.cast(coded_3d, tf.uint8)
-            image = tf.image.encode_png(coded_3d_int, compression=0)
+            image = text_string_to_image(text_str)
             tf.io.write_file(image_path, image)
 
 
