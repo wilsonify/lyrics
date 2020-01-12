@@ -4,7 +4,7 @@ import unittest
 import numpy as np
 import recurrent.utils as txt
 import tensorflow as tf
-from recurrent import utils
+from recurrent import utils, config
 from recurrent.rnn_train import load_mnist
 
 TST_TXTSIZE = 10000
@@ -120,9 +120,9 @@ def test_load_mnist():
 def test_encode(phoneme_str):
     output = utils.encode(phoneme_str)
     print(output)
-    assert output.shape == (448, utils.ALPHASIZE)
+    assert output.shape == (410, config.ALPHASIZE)
 
 
 def test_decode(encoded_tensor):
     output = utils.decode(encoded_tensor)
-    assert len(output) == 1214
+    assert len(output) == 896
