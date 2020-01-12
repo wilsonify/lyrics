@@ -10,127 +10,42 @@ import numpy as np
 import tensorflow as tf
 from recurrent import config
 
-alphabet = [
-    'A',
-    'AA0',
-    'AA1',
-    'AA2',
-    'AE',
-    'AE0',
-    'AE1',
-    'AE2',
-    'AH',
-    'AH1',
-    'AH2',
-    'AO0',
-    'AO1',
-    'AO2',
-    'AW',
-    'AW0',
-    'AW1',
-    'AW2',
-    'AY0',
-    'AY1',
-    'AY2',
-    'B',
-    'CH',
-    'D',
-    'DH',
-    'EE',
-    'EH',
-    'EH0',
-    'EH1',
-    'EH2',
-    'ER0',
-    'ER1',
-    'ER2',
-    'EY0',
-    'EY1',
-    'EY2',
-    'F',
-    'G',
-    'H',
-    'HH',
-    'IH',
-    'IH0',
-    'IH1',
-    'IH2',
-    'IY0',
-    'IY1',
-    'IY2',
-    'J',
-    'JH',
-    'K',
-    'L',
-    'M',
-    'N',
-    'NG',
-    'OH',
-    'OO',
-    'OW0',
-    'OW1',
-    'OW2',
-    'OY0',
-    'OY1',
-    'OY2',
-    'P',
-    'R',
-    'S',
-    'SH',
-    'T',
-    'TH',
-    'TZ',
-    'U',
-    'UH',
-    'UH0',
-    'UH1',
-    'UH2',
-    'UW0',
-    'UW1',
-    'UW2',
-    'V',
-    'W',
-    'WH',
-    'Y',
-    'Z',
-    'ZH',
-    ' ',
-    '\n'
-]
-
-char_to_int = {c: i for i, c in enumerate(alphabet)}
-int_to_char = {i: c for i, c in enumerate(alphabet)}
-
-ALPHASIZE = len(alphabet)
-alphabet_set = set(alphabet)
-
 
 def encode(phoneme_str):
+    """
+    encode phoneme as a one hot encoded tensor
+    :param phoneme_str:
+    :return:
+    """
     lines_list = phoneme_str.split("\n")
     integer_encoded = []
     for line in lines_list:
-        integer_encoded.append(char_to_int['\n'])
+        integer_encoded.append(config.CHAR_TO_INT['\n'])
         phoneme_list = line.split(" ")
         for phoneme in phoneme_list:
             try:
-                integer_encoded.append(char_to_int[phoneme])
+                integer_encoded.append(config.CHAR_TO_INT[phoneme])
             except KeyError:
-                integer_encoded.append(char_to_int[' '])
+                continue
     logging.debug("%r", "integer_encoded = {}".format(integer_encoded))
-    return tf.one_hot(integer_encoded, ALPHASIZE, on_value=1.0, off_value=0.0, axis=-1)
+    return tf.one_hot(integer_encoded, config.ALPHASIZE, on_value=1.0, off_value=0.0, axis=-1)
 
 
 def decode(one_hot_tensor):
+    """
+    decode tensor to phoneme
+    :param one_hot_tensor:
+    :return:
+    """
     indexes = tf.argmax(one_hot_tensor, axis=1)
     phoneme_str = ""
     for index in indexes:
-        print(int(index))
-
+        logging.info(int(index))
         try:
-            phoneme_str += " " + int_to_char[int(index)]
+            phoneme_str += " " + config.INT_TO_CHAR[int(index)]
         except KeyError:
             continue
-    print(phoneme_str)
+    logging.info(phoneme_str)
     return phoneme_str
 
 
