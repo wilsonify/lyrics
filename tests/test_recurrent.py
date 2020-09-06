@@ -125,4 +125,4 @@ def test_encode(phoneme_str):
 
 def test_decode(encoded_tensor):
     output = utils.decode(encoded_tensor)
-    assert len(output) == 896
+    assert len(output) == 1214
