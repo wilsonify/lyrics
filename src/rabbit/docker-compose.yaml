@@ -3,6 +3,7 @@ services:
   some-rabbitmq:
     image: rabbitmq:3-management-alpine
     hostname: rabbit-host
+    restart: unless-stopped
     ports:
      - "32779:4369"
      - "32778:5671"
