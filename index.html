@@ -1,1495 +1,1482 @@
 
-<!doctype html>
-<html lang="en" class="no-js">
+<!DOCTYPE html>
+
+<html>
   <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Installation &#8212; lyrics</title>
     
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-        <meta name="description" content="generative song lyrics">
-      
-      
-      
-      
-      <link rel="shortcut icon" href="img/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
     
-    
-      
-        <title>lyrics</title>
-      
-    
-    
-      <link rel="stylesheet" href="assets/stylesheets/main.3b61ea93.min.css">
-      
-        
-        <link rel="stylesheet" href="assets/stylesheets/palette.39b8e14a.min.css">
-        
-          
-          
-          <meta name="theme-color" content="#000000">
-        
-      
-    
-    
+  <link rel="stylesheet"
+    href="_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
     
       
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
+  <link rel="stylesheet"
+    href="_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="_static/vendor/lato_latin-ext/1.44.1/index.css">
+
     
+    <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-    
-      <link rel="stylesheet" href="css/termynal.css">
-    
-      <link rel="stylesheet" href="css/custom.css">
-    
-    
-      
-        
-<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-155009830-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
-<script async src="https://www.google-analytics.com/analytics.js"></script>
-      
-    
-    
+  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
+    <script src="_static/jquery.js"></script>
+    <script src="_static/underscore.js"></script>
+    <script src="_static/doctools.js"></script>
+    <script src="_static/togglebutton.js"></script>
+    <script src="_static/clipboard.min.js"></script>
+    <script src="_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" />
+    <link rel="next" title="Typer CLI" href="typer-cli.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
   </head>
-  
-  
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
     
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="teal">
-      
-  
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#installation" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href="." title="lyrics" class="md-header-nav__button md-logo" aria-label="lyrics">
-      
-  <img src="img/icon-white.svg" alt="logo">
-
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      <div class="md-header-nav__ellipsis">
-        <div class="md-header-nav__topic">
-          <span class="md-ellipsis">
-            lyrics
-          </span>
-        </div>
-        <div class="md-header-nav__topic">
-          <span class="md-ellipsis">
-            
-              Lyrics
-            
-          </span>
-        </div>
-      </div>
-    </div>
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="#">
+  
+  
+  <h1 class="site-logo" id="site-title">lyrics</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1 current active">
+  <a class="reference internal" href="#">
+   Installation
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="typer-cli.html">
+   Typer CLI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="alternatives.html">
+   Intro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="alternatives.html#previous-tools">
+   Previous tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html">
+   Star
+   <strong>
+    Typer
+   </strong>
+   in GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#watch-the-github-repository-for-releases">
+   Watch the GitHub repository for releases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#connect-with-the-author">
+   Connect with the author
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#tweet-about-typer">
+   Tweet about
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#let-me-know-how-are-you-using-typer">
+   Let me know how are you using
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#help-others-with-issues-in-github">
+   Help others with issues in GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#watch-the-github-repository">
+   Watch the GitHub repository
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#create-issues">
+   Create issues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help-typer.html#create-a-pull-request">
+   Create a Pull Request
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributing.html">
+   Developing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributing.html#docs">
+   Docs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="contributing.html#tests">
+   Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html">
+   Latest changes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id1">
+   0.3.2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id2">
+   0.3.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id3">
+   0.3.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id4">
+   0.2.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id5">
+   0.2.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id6">
+   0.1.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id7">
+   0.1.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id8">
+   0.0.11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id9">
+   0.0.10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id10">
+   0.0.9
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id11">
+   0.0.8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id12">
+   0.0.7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id13">
+   0.0.6
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id14">
+   0.0.5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id15">
+   0.0.4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id16">
+   0.0.3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id17">
+   0.0.2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="release-notes.html#id18">
+   0.0.1
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/index.html">
+   Python types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/index.html#intro">
+   Intro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/index.html#run-the-code">
+   Run the code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/index.html#install-typer">
+   Install
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html">
+   The simplest example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#what-is-a-cli-argument">
+   What is a
+   <strong>
+    CLI argument
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#add-a-cli-argument">
+   Add a CLI argument
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#two-cli-arguments">
+   Two CLI arguments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#what-is-a-cli-option">
+   What is a
+   <strong>
+    CLI option
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#add-one-cli-option">
+   Add one
+   <em>
+    CLI option
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#a-cli-option-with-a-value">
+   A
+   <em>
+    CLI option
+   </em>
+   with a value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#document-your-cli-app">
+   Document your CLI app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#arguments-options-parameters-optional-required">
+   Arguments, options, parameters, optional, required
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/first-steps.html#typer-cli">
+   <strong>
+    Typer CLI
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/printing.html">
+   Color
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/printing.html#typer-secho-style-and-print">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     typer.secho()
+    </span>
+   </code>
+   - style and print
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/printing.html#standard-output-and-standard-error">
+   “Standard Output” and “Standard Error”
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/terminating.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Exit
+    </span>
+   </code>
+   a CLI program
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/terminating.html#exit-with-an-error">
+   Exit with an error
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/terminating.html#abort">
+   Abort
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/optional.html">
+   An alternative
+   <em>
+    CLI argument
+   </em>
+   declaration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/optional.html#make-an-optional-cli-argument">
+   Make an optional
+   <em>
+    CLI argument
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/default.html">
+   An optional
+   <em>
+    CLI argument
+   </em>
+   with a default
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/default.html#dynamic-default-value">
+   Dynamic default value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/help.html">
+   Add a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     help
+    </span>
+   </code>
+   text for a
+   <em>
+    CLI argument
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/help.html#combine-help-text-and-docstrings">
+   Combine help text and docstrings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/help.html#help-with-defaults">
+   Help with defaults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/help.html#custom-default-string">
+   Custom default string
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/help.html#custom-help-name-metavar">
+   Custom help name (
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     metavar
+    </span>
+   </code>
+   )
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/help.html#hide-a-cli-argument-from-the-help-text">
+   Hide a
+   <em>
+    CLI argument
+   </em>
+   from the help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/envvar.html">
+   Multiple environment variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/arguments/envvar.html#hide-an-env-var-from-the-help-text">
+   Hide an env var from the help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/help.html">
+   Hide default from help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/prompt.html">
+   Customize the prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/prompt.html#confirmation-prompt">
+   Confirmation prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/password.html">
+   A Password prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/name.html">
+   <em>
+    CLI option
+   </em>
+   short names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/callback-and-context.html">
+   Validate
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/callback-and-context.html#handling-completion">
+   Handling completion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/callback-and-context.html#using-the-callbackparam-object">
+   Using the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     CallbackParam
+    </span>
+   </code>
+   object
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/callback-and-context.html#technical-details">
+   Technical Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/version.html">
+   First version of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --version
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/version.html#previous-parameters-and-is-eager">
+   Previous parameters and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     is_eager
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html">
+   Review completion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#custom-completion-for-values">
+   Custom completion for values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#check-the-incomplete-value">
+   Check the incomplete value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#add-help-to-completions">
+   Add help to completions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#simplify-with-yield">
+   Simplify with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     yield
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#access-other-cli-parameters-with-the-context">
+   Access other
+   <em>
+    CLI parameters
+   </em>
+   with the Context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#getting-the-raw-cli-parameters">
+   Getting the raw
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#getting-the-context-and-the-raw-cli-parameters">
+   Getting the Context and the raw
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/options/autocompletion.html#types-types-everywhere">
+   Types, types everywhere
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/index.html">
+   Command or subcommand
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/index.html#explicit-application">
+   Explicit application
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/index.html#a-cli-application-with-multiple-commands">
+   A CLI application with multiple commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/index.html#click-group">
+   Click Group
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/index.html#decorator-technical-details">
+   Decorator Technical Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/help.html">
+   Overwrite command help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/callback.html">
+   Adding a callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/callback.html#overriding-a-callback">
+   Overriding a callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/callback.html#adding-a-callback-only-for-documentation">
+   Adding a callback only for documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/callback.html#click-group">
+   Click Group
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/one-or-multiple.html">
+   One command and one callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/one-or-multiple.html#using-the-callback-to-document">
+   Using the callback to document
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/context.html">
+   Getting the context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/context.html#executable-callback">
+   Executable callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/context.html#exclusive-executable-callback">
+   Exclusive executable callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/commands/context.html#configuring-the-context">
+   Configuring the context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/index.html">
+   Data conversion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/index.html#watch-next">
+   Watch next
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/number.html">
+   Clamping numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/number.html#counter-cli-options">
+   Counter
+   <em>
+    CLI options
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/bool.html">
+   Only
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --force
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/bool.html#alternative-names">
+   Alternative names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/bool.html#short-names">
+   Short names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/bool.html#only-names-for-false">
+   Only names for
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     False
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/datetime.html">
+   Custom date format
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/enum.html">
+   Case insensitive Enum choices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/path.html">
+   Path validations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileText
+    </span>
+   </code>
+   reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html#filetextwrite">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileTextWrite
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html#filebinaryread">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileBinaryRead
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html#filebinarywrite">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileBinaryWrite
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html#file-cli-parameter-configurations">
+   File
+   <em>
+    CLI parameter
+   </em>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html#advanced-mode">
+   Advanced
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     mode
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/parameter-types/file.html#about-the-different-types">
+   About the different types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/add-typer.html">
+   Manage items
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/add-typer.html#manage-users">
+   Manage users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/add-typer.html#put-them-together">
+   Put them together
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/add-typer.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/single-file.html">
+   Apps at the top
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/single-file.html#function-names">
+   Function names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/single-file.html#command-name">
+   Command name
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/single-file.html#check-it">
+   Check it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/nested-subcommands.html">
+   A CLI app for reigns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/nested-subcommands.html#a-cli-app-for-towns">
+   A CLI app for towns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/nested-subcommands.html#manage-the-land-in-a-cli-app">
+   Manage the land in a CLI app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/nested-subcommands.html#deeply-nested-subcommands">
+   Deeply nested subcommands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/nested-subcommands.html#review-the-files">
+   Review the files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/nested-subcommands.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/callback-override.html">
+   Add a callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/callback-override.html#overriding-the-callback-on-creation">
+   Overriding the callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/callback-override.html#overriding-the-callback-when-adding-a-sub-typer">
+   Overriding the callback when adding a sub-Typer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/name-and-help.html">
+   Add a help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/name-and-help.html#inferring-name-and-help-from-callback">
+   Inferring name and help from callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/name-and-help.html#set-the-name-and-help">
+   Set the name and help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/subcommands/name-and-help.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/multiple-values/multiple-options.html">
+   Multiple
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     float
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/multiple-values/options-with-multiple-values.html">
+   Check it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/multiple-values/arguments-with-multiple-values.html">
+   <em>
+    CLI arguments
+   </em>
+   with tuples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/prompt.html">
+   Confirm
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/prompt.html#confirm-or-abort">
+   Confirm or abort
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/progressbar.html">
+   Setting a Progress Bar
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     length
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/progressbar.html#add-a-label">
+   Add a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     label
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/progressbar.html#iterate-manually">
+   Iterate manually
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/app-dir.html">
+   About
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Path
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/launch.html">
+   Locating a file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/testing.html">
+   Test the app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/testing.html#testing-input">
+   Testing input
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/testing.html#test-a-function">
+   Test a function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/using-click.html">
+   A single app with both Click and
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/using-click.html#about-click-decorators">
+   About Click decorators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#create-a-project">
+   Create a project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#dependencies-and-environment">
+   Dependencies and environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#create-your-app">
+   Create your app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#modify-the-readme">
+   Modify the README
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#modify-your-project-metadata">
+   Modify your project metadata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#add-a-script">
+   Add a “script”
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#install-your-package">
+   Install your package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#try-your-cli-program">
+   Try your CLI program
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#create-a-wheel-package">
+   Create a wheel package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#test-your-wheel-package">
+   Test your wheel package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#support-python-m-optional">
+   Support
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     python
+    </span>
+    <span class="pre">
+     -m
+    </span>
+   </code>
+   (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#publish-to-pypi-optional">
+   Publish to PyPI (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#generate-docs-with-typer-cli-optional">
+   Generate docs with
+   <strong>
+    Typer CLI
+   </strong>
+   (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="tutorial/package.html#what-s-next">
+   What’s next
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
 </div>
-    
-    
-      <div class="md-header-nav__source">
-        
-<a href="https://github.com/wilsonify/lyrics" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
-    
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    wilsonify/lyrics
-  </div>
-</a>
-      </div>
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
+
+</div>
+
+
           
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
 
 
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href="." title="lyrics" class="md-nav__button md-logo" aria-label="lyrics">
-      
-  <img src="img/icon-white.svg" alt="logo">
-
-    </a>
-    lyrics
-  </label>
-  
-    <div class="md-nav__source">
-      
-<a href="https://github.com/wilsonify/lyrics" title="Go to repository" class="md-source">
-  <div class="md-source__icon md-icon">
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
     
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
-  </div>
-  <div class="md-source__repository">
-    wilsonify/lyrics
-  </div>
-</a>
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
     </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="_sources/index.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
 
 
-  
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
 
+        <!-- Launch buttons -->
 
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Lyrics
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="." class="md-nav__link md-nav__link--active">
-      Lyrics
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-virtual-environment" class="md-nav__link">
-    create a virtual environment
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Installation
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-dependencies" class="md-nav__link">
-    install dependencies
-  </a>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="features/" class="md-nav__link">
-      Features
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#create-a-virtual-environment">
+     create a virtual environment
     </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" >
-    
-    <label class="md-nav__link" for="nav-3">
-      Tutorial - User Guide
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Tutorial - User Guide" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        <span class="md-nav__icon md-icon"></span>
-        Tutorial - User Guide
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/" class="md-nav__link">
-      Tutorial - User Guide - Intro
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-dependencies">
+     install dependencies
     </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/first-steps/" class="md-nav__link">
-      First Steps
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/printing/" class="md-nav__link">
-      Printing and Colors
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/terminating/" class="md-nav__link">
-      Terminating
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" >
-    
-    <label class="md-nav__link" for="nav-3-5">
-      CLI Arguments
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="CLI Arguments" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-5">
-        <span class="md-nav__icon md-icon"></span>
-        CLI Arguments
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/arguments/" class="md-nav__link">
-      CLI Arguments Intro
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/arguments/optional/" class="md-nav__link">
-      Optional CLI Arguments
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/arguments/default/" class="md-nav__link">
-      CLI Arguments with Default
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/arguments/help/" class="md-nav__link">
-      CLI Arguments with Help
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/arguments/envvar/" class="md-nav__link">
-      CLI Arguments with Environment Variables
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/arguments/other-uses/" class="md-nav__link">
-      Other uses
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6" >
-    
-    <label class="md-nav__link" for="nav-3-6">
-      CLI Options
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="CLI Options" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-6">
-        <span class="md-nav__icon md-icon"></span>
-        CLI Options
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/" class="md-nav__link">
-      CLI Options Intro
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/help/" class="md-nav__link">
-      CLI Options with Help
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/required/" class="md-nav__link">
-      Required CLI Options
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/prompt/" class="md-nav__link">
-      CLI Option Prompt
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/password/" class="md-nav__link">
-      Password CLI Option and Confirmation Prompt
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/name/" class="md-nav__link">
-      CLI Option Name
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/callback-and-context/" class="md-nav__link">
-      CLI Option Callback and Context
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/version/" class="md-nav__link">
-      Version CLI Option, is_eager
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/options/autocompletion/" class="md-nav__link">
-      CLI Option autocompletion
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7" >
-    
-    <label class="md-nav__link" for="nav-3-7">
-      Commands
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Commands" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-7">
-        <span class="md-nav__icon md-icon"></span>
-        Commands
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/" class="md-nav__link">
-      Commands Intro
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/arguments/" class="md-nav__link">
-      Command CLI Arguments
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/options/" class="md-nav__link">
-      Command CLI Options
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/help/" class="md-nav__link">
-      Command Help
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/name/" class="md-nav__link">
-      Custom Command Name
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/callback/" class="md-nav__link">
-      Typer Callback
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/one-or-multiple/" class="md-nav__link">
-      One or Multiple Commands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/commands/context/" class="md-nav__link">
-      Using the Context
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8" >
-    
-    <label class="md-nav__link" for="nav-3-8">
-      CLI Parameter Types
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="CLI Parameter Types" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-8">
-        <span class="md-nav__icon md-icon"></span>
-        CLI Parameter Types
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/" class="md-nav__link">
-      CLI Parameter Types Intro
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/number/" class="md-nav__link">
-      Number
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/bool/" class="md-nav__link">
-      Boolean CLI Options
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/uuid/" class="md-nav__link">
-      UUID
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/datetime/" class="md-nav__link">
-      DateTime
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/enum/" class="md-nav__link">
-      Enum - Choices
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/path/" class="md-nav__link">
-      Path
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/parameter-types/file/" class="md-nav__link">
-      File
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9" >
-    
-    <label class="md-nav__link" for="nav-3-9">
-      SubCommands - Command Groups
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="SubCommands - Command Groups" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-9">
-        <span class="md-nav__icon md-icon"></span>
-        SubCommands - Command Groups
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/subcommands/" class="md-nav__link">
-      SubCommands - Command Groups - Intro
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/subcommands/add-typer/" class="md-nav__link">
-      Add Typer
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/subcommands/single-file/" class="md-nav__link">
-      SubCommands in a Single File
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/subcommands/nested-subcommands/" class="md-nav__link">
-      Nested SubCommands
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/subcommands/callback-override/" class="md-nav__link">
-      Sub-Typer Callback Override
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/subcommands/name-and-help/" class="md-nav__link">
-      SubCommand Name and Help
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  
-  <li class="md-nav__item md-nav__item--nested">
-    
-    
-      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-10" type="checkbox" id="nav-3-10" >
-    
-    <label class="md-nav__link" for="nav-3-10">
-      Multiple Values
-      <span class="md-nav__icon md-icon"></span>
-    </label>
-    <nav class="md-nav" aria-label="Multiple Values" data-md-level="2">
-      <label class="md-nav__title" for="nav-3-10">
-        <span class="md-nav__icon md-icon"></span>
-        Multiple Values
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/multiple-values/" class="md-nav__link">
-      Multiple Values Intro
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/multiple-values/multiple-options/" class="md-nav__link">
-      Multiple CLI Options
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/multiple-values/options-with-multiple-values/" class="md-nav__link">
-      CLI Options with Multiple Values
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/multiple-values/arguments-with-multiple-values/" class="md-nav__link">
-      CLI Arguments with Multiple Values
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/prompt/" class="md-nav__link">
-      Ask with Prompt
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/progressbar/" class="md-nav__link">
-      Progress Bar
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/app-dir/" class="md-nav__link">
-      CLI Application Directory
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/launch/" class="md-nav__link">
-      Launching Applications
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/testing/" class="md-nav__link">
-      Testing
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/using-click/" class="md-nav__link">
-      Using Click
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-
-  <li class="md-nav__item">
-    <a href="tutorial/package/" class="md-nav__link">
-      Building a Package
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="typer-cli/" class="md-nav__link">
-      Typer CLI - completion for small scripts
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="alternatives/" class="md-nav__link">
-      Alternatives, Inspiration and Comparisons
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="help-typer/" class="md-nav__link">
-      Help Typer - Get Help
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="contributing/" class="md-nav__link">
-      Development - Contributing
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="release-notes/" class="md-nav__link">
-      Release Notes
-    </a>
-  </li>
-
-    
+   </li>
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#create-a-virtual-environment" class="md-nav__link">
-    create a virtual environment
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#usage">
+   Usage:
   </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-dependencies" class="md-nav__link">
-    install dependencies
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#tests">
+   Tests
   </a>
-  
-</li>
-      
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generated-beatles">
+   generated Beatles
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#contributing">
+     Contributing
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#requirements">
+     Requirements
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#id1">
+     Installation
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#license">
+     License
+    </a>
+    <ul class="nav section-nav flex-column">
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
+   </li>
+  </ul>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
                 
-                
-                <p><img alt="Logo of Lyrics" src="img/logo-lyric.png" /></p>
+  <p><img alt="Logo of Lyrics" src="_images/logo-lyric.png" /></p>
 <p align="center">
     <em> generative song lyrics </em>
 </p>
-
 <p align="center">
 <a href="https://github.com/wilsonify/lyrics/actions?query=workflow%3ATest" target="_blank">
     <img src="https://github.com/wilsonify/lyrics/workflows/Test/badge.svg" alt="Test">
 </a>
-
 <a href="https://github.com/wilsonify/lyrics/actions?query=workflow%3APublish" target="_blank">
     <img src="https://github.com/wilsonify/lyrics/workflows/Publish/badge.svg" alt="Publish">
 </a>
-
 <a href="https://codecov.io/gh/wilsonify/lyrics" target="_blank">
     <img src="https://img.shields.io/codecov/c/github/wilsonify/lyrics?color=%2334D058" alt="Coverage">
 </a>
-
 </p>
-
-<hr />
-<p><strong><a href="https://github.wilsonify.io/lyrics">Documentation</a></strong> </p>
-<p><strong><a href="https://github.com/wilsonify/lyrics">Source Code</a></strong></p>
-<hr />
-<p>lyrics is a project for using Recurrent Neural Networks to generate song lyrics inspired by <a href="https://github.com/martin-gorner/tensorflow-rnn-shakespeare">tensorflow-rnn-shakespeare</a></p>
-<h2 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h2>
-<p>You're going to need tensorflow-gpu==1.12 (old).
-this project is intended to use an old GPU (GTX 650 compute capability=3.0) 
+<hr class="docutils" />
+<p><strong><a class="reference external" href="https://github.wilsonify.io/lyrics">Documentation</a></strong></p>
+<p><strong><a class="reference external" href="https://github.com/wilsonify/lyrics">Source Code</a></strong></p>
+<hr class="docutils" />
+<p>lyrics is a project for using Recurrent Neural Networks to generate song lyrics inspired by <a class="reference external" href="https://github.com/martin-gorner/tensorflow-rnn-shakespeare">tensorflow-rnn-shakespeare</a></p>
+<div class="section" id="installation">
+<h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>You’re going to need tensorflow-gpu==1.12 (old).
+this project is intended to use an old GPU (GTX 650 compute capability=3.0)
 which is not officially supported by tensorflow, so compile tensorflow from source first.</p>
-<p>some notable tensorflow dependencies:
-<div class="highlight"><pre><span></span><code>nvidia-driver-390
-cuda=9.0
-cuDNN=7.7
-nccl==2.2
-</code></pre></div></p>
-<h3 id="create-a-virtual-environment">create a virtual environment<a class="headerlink" href="#create-a-virtual-environment" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>python -m virtualenv venv
+<p>some notable tensorflow dependencies:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">nvidia</span><span class="o">-</span><span class="n">driver</span><span class="o">-</span><span class="mi">390</span>
+<span class="n">cuda</span><span class="o">=</span><span class="mf">9.0</span>
+<span class="n">cuDNN</span><span class="o">=</span><span class="mf">7.7</span>
+<span class="n">nccl</span><span class="o">==</span><span class="mf">2.2</span>
+</pre></div>
+</div>
+<div class="section" id="create-a-virtual-environment">
+<h2>create a virtual environment<a class="headerlink" href="#create-a-virtual-environment" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>python -m virtualenv venv
 <span class="nb">source</span> venv/bin/activate
-</code></pre></div>
-<h3 id="install-dependencies">install dependencies<a class="headerlink" href="#install-dependencies" title="Permanent link">&para;</a></h3>
-<div class="highlight"><pre><span></span><code>python -m pip install pkg/tensorflow-1.12.0-cp36-cp36m-linux_x86_64.whl
-cd src/recurrent
-python -m pip install -r requirements.txt
-python setup.py setup.py install
-cd src/grapheme2phoneme/grapheme2phoneme
-python -m pip install -r requirements.txt
-python -m nltk.downloader cmudict
-python setup.py develop
-</code></pre></div>
-<h2 id="usage">Usage:<a class="headerlink" href="#usage" title="Permanent link">&para;</a></h2>
-<p><div class="highlight"><pre><span></span><code>source venv/bin/activate
-python rnn_train.py
-</code></pre></div>
-trains a language model on a directory of txt files (song lyrics or otherwise).</p>
-<p><div class="highlight"><pre><span></span><code>tensorboard --logdir=config.log_dir
-</code></pre></div>
-rnn_train.py** is set up to save training and validation data as "Tensorboard sumaries" in the "log" folder.
+</pre></div>
+</div>
+</div>
+<div class="section" id="install-dependencies">
+<h2>install dependencies<a class="headerlink" href="#install-dependencies" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">pkg</span><span class="o">/</span><span class="n">tensorflow</span><span class="o">-</span><span class="mf">1.12</span><span class="o">.</span><span class="mi">0</span><span class="o">-</span><span class="n">cp36</span><span class="o">-</span><span class="n">cp36m</span><span class="o">-</span><span class="n">linux_x86_64</span><span class="o">.</span><span class="n">whl</span>
+<span class="n">cd</span> <span class="n">src</span><span class="o">/</span><span class="n">recurrent</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+<span class="n">cd</span> <span class="n">src</span><span class="o">/</span><span class="n">grapheme2phoneme</span><span class="o">/</span><span class="n">grapheme2phoneme</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pip</span> <span class="n">install</span> <span class="o">-</span><span class="n">r</span> <span class="n">requirements</span><span class="o">.</span><span class="n">txt</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">nltk</span><span class="o">.</span><span class="n">downloader</span> <span class="n">cmudict</span>
+<span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">develop</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="usage">
+<h1>Usage:<a class="headerlink" href="#usage" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">source</span> <span class="n">venv</span><span class="o">/</span><span class="nb">bin</span><span class="o">/</span><span class="n">activate</span>
+<span class="n">python</span> <span class="n">rnn_train</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>trains a language model on a directory of txt files (song lyrics or otherwise).</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tensorboard</span> <span class="o">--</span><span class="n">logdir</span><span class="o">=</span><span class="n">config</span><span class="o">.</span><span class="n">log_dir</span>
+</pre></div>
+</div>
+<p>rnn_train.py** is set up to save training and validation data as “Tensorboard sumaries” in the “log” folder.
 They can be visualised with Tensorboard.</p>
-<p><div class="highlight"><pre><span></span><code>python rnn_play.py
-</code></pre></div>
-uses a trained snapshot (saved to checkpoints folder) to generate a new text.<br />
-You can also generate new "Tensorflow Python" code. See comments in the file.</p>
-<h1 id="tests">Tests<a class="headerlink" href="#tests" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>python setup.py install
-python -m pytest
-</code></pre></div>
-<h1 id="generated-beatles">generated Beatles<a class="headerlink" href="#generated-beatles" title="Permanent link">&para;</a></h1>
-<div class="highlight"><pre><span></span><code>Well, it&#39;s a long with you
-I&#39;m so slad at&#39;s time
-And I&#39;m going to love you any old way
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">rnn_play</span><span class="o">.</span><span class="n">py</span>
+</pre></div>
+</div>
+<p>uses a trained snapshot (saved to checkpoints folder) to generate a new text.<br />
+You can also generate new “Tensorflow Python” code. See comments in the file.</p>
+</div>
+<div class="section" id="tests">
+<h1>Tests<a class="headerlink" href="#tests" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">python</span> <span class="n">setup</span><span class="o">.</span><span class="n">py</span> <span class="n">install</span>
+<span class="n">python</span> <span class="o">-</span><span class="n">m</span> <span class="n">pytest</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="generated-beatles">
+<h1>generated Beatles<a class="headerlink" href="#generated-beatles" title="Permalink to this headline">¶</a></h1>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Well</span><span class="p">,</span> <span class="n">it</span><span class="s1">&#39;s a long with you</span>
+<span class="n">I</span><span class="s1">&#39;m so slad at&#39;</span><span class="n">s</span> <span class="n">time</span>
+<span class="n">And</span> <span class="n">I</span><span class="s1">&#39;m going to love you any old way</span>
 
-[Verse 1]
-Got a good roasing for the day, the world
-If the sun you stile, hame whit me day
-I want to be your lover baby
-I want to be your man
+<span class="p">[</span><span class="n">Verse</span> <span class="mi">1</span><span class="p">]</span>
+<span class="n">Got</span> <span class="n">a</span> <span class="n">good</span> <span class="n">roasing</span> <span class="k">for</span> <span class="n">the</span> <span class="n">day</span><span class="p">,</span> <span class="n">the</span> <span class="n">world</span>
+<span class="n">If</span> <span class="n">the</span> <span class="n">sun</span> <span class="n">you</span> <span class="n">stile</span><span class="p">,</span> <span class="n">hame</span> <span class="n">whit</span> <span class="n">me</span> <span class="n">day</span>
+<span class="n">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">be</span> <span class="n">your</span> <span class="n">lover</span> <span class="n">baby</span>
+<span class="n">I</span> <span class="n">want</span> <span class="n">to</span> <span class="n">be</span> <span class="n">your</span> <span class="n">man</span>
 
-[Verse 2]
-Love you all the time
-I&#39;clld so lave you while ever day
-I said, I love you
-And I&#39;m always thinking of you
-Oh, oh, oh
-You treat me badly
-I love you madly
-You&#39;ve really got a hold on me
-You&#39;ve really got a hold on me, baby
+<span class="p">[</span><span class="n">Verse</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">Love</span> <span class="n">you</span> <span class="nb">all</span> <span class="n">the</span> <span class="n">time</span>
+<span class="n">I</span><span class="s1">&#39;clld so lave you while ever day</span>
+<span class="n">I</span> <span class="n">said</span><span class="p">,</span> <span class="n">I</span> <span class="n">love</span> <span class="n">you</span>
+<span class="n">And</span> <span class="n">I</span><span class="s1">&#39;m always thinking of you</span>
+<span class="n">Oh</span><span class="p">,</span> <span class="n">oh</span><span class="p">,</span> <span class="n">oh</span>
+<span class="n">You</span> <span class="n">treat</span> <span class="n">me</span> <span class="n">badly</span>
+<span class="n">I</span> <span class="n">love</span> <span class="n">you</span> <span class="n">madly</span>
+<span class="n">You</span><span class="s1">&#39;ve really got a hold on me</span>
+<span class="n">You</span><span class="s1">&#39;ve really got a hold on me, baby</span>
 
-[Chorus]
-You&#39;ve really got a hold on me
-DOoh, some insurance on me, baby
-Well, if you ever, ever say goodbye
-I&#39;m gonna go right home and die
-Oh, if you want me, baby
-You&#39;ve gotta come to me
-Mm honey
-Baby sawk home
-Seeks nowhing what sometnd cauld be baunt
-Nowhere man come your made yeah
+<span class="p">[</span><span class="n">Chorus</span><span class="p">]</span>
+<span class="n">You</span><span class="s1">&#39;ve really got a hold on me</span>
+<span class="n">DOoh</span><span class="p">,</span> <span class="n">some</span> <span class="n">insurance</span> <span class="n">on</span> <span class="n">me</span><span class="p">,</span> <span class="n">baby</span>
+<span class="n">Well</span><span class="p">,</span> <span class="k">if</span> <span class="n">you</span> <span class="n">ever</span><span class="p">,</span> <span class="n">ever</span> <span class="n">say</span> <span class="n">goodbye</span>
+<span class="n">I</span><span class="s1">&#39;m gonna go right home and die</span>
+<span class="n">Oh</span><span class="p">,</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">me</span><span class="p">,</span> <span class="n">baby</span>
+<span class="n">You</span><span class="s1">&#39;ve gotta come to me</span>
+<span class="n">Mm</span> <span class="n">honey</span>
+<span class="n">Baby</span> <span class="n">sawk</span> <span class="n">home</span>
+<span class="n">Seeks</span> <span class="n">nowhing</span> <span class="n">what</span> <span class="n">sometnd</span> <span class="n">cauld</span> <span class="n">be</span> <span class="n">baunt</span>
+<span class="n">Nowhere</span> <span class="n">man</span> <span class="n">come</span> <span class="n">your</span> <span class="n">made</span> <span class="n">yeah</span>
 
-[Verse 2]
-The dud as aheit Is going to set you through
-Come on, pastencco in in nowhere, pain ag the haie
-You can stop theme soresede
-Who wan sun you know the walrus und
-Her lajj, don&#39;t you tell me why con&#39;t you tell me what you see
-It is no surprise now, what you see is me
-</code></pre></div>
-<h2 id="contributing">Contributing<a class="headerlink" href="#contributing" title="Permanent link">&para;</a></h2>
+<span class="p">[</span><span class="n">Verse</span> <span class="mi">2</span><span class="p">]</span>
+<span class="n">The</span> <span class="n">dud</span> <span class="k">as</span> <span class="n">aheit</span> <span class="n">Is</span> <span class="n">going</span> <span class="n">to</span> <span class="nb">set</span> <span class="n">you</span> <span class="n">through</span>
+<span class="n">Come</span> <span class="n">on</span><span class="p">,</span> <span class="n">pastencco</span> <span class="ow">in</span> <span class="ow">in</span> <span class="n">nowhere</span><span class="p">,</span> <span class="n">pain</span> <span class="n">ag</span> <span class="n">the</span> <span class="n">haie</span>
+<span class="n">You</span> <span class="n">can</span> <span class="n">stop</span> <span class="n">theme</span> <span class="n">soresede</span>
+<span class="n">Who</span> <span class="n">wan</span> <span class="n">sun</span> <span class="n">you</span> <span class="n">know</span> <span class="n">the</span> <span class="n">walrus</span> <span class="n">und</span>
+<span class="n">Her</span> <span class="n">lajj</span><span class="p">,</span> <span class="n">don</span><span class="s1">&#39;t you tell me why con&#39;</span><span class="n">t</span> <span class="n">you</span> <span class="n">tell</span> <span class="n">me</span> <span class="n">what</span> <span class="n">you</span> <span class="n">see</span>
+<span class="n">It</span> <span class="ow">is</span> <span class="n">no</span> <span class="n">surprise</span> <span class="n">now</span><span class="p">,</span> <span class="n">what</span> <span class="n">you</span> <span class="n">see</span> <span class="ow">is</span> <span class="n">me</span>
+
+</pre></div>
+</div>
+<div class="section" id="contributing">
+<h2>Contributing<a class="headerlink" href="#contributing" title="Permalink to this headline">¶</a></h2>
 <p>Pull requests are welcome.</p>
-<h2 id="requirements">Requirements<a class="headerlink" href="#requirements" title="Permanent link">&para;</a></h2>
+</div>
+<div class="section" id="requirements">
+<h2>Requirements<a class="headerlink" href="#requirements" title="Permalink to this headline">¶</a></h2>
 <p>Python 3.6+</p>
-<h2 id="installation_1">Installation<a class="headerlink" href="#installation_1" title="Permanent link">&para;</a></h2>
+</div>
+<div class="section" id="id1">
+<h2>Installation<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="termy">
-
-<div class="highlight"><pre><span></span><code>pip install lyrics
-</code></pre></div>
-
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pip</span> <span class="n">install</span> <span class="n">lyrics</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="license">
+<h2>License<a class="headerlink" href="#license" title="Permalink to this headline">¶</a></h2>
+<p>This project is licensed under the terms of the MIT license.</p>
+<div class="toctree-wrapper compound">
+</div>
+<div class="toctree-wrapper compound">
+</div>
+</div>
 </div>
 
-<h2 id="license">License<a class="headerlink" href="#license" title="Permanent link">&para;</a></h2>
-<p>This project is licensed under the terms of the MIT license.</p>
-                
-              
-              
-                
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./."
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
 
-
-              
-            </article>
-          </div>
-        </div>
-      </main>
-      
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-        
-          <a href="features/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Features
               </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
+              
+        </div>
     </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
-      
-  <div class="md-footer-social">
     
-      
-      
-        
-        
-      
-      <a href="https://github.com/wilsonify" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
-      </a>
     
-      
-      
+    <div class='prev-next-bottom'>
         
-        
-      
-      <a href="https://www.linkedin.com/in/tom-andrew-wilson/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
-      </a>
-    
-      
-      
-        
-        
-      
-      <a href="https://www.reddit.com/r/wilsonify" target="_blank" rel="noopener" title="www.reddit.com" class="md-footer-social__link">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M201.5 305.5c-13.8 0-24.9-11.1-24.9-24.6 0-13.8 11.1-24.9 24.9-24.9 13.6 0 24.6 11.1 24.6 24.9 0 13.6-11.1 24.6-24.6 24.6zM504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-132.3-41.2c-9.4 0-17.7 3.9-23.8 10-22.4-15.5-52.6-25.5-86.1-26.6l17.4-78.3 55.4 12.5c0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.3 24.9-24.9s-11.1-24.9-24.9-24.9c-9.7 0-18 5.8-22.1 13.8l-61.2-13.6c-3-.8-6.1 1.4-6.9 4.4l-19.1 86.4c-33.2 1.4-63.1 11.3-85.5 26.8-6.1-6.4-14.7-10.2-24.1-10.2-34.9 0-46.3 46.9-14.4 62.8-1.1 5-1.7 10.2-1.7 15.5 0 52.6 59.2 95.2 132 95.2 73.1 0 132.3-42.6 132.3-95.2 0-5.3-.6-10.8-1.9-15.8 31.3-16 19.8-62.5-14.9-62.5zM302.8 331c-18.2 18.2-76.1 17.9-93.6 0-2.2-2.2-6.1-2.2-8.3 0-2.5 2.5-2.5 6.4 0 8.6 22.8 22.8 87.3 22.8 110.2 0 2.5-2.2 2.5-6.1 0-8.6-2.2-2.2-6.1-2.2-8.3 0zm7.7-75c-13.6 0-24.6 11.1-24.6 24.9 0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.1 24.9-24.6 0-13.8-11-24.9-24.9-24.9z"/></svg>
-      </a>
-    
-  </div>
+    <a class='right-next' id="next-link" href="typer-cli.html" title="next page">Typer CLI</a>
 
     </div>
-  </div>
-</footer>
-      
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Thomas Wilson<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
     </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
     
-      <script src="assets/javascripts/vendor.08c56446.min.js"></script>
-      <script src="assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
-      
-      <script>
-        app = initialize({
-          base: ".",
-          features: [],
-          search: Object.assign({
-            worker: "assets/javascripts/worker/search.8c7e0a7e.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
-      
-        <script src="https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js"></script>
-      
-        <script src="js/termynal.js"></script>
-      
-        <script src="js/custom.js"></script>
-      
+  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
     
   </body>
 </html>

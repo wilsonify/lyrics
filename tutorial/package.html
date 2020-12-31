@@ -1,0 +1,2061 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Prerequisites &#8212; lyrics</title>
+    
+  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/togglebutton.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="A single app with both Click and Typer" href="using-click.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">lyrics</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../typer-cli.html">
+   Typer CLI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../alternatives.html">
+   Intro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../alternatives.html#previous-tools">
+   Previous tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html">
+   Star
+   <strong>
+    Typer
+   </strong>
+   in GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#watch-the-github-repository-for-releases">
+   Watch the GitHub repository for releases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#connect-with-the-author">
+   Connect with the author
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#tweet-about-typer">
+   Tweet about
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#let-me-know-how-are-you-using-typer">
+   Let me know how are you using
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#help-others-with-issues-in-github">
+   Help others with issues in GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#watch-the-github-repository">
+   Watch the GitHub repository
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#create-issues">
+   Create issues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../help-typer.html#create-a-pull-request">
+   Create a Pull Request
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing.html">
+   Developing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing.html#docs">
+   Docs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../contributing.html#tests">
+   Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html">
+   Latest changes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id1">
+   0.3.2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id2">
+   0.3.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id3">
+   0.3.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id4">
+   0.2.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id5">
+   0.2.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id6">
+   0.1.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id7">
+   0.1.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id8">
+   0.0.11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id9">
+   0.0.10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id10">
+   0.0.9
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id11">
+   0.0.8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id12">
+   0.0.7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id13">
+   0.0.6
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id14">
+   0.0.5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id15">
+   0.0.4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id16">
+   0.0.3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id17">
+   0.0.2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../release-notes.html#id18">
+   0.0.1
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html">
+   Python types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html#intro">
+   Intro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html#run-the-code">
+   Run the code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="index.html#install-typer">
+   Install
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html">
+   The simplest example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#what-is-a-cli-argument">
+   What is a
+   <strong>
+    CLI argument
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#add-a-cli-argument">
+   Add a CLI argument
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#two-cli-arguments">
+   Two CLI arguments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#what-is-a-cli-option">
+   What is a
+   <strong>
+    CLI option
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#add-one-cli-option">
+   Add one
+   <em>
+    CLI option
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#a-cli-option-with-a-value">
+   A
+   <em>
+    CLI option
+   </em>
+   with a value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#document-your-cli-app">
+   Document your CLI app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#arguments-options-parameters-optional-required">
+   Arguments, options, parameters, optional, required
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="first-steps.html#typer-cli">
+   <strong>
+    Typer CLI
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="printing.html">
+   Color
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="printing.html#typer-secho-style-and-print">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     typer.secho()
+    </span>
+   </code>
+   - style and print
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="printing.html#standard-output-and-standard-error">
+   “Standard Output” and “Standard Error”
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="terminating.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Exit
+    </span>
+   </code>
+   a CLI program
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="terminating.html#exit-with-an-error">
+   Exit with an error
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="terminating.html#abort">
+   Abort
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/optional.html">
+   An alternative
+   <em>
+    CLI argument
+   </em>
+   declaration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/optional.html#make-an-optional-cli-argument">
+   Make an optional
+   <em>
+    CLI argument
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/default.html">
+   An optional
+   <em>
+    CLI argument
+   </em>
+   with a default
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/default.html#dynamic-default-value">
+   Dynamic default value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/help.html">
+   Add a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     help
+    </span>
+   </code>
+   text for a
+   <em>
+    CLI argument
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/help.html#combine-help-text-and-docstrings">
+   Combine help text and docstrings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/help.html#help-with-defaults">
+   Help with defaults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/help.html#custom-default-string">
+   Custom default string
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/help.html#custom-help-name-metavar">
+   Custom help name (
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     metavar
+    </span>
+   </code>
+   )
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/help.html#hide-a-cli-argument-from-the-help-text">
+   Hide a
+   <em>
+    CLI argument
+   </em>
+   from the help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/envvar.html">
+   Multiple environment variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="arguments/envvar.html#hide-an-env-var-from-the-help-text">
+   Hide an env var from the help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/help.html">
+   Hide default from help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/prompt.html">
+   Customize the prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/prompt.html#confirmation-prompt">
+   Confirmation prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/password.html">
+   A Password prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/name.html">
+   <em>
+    CLI option
+   </em>
+   short names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/callback-and-context.html">
+   Validate
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/callback-and-context.html#handling-completion">
+   Handling completion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/callback-and-context.html#using-the-callbackparam-object">
+   Using the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     CallbackParam
+    </span>
+   </code>
+   object
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/callback-and-context.html#technical-details">
+   Technical Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/version.html">
+   First version of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --version
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/version.html#previous-parameters-and-is-eager">
+   Previous parameters and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     is_eager
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html">
+   Review completion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#custom-completion-for-values">
+   Custom completion for values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#check-the-incomplete-value">
+   Check the incomplete value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#add-help-to-completions">
+   Add help to completions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#simplify-with-yield">
+   Simplify with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     yield
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#access-other-cli-parameters-with-the-context">
+   Access other
+   <em>
+    CLI parameters
+   </em>
+   with the Context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#getting-the-raw-cli-parameters">
+   Getting the raw
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#getting-the-context-and-the-raw-cli-parameters">
+   Getting the Context and the raw
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="options/autocompletion.html#types-types-everywhere">
+   Types, types everywhere
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/index.html">
+   Command or subcommand
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/index.html#explicit-application">
+   Explicit application
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/index.html#a-cli-application-with-multiple-commands">
+   A CLI application with multiple commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/index.html#click-group">
+   Click Group
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/index.html#decorator-technical-details">
+   Decorator Technical Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/help.html">
+   Overwrite command help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/callback.html">
+   Adding a callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/callback.html#overriding-a-callback">
+   Overriding a callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/callback.html#adding-a-callback-only-for-documentation">
+   Adding a callback only for documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/callback.html#click-group">
+   Click Group
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/one-or-multiple.html">
+   One command and one callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/one-or-multiple.html#using-the-callback-to-document">
+   Using the callback to document
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/context.html">
+   Getting the context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/context.html#executable-callback">
+   Executable callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/context.html#exclusive-executable-callback">
+   Exclusive executable callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="commands/context.html#configuring-the-context">
+   Configuring the context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/index.html">
+   Data conversion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/index.html#watch-next">
+   Watch next
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/number.html">
+   Clamping numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/number.html#counter-cli-options">
+   Counter
+   <em>
+    CLI options
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/bool.html">
+   Only
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --force
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/bool.html#alternative-names">
+   Alternative names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/bool.html#short-names">
+   Short names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/bool.html#only-names-for-false">
+   Only names for
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     False
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/datetime.html">
+   Custom date format
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/enum.html">
+   Case insensitive Enum choices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/path.html">
+   Path validations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileText
+    </span>
+   </code>
+   reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html#filetextwrite">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileTextWrite
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html#filebinaryread">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileBinaryRead
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html#filebinarywrite">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileBinaryWrite
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html#file-cli-parameter-configurations">
+   File
+   <em>
+    CLI parameter
+   </em>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html#advanced-mode">
+   Advanced
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     mode
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="parameter-types/file.html#about-the-different-types">
+   About the different types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/add-typer.html">
+   Manage items
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/add-typer.html#manage-users">
+   Manage users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/add-typer.html#put-them-together">
+   Put them together
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/add-typer.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/single-file.html">
+   Apps at the top
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/single-file.html#function-names">
+   Function names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/single-file.html#command-name">
+   Command name
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/single-file.html#check-it">
+   Check it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/nested-subcommands.html">
+   A CLI app for reigns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/nested-subcommands.html#a-cli-app-for-towns">
+   A CLI app for towns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/nested-subcommands.html#manage-the-land-in-a-cli-app">
+   Manage the land in a CLI app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/nested-subcommands.html#deeply-nested-subcommands">
+   Deeply nested subcommands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/nested-subcommands.html#review-the-files">
+   Review the files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/nested-subcommands.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/callback-override.html">
+   Add a callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/callback-override.html#overriding-the-callback-on-creation">
+   Overriding the callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/callback-override.html#overriding-the-callback-when-adding-a-sub-typer">
+   Overriding the callback when adding a sub-Typer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/name-and-help.html">
+   Add a help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/name-and-help.html#inferring-name-and-help-from-callback">
+   Inferring name and help from callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/name-and-help.html#set-the-name-and-help">
+   Set the name and help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="subcommands/name-and-help.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="multiple-values/multiple-options.html">
+   Multiple
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     float
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="multiple-values/options-with-multiple-values.html">
+   Check it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="multiple-values/arguments-with-multiple-values.html">
+   <em>
+    CLI arguments
+   </em>
+   with tuples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prompt.html">
+   Confirm
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prompt.html#confirm-or-abort">
+   Confirm or abort
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="progressbar.html">
+   Setting a Progress Bar
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     length
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="progressbar.html#add-a-label">
+   Add a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     label
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="progressbar.html#iterate-manually">
+   Iterate manually
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="app-dir.html">
+   About
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Path
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="launch.html">
+   Locating a file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html">
+   Test the app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html#testing-input">
+   Testing input
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="testing.html#test-a-function">
+   Test a function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using-click.html">
+   A single app with both Click and
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="using-click.html#about-click-decorators">
+   About Click decorators
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#create-a-project">
+   Create a project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#dependencies-and-environment">
+   Dependencies and environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#create-your-app">
+   Create your app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#modify-the-readme">
+   Modify the README
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#modify-your-project-metadata">
+   Modify your project metadata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#add-a-script">
+   Add a “script”
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#install-your-package">
+   Install your package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#try-your-cli-program">
+   Try your CLI program
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#create-a-wheel-package">
+   Create a wheel package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#test-your-wheel-package">
+   Test your wheel package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#support-python-m-optional">
+   Support
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     python
+    </span>
+    <span class="pre">
+     -m
+    </span>
+   </code>
+   (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#publish-to-pypi-optional">
+   Publish to PyPI (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#generate-docs-with-typer-cli-optional">
+   Generate docs with
+   <strong>
+    Typer CLI
+   </strong>
+   (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="#what-s-next">
+   What’s next
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../_sources/tutorial/package.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-project">
+   Create a project
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#dependencies-and-environment">
+   Dependencies and environment
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-your-app">
+   Create your app
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modify-the-readme">
+   Modify the README
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#modify-your-project-metadata">
+   Modify your project metadata
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#add-a-script">
+   Add a “script”
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#install-your-package">
+   Install your package
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#try-your-cli-program">
+   Try your CLI program
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#create-a-wheel-package">
+   Create a wheel package
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#test-your-wheel-package">
+   Test your wheel package
+  </a>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#support-python-m-optional">
+   Support
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     python
+    </span>
+    <span class="pre">
+     -m
+    </span>
+   </code>
+   (optional)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#add-a-main-py">
+     Add a
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       __main__.py
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#set-a-program-name-in-main-py">
+     Set a program name in
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       __main__.py
+      </span>
+     </code>
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#autocompletion-and-python-m">
+     Autocompletion and
+     <code class="docutils literal notranslate">
+      <span class="pre">
+       python
+      </span>
+      <span class="pre">
+       -m
+      </span>
+     </code>
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#publish-to-pypi-optional">
+   Publish to PyPI (optional)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#pypi-api-token">
+     PyPI API token
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#publish-to-pypi">
+     Publish to PyPI
+    </a>
+   </li>
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#install-from-pypi">
+     Install from PyPI
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#generate-docs-with-typer-cli-optional">
+   Generate docs with
+   <strong>
+    Typer CLI
+   </strong>
+   (optional)
+  </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h2 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#publish-a-new-version-with-the-docs">
+     Publish a new version with the docs
+    </a>
+   </li>
+  </ul>
+ </li>
+ <li class="toc-h1 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#what-s-next">
+   What’s next
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p>When you create a CLI program with <strong>Typer</strong> you probably want to create your own Python package.</p>
+<p>That’s what allows your users to install it and have it as an independent program that they can use in their terminal.</p>
+<p>And that’s also required for shell auto completion to work (unless you use your program through <a class="reference internal" href="../typer-cli.html"><span class="doc std std-doc">Typer CLI</span></a>{.internal-link target=_blank}).</p>
+<p>Nowadays, there are several ways and tools to create Python packages (what you install with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span> <span class="pre">something</span></code>).</p>
+<p>You might even have your favorite already.</p>
+<p>Here’s a very opinionated, short guide, showing one of the alternative ways of creating a Python package with a <strong>Typer</strong> app, from scratch.</p>
+<p>!!! tip
+If you already have a favorite way of creating Python packages, feel free to skip this.</p>
+<div class="section" id="prerequisites">
+<h1>Prerequisites<a class="headerlink" href="#prerequisites" title="Permalink to this headline">¶</a></h1>
+<p>For this guide we’ll use <a href="https://python-poetry.org/" class="external-link" target="_blank">Poetry</a>.</p>
+<p>Poetry’s docs are great, so go ahead, check them and install it.</p>
+</div>
+<div class="section" id="create-a-project">
+<h1>Create a project<a class="headerlink" href="#create-a-project" title="Permalink to this headline">¶</a></h1>
+<p>Let’s say we want to create a CLI application called <code class="docutils literal notranslate"><span class="pre">portal-gun</span></code>.</p>
+<p>To make sure your package doesn’t collide with the package created by someone else, we’ll name it with a prefix of your name.</p>
+<p>So, if your name is Rick, we’ll call it <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>.</p>
+<p>Create a project with Poetry:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry new rick-portal-gun
+
+<span class="go">Created package rick_portal_gun in rick-portal-gun</span>
+
+<span class="go">// Enter the new project directory</span>
+<span class="go">cd ./rick-portal-gun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="dependencies-and-environment">
+<h1>Dependencies and environment<a class="headerlink" href="#dependencies-and-environment" title="Permalink to this headline">¶</a></h1>
+<p>Add <code class="docutils literal notranslate"><span class="pre">typer[all]</span></code> to your dependencies:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry add typer<span class="o">[</span>all<span class="o">]</span>
+
+<span class="go">// It creates a virtual environment for your project</span>
+<span class="go">Creating virtualenv rick-portal-gun-w31dJa0b-py3.6 in /home/rick/.cache/pypoetry/virtualenvs</span>
+<span class="go">Using version ^0.1.0 for typer</span>
+
+<span class="go">Updating dependencies</span>
+<span class="go">Resolving dependencies... (1.2s)</span>
+
+<span class="go">Writing lock file</span>
+
+<span class="go">---&gt; 100%</span>
+
+<span class="go">Package operations: 15 installs, 0 updates, 0 removals</span>
+
+<span class="go">  - Installing zipp (3.1.0)</span>
+<span class="go">  - Installing importlib-metadata (1.5.0)</span>
+<span class="go">  - Installing pyparsing (2.4.6)</span>
+<span class="go">  - Installing six (1.14.0)</span>
+<span class="go">  - Installing attrs (19.3.0)</span>
+<span class="go">  - Installing click (7.1.1)</span>
+<span class="go">  - Installing colorama (0.4.3)</span>
+<span class="go">  - Installing more-itertools (8.2.0)</span>
+<span class="go">  - Installing packaging (20.3)</span>
+<span class="go">  - Installing pluggy (0.13.1)</span>
+<span class="go">  - Installing py (1.8.1)</span>
+<span class="go">  - Installing shellingham (1.3.2)</span>
+<span class="go">  - Installing wcwidth (0.1.8)</span>
+<span class="go">  - Installing pytest (5.4.1)</span>
+<span class="go">  - Installing typer (0.0.11)</span>
+
+<span class="go">// Activate that new virtual environment</span>
+<span class="gp">$</span> poetry shell
+
+<span class="go">Spawning shell within /home/rick/.cache/pypoetry/virtualenvs/rick-portal-gun-w31dJa0b-py3.6</span>
+
+<span class="go">// Open an editor using this new environment, for example VS Code</span>
+<span class="gp">$</span> code ./
+</pre></div>
+</div>
+</div>
+<p>You can see that you have a generated project structure that looks like:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>.
+├── poetry.lock
+├── pyproject.toml
+├── README.rst
+├── rick_portal_gun
+│   └── __init__.py
+└── tests
+    ├── __init__.py
+    └── test_rick_portal_gun.py
+</pre></div>
+</div>
+</div>
+<div class="section" id="create-your-app">
+<h1>Create your app<a class="headerlink" href="#create-your-app" title="Permalink to this headline">¶</a></h1>
+<p>Now let’s create an extremely simple <strong>Typer</strong> app.</p>
+<p>Create a file <code class="docutils literal notranslate"><span class="pre">rick_portal_gun/main.py</span></code> with:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">typer</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Typer</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">callback</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Awesome Portal Gun</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">shoot</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shoot the portal gun</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;Shooting portal gun&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">load</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the portal gun</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;Loading portal gun&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>!!! tip
+As we are creating an installable Python package, there’s no need to add a section with <code class="docutils literal notranslate"><span class="pre">if</span> <span class="pre">__name__</span> <span class="pre">==</span> <span class="pre">&quot;__main__:</span></code>.</p>
+</div>
+<div class="section" id="modify-the-readme">
+<h1>Modify the README<a class="headerlink" href="#modify-the-readme" title="Permalink to this headline">¶</a></h1>
+<p>Let’s change the README. By default it’s a file <code class="docutils literal notranslate"><span class="pre">README.rst</span></code>.</p>
+<p>Let’s change it to <code class="docutils literal notranslate"><span class="pre">README.md</span></code>. So, change the extension from <code class="docutils literal notranslate"><span class="pre">.rst</span></code> to <code class="docutils literal notranslate"><span class="pre">.md</span></code>.</p>
+<p>So that we can use Markdown instead of reStructuredText.</p>
+<p>And change the file to have something like:</p>
+<div class="highlight-Markdown notranslate"><div class="highlight"><pre><span></span># Portal Gun
+
+The awesome Portal Gun
+</pre></div>
+</div>
+</div>
+<div class="section" id="modify-your-project-metadata">
+<h1>Modify your project metadata<a class="headerlink" href="#modify-your-project-metadata" title="Permalink to this headline">¶</a></h1>
+<p>Edit your file <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>.</p>
+<p>It would look something like:</p>
+<div class="highlight-TOML notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</pre></div>
+</div>
+<p>We changed the default README, so let’s make it use the new <code class="docutils literal notranslate"><span class="pre">README.md</span></code>.</p>
+<p>Add the line:</p>
+<div class="highlight-TOML notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+<span class="n">readme</span> <span class="o">=</span> <span class="s">&quot;README.md&quot;</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="add-a-script">
+<h1>Add a “script”<a class="headerlink" href="#add-a-script" title="Permalink to this headline">¶</a></h1>
+<p>We are creating a Python package that can be installed with <code class="docutils literal notranslate"><span class="pre">pip</span> <span class="pre">install</span></code>.</p>
+<p>But we want it to provide a CLI program that can be executed in the shell.</p>
+<p>To do that, we add a configuration to the <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> in the section <code class="docutils literal notranslate"><span class="pre">[tool.poetry.scripts]</span></code>:</p>
+<div class="highlight-TOML notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+<span class="n">readme</span> <span class="o">=</span> <span class="s">&quot;README.md&quot;</span>
+
+<span class="k">[tool.poetry.scripts]</span>
+<span class="n">rick-portal-gun</span> <span class="o">=</span> <span class="s">&quot;rick_portal_gun.main:app&quot;</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</pre></div>
+</div>
+<p>Here’s what that line means:</p>
+<p><code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>: will be the name of the CLI program. That’s how we will call it in the terminal once it is installed. Like:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun
+
+<span class="go">// Something happens here ✨</span>
+</pre></div>
+</div>
+</div>
+<p><code class="docutils literal notranslate"><span class="pre">rick_portal_gun.main</span></code>, in the part <code class="docutils literal notranslate"><span class="pre">&quot;rick_portal_gun.main:app&quot;</span></code>, with underscores, refers to the Python module to import. That’s what someone would use in a section like:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rick_portal_gun.main</span> <span class="kn">import</span> <span class="c1"># something goes here</span>
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">app</span></code> in <code class="docutils literal notranslate"><span class="pre">&quot;rick_portal_gun.main:app&quot;</span></code> is the thing to import from the module, and to call as a function, like:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">rick_portal_gun.main</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>That config section tells Poetry that when this package is installed we want it to create a command line program called <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>.</p>
+<p>And that the object to call (like a function) is the one in the variable <code class="docutils literal notranslate"><span class="pre">app</span></code> inside of the module <code class="docutils literal notranslate"><span class="pre">rick_portal_gun.main</span></code>.</p>
+</div>
+<div class="section" id="install-your-package">
+<h1>Install your package<a class="headerlink" href="#install-your-package" title="Permalink to this headline">¶</a></h1>
+<p>That’s what we need to create a package.</p>
+<p>You can now install it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry install
+
+<span class="go">Installing dependencies from lock file</span>
+
+<span class="go">No dependencies to install or update</span>
+
+<span class="go">  - Installing rick-portal-gun (0.1.0)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="try-your-cli-program">
+<h1>Try your CLI program<a class="headerlink" href="#try-your-cli-program" title="Permalink to this headline">¶</a></h1>
+<p>Your package is installed in the environment created by Poetry, but you can already use it.</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// You can use the which program to check which rick-portal-gun program is available (if any)</span>
+<span class="gp">$</span> which rick-portal-gun
+
+<span class="go">// You get the one from your environment</span>
+<span class="go">/home/rick/.cache/pypoetry/virtualenvs/rick-portal-gun-w31dJa0b-py3.6/bin/rick-portal-gun</span>
+
+<span class="go">// Try it</span>
+<span class="gp">$</span> rick-portal-gun
+
+<span class="go">// You get all the standard help</span>
+<span class="go">Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...</span>
+
+<span class="go">  Awesome Portal Gun</span>
+
+<span class="go">Options:</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  load   Load the portal gun</span>
+<span class="go">  shoot  Shoot the portal gun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="create-a-wheel-package">
+<h1>Create a wheel package<a class="headerlink" href="#create-a-wheel-package" title="Permalink to this headline">¶</a></h1>
+<p>Python packages have a standard format called a “wheel”. It’s a file that ends in <code class="docutils literal notranslate"><span class="pre">.whl</span></code>.</p>
+<p>You can create a wheel with Poetry:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry build
+
+<span class="go">Building rick-portal-gun (0.1.0)</span>
+<span class="go"> - Building sdist</span>
+<span class="go"> - Built rick-portal-gun-0.1.0.tar.gz</span>
+
+<span class="go"> - Building wheel</span>
+<span class="go"> - Built rick_portal_gun-0.1.0-py3-none-any.whl</span>
+</pre></div>
+</div>
+</div>
+<p>After that, if you check in your project directory, you should now have a couple of extra files at <code class="docutils literal notranslate"><span class="pre">./dist/</span></code>:</p>
+<div class="highlight-hl_lines=&quot;3 notranslate"><div class="highlight"><pre><span></span>.
+├── dist
+│   ├── rick_portal_gun-0.1.0-py3-none-any.whl
+│   └── rick-portal-gun-0.1.0.tar.gz
+├── pyproject.toml
+├── README.md
+├── ...
+</pre></div>
+</div>
+<p>The <code class="docutils literal notranslate"><span class="pre">.whl</span></code> is the wheel file. You can send that wheel file to anyone and they can use it to install your program (we’ll see how to upload it to PyPI in a bit).</p>
+</div>
+<div class="section" id="test-your-wheel-package">
+<h1>Test your wheel package<a class="headerlink" href="#test-your-wheel-package" title="Permalink to this headline">¶</a></h1>
+<p>Now you can open another terminal and install that package from the file for your own user with:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user /home/rock/code/rick-portal-gun/dist/rick_portal_gun-0.1.0-py3-none-any.whl
+
+<span class="go">---&gt; 100%</span>
+</pre></div>
+</div>
+</div>
+<p>!!! warning
+The <code class="docutils literal notranslate"><span class="pre">--user</span></code> is important, that ensures you install it in your user’s directory and not in the global system.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>If you installed it in the global system (e.g. with `sudo`) you could install a version of a library (e.g. a sub-dependency) that is incompatible with your system.
+</pre></div>
+</div>
+<p>!!! tip
+Bonus points if you use <a href="https://github.com/pipxproject/pipx" class="external-link" target="_blank"><code class="docutils literal notranslate"><span class="pre">pipx</span></code></a> to install it while keeping an isolated environment for your Python CLI programs 🚀</p>
+<p>Now you have your CLI program installed. And you can use it freely:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun shoot
+
+<span class="go">// It works 🎉</span>
+<span class="go">Shooting portal gun</span>
+</pre></div>
+</div>
+</div>
+<p>Having it installed globally (and not in a single environment), you can now install completion globally for it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun --install-completion
+
+<span class="go">zsh completion installed in /home/user/.zshrc.</span>
+<span class="go">Completion will take effect once you restart the terminal.</span>
+</pre></div>
+</div>
+</div>
+<p>!!! tip
+If you want to remove completion you can just delete the added line in that file.</p>
+<p>And after you restart the terminal you will get completion for your new CLI program:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// You get completion for your CLI program ✨</span>
+<span class="go">load   -- Load the portal gun</span>
+<span class="go">shoot  -- Shoot the portal gun</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="support-python-m-optional">
+<h1>Support <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code> (optional)<a class="headerlink" href="#support-python-m-optional" title="Permalink to this headline">¶</a></h1>
+<p>You may have seen that you can call many Python modules as scripts with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">some-module</span></code>.</p>
+<p>For example, one way to call <code class="docutils literal notranslate"><span class="pre">pip</span></code> is:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install fastapi
+</pre></div>
+</div>
+</div>
+<p>But you can also call Python with the <code class="docutils literal notranslate"><span class="pre">-m</span></code> <em>CLI Option</em> and pass a module for it to execute as if it was a script, like:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install fastapi
+</pre></div>
+</div>
+</div>
+<p>Here we pass <code class="docutils literal notranslate"><span class="pre">pip</span></code> as the value for <code class="docutils literal notranslate"><span class="pre">-m</span></code>, so, Python will execute the module <code class="docutils literal notranslate"><span class="pre">pip</span></code> as if it was a script. And then it will pass the rest of the <em>CLI Parameters</em> (<code class="docutils literal notranslate"><span class="pre">install</span> <span class="pre">fastapi</span></code>) to it.</p>
+<p>These two are more or less equivalent, the <code class="docutils literal notranslate"><span class="pre">install</span> <span class="pre">fastapi</span></code> will be passed to <code class="docutils literal notranslate"><span class="pre">pip</span></code>.</p>
+<p>!!! tip
+In the case of <code class="docutils literal notranslate"><span class="pre">pip</span></code>, in many occasions it’s actually recommended that you run it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code>, because if you create a virtual environment with its own <code class="docutils literal notranslate"><span class="pre">python</span></code>, that will ensure that you use the <code class="docutils literal notranslate"><span class="pre">pip</span></code> from <em>that</em> environment.</p>
+<div class="section" id="add-a-main-py">
+<h2>Add a <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code><a class="headerlink" href="#add-a-main-py" title="Permalink to this headline">¶</a></h2>
+<p>You can support that same style of calling the package/module for your own package, simply by adding a file <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code>.</p>
+<p>Python will look for that file and execute it.</p>
+<p>The file would live right beside <code class="docutils literal notranslate"><span class="pre">__init__.py</span></code>:</p>
+<div class="highlight-hl_lines=&quot;7&quot; notranslate"><div class="highlight"><pre><span></span>.
+├── poetry.lock
+├── pyproject.toml
+├── README.rst
+├── rick_portal_gun
+│   ├── __init__.py
+│   └── __main__.py
+└── tests
+    ├── __init__.py
+    └── test_rick_portal_gun.py
+</pre></div>
+</div>
+<p>No other file has to import it, you don’t have to reference it in your <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> or anything else, it just works by default, as it is standard Python behavior.</p>
+<p>Then in that file you can execute your <strong>Typer</strong> program:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="p">()</span>
+</pre></div>
+</div>
+<p>Now, after installing your package, if you call it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code> it will work (for the main part):</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m rick_portal_gun
+
+<span class="go">Usage: __main__.py [OPTIONS] COMMAND [ARGS]...</span>
+
+<span class="go">  Awesome Portal Gun</span>
+
+<span class="go">Options:</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  load   Load the portal gun</span>
+<span class="go">  shoot  Shoot the portal gun</span>
+</pre></div>
+</div>
+</div>
+<p>!!! tip
+Notice that you have to pass the importable version of the package name, so <code class="docutils literal notranslate"><span class="pre">rick_portal_gun</span></code> instead of <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>.</p>
+<p>That works! 🚀 Sort of… 🤔</p>
+<p>See the <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> in the help instead of <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>? We’ll fix that next.</p>
+</div>
+<div class="section" id="set-a-program-name-in-main-py">
+<h2>Set a program name in <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code><a class="headerlink" href="#set-a-program-name-in-main-py" title="Permalink to this headline">¶</a></h2>
+<p>We are setting the program name in the file <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code> in the line like:</p>
+<div class="highlight-TOML notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry.scripts]</span>
+<span class="n">rick-portal-gun</span> <span class="o">=</span> <span class="s">&quot;rick_portal_gun.main:app&quot;</span>
+</pre></div>
+</div>
+<p>But when Python runs our package as a script with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code>, it doesn’t have the information of the program name.</p>
+<p>So, to fix the help text to use the correct program name when called with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code>, we can pass it to the app in <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="p">(</span><span class="n">prog_name</span><span class="o">=</span><span class="s2">&quot;rick-portal-gun&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>!!! tip
+You can pass all the arguments and keyword arguments you could pass to a Click application, including <code class="docutils literal notranslate"><span class="pre">prog_name</span></code>.</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m rick_portal_gun
+
+<span class="go">Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...</span>
+
+<span class="go">  Awesome Portal Gun</span>
+
+<span class="go">Options:</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  load   Load the portal gun</span>
+<span class="go">  shoot  Shoot the portal gun</span>
+</pre></div>
+</div>
+</div>
+<p>Great! That works correctly! 🎉 ✅</p>
+<p>Notice that now it uses <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code> instead of <code class="docutils literal notranslate"><span class="pre">__main__.py</span></code> in the help.</p>
+</div>
+<div class="section" id="autocompletion-and-python-m">
+<h2>Autocompletion and <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code><a class="headerlink" href="#autocompletion-and-python-m" title="Permalink to this headline">¶</a></h2>
+<p>Have in mind that TAB completion (shell auto-completion) won’t work when using <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code>.</p>
+<p>Auto-completion depends on the name of the program called, it’s tied to each specific program name.</p>
+<p>So, to have shell completion for <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code> you would have to call it directly:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+</pre></div>
+</div>
+</div>
+<p>But you can still support <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code> for the cases where it’s useful.</p>
+</div>
+</div>
+<div class="section" id="publish-to-pypi-optional">
+<h1>Publish to PyPI (optional)<a class="headerlink" href="#publish-to-pypi-optional" title="Permalink to this headline">¶</a></h1>
+<p>You can publish that new package to <a href="https://pypi.org/" class="external-link" target="_blank">PyPI</a> to make it public, so others can install it easily.</p>
+<p>So, go ahead and create an account there (it’s free).</p>
+<div class="section" id="pypi-api-token">
+<h2>PyPI API token<a class="headerlink" href="#pypi-api-token" title="Permalink to this headline">¶</a></h2>
+<p>To do it, you first need to configure a PyPI auth token.</p>
+<p>Login to <a href="https://pypi.org/" class="external-link" target="_blank">PyPI</a>.</p>
+<p>And then go to <a href="https://pypi.org/manage/account/token/" class="external-link" target="_blank">https://pypi.org/manage/account/token/</a> to create a new token.</p>
+<p>Let’s say your new API token is:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">pypi</span><span class="o">-</span><span class="n">wubalubadubdub</span><span class="o">-</span><span class="n">deadbeef1234</span>
+</pre></div>
+</div>
+<p>Now configure Poetry to use this token with the command <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">config</span> <span class="pre">pypi-token.pypi</span></code>:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry config pypi-token.pypi pypi-wubalubadubdub-deadbeef1234
+<span class="go">// It won&#39;t show any output, but it&#39;s already configured</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="publish-to-pypi">
+<h2>Publish to PyPI<a class="headerlink" href="#publish-to-pypi" title="Permalink to this headline">¶</a></h2>
+<p>Now you can publish your package with Poetry.</p>
+<p>You could build the package (as we did above) and then publish later, or you could tell poetry to build it before publishing in one go:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry publish --build
+
+<span class="gp">#</span> There are <span class="m">2</span> files ready <span class="k">for</span> publishing. Build anyway? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span> $ yes
+
+<span class="go">---&gt; 100%</span>
+
+<span class="go">Building rick-portal-gun (0.1.0)</span>
+<span class="go"> - Building sdist</span>
+<span class="go"> - Built rick-portal-gun-0.1.0.tar.gz</span>
+
+<span class="go"> - Building wheel</span>
+<span class="go"> - Built rick_portal_gun-0.1.0-py3-none-any.whl</span>
+
+<span class="go">Publishing rick-portal-gun (0.1.0) to PyPI</span>
+<span class="go"> - Uploading rick-portal-gun-0.1.0.tar.gz 100%</span>
+<span class="go"> - Uploading rick_portal_gun-0.1.0-py3-none-any.whl 100%</span>
+</pre></div>
+</div>
+</div>
+<p>Now you can go to PyPI and check your projects at <a href="https://pypi.org/manage/projects/" class="external-link" target="_blank">https://pypi.org/manage/projects/</a>.</p>
+<p>You should now see your new “rick-portal-gun” package.</p>
+</div>
+<div class="section" id="install-from-pypi">
+<h2>Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Permalink to this headline">¶</a></h2>
+<p>Now to see that we can install it form PyPI, open another terminal, and uninstall the currently installed package.</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip uninstall rick-portal-gun
+
+<span class="go">Found existing installation: rick-portal-gun 0.1.0</span>
+<span class="go">Uninstalling rick-portal-gun-0.1.0:</span>
+<span class="go">  Would remove:</span>
+<span class="go">    /home/user/.local/bin/rick-portal-gun</span>
+<span class="go">    /home/user/.local/lib/python3.6/site-packages/rick_portal_gun-0.1.0.dist-info/*</span>
+<span class="go">    /home/user/.local/lib/python3.6/site-packages/rick_portal_gun/*</span>
+<span class="gp">#</span> Proceed <span class="o">(</span>y/n<span class="o">)</span>? $ y
+<span class="go">    Successfully uninstalled rick-portal-gun-0.1.0</span>
+</pre></div>
+</div>
+</div>
+<p>And now install it again, but this time using just the name, so that <code class="docutils literal notranslate"><span class="pre">pip</span></code> pulls it from PyPI:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user rick-portal-gun
+
+<span class="go">// Notice that it says &quot;Downloading&quot; 🚀</span>
+<span class="go">Collecting rick-portal-gun</span>
+<span class="go">  Downloading rick_portal_gun-0.1.0-py3-none-any.whl (1.8 kB)</span>
+<span class="go">Requirement already satisfied: typer[all]&lt;0.0.12,&gt;=0.0.11 in ./.local/lib/python3.6/site-packages (from rick-portal-gun) (0.0.11)</span>
+<span class="go">Requirement already satisfied: click&lt;7.2.0,&gt;=7.1.1 in ./anaconda3/lib/python3.6/site-packages (from typer[all]&lt;0.0.12,&gt;=0.0.11-&gt;rick-portal-gun) (7.1.1)</span>
+<span class="go">Requirement already satisfied: colorama; extra == &quot;all&quot; in ./anaconda3/lib/python3.6/site-packages (from typer[all]&lt;0.0.12,&gt;=0.0.11-&gt;rick-portal-gun) (0.4.3)</span>
+<span class="go">Requirement already satisfied: shellingham; extra == &quot;all&quot; in ./anaconda3/lib/python3.6/site-packages (from typer[all]&lt;0.0.12,&gt;=0.0.11-&gt;rick-portal-gun) (1.3.1)</span>
+<span class="go">Installing collected packages: rick-portal-gun</span>
+<span class="go">Successfully installed rick-portal-gun-0.1.0</span>
+</pre></div>
+</div>
+</div>
+<p>And now test the newly installed package from PyPI:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun load
+
+<span class="go">// It works! 🎉</span>
+<span class="go">Loading portal gun</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+<div class="section" id="generate-docs-with-typer-cli-optional">
+<h1>Generate docs with <strong>Typer CLI</strong> (optional)<a class="headerlink" href="#generate-docs-with-typer-cli-optional" title="Permalink to this headline">¶</a></h1>
+<p>You can install and use <a class="reference internal" href="../typer-cli.html"><span class="doc std std-doc">Typer CLI</span></a>{.internal-link target=_blank} to generate docs for your package.</p>
+<p>After installing it, you can use it to generate a new <code class="docutils literal notranslate"><span class="pre">README.md</span></code>:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer rick_portal_gun.main utils docs --output README.md --name rick-portal-gun
+
+<span class="go">Docs saved to: README.md</span>
+</pre></div>
+</div>
+</div>
+<p>You just have to pass it the module to import (<code class="docutils literal notranslate"><span class="pre">rick_portal_gun.main</span></code>) and it will detect the <code class="docutils literal notranslate"><span class="pre">typer.Typer</span></code> app automatically.</p>
+<p>By specifying the <code class="docutils literal notranslate"><span class="pre">--name</span></code> of the program it will be able to use it while generating the docs.</p>
+<div class="section" id="publish-a-new-version-with-the-docs">
+<h2>Publish a new version with the docs<a class="headerlink" href="#publish-a-new-version-with-the-docs" title="Permalink to this headline">¶</a></h2>
+<p>Now you can publish a new version with the updated docs.</p>
+<p>For that you need to first increase the version in <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>:</p>
+<div class="highlight-TOML notranslate"><div class="highlight"><pre><span></span><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.2.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+<span class="n">readme</span> <span class="o">=</span> <span class="s">&quot;README.md&quot;</span>
+
+<span class="k">[tool.poetry.scripts]</span>
+<span class="n">rick-portal-gun</span> <span class="o">=</span> <span class="s">&quot;rick_portal_gun.main:app&quot;</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</pre></div>
+</div>
+<p>And in the file <code class="docutils literal notranslate"><span class="pre">rick_portal_gun/__init__.py</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.0&#39;</span>
+</pre></div>
+</div>
+<p>And then build and publish again:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry publish --build
+
+<span class="go">---&gt; 100%</span>
+
+<span class="go">Building rick-portal-gun (0.2.0)</span>
+<span class="go"> - Building sdist</span>
+<span class="go"> - Built rick-portal-gun-0.2.0.tar.gz</span>
+
+<span class="go"> - Building wheel</span>
+<span class="go"> - Built rick_portal_gun-0.2.0-py3-none-any.whl</span>
+
+<span class="go">Publishing rick-portal-gun (0.2.0) to PyPI</span>
+<span class="go"> - Uploading rick-portal-gun-0.2.0.tar.gz 100%</span>
+<span class="go"> - Uploading rick_portal_gun-0.2.0-py3-none-any.whl 100%</span>
+</pre></div>
+</div>
+</div>
+<p>And now you can go to PyPI, to the project page, and reload it, and it will now have your new generated docs.</p>
+</div>
+</div>
+<div class="section" id="what-s-next">
+<h1>What’s next<a class="headerlink" href="#what-s-next" title="Permalink to this headline">¶</a></h1>
+<p>This is a very simple guide. You could add many more steps.</p>
+<p>For example, you should use <a href="https://git-scm.com/" class="external-link" target="_blank">Git</a>, the version control system, to save your code.</p>
+<p>You can add a lot of extra metadata to your <code class="docutils literal notranslate"><span class="pre">pyproject.toml</span></code>, check the docs for <a href="https://python-poetry.org/docs/libraries/" class="external-link" target="_blank">Poetry: Libraries</a>.</p>
+<p>You could use <a href="https://github.com/pipxproject/pipx" class="external-link" target="_blank"><code class="docutils literal notranslate"><span class="pre">pipx</span></code></a> to manage your installed CLI Python programs in isolated environments.</p>
+<p>Maybe use automatic formatting with <a href="https://github.com/psf/black" class="external-link" target="_blank">Black</a>.</p>
+<p>You’ll probably want to publish your code as open source to <a href="https://github.com/" class="external-link" target="_blank">GitHub</a>.</p>
+<p>And then you could integrate a <abbr title="Continuous Integration">CI</abbr> tool to run your tests and deploy your package automatically.</p>
+<p>And there’s a long etc. But now you have the basics and you can continue on your own 🚀.</p>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./tutorial"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="using-click.html" title="previous page">A single app with both Click and <strong>Typer</strong></a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Thomas Wilson<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>

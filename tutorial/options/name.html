@@ -1,0 +1,1605 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>CLI option short names &#8212; lyrics</title>
+    
+  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+
+    
+  <link rel="stylesheet"
+    href="../../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    
+      
+  <link rel="stylesheet"
+    href="../../_static/vendor/open-sans_all/1.44.1/index.css">
+  <link rel="stylesheet"
+    href="../../_static/vendor/lato_latin-ext/1.44.1/index.css">
+
+    
+    <link rel="stylesheet" href="../../_static/pygments.css" type="text/css" />
+    <link rel="stylesheet" href="../../_static/sphinx-book-theme.40e2e510f6b7d1648584402491bb10fe.css" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
+    <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
+    
+  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+
+    <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
+    <script src="../../_static/jquery.js"></script>
+    <script src="../../_static/underscore.js"></script>
+    <script src="../../_static/doctools.js"></script>
+    <script src="../../_static/togglebutton.js"></script>
+    <script src="../../_static/clipboard.min.js"></script>
+    <script src="../../_static/copybutton.js"></script>
+    <script >var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../../_static/sphinx-book-theme.d31b09fe5c1d09cb49b26a786de4a05d.js"></script>
+    <script async="async" src="https://unpkg.com/thebelab@latest/lib/index.js"></script>
+    <script >
+        const thebe_selector = ".thebe"
+        const thebe_selector_input = "pre"
+        const thebe_selector_output = ".output"
+    </script>
+    <script async="async" src="../../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../../genindex.html" />
+    <link rel="search" title="Search" href="../../search.html" />
+    <link rel="next" title="Validate CLI parameters" href="callback-and-context.html" />
+    <link rel="prev" title="A Password prompt" href="password.html" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="en" />
+
+
+
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="80">
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<div class="col-12 col-md-3 bd-sidebar site-navigation show" id="site-navigation">
+    
+        <div class="navbar-brand-box">
+<a class="navbar-brand text-wrap" href="../../index.html">
+  
+  
+  <h1 class="site-logo" id="site-title">lyrics</h1>
+  
+</a>
+</div><form class="bd-search d-flex align-items-center" action="../../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form>
+<nav class="bd-links" id="bd-docs-nav" aria-label="Main navigation">
+    <ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../index.html">
+   Installation
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Get started
+ </span>
+</p>
+<ul class="nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../typer-cli.html">
+   Typer CLI
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../alternatives.html">
+   Intro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../alternatives.html#previous-tools">
+   Previous tools
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html">
+   Star
+   <strong>
+    Typer
+   </strong>
+   in GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#watch-the-github-repository-for-releases">
+   Watch the GitHub repository for releases
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#connect-with-the-author">
+   Connect with the author
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#tweet-about-typer">
+   Tweet about
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#let-me-know-how-are-you-using-typer">
+   Let me know how are you using
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#help-others-with-issues-in-github">
+   Help others with issues in GitHub
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#watch-the-github-repository">
+   Watch the GitHub repository
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#create-issues">
+   Create issues
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../help-typer.html#create-a-pull-request">
+   Create a Pull Request
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../contributing.html">
+   Developing
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../contributing.html#docs">
+   Docs
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../contributing.html#tests">
+   Tests
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html">
+   Latest changes
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id1">
+   0.3.2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id2">
+   0.3.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id3">
+   0.3.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id4">
+   0.2.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id5">
+   0.2.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id6">
+   0.1.1
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id7">
+   0.1.0
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id8">
+   0.0.11
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id9">
+   0.0.10
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id10">
+   0.0.9
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id11">
+   0.0.8
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id12">
+   0.0.7
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id13">
+   0.0.6
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id14">
+   0.0.5
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id15">
+   0.0.4
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id16">
+   0.0.3
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id17">
+   0.0.2
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../../release-notes.html#id18">
+   0.0.1
+  </a>
+ </li>
+</ul>
+<p class="caption collapsible-parent">
+ <span class="caption-text">
+  Tutorial
+ </span>
+</p>
+<ul class="current nav sidenav_l1">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html">
+   Python types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html#intro">
+   Intro
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html#run-the-code">
+   Run the code
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../index.html#install-typer">
+   Install
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html">
+   The simplest example
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#what-is-a-cli-argument">
+   What is a
+   <strong>
+    CLI argument
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#add-a-cli-argument">
+   Add a CLI argument
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#two-cli-arguments">
+   Two CLI arguments
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#what-is-a-cli-option">
+   What is a
+   <strong>
+    CLI option
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#add-one-cli-option">
+   Add one
+   <em>
+    CLI option
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#a-cli-option-with-a-value">
+   A
+   <em>
+    CLI option
+   </em>
+   with a value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#document-your-cli-app">
+   Document your CLI app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#arguments-options-parameters-optional-required">
+   Arguments, options, parameters, optional, required
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../first-steps.html#typer-cli">
+   <strong>
+    Typer CLI
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../printing.html">
+   Color
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../printing.html#typer-secho-style-and-print">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     typer.secho()
+    </span>
+   </code>
+   - style and print
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../printing.html#standard-output-and-standard-error">
+   “Standard Output” and “Standard Error”
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../terminating.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Exit
+    </span>
+   </code>
+   a CLI program
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../terminating.html#exit-with-an-error">
+   Exit with an error
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../terminating.html#abort">
+   Abort
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/optional.html">
+   An alternative
+   <em>
+    CLI argument
+   </em>
+   declaration
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/optional.html#make-an-optional-cli-argument">
+   Make an optional
+   <em>
+    CLI argument
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/default.html">
+   An optional
+   <em>
+    CLI argument
+   </em>
+   with a default
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/default.html#dynamic-default-value">
+   Dynamic default value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/help.html">
+   Add a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     help
+    </span>
+   </code>
+   text for a
+   <em>
+    CLI argument
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/help.html#combine-help-text-and-docstrings">
+   Combine help text and docstrings
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/help.html#help-with-defaults">
+   Help with defaults
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/help.html#custom-default-string">
+   Custom default string
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/help.html#custom-help-name-metavar">
+   Custom help name (
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     metavar
+    </span>
+   </code>
+   )
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/help.html#hide-a-cli-argument-from-the-help-text">
+   Hide a
+   <em>
+    CLI argument
+   </em>
+   from the help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/envvar.html">
+   Multiple environment variables
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../arguments/envvar.html#hide-an-env-var-from-the-help-text">
+   Hide an env var from the help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="help.html">
+   Hide default from help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prompt.html">
+   Customize the prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="prompt.html#confirmation-prompt">
+   Confirmation prompt
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="password.html">
+   A Password prompt
+  </a>
+ </li>
+ <li class="toctree-l1 current active">
+  <a class="current reference internal" href="#">
+   <em>
+    CLI option
+   </em>
+   short names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="callback-and-context.html">
+   Validate
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="callback-and-context.html#handling-completion">
+   Handling completion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="callback-and-context.html#using-the-callbackparam-object">
+   Using the
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     CallbackParam
+    </span>
+   </code>
+   object
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="callback-and-context.html#technical-details">
+   Technical Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="version.html">
+   First version of
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --version
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="version.html#previous-parameters-and-is-eager">
+   Previous parameters and
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     is_eager
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html">
+   Review completion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#custom-completion-for-values">
+   Custom completion for values
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#check-the-incomplete-value">
+   Check the incomplete value
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#add-help-to-completions">
+   Add help to completions
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#simplify-with-yield">
+   Simplify with
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     yield
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#access-other-cli-parameters-with-the-context">
+   Access other
+   <em>
+    CLI parameters
+   </em>
+   with the Context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#getting-the-raw-cli-parameters">
+   Getting the raw
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#getting-the-context-and-the-raw-cli-parameters">
+   Getting the Context and the raw
+   <em>
+    CLI parameters
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="autocompletion.html#types-types-everywhere">
+   Types, types everywhere
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/index.html">
+   Command or subcommand
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/index.html#explicit-application">
+   Explicit application
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/index.html#a-cli-application-with-multiple-commands">
+   A CLI application with multiple commands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/index.html#click-group">
+   Click Group
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/index.html#decorator-technical-details">
+   Decorator Technical Details
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/help.html">
+   Overwrite command help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/callback.html">
+   Adding a callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/callback.html#overriding-a-callback">
+   Overriding a callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/callback.html#adding-a-callback-only-for-documentation">
+   Adding a callback only for documentation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/callback.html#click-group">
+   Click Group
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/one-or-multiple.html">
+   One command and one callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/one-or-multiple.html#using-the-callback-to-document">
+   Using the callback to document
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/context.html">
+   Getting the context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/context.html#executable-callback">
+   Executable callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/context.html#exclusive-executable-callback">
+   Exclusive executable callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../commands/context.html#configuring-the-context">
+   Configuring the context
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/index.html">
+   Data conversion
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/index.html#watch-next">
+   Watch next
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/number.html">
+   Clamping numbers
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/number.html#counter-cli-options">
+   Counter
+   <em>
+    CLI options
+   </em>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/bool.html">
+   Only
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     --force
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/bool.html#alternative-names">
+   Alternative names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/bool.html#short-names">
+   Short names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/bool.html#only-names-for-false">
+   Only names for
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     False
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/datetime.html">
+   Custom date format
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/enum.html">
+   Case insensitive Enum choices
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/path.html">
+   Path validations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileText
+    </span>
+   </code>
+   reading
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html#filetextwrite">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileTextWrite
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html#filebinaryread">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileBinaryRead
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html#filebinarywrite">
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     FileBinaryWrite
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html#file-cli-parameter-configurations">
+   File
+   <em>
+    CLI parameter
+   </em>
+   configurations
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html#advanced-mode">
+   Advanced
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     mode
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../parameter-types/file.html#about-the-different-types">
+   About the different types
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/add-typer.html">
+   Manage items
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/add-typer.html#manage-users">
+   Manage users
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/add-typer.html#put-them-together">
+   Put them together
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/add-typer.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/single-file.html">
+   Apps at the top
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/single-file.html#function-names">
+   Function names
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/single-file.html#command-name">
+   Command name
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/single-file.html#check-it">
+   Check it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/nested-subcommands.html">
+   A CLI app for reigns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/nested-subcommands.html#a-cli-app-for-towns">
+   A CLI app for towns
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/nested-subcommands.html#manage-the-land-in-a-cli-app">
+   Manage the land in a CLI app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/nested-subcommands.html#deeply-nested-subcommands">
+   Deeply nested subcommands
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/nested-subcommands.html#review-the-files">
+   Review the files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/nested-subcommands.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/callback-override.html">
+   Add a callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/callback-override.html#overriding-the-callback-on-creation">
+   Overriding the callback on creation
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/callback-override.html#overriding-the-callback-when-adding-a-sub-typer">
+   Overriding the callback when adding a sub-Typer
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/name-and-help.html">
+   Add a help text
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/name-and-help.html#inferring-name-and-help-from-callback">
+   Inferring name and help from callback
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/name-and-help.html#set-the-name-and-help">
+   Set the name and help
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../subcommands/name-and-help.html#recap">
+   Recap
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple-values/multiple-options.html">
+   Multiple
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     float
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple-values/options-with-multiple-values.html">
+   Check it
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../multiple-values/arguments-with-multiple-values.html">
+   <em>
+    CLI arguments
+   </em>
+   with tuples
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../prompt.html">
+   Confirm
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../prompt.html#confirm-or-abort">
+   Confirm or abort
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../progressbar.html">
+   Setting a Progress Bar
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     length
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../progressbar.html#add-a-label">
+   Add a
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     label
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../progressbar.html#iterate-manually">
+   Iterate manually
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../app-dir.html">
+   About
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     Path
+    </span>
+   </code>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../launch.html">
+   Locating a file
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../testing.html">
+   Test the app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../testing.html#testing-input">
+   Testing input
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../testing.html#test-a-function">
+   Test a function
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../using-click.html">
+   A single app with both Click and
+   <strong>
+    Typer
+   </strong>
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../using-click.html#about-click-decorators">
+   About Click decorators
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html">
+   Prerequisites
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#create-a-project">
+   Create a project
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#dependencies-and-environment">
+   Dependencies and environment
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#create-your-app">
+   Create your app
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#modify-the-readme">
+   Modify the README
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#modify-your-project-metadata">
+   Modify your project metadata
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#add-a-script">
+   Add a “script”
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#install-your-package">
+   Install your package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#try-your-cli-program">
+   Try your CLI program
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#create-a-wheel-package">
+   Create a wheel package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#test-your-wheel-package">
+   Test your wheel package
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#support-python-m-optional">
+   Support
+   <code class="docutils literal notranslate">
+    <span class="pre">
+     python
+    </span>
+    <span class="pre">
+     -m
+    </span>
+   </code>
+   (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#publish-to-pypi-optional">
+   Publish to PyPI (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#generate-docs-with-typer-cli-optional">
+   Generate docs with
+   <strong>
+    Typer CLI
+   </strong>
+   (optional)
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../package.html#what-s-next">
+   What’s next
+  </a>
+ </li>
+</ul>
+
+</nav> <!-- To handle the deprecated key -->
+
+<div class="navbar_extra_footer">
+  Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+</div>
+
+</div>
+
+
+          
+
+
+          
+<main class="col py-md-3 pl-md-4 bd-content overflow-auto" role="main">
+    
+    <div class="row topbar fixed-top container-xl">
+    <div class="col-12 col-md-3 bd-topbar-whitespace site-navigation show">
+    </div>
+    <div class="col pl-2 topbar-main">
+        
+        <button id="navbar-toggler" class="navbar-toggler ml-0" type="button" data-toggle="collapse"
+            data-toggle="tooltip" data-placement="bottom" data-target=".site-navigation" aria-controls="navbar-menu"
+            aria-expanded="true" aria-label="Toggle navigation" aria-controls="site-navigation"
+            title="Toggle navigation" data-toggle="tooltip" data-placement="left">
+            <i class="fas fa-bars"></i>
+            <i class="fas fa-arrow-left"></i>
+            <i class="fas fa-arrow-up"></i>
+        </button>
+        
+        
+<div class="dropdown-buttons-trigger">
+    <button id="dropdown-buttons-trigger" class="btn btn-secondary topbarbtn" aria-label="Download this page"><i
+            class="fas fa-download"></i></button>
+
+    <div class="dropdown-buttons">
+        <!-- ipynb file if we had a myst markdown file -->
+        
+        <!-- Download raw file -->
+        <a class="dropdown-buttons" href="../../_sources/tutorial/options/name.md"><button type="button"
+                class="btn btn-secondary topbarbtn" title="Download source file" data-toggle="tooltip"
+                data-placement="left">.md</button></a>
+        <!-- Download PDF via print -->
+        <button type="button" id="download-print" class="btn btn-secondary topbarbtn" title="Print to PDF"
+            onClick="window.print()" data-toggle="tooltip" data-placement="left">.pdf</button>
+    </div>
+</div>
+
+        <!-- Source interaction buttons -->
+
+
+        <!-- Full screen (wrap in <a> to have style consistency -->
+        <a class="full-screen-button"><button type="button" class="btn btn-secondary topbarbtn" data-toggle="tooltip"
+                data-placement="bottom" onclick="toggleFullScreen()" aria-label="Fullscreen mode"
+                title="Fullscreen mode"><i
+                    class="fas fa-expand"></i></button></a>
+
+        <!-- Launch buttons -->
+
+    </div>
+
+    <!-- Table of contents -->
+    <div class="d-none d-md-block col-md-2 bd-toc show">
+        
+        <div class="tocsection onthispage pt-5 pb-3">
+            <i class="fas fa-list"></i> Contents
+        </div>
+        <nav id="bd-toc-nav">
+            <ul class="nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-option-short-names-together">
+   <em>
+    CLI option
+   </em>
+   short names together
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-option-short-names-with-values">
+   <em>
+    CLI option
+   </em>
+   short names with values
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#defining-cli-option-short-names">
+   Defining
+   <em>
+    CLI option
+   </em>
+   short names
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-option-only-short-name">
+   <em>
+    CLI option
+   </em>
+   only short name
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cli-option-short-name-and-default">
+   <em>
+    CLI option
+   </em>
+   short name and default
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#id1">
+   <em>
+    CLI option
+   </em>
+   short names together
+  </a>
+ </li>
+</ul>
+
+        </nav>
+        
+    </div>
+</div>
+    <div id="main-content" class="row">
+        <div class="col-12 col-md-9 pl-md-3 pr-md-0">
+        
+              <div>
+                
+  <p>By default <strong>Typer</strong> will create a <em>CLI option</em> name from the function parameter.</p>
+<p>So, if you have a function with:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">user_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p>or</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">user_name</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="kc">None</span><span class="p">)):</span>
+    <span class="k">pass</span>
+</pre></div>
+</div>
+<p><strong>Typer</strong> will create a <em>CLI option</em>:</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">--</span><span class="n">user</span><span class="o">-</span><span class="n">name</span>
+</pre></div>
+</div>
+<p>But you can customize it if you want to.</p>
+<p>Let’s say the function parameter name is <code class="docutils literal notranslate"><span class="pre">user_name</span></code> as above, but you want the <em>CLI option</em> to be just <code class="docutils literal notranslate"><span class="pre">--name</span></code>.</p>
+<p>You can pass the <em>CLI option</em> name that you want to have in the next positional argument passed to <code class="docutils literal notranslate"><span class="pre">typer.Option()</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{!../docs_src/options/name/tutorial001.py!}
+</pre></div>
+</div>
+<p>Here you are passing the string <code class="docutils literal notranslate"><span class="pre">&quot;--name&quot;</span></code> as the second positional argument to <code class="docutils literal notranslate"><span class="pre">typer.Option()</span></code>.</p>
+<p>!!! info
+“<a href="https://docs.python.org/3.8/glossary.html#term-argument" class="external-link" target="_blank">Positional</a>” means that it’s not a function argument with a keyword name.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>For example `show_default=True` is a keyword argument. &quot;`show_default`&quot; is the keyword.
+
+But in `&quot;--name&quot;` there&#39;s no `option_name=&quot;--name&quot;` or something similar, it&#39;s just the string value `&quot;--name&quot;` that goes in `typer.Option()` after the `...` value passed in the first position.
+
+That&#39;s a &quot;positional argument&quot; in a function.
+</pre></div>
+</div>
+<p>Check it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+
+<span class="go">// Notice the --name instead of --user-name</span>
+<span class="go">Usage: main.py [OPTIONS]</span>
+
+<span class="go">Options:</span>
+<span class="go">  --name TEXT           [required]</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">// Try it</span>
+<span class="gp">$</span> python --name Camila
+
+<span class="go">Hello Camila</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-option-short-names">
+<h1><em>CLI option</em> short names<a class="headerlink" href="#cli-option-short-names" title="Permalink to this headline">¶</a></h1>
+<p>A short name is a <em>CLI option</em> name with a single dash (<code class="docutils literal notranslate"><span class="pre">-</span></code>) instead of 2 (<code class="docutils literal notranslate"><span class="pre">--</span></code>) and a single letter, like <code class="docutils literal notranslate"><span class="pre">-n</span></code> instead of <code class="docutils literal notranslate"><span class="pre">--name</span></code>.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">ls</span></code> program has a <em>CLI option</em> named <code class="docutils literal notranslate"><span class="pre">--size</span></code>, and the same <em>CLI option</em> also has a short name <code class="docutils literal notranslate"><span class="pre">-s</span></code>:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// With the long name --size</span>
+<span class="gp">$</span> ls ./myproject --size
+
+<span class="go">12 first-steps.md   4 intro.md</span>
+
+<span class="go">// With the short name -s</span>
+<span class="gp">$</span> ls ./myproject -s
+
+<span class="go">12 first-steps.md   4 intro.md</span>
+
+<span class="go">// Both CLI option names do the same</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="cli-option-short-names-together">
+<h2><em>CLI option</em> short names together<a class="headerlink" href="#cli-option-short-names-together" title="Permalink to this headline">¶</a></h2>
+<p>Short names have another feature, when they have a single letter, as in <code class="docutils literal notranslate"><span class="pre">-s</span></code>, you can put several of these <em>CLI options</em> together, with a single dash.</p>
+<p>For example, the <code class="docutils literal notranslate"><span class="pre">ls</span></code> program has these 2 <em>CLI options</em> (among others):</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--size</span></code>: show the sizes of the listed files.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--human</span></code>: show a human-readable format, like <code class="docutils literal notranslate"><span class="pre">1MB</span></code> instead of just <code class="docutils literal notranslate"><span class="pre">1024</span></code>.</p></li>
+</ul>
+<p>And these 2 <em>CLI options</em> have short versions too:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">--size</span></code>: short version <code class="docutils literal notranslate"><span class="pre">-s</span></code>.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--human</span></code>: short version <code class="docutils literal notranslate"><span class="pre">-h</span></code>.</p></li>
+</ul>
+<p>So, you can put them together with <code class="docutils literal notranslate"><span class="pre">-sh</span></code> or <code class="docutils literal notranslate"><span class="pre">-hs</span></code>:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Call ls with long CLI options</span>
+<span class="gp">$</span> ls --size --human
+
+<span class="go">12K first-steps.md   4.0K intro.md</span>
+
+<span class="go">// Now with short versions</span>
+<span class="gp">$</span> ls -s -h
+
+<span class="go">12K first-steps.md   4.0K intro.md</span>
+
+<span class="go">// And with short versions together</span>
+<span class="gp">$</span> ls -sh
+
+<span class="go">12K first-steps.md   4.0K intro.md</span>
+
+<span class="go">// Order in short versions doesn&#39;t matter</span>
+<span class="gp">$</span> ls -hs
+
+<span class="go">12K first-steps.md   4.0K intro.md</span>
+
+<span class="go">// They all work the same 🎉</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cli-option-short-names-with-values">
+<h2><em>CLI option</em> short names with values<a class="headerlink" href="#cli-option-short-names-with-values" title="Permalink to this headline">¶</a></h2>
+<p>When you use <em>CLI options</em> with short names, you can put them together if they are just boolean flags, like <code class="docutils literal notranslate"><span class="pre">--size</span></code> or <code class="docutils literal notranslate"><span class="pre">--human</span></code>.</p>
+<p>But if you have a <em>CLI option</em> <code class="docutils literal notranslate"><span class="pre">--file</span></code> with a short name <code class="docutils literal notranslate"><span class="pre">-f</span></code> that takes a value, if you put it with other short names for <em>CLI options</em>, you have to put it as the last letter, so that it can receive the value that comes right after.</p>
+<p>For example, let’s say you are decompressing/extracting a file <code class="docutils literal notranslate"><span class="pre">myproject.tar.gz</span></code> with the program <code class="docutils literal notranslate"><span class="pre">tar</span></code>.</p>
+<p>You can pass these <em>CLI option</em> short names to <code class="docutils literal notranslate"><span class="pre">tar</span></code>:</p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">-x</span></code>: means “e<code class="docutils literal notranslate"><span class="pre">X</span></code>tract”, to decompress and extract the contents.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-v</span></code>: means “<code class="docutils literal notranslate"><span class="pre">V</span></code>erbose”, to print on the screen what it is doing, so you can know that it’s decompressing each file and can entertain yourself while you wait.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">-f</span></code>: means “<code class="docutils literal notranslate"><span class="pre">F</span></code>ile”, this one requires a value, the compressed file to extract (in our example, this is <code class="docutils literal notranslate"><span class="pre">myproject.tar.gz</span></code>).</p>
+<ul>
+<li><p>So if you use all the short names together, this <code class="docutils literal notranslate"><span class="pre">-f</span></code> has to come last, to receive the value that comes next to it.</p></li>
+</ul>
+</li>
+</ul>
+<p>For example:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tar -xvf myproject.tar.gz
+
+<span class="go">myproject/</span>
+<span class="go">myproject/first-steps.md</span>
+<span class="go">myproject/intro.md</span>
+
+<span class="go">// But if you put the -f before</span>
+<span class="gp">$</span> tar -fxv myproject.tar.gz
+
+<span class="go">// You get an ugly error</span>
+<span class="go">tar: You must specify one of the blah, blah, error, error</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="defining-cli-option-short-names">
+<h2>Defining <em>CLI option</em> short names<a class="headerlink" href="#defining-cli-option-short-names" title="Permalink to this headline">¶</a></h2>
+<p>In <strong>Typer</strong> you can also define <em>CLI option</em> short names the same way you can customize the long names.</p>
+<p><code class="docutils literal notranslate"><span class="pre">typer.Option()</span></code> receives as a first function argument the default value, e.g. <code class="docutils literal notranslate"><span class="pre">None</span></code>, and all the next <em>positional</em> values are to define the <em>CLI option</em> name(s).</p>
+<p>!!! tip
+Remember the <em>positional</em> function arguments are those that don’t have a keyword.</p>
+<div class="highlight-none notranslate"><div class="highlight"><pre><span></span>All the other function arguments/parameters you pass to `typer.Option()` like `prompt=True` and `help=&quot;This option blah, blah&quot;` require the keyword.
+</pre></div>
+</div>
+<p>You can overwrite the <em>CLI option</em> name to use as in the previous example, but you can also declare extra alternatives, including short names.</p>
+<p>For example, extending the previous example, let’s add a <em>CLI option</em> short name <code class="docutils literal notranslate"><span class="pre">-n</span></code>:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{!../docs_src/options/name/tutorial002.py!}
+</pre></div>
+</div>
+<p>Here we are overwriting the <em>CLI option</em> name that by default would be <code class="docutils literal notranslate"><span class="pre">--user-name</span></code>, and we are defining it to be <code class="docutils literal notranslate"><span class="pre">--name</span></code>. And we are also declaring a <em>CLI option</em> short name of <code class="docutils literal notranslate"><span class="pre">-n</span></code>.</p>
+<p>Check it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
+<span class="gp">$</span> python main.py --help
+
+<span class="go">// Notice the two CLI option names -n and --name</span>
+<span class="go">Usage: main.py [OPTIONS]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -n, --name TEXT       [required]</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">// Try the short version</span>
+<span class="gp">$</span> python main.py -n Camila
+
+<span class="go">Hello Camila</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cli-option-only-short-name">
+<h2><em>CLI option</em> only short name<a class="headerlink" href="#cli-option-only-short-name" title="Permalink to this headline">¶</a></h2>
+<p>If you only declare a short name like <code class="docutils literal notranslate"><span class="pre">-n</span></code> then that will be the only <em>CLI option</em> name. And neither <code class="docutils literal notranslate"><span class="pre">--name</span></code> nor <code class="docutils literal notranslate"><span class="pre">--user-name</span></code> will be available.</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{!../docs_src/options/name/tutorial003.py!}
+</pre></div>
+</div>
+<p>Check it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+
+<span class="go">// Notice there&#39;s no --name nor --user-name, only -n</span>
+<span class="go">Usage: main.py [OPTIONS]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -n TEXT               [required]</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">// Try it</span>
+<span class="gp">$</span> python main.py -n Camila
+
+<span class="go">Hello Camila</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="cli-option-short-name-and-default">
+<h2><em>CLI option</em> short name and default<a class="headerlink" href="#cli-option-short-name-and-default" title="Permalink to this headline">¶</a></h2>
+<p>Continuing with the example above, as <strong>Typer</strong> allows you to declare a <em>CLI option</em> as having only a short name, if you want to have the default long name plus a short name, you have to declare both explicitly:</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{!../docs_src/options/name/tutorial004.py!}
+</pre></div>
+</div>
+<p>Check it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+
+<span class="go">// Notice that we have the long version --user-name back</span>
+<span class="go">// and we also have the short version -n</span>
+<span class="go">Usage: main.py [OPTIONS]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -n, --user-name TEXT  [required]</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">// Try it</span>
+<span class="gp">$</span> python main.py --user-name Camila
+
+<span class="go">Hello Camila</span>
+
+<span class="go">// And try the short version</span>
+<span class="gp">$</span> python main.py -n Camila
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id1">
+<h2><em>CLI option</em> short names together<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<p>You can create multiple short names and use them together.</p>
+<p>You don’t have to do anything special for it to work (apart from declaring those short versions):</p>
+<div class="highlight-Python notranslate"><div class="highlight"><pre><span></span>{!../docs_src/options/name/tutorial005.py!}
+</pre></div>
+</div>
+<p>!!! tip
+Notice that, again, we are declaring the long and short version of the <em>CLI option</em> names.</p>
+<p>Check it:</p>
+<div class="termy">
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+
+<span class="go">// We now have short versions -n and -f</span>
+<span class="go">// And also long versions --name and --formal</span>
+<span class="go">Usage: main.py [OPTIONS]</span>
+
+<span class="go">Options:</span>
+<span class="go">  -n, --name TEXT       [required]</span>
+<span class="go">  -f, --formal</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">// Try the short versions</span>
+<span class="gp">$</span> python main.py -n Camila -f
+
+<span class="go">Good day Ms. Camila.</span>
+
+<span class="go">// And try the 2 short versions together</span>
+<span class="go">// See how -n has to go last, to be able to get the value</span>
+<span class="gp">$</span> python main.py -fn Camila
+
+<span class="go">Good day Ms. Camila.</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            kernelName: "python3",
+            path: "./tutorial/options"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+        </div>
+    </div>
+    
+    
+    <div class='prev-next-bottom'>
+        
+    <a class='left-prev' id="prev-link" href="password.html" title="previous page">A Password prompt</a>
+    <a class='right-next' id="next-link" href="callback-and-context.html" title="next page">Validate <em>CLI parameters</em></a>
+
+    </div>
+    <footer class="footer mt-5 mt-md-0">
+    <div class="container">
+      <p>
+        
+          By Thomas Wilson<br/>
+        
+            &copy; Copyright 2020.<br/>
+      </p>
+    </div>
+  </footer>
+</main>
+
+
+      </div>
+    </div>
+
+    
+  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+
+
+    
+  </body>
+</html>
