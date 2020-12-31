@@ -4,7 +4,7 @@ Inspired by [tensorflow-rnn-shakespeare](https://github.com/martin-gorner/tensor
 
 ## Installation
 You're going to need tensorflow-gpu==1.12 (old).
-this project is intened to use an old GPU (GTX 650 compute capability=3.0) 
+this project is intended to use an old GPU (GTX 650 compute capability=3.0) 
 which is not officially supported by tensorflow, so compile tensorflow from source first.
 
 some notable tensorflow dependencies:
