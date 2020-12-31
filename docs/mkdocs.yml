@@ -1,6 +1,6 @@
 site_name: lyrics
 site_description: generative song lyrics
-site_url: https://wilsonify.github.io/lyrics
+
 
 theme:
     name: 'material'
