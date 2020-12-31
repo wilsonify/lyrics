@@ -1,0 +1,2005 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="generative song lyrics">
+      
+      
+      
+      
+        <link rel="canonical" href="https://wilsonify.github.io/lyrics/tutorial/options/autocompletion/">
+      
+      <link rel="shortcut icon" href="../../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+    
+    
+      
+        <title>CLI Option autocompletion - lyrics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../../assets/stylesheets/main.3b61ea93.min.css">
+      
+        
+        <link rel="stylesheet" href="../../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../../css/termynal.css">
+    
+      <link rel="stylesheet" href="../../../css/custom.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-155009830-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="teal">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#review-completion" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://wilsonify.github.io/lyrics" title="lyrics" class="md-header-nav__button md-logo" aria-label="lyrics">
+      
+  <img src="../../../img/icon-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            lyrics
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              CLI Option autocompletion
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/wilsonify/lyrics" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wilsonify/lyrics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://wilsonify.github.io/lyrics" title="lyrics" class="md-nav__button md-logo" aria-label="lyrics">
+      
+  <img src="../../../img/icon-white.svg" alt="logo">
+
+    </a>
+    lyrics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/wilsonify/lyrics" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wilsonify/lyrics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../.." class="md-nav__link">
+      Lyrics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../features/" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  
+
+
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Tutorial - User Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorial - User Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorial - User Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../" class="md-nav__link">
+      Tutorial - User Guide - Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../first-steps/" class="md-nav__link">
+      First Steps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../printing/" class="md-nav__link">
+      Printing and Colors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../terminating/" class="md-nav__link">
+      Terminating
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" >
+    
+    <label class="md-nav__link" for="nav-3-5">
+      CLI Arguments
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI Arguments" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        CLI Arguments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../arguments/" class="md-nav__link">
+      CLI Arguments Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../arguments/optional/" class="md-nav__link">
+      Optional CLI Arguments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../arguments/default/" class="md-nav__link">
+      CLI Arguments with Default
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../arguments/help/" class="md-nav__link">
+      CLI Arguments with Help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../arguments/envvar/" class="md-nav__link">
+      CLI Arguments with Environment Variables
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../arguments/other-uses/" class="md-nav__link">
+      Other uses
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6" checked>
+    
+    <label class="md-nav__link" for="nav-3-6">
+      CLI Options
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI Options" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        CLI Options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../" class="md-nav__link">
+      CLI Options Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../help/" class="md-nav__link">
+      CLI Options with Help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../required/" class="md-nav__link">
+      Required CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../prompt/" class="md-nav__link">
+      CLI Option Prompt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../password/" class="md-nav__link">
+      Password CLI Option and Confirmation Prompt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../name/" class="md-nav__link">
+      CLI Option Name
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../callback-and-context/" class="md-nav__link">
+      CLI Option Callback and Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../version/" class="md-nav__link">
+      Version CLI Option, is_eager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        CLI Option autocompletion
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      CLI Option autocompletion
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#review-completion" class="md-nav__link">
+    Review completion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-completion-for-values" class="md-nav__link">
+    Custom completion for values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-incomplete-value" class="md-nav__link">
+    Check the incomplete value
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-help-to-completions" class="md-nav__link">
+    Add help to completions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simplify-with-yield" class="md-nav__link">
+    Simplify with yield
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-other-cli-parameters-with-the-context" class="md-nav__link">
+    Access other CLI parameters with the Context
+  </a>
+  
+    <nav class="md-nav" aria-label="Access other CLI parameters with the Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-completion-for-multiple-values" class="md-nav__link">
+    Getting completion for multiple values
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-raw-cli-parameters" class="md-nav__link">
+    Getting the raw CLI parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting the raw CLI parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#printing-to-standard-error" class="md-nav__link">
+    Printing to "standard error"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-context-and-the-raw-cli-parameters" class="md-nav__link">
+    Getting the Context and the raw CLI parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-types-everywhere" class="md-nav__link">
+    Types, types everywhere
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7" >
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/" class="md-nav__link">
+      Commands Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/arguments/" class="md-nav__link">
+      Command CLI Arguments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/options/" class="md-nav__link">
+      Command CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/help/" class="md-nav__link">
+      Command Help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/name/" class="md-nav__link">
+      Custom Command Name
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/callback/" class="md-nav__link">
+      Typer Callback
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/one-or-multiple/" class="md-nav__link">
+      One or Multiple Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../commands/context/" class="md-nav__link">
+      Using the Context
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8" >
+    
+    <label class="md-nav__link" for="nav-3-8">
+      CLI Parameter Types
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI Parameter Types" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        CLI Parameter Types
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/" class="md-nav__link">
+      CLI Parameter Types Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/number/" class="md-nav__link">
+      Number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/bool/" class="md-nav__link">
+      Boolean CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/uuid/" class="md-nav__link">
+      UUID
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/datetime/" class="md-nav__link">
+      DateTime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/enum/" class="md-nav__link">
+      Enum - Choices
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/path/" class="md-nav__link">
+      Path
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../parameter-types/file/" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9" >
+    
+    <label class="md-nav__link" for="nav-3-9">
+      SubCommands - Command Groups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="SubCommands - Command Groups" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        <span class="md-nav__icon md-icon"></span>
+        SubCommands - Command Groups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../subcommands/" class="md-nav__link">
+      SubCommands - Command Groups - Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../subcommands/add-typer/" class="md-nav__link">
+      Add Typer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../subcommands/single-file/" class="md-nav__link">
+      SubCommands in a Single File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../subcommands/nested-subcommands/" class="md-nav__link">
+      Nested SubCommands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../subcommands/callback-override/" class="md-nav__link">
+      Sub-Typer Callback Override
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../subcommands/name-and-help/" class="md-nav__link">
+      SubCommand Name and Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-10" type="checkbox" id="nav-3-10" >
+    
+    <label class="md-nav__link" for="nav-3-10">
+      Multiple Values
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Multiple Values" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-10">
+        <span class="md-nav__icon md-icon"></span>
+        Multiple Values
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../multiple-values/" class="md-nav__link">
+      Multiple Values Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../multiple-values/multiple-options/" class="md-nav__link">
+      Multiple CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../multiple-values/options-with-multiple-values/" class="md-nav__link">
+      CLI Options with Multiple Values
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../multiple-values/arguments-with-multiple-values/" class="md-nav__link">
+      CLI Arguments with Multiple Values
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../prompt/" class="md-nav__link">
+      Ask with Prompt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../progressbar/" class="md-nav__link">
+      Progress Bar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../app-dir/" class="md-nav__link">
+      CLI Application Directory
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../launch/" class="md-nav__link">
+      Launching Applications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../testing/" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../using-click/" class="md-nav__link">
+      Using Click
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../../package/" class="md-nav__link">
+      Building a Package
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../typer-cli/" class="md-nav__link">
+      Typer CLI - completion for small scripts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../alternatives/" class="md-nav__link">
+      Alternatives, Inspiration and Comparisons
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../help-typer/" class="md-nav__link">
+      Help Typer - Get Help
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../contributing/" class="md-nav__link">
+      Development - Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../../release-notes/" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#review-completion" class="md-nav__link">
+    Review completion
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#custom-completion-for-values" class="md-nav__link">
+    Custom completion for values
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#check-the-incomplete-value" class="md-nav__link">
+    Check the incomplete value
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-help-to-completions" class="md-nav__link">
+    Add help to completions
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#simplify-with-yield" class="md-nav__link">
+    Simplify with yield
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#access-other-cli-parameters-with-the-context" class="md-nav__link">
+    Access other CLI parameters with the Context
+  </a>
+  
+    <nav class="md-nav" aria-label="Access other CLI parameters with the Context">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#getting-completion-for-multiple-values" class="md-nav__link">
+    Getting completion for multiple values
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-raw-cli-parameters" class="md-nav__link">
+    Getting the raw CLI parameters
+  </a>
+  
+    <nav class="md-nav" aria-label="Getting the raw CLI parameters">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#printing-to-standard-error" class="md-nav__link">
+    Printing to "standard error"
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#getting-the-context-and-the-raw-cli-parameters" class="md-nav__link">
+    Getting the Context and the raw CLI parameters
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#types-types-everywhere" class="md-nav__link">
+    Types, types everywhere
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>CLI Option autocompletion</h1>
+                
+                <p>As you have seen, apps built with <strong>Typer</strong> have completion in your shell that works when you create a Python package or using <strong>Typer CLI</strong>.</p>
+<p>It normally completes <em>CLI options</em>, <em>CLI arguments</em>, and subcommands (that you will learn about later).</p>
+<p>But you can also provide auto completion for the <strong>values</strong> of <em>CLI options</em> and <em>CLI arguments</em>. We will learn about that here.</p>
+<h2 id="review-completion">Review completion<a class="headerlink" href="#review-completion" title="Permanent link">&para;</a></h2>
+<p>Before checking how to provide custom completions, let's check again how it works.</p>
+<p>After installing completion (for your own Python package or for <strong>Typer CLI</strong>), when you use your CLI program and start adding a <em>CLI option</em> with <code>--</code> an then hit <kbd>TAB</kbd>, your shell will show you the available <em>CLI options</em> (the same for <em>CLI arguments</em>, etc).</p>
+<p>To check it quickly without creating a new Python package, install <a class="internal-link" href="../../../typer-cli/" target="_blank">Typer CLI</a>.</p>
+<p>Then let's create small example script:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typer</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span><span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">)):</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>And let's try it with <strong>Typer CLI</strong> to get completion:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="go">// Hit the TAB key in your keyboard below where you see the: [TAB]</span>
+<span class="gp">$</span> typer ./main.py <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// Depending on your terminal/shell you will get some completion like this ✨</span>
+<span class="go">run    -- Run the provided Typer app.</span>
+<span class="go">utils  -- Extra utility commands for Typer apps.</span>
+
+<span class="go">// Then try with &quot;run&quot; and --</span>
+<span class="gp">$</span> typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// You will get completion for --name, depending on your terminal it will look something like this</span>
+<span class="go">--name  -- The name to say hi to.</span>
+
+<span class="go">// And you can run it as if it was with Python directly</span>
+<span class="gp">$</span> typer ./main.py run --name Camila
+
+<span class="go">Hello Camila</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="custom-completion-for-values">Custom completion for values<a class="headerlink" href="#custom-completion-for-values" title="Permanent link">&para;</a></h2>
+<p>Right now we get completion for the <em>CLI option</em> names, but not for the values.</p>
+<p>We can provide completion for the values creating an <code>autocompletion</code> function, similar to the <code>callback</code> functions from <a class="internal-link" href="../callback-and-context/" target="_blank">CLI Option Callback and Context</a>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typer</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">():</span>
+</span><span class="hll">    <span class="k">return</span> <span class="p">[</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;Sebastian&quot;</span><span class="p">]</span>
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+<span class="hll">        <span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+</span>    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>We return a <code>list</code> of strings from the <code>complete_name()</code> function.</p>
+<p>And then we get those values when using completion:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// We get the values returned from the function 🎉</span>
+<span class="go">Camila     Carlos     Sebastian</span>
+</code></pre></div>
+
+</div>
+
+<p>We got the basics working. Now let's improve it.</p>
+<h2 id="check-the-incomplete-value">Check the incomplete value<a class="headerlink" href="#check-the-incomplete-value" title="Permanent link">&para;</a></h2>
+<p>Right now, we always return those values, even if users start typing <code>Sebast</code> and then hit <kbd>TAB</kbd>, they will also get the completion for <code>Camila</code> and <code>Carlos</code> (depending on the shell), while we should only get completion for <code>Sebastian</code>.</p>
+<p>But we can fix that so that it always works correctly.</p>
+<p>Modify the <code>complete_name()</code> function to receive a parameter of type <code>str</code>, it will contain the incomplete value.</p>
+<p>Then we can check and return only the values that start with the incomplete value from the command line:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typer</span>
+
+<span class="n">valid_names</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;Sebastian&quot;</span><span class="p">]</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">(</span><span class="n">incomplete</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span class="hll">    <span class="n">completion</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="hll">    <span class="k">for</span> <span class="n">name</span> <span class="ow">in</span> <span class="n">valid_names</span><span class="p">:</span>
+</span><span class="hll">        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">incomplete</span><span class="p">):</span>
+</span><span class="hll">            <span class="n">completion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">name</span><span class="p">)</span>
+</span><span class="hll">    <span class="k">return</span> <span class="n">completion</span>
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>Now let's try it:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// We get the values returned from the function that start with Ca 🎉</span>
+<span class="go">Camila     Carlos</span>
+</code></pre></div>
+
+</div>
+
+<p>Now we are only returning the valid values, that start with <code>Ca</code>, we are no longer returning <code>Sebastian</code> as a completion option.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You have to declare the incomplete value of type <code>str</code> and that's what you will receive in the function.</p>
+<p>No matter if the actual value will be an <code>int</code>, or something else, when doing completion, you will only get a <code>str</code> as the incomplete value.</p>
+<p>And the same way, you can only return <code>str</code>, not <code>int</code>, etc.</p>
+</div>
+<h2 id="add-help-to-completions">Add help to completions<a class="headerlink" href="#add-help-to-completions" title="Permanent link">&para;</a></h2>
+<p>Right now we are returning a <code>list</code> of <code>str</code>.</p>
+<p>But some shells (Zsh, Fish, PowerShell) are capable of showing extra help text for completion.</p>
+<p>We can provide that extra help text so that those shells can show it.</p>
+<p>In the <code>complete_name()</code> function, instead of providing one <code>str</code> per completion element, we provide a <code>tuple</code> with 2 items. The first item is the actual completion string, and the second item is the help text.</p>
+<p>So, in the end, we return a <code>list</code> of <code>tuples</code> of <code>str</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typer</span>
+
+<span class="hll"><span class="n">valid_completion_items</span> <span class="o">=</span> <span class="p">[</span>
+</span><span class="hll">    <span class="p">(</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;The reader of books.&quot;</span><span class="p">),</span>
+</span><span class="hll">    <span class="p">(</span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;The writer of scripts.&quot;</span><span class="p">),</span>
+</span><span class="hll">    <span class="p">(</span><span class="s2">&quot;Sebastian&quot;</span><span class="p">,</span> <span class="s2">&quot;The type hints guy.&quot;</span><span class="p">),</span>
+</span><span class="hll"><span class="p">]</span>
+</span>
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">(</span><span class="n">incomplete</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span class="hll">    <span class="n">completion</span> <span class="o">=</span> <span class="p">[]</span>
+</span><span class="hll">    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">help_text</span> <span class="ow">in</span> <span class="n">valid_completion_items</span><span class="p">:</span>
+</span><span class="hll">        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">incomplete</span><span class="p">):</span>
+</span><span class="hll">            <span class="n">completion_item</span> <span class="o">=</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">help_text</span><span class="p">)</span>
+</span><span class="hll">            <span class="n">completion</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">completion_item</span><span class="p">)</span>
+</span><span class="hll">    <span class="k">return</span> <span class="n">completion</span>
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to have help text for each item, make sure each item in the list is a <code>tuple</code>. Not a <code>list</code>.</p>
+<p>Click checks specifically for a <code>tuple</code> when extracting the help text.</p>
+<p>So in the end, the return will be a <code>list</code> (or other iterable) of <code>tuples</code> of 2 <code>str</code>.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The help text will be visible in Zsh, Fish, and PowerShell.</p>
+<p>Bash doesn't support showing the help text, but completion will still work the same.</p>
+</div>
+<p>If you have a shell like Zsh, it would look like:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// We get the completion items with their help text 🎉</span>
+<span class="go">Camila     -- The reader of books.</span>
+<span class="go">Carlos     -- The writer of scripts.</span>
+<span class="go">Sebastian  -- The type hints guy.</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="simplify-with-yield">Simplify with <code>yield</code><a class="headerlink" href="#simplify-with-yield" title="Permanent link">&para;</a></h2>
+<p>Instead of creating and returning a list with values (<code>str</code> or <code>tuple</code>), we can use <code>yield</code> with each value that we want in the completion.</p>
+<p>That way our function will be a <a href="https://docs.python.org/3.8/glossary.html#index-19" class="external-link" target="_blank">generator</a> that <strong>Typer</strong> (actually Click) can iterate:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typer</span>
+
+<span class="n">valid_completion_items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;The reader of books.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;The writer of scripts.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Sebastian&quot;</span><span class="p">,</span> <span class="s2">&quot;The type hints guy.&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">(</span><span class="n">incomplete</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span class="hll">    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">help_text</span> <span class="ow">in</span> <span class="n">valid_completion_items</span><span class="p">:</span>
+</span><span class="hll">        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">incomplete</span><span class="p">):</span>
+</span><span class="hll">            <span class="k">yield</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">help_text</span><span class="p">)</span>
+</span>
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="s2">&quot;World&quot;</span><span class="p">,</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>That simplifies our code a bit and works the same.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If all the <code>yield</code> part seems complex for you, don't worry, you can just use the version with the <code>list</code> above.</p>
+<p>In the end, that's just to save us a couple of lines of code.</p>
+</div>
+<div class="admonition info">
+<p class="admonition-title">Info</p>
+<p>The function can use <code>yield</code>, so it doesn't have to return strictly a <code>list</code>, it just has to be <a href="https://docs.python.org/3.8/glossary.html#term-iterable" class="external-link" target="_blank">iterable</a>.</p>
+<p>But each of the elements for completion has to be a <code>str</code> or a <code>tuple</code> (when containing a help text).</p>
+</div>
+<h2 id="access-other-cli-parameters-with-the-context">Access other <em>CLI parameters</em> with the Context<a class="headerlink" href="#access-other-cli-parameters-with-the-context" title="Permanent link">&para;</a></h2>
+<p>Let's say that now we want to modify the program to be able to "say hi" to multiple people at the same time.</p>
+<p>So, we will allow multiple <code>--name</code> <em>CLI options</em>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You will learn more about <em>CLI parameters</em> with multiple values later in the tutorial.</p>
+<p>So, for now, take this as a sneak peek 😉.</p>
+</div>
+<p>For this we use a <code>List</code> of <code>str</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">typer</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">main</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">([</span><span class="s2">&quot;World&quot;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">)):</span>
+</span><span class="hll">    <span class="k">for</span> <span class="n">each_name</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+</span><span class="hll">        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">each_name</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</span>
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>And then we can use it like:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name Camila --name Sebastian
+
+<span class="go">Hello Camila</span>
+<span class="go">Hello Sebastian</span>
+</code></pre></div>
+
+</div>
+
+<h3 id="getting-completion-for-multiple-values">Getting completion for multiple values<a class="headerlink" href="#getting-completion-for-multiple-values" title="Permanent link">&para;</a></h3>
+<p>And the same way as before, we want to provide <strong>completion</strong> for those names. But we don't want to provide the <strong>same names</strong> for completion if they were already given in previous parameters.</p>
+<p>For that, we will access and use the "Context". When you create a <strong>Typer</strong> application it uses Click underneath. And every Click application has a special object called a <a href="https://click.palletsprojects.com/en/7.x/commands/#nested-handling-and-contexts" class="external-link" target="_blank">"Context"</a> that is normally hidden.</p>
+<p>But you can access the context by declaring a function parameter of type <code>typer.Context</code>.</p>
+<p>And from that context you can get the current values for each parameter.</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">typer</span>
+
+<span class="n">valid_completion_items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;The reader of books.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;The writer of scripts.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Sebastian&quot;</span><span class="p">,</span> <span class="s2">&quot;The type hints guy.&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">typer</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">incomplete</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span class="hll">    <span class="n">names</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]</span>
+</span>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">help_text</span> <span class="ow">in</span> <span class="n">valid_completion_items</span><span class="p">:</span>
+<span class="hll">        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">incomplete</span><span class="p">)</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+</span>            <span class="k">yield</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">help_text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;World&quot;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>We are getting the <code>names</code> already provided with <code>--name</code> in the command line before this completion was triggered.</p>
+<p>If there's no <code>--name</code> in the command line, it will be <code>None</code>, so we use <code>or []</code> to make sure we have a <code>list</code> (even if empty) to check its contents later.</p>
+<p>Then, when we have a completion candidate, we check if each <code>name</code> was already provided with <code>--name</code> by checking if it's in that list of <code>names</code> with <code>name not in names</code>.</p>
+<p>And then we <code>yield</code> each item that has not being used yet.</p>
+<p>Check it:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// The first time we trigger completion, we get all the names</span>
+<span class="go">Camila     -- The reader of books.</span>
+<span class="go">Carlos     -- The writer of scripts.</span>
+<span class="go">Sebastian  -- The type hints guy.</span>
+
+<span class="go">// Add a name and trigger completion again</span>
+<span class="gp">$</span> typer ./main.py run --name Sebastian --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// Now we get completion only for the names we haven&#39;t used 🎉</span>
+<span class="go">Camila  -- The reader of books.</span>
+<span class="go">Carlos  -- The writer of scripts.</span>
+
+<span class="go">// And if we add another of the available names:</span>
+<span class="gp">$</span> typer ./main.py run --name Sebastian --name Camila --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// We get completion for the only available one</span>
+<span class="go">Carlos  -- The writer of scripts.</span>
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>It's quite possible that if there's only one option left, your shell will complete it right away instead of showing the option with the help text, to save you more typing.</p>
+</div>
+<h2 id="getting-the-raw-cli-parameters">Getting the raw <em>CLI parameters</em><a class="headerlink" href="#getting-the-raw-cli-parameters" title="Permanent link">&para;</a></h2>
+<p>You can also get the raw <em>CLI parameters</em>, just a <code>list</code> of <code>str</code> with everything passed in the command line before the incomplete value.</p>
+<p>For example, something like <code>["typer", "main.py", "run", "--name"]</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This would be for advanced scenarios, in most use cases you would be better off using the context.</p>
+<p>But it's still possible if you need it.</p>
+</div>
+<p>As a simple example, let's show it on the screen before completion.</p>
+<p>Because completion is based on the output printed by your program (handled internally by <strong>Typer</strong>), during completion we can't just print something else as we normally do.</p>
+<h3 id="printing-to-standard-error">Printing to "standard error"<a class="headerlink" href="#printing-to-standard-error" title="Permanent link">&para;</a></h3>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you need a refresher about what is "standard output" and "standard error" check the section in <a class="internal-link" href="../../printing/#standard-output-and-standard-error" target="_blank">Printing and Colors: "Standard Output" and "Standard Error"</a>.</p>
+</div>
+<p>The completion system only reads from "standard output", so, printing to "standard error" won't break completion. 🚀</p>
+<p>You can print to "standard error" with <code>typer.echo("some text", err=True)</code>.</p>
+<p>Using <code>err=True</code> tells <strong>Typer</strong> (actually Click) that the output should be shown in "standard error".</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">typer</span>
+
+<span class="n">valid_completion_items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;The reader of books.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;The writer of scripts.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Sebastian&quot;</span><span class="p">,</span> <span class="s2">&quot;The type hints guy.&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">(</span><span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">incomplete</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span><span class="hll">    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+</span>    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">help_text</span> <span class="ow">in</span> <span class="n">valid_completion_items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">incomplete</span><span class="p">):</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">help_text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;World&quot;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>We get all the <em>CLI parameters</em> as a raw <code>list</code> of <code>str</code> by declaring a parameter with type <code>List[str]</code>, here it's named <code>args</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Here we name the list of all the raw <em>CLI parameters</em> <code>args</code> because that's the convention with Click.</p>
+<p>But it doesn't contain only <em>CLI arguments</em>, it has everything, including <em>CLI options</em> and values, as a raw <code>list</code> of <code>str</code>.</p>
+</div>
+<p>And then we just print it to "standard error".</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// First we see the raw CLI parameters</span>
+<span class="go">[&#39;./main.py&#39;, &#39;run&#39;, &#39;--name&#39;]</span>
+
+<span class="go">// And then we see the actual completion</span>
+<span class="go">Camila     -- The reader of books.</span>
+<span class="go">Carlos     -- The writer of scripts.</span>
+<span class="go">Sebastian  -- The type hints guy.</span>
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>This is a very simple (and quite useless) example, just so you know how it works and that you can use it.</p>
+<p>But it's probably useful only in very advanced use cases.</p>
+</div>
+<h2 id="getting-the-context-and-the-raw-cli-parameters">Getting the Context and the raw <em>CLI parameters</em><a class="headerlink" href="#getting-the-context-and-the-raw-cli-parameters" title="Permanent link">&para;</a></h2>
+<p>Of course, you can declare everything if you need it, the context, the raw <em>CLI parameters</em>, and the incomplete <code>str</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">List</span>
+
+<span class="kn">import</span> <span class="nn">typer</span>
+
+<span class="n">valid_completion_items</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="p">(</span><span class="s2">&quot;Camila&quot;</span><span class="p">,</span> <span class="s2">&quot;The reader of books.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Carlos&quot;</span><span class="p">,</span> <span class="s2">&quot;The writer of scripts.&quot;</span><span class="p">),</span>
+    <span class="p">(</span><span class="s2">&quot;Sebastian&quot;</span><span class="p">,</span> <span class="s2">&quot;The type hints guy.&quot;</span><span class="p">),</span>
+<span class="p">]</span>
+
+
+<span class="hll"><span class="k">def</span> <span class="nf">complete_name</span><span class="p">(</span><span class="n">ctx</span><span class="p">:</span> <span class="n">typer</span><span class="o">.</span><span class="n">Context</span><span class="p">,</span> <span class="n">args</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">incomplete</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
+</span>    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">args</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">err</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+    <span class="n">names</span> <span class="o">=</span> <span class="n">ctx</span><span class="o">.</span><span class="n">params</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;name&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">name</span><span class="p">,</span> <span class="n">help_text</span> <span class="ow">in</span> <span class="n">valid_completion_items</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">name</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="n">incomplete</span><span class="p">)</span> <span class="ow">and</span> <span class="n">name</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">names</span><span class="p">:</span>
+            <span class="k">yield</span> <span class="p">(</span><span class="n">name</span><span class="p">,</span> <span class="n">help_text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">main</span><span class="p">(</span>
+    <span class="n">name</span><span class="p">:</span> <span class="n">List</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Option</span><span class="p">(</span>
+        <span class="p">[</span><span class="s2">&quot;World&quot;</span><span class="p">],</span> <span class="n">help</span><span class="o">=</span><span class="s2">&quot;The name to say hi to.&quot;</span><span class="p">,</span> <span class="n">autocompletion</span><span class="o">=</span><span class="n">complete_name</span>
+    <span class="p">)</span>
+<span class="p">):</span>
+    <span class="k">for</span> <span class="n">n</span> <span class="ow">in</span> <span class="n">name</span><span class="p">:</span>
+        <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Hello </span><span class="si">{</span><span class="n">n</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+
+
+<span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&quot;__main__&quot;</span><span class="p">:</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="n">main</span><span class="p">)</span>
+</code></pre></div>
+<p>Check it:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// First we see the raw CLI parameters</span>
+<span class="go">[&#39;./main.py&#39;, &#39;run&#39;, &#39;--name&#39;]</span>
+
+<span class="go">// And then we see the actual completion</span>
+<span class="go">Camila     -- The reader of books.</span>
+<span class="go">Carlos     -- The writer of scripts.</span>
+<span class="go">Sebastian  -- The type hints guy.</span>
+
+<span class="gp">$</span> typer ./main.py run --name Sebastian --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// Again, we see the raw CLI parameters</span>
+<span class="go">[&#39;./main.py&#39;, &#39;run&#39;, &#39;--name&#39;, &#39;Sebastian&#39;, &#39;--name&#39;]</span>
+
+<span class="go">// And then we see the rest of the valid completion items</span>
+<span class="go">Camila     -- The reader of books.</span>
+<span class="go">Carlos     -- The writer of scripts.</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="types-types-everywhere">Types, types everywhere<a class="headerlink" href="#types-types-everywhere" title="Permanent link">&para;</a></h2>
+<p><strong>Typer</strong> uses the type declarations to detect what it has to provide to your <code>autocompletion</code> function.</p>
+<p>You can declare function parameters of these types:</p>
+<ul>
+<li><code>str</code>: for the incomplete value.</li>
+<li><code>typer.Context</code>: for the current context.</li>
+<li><code>List[str]</code>: for the raw <em>CLI parameters</em>.</li>
+</ul>
+<p>It doesn't matter how you name them, in which order, or which ones of the 3 options you declare. It will all "<strong>just work</strong>" ✨</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../version/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Version CLI Option, is_eager
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../commands/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Commands Intro
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/wilsonify" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.linkedin.com/in/tom-andrew-wilson/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.reddit.com/r/wilsonify" target="_blank" rel="noopener" title="www.reddit.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M201.5 305.5c-13.8 0-24.9-11.1-24.9-24.6 0-13.8 11.1-24.9 24.9-24.9 13.6 0 24.6 11.1 24.6 24.9 0 13.6-11.1 24.6-24.6 24.6zM504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-132.3-41.2c-9.4 0-17.7 3.9-23.8 10-22.4-15.5-52.6-25.5-86.1-26.6l17.4-78.3 55.4 12.5c0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.3 24.9-24.9s-11.1-24.9-24.9-24.9c-9.7 0-18 5.8-22.1 13.8l-61.2-13.6c-3-.8-6.1 1.4-6.9 4.4l-19.1 86.4c-33.2 1.4-63.1 11.3-85.5 26.8-6.1-6.4-14.7-10.2-24.1-10.2-34.9 0-46.3 46.9-14.4 62.8-1.1 5-1.7 10.2-1.7 15.5 0 52.6 59.2 95.2 132 95.2 73.1 0 132.3-42.6 132.3-95.2 0-5.3-.6-10.8-1.9-15.8 31.3-16 19.8-62.5-14.9-62.5zM302.8 331c-18.2 18.2-76.1 17.9-93.6 0-2.2-2.2-6.1-2.2-8.3 0-2.5 2.5-2.5 6.4 0 8.6 22.8 22.8 87.3 22.8 110.2 0 2.5-2.2 2.5-6.1 0-8.6-2.2-2.2-6.1-2.2-8.3 0zm7.7-75c-13.6 0-24.6 11.1-24.6 24.9 0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.1 24.9-24.6 0-13.8-11-24.9-24.9-24.9z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../../assets/javascripts/worker/search.8c7e0a7e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js"></script>
+      
+        <script src="../../../js/termynal.js"></script>
+      
+        <script src="../../../js/custom.js"></script>
+      
+    
+  </body>
+</html>

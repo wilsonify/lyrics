@@ -1,0 +1,2337 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="generative song lyrics">
+      
+      
+      
+      
+        <link rel="canonical" href="https://wilsonify.github.io/lyrics/tutorial/package/">
+      
+      <link rel="shortcut icon" href="../../img/favicon.png">
+      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
+    
+    
+      
+        <title>Building a Package - lyrics</title>
+      
+    
+    
+      <link rel="stylesheet" href="../../assets/stylesheets/main.3b61ea93.min.css">
+      
+        
+        <link rel="stylesheet" href="../../assets/stylesheets/palette.39b8e14a.min.css">
+        
+          
+          
+          <meta name="theme-color" content="#000000">
+        
+      
+    
+    
+    
+      
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
+        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
+      
+    
+    
+    
+      <link rel="stylesheet" href="../../css/termynal.css">
+    
+      <link rel="stylesheet" href="../../css/custom.css">
+    
+    
+      
+        
+<script>window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga("create","UA-155009830-1","auto"),ga("set","anonymizeIp",!0),ga("send","pageview"),document.addEventListener("DOMContentLoaded",function(){document.forms.search&&document.forms.search.query.addEventListener("blur",function(){if(this.value){var e=document.location.pathname;ga("send","pageview",e+"?q="+this.value)}})}),document.addEventListener("DOMContentSwitch",function(){ga("send","pageview",document.location.pathname)})</script>
+<script async src="https://www.google-analytics.com/analytics.js"></script>
+      
+    
+    
+  </head>
+  
+  
+    
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="black" data-md-color-accent="teal">
+      
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#prerequisites" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header-nav md-grid" aria-label="Header">
+    <a href="https://wilsonify.github.io/lyrics" title="lyrics" class="md-header-nav__button md-logo" aria-label="lyrics">
+      
+  <img src="../../img/icon-white.svg" alt="logo">
+
+    </a>
+    <label class="md-header-nav__button md-icon" for="__drawer">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
+    </label>
+    <div class="md-header-nav__title" data-md-component="header-title">
+      <div class="md-header-nav__ellipsis">
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            lyrics
+          </span>
+        </div>
+        <div class="md-header-nav__topic">
+          <span class="md-ellipsis">
+            
+              Building a Package
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      <label class="md-header-nav__button md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+      </label>
+      
+<div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
+      <label class="md-search__icon md-icon" for="__search">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+      </label>
+      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
+      </button>
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+      <div class="md-header-nav__source">
+        
+<a href="https://github.com/wilsonify/lyrics" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wilsonify/lyrics
+  </div>
+</a>
+      </div>
+    
+  </nav>
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href="https://wilsonify.github.io/lyrics" title="lyrics" class="md-nav__button md-logo" aria-label="lyrics">
+      
+  <img src="../../img/icon-white.svg" alt="logo">
+
+    </a>
+    lyrics
+  </label>
+  
+    <div class="md-nav__source">
+      
+<a href="https://github.com/wilsonify/lyrics" title="Go to repository" class="md-source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+  </div>
+  <div class="md-source__repository">
+    wilsonify/lyrics
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../.." class="md-nav__link">
+      Lyrics
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../features/" class="md-nav__link">
+      Features
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+  
+
+
+  
+  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3" checked>
+    
+    <label class="md-nav__link" for="nav-3">
+      Tutorial - User Guide
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Tutorial - User Guide" data-md-level="1">
+      <label class="md-nav__title" for="nav-3">
+        <span class="md-nav__icon md-icon"></span>
+        Tutorial - User Guide
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../" class="md-nav__link">
+      Tutorial - User Guide - Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../first-steps/" class="md-nav__link">
+      First Steps
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../printing/" class="md-nav__link">
+      Printing and Colors
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../terminating/" class="md-nav__link">
+      Terminating
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-5" type="checkbox" id="nav-3-5" >
+    
+    <label class="md-nav__link" for="nav-3-5">
+      CLI Arguments
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI Arguments" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-5">
+        <span class="md-nav__icon md-icon"></span>
+        CLI Arguments
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../arguments/" class="md-nav__link">
+      CLI Arguments Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../arguments/optional/" class="md-nav__link">
+      Optional CLI Arguments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../arguments/default/" class="md-nav__link">
+      CLI Arguments with Default
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../arguments/help/" class="md-nav__link">
+      CLI Arguments with Help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../arguments/envvar/" class="md-nav__link">
+      CLI Arguments with Environment Variables
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../arguments/other-uses/" class="md-nav__link">
+      Other uses
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-6" type="checkbox" id="nav-3-6" >
+    
+    <label class="md-nav__link" for="nav-3-6">
+      CLI Options
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI Options" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-6">
+        <span class="md-nav__icon md-icon"></span>
+        CLI Options
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/" class="md-nav__link">
+      CLI Options Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/help/" class="md-nav__link">
+      CLI Options with Help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/required/" class="md-nav__link">
+      Required CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/prompt/" class="md-nav__link">
+      CLI Option Prompt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/password/" class="md-nav__link">
+      Password CLI Option and Confirmation Prompt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/name/" class="md-nav__link">
+      CLI Option Name
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/callback-and-context/" class="md-nav__link">
+      CLI Option Callback and Context
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/version/" class="md-nav__link">
+      Version CLI Option, is_eager
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../options/autocompletion/" class="md-nav__link">
+      CLI Option autocompletion
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-7" type="checkbox" id="nav-3-7" >
+    
+    <label class="md-nav__link" for="nav-3-7">
+      Commands
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Commands" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-7">
+        <span class="md-nav__icon md-icon"></span>
+        Commands
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/" class="md-nav__link">
+      Commands Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/arguments/" class="md-nav__link">
+      Command CLI Arguments
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/options/" class="md-nav__link">
+      Command CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/help/" class="md-nav__link">
+      Command Help
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/name/" class="md-nav__link">
+      Custom Command Name
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/callback/" class="md-nav__link">
+      Typer Callback
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/one-or-multiple/" class="md-nav__link">
+      One or Multiple Commands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../commands/context/" class="md-nav__link">
+      Using the Context
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-8" type="checkbox" id="nav-3-8" >
+    
+    <label class="md-nav__link" for="nav-3-8">
+      CLI Parameter Types
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="CLI Parameter Types" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-8">
+        <span class="md-nav__icon md-icon"></span>
+        CLI Parameter Types
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/" class="md-nav__link">
+      CLI Parameter Types Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/number/" class="md-nav__link">
+      Number
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/bool/" class="md-nav__link">
+      Boolean CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/uuid/" class="md-nav__link">
+      UUID
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/datetime/" class="md-nav__link">
+      DateTime
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/enum/" class="md-nav__link">
+      Enum - Choices
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/path/" class="md-nav__link">
+      Path
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../parameter-types/file/" class="md-nav__link">
+      File
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-9" type="checkbox" id="nav-3-9" >
+    
+    <label class="md-nav__link" for="nav-3-9">
+      SubCommands - Command Groups
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="SubCommands - Command Groups" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-9">
+        <span class="md-nav__icon md-icon"></span>
+        SubCommands - Command Groups
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../subcommands/" class="md-nav__link">
+      SubCommands - Command Groups - Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../subcommands/add-typer/" class="md-nav__link">
+      Add Typer
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../subcommands/single-file/" class="md-nav__link">
+      SubCommands in a Single File
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../subcommands/nested-subcommands/" class="md-nav__link">
+      Nested SubCommands
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../subcommands/callback-override/" class="md-nav__link">
+      Sub-Typer Callback Override
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../subcommands/name-and-help/" class="md-nav__link">
+      SubCommand Name and Help
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  
+  <li class="md-nav__item md-nav__item--nested">
+    
+    
+      <input class="md-nav__toggle md-toggle" data-md-toggle="nav-3-10" type="checkbox" id="nav-3-10" >
+    
+    <label class="md-nav__link" for="nav-3-10">
+      Multiple Values
+      <span class="md-nav__icon md-icon"></span>
+    </label>
+    <nav class="md-nav" aria-label="Multiple Values" data-md-level="2">
+      <label class="md-nav__title" for="nav-3-10">
+        <span class="md-nav__icon md-icon"></span>
+        Multiple Values
+      </label>
+      <ul class="md-nav__list" data-md-scrollfix>
+        
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../multiple-values/" class="md-nav__link">
+      Multiple Values Intro
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../multiple-values/multiple-options/" class="md-nav__link">
+      Multiple CLI Options
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../multiple-values/options-with-multiple-values/" class="md-nav__link">
+      CLI Options with Multiple Values
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../multiple-values/arguments-with-multiple-values/" class="md-nav__link">
+      CLI Arguments with Multiple Values
+    </a>
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../prompt/" class="md-nav__link">
+      Ask with Prompt
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../progressbar/" class="md-nav__link">
+      Progress Bar
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../app-dir/" class="md-nav__link">
+      CLI Application Directory
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../launch/" class="md-nav__link">
+      Launching Applications
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../testing/" class="md-nav__link">
+      Testing
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+
+  <li class="md-nav__item">
+    <a href="../using-click/" class="md-nav__link">
+      Using Click
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  
+
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Building a Package
+        <span class="md-nav__icon md-icon"></span>
+      </label>
+    
+    <a href="./" class="md-nav__link md-nav__link--active">
+      Building a Package
+    </a>
+    
+      
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies-and-environment" class="md-nav__link">
+    Dependencies and environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-your-app" class="md-nav__link">
+    Create your app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modify-the-readme" class="md-nav__link">
+    Modify the README
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modify-your-project-metadata" class="md-nav__link">
+    Modify your project metadata
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-a-script" class="md-nav__link">
+    Add a "script"
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-your-package" class="md-nav__link">
+    Install your package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-your-cli-program" class="md-nav__link">
+    Try your CLI program
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-wheel-package" class="md-nav__link">
+    Create a wheel package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-your-wheel-package" class="md-nav__link">
+    Test your wheel package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-python-m-optional" class="md-nav__link">
+    Support python -m (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Support python -m (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-__main__py" class="md-nav__link">
+    Add a __main__.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-a-program-name-in-__main__py" class="md-nav__link">
+    Set a program name in __main__.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autocompletion-and-python-m" class="md-nav__link">
+    Autocompletion and python -m
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-to-pypi-optional" class="md-nav__link">
+    Publish to PyPI (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Publish to PyPI (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pypi-api-token" class="md-nav__link">
+    PyPI API token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-to-pypi" class="md-nav__link">
+    Publish to PyPI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-from-pypi" class="md-nav__link">
+    Install from PyPI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-docs-with-typer-cli-optional" class="md-nav__link">
+    Generate docs with Typer CLI (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate docs with Typer CLI (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publish-a-new-version-with-the-docs" class="md-nav__link">
+    Publish a new version with the docs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    What's next
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+    
+  </li>
+
+        
+      </ul>
+    </nav>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../typer-cli/" class="md-nav__link">
+      Typer CLI - completion for small scripts
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../alternatives/" class="md-nav__link">
+      Alternatives, Inspiration and Comparisons
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../help-typer/" class="md-nav__link">
+      Help Typer - Get Help
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../contributing/" class="md-nav__link">
+      Development - Contributing
+    </a>
+  </li>
+
+    
+      
+      
+      
+
+
+
+  <li class="md-nav__item">
+    <a href="../../release-notes/" class="md-nav__link">
+      Release Notes
+    </a>
+  </li>
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#prerequisites" class="md-nav__link">
+    Prerequisites
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-project" class="md-nav__link">
+    Create a project
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#dependencies-and-environment" class="md-nav__link">
+    Dependencies and environment
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-your-app" class="md-nav__link">
+    Create your app
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modify-the-readme" class="md-nav__link">
+    Modify the README
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#modify-your-project-metadata" class="md-nav__link">
+    Modify your project metadata
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#add-a-script" class="md-nav__link">
+    Add a "script"
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#install-your-package" class="md-nav__link">
+    Install your package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#try-your-cli-program" class="md-nav__link">
+    Try your CLI program
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create-a-wheel-package" class="md-nav__link">
+    Create a wheel package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#test-your-wheel-package" class="md-nav__link">
+    Test your wheel package
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#support-python-m-optional" class="md-nav__link">
+    Support python -m (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Support python -m (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#add-a-__main__py" class="md-nav__link">
+    Add a __main__.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set-a-program-name-in-__main__py" class="md-nav__link">
+    Set a program name in __main__.py
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#autocompletion-and-python-m" class="md-nav__link">
+    Autocompletion and python -m
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#publish-to-pypi-optional" class="md-nav__link">
+    Publish to PyPI (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Publish to PyPI (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#pypi-api-token" class="md-nav__link">
+    PyPI API token
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#publish-to-pypi" class="md-nav__link">
+    Publish to PyPI
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#install-from-pypi" class="md-nav__link">
+    Install from PyPI
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#generate-docs-with-typer-cli-optional" class="md-nav__link">
+    Generate docs with Typer CLI (optional)
+  </a>
+  
+    <nav class="md-nav" aria-label="Generate docs with Typer CLI (optional)">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#publish-a-new-version-with-the-docs" class="md-nav__link">
+    Publish a new version with the docs
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#whats-next" class="md-nav__link">
+    What's next
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          <div class="md-content">
+            <article class="md-content__inner md-typeset">
+              
+                
+                
+                  <h1>Building a Package</h1>
+                
+                <p>When you create a CLI program with <strong>Typer</strong> you probably want to create your own Python package.</p>
+<p>That's what allows your users to install it and have it as an independent program that they can use in their terminal.</p>
+<p>And that's also required for shell auto completion to work (unless you use your program through <a class="internal-link" href="../../typer-cli/" target="_blank">Typer CLI</a>).</p>
+<p>Nowadays, there are several ways and tools to create Python packages (what you install with <code>pip install something</code>).</p>
+<p>You might even have your favorite already.</p>
+<p>Here's a very opinionated, short guide, showing one of the alternative ways of creating a Python package with a <strong>Typer</strong> app, from scratch.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you already have a favorite way of creating Python packages, feel free to skip this.</p>
+</div>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
+<p>For this guide we'll use <a href="https://python-poetry.org/" class="external-link" target="_blank">Poetry</a>.</p>
+<p>Poetry's docs are great, so go ahead, check them and install it.</p>
+<h2 id="create-a-project">Create a project<a class="headerlink" href="#create-a-project" title="Permanent link">&para;</a></h2>
+<p>Let's say we want to create a CLI application called <code>portal-gun</code>.</p>
+<p>To make sure your package doesn't collide with the package created by someone else, we'll name it with a prefix of your name.</p>
+<p>So, if your name is Rick, we'll call it <code>rick-portal-gun</code>.</p>
+<p>Create a project with Poetry:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry new rick-portal-gun
+
+<span class="go">Created package rick_portal_gun in rick-portal-gun</span>
+
+<span class="go">// Enter the new project directory</span>
+<span class="go">cd ./rick-portal-gun</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="dependencies-and-environment">Dependencies and environment<a class="headerlink" href="#dependencies-and-environment" title="Permanent link">&para;</a></h2>
+<p>Add <code>typer[all]</code> to your dependencies:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry add typer<span class="o">[</span>all<span class="o">]</span>
+
+<span class="go">// It creates a virtual environment for your project</span>
+<span class="go">Creating virtualenv rick-portal-gun-w31dJa0b-py3.6 in /home/rick/.cache/pypoetry/virtualenvs</span>
+<span class="go">Using version ^0.1.0 for typer</span>
+
+<span class="go">Updating dependencies</span>
+<span class="go">Resolving dependencies... (1.2s)</span>
+
+<span class="go">Writing lock file</span>
+
+<span class="go">---&gt; 100%</span>
+
+<span class="go">Package operations: 15 installs, 0 updates, 0 removals</span>
+
+<span class="go">  - Installing zipp (3.1.0)</span>
+<span class="go">  - Installing importlib-metadata (1.5.0)</span>
+<span class="go">  - Installing pyparsing (2.4.6)</span>
+<span class="go">  - Installing six (1.14.0)</span>
+<span class="go">  - Installing attrs (19.3.0)</span>
+<span class="go">  - Installing click (7.1.1)</span>
+<span class="go">  - Installing colorama (0.4.3)</span>
+<span class="go">  - Installing more-itertools (8.2.0)</span>
+<span class="go">  - Installing packaging (20.3)</span>
+<span class="go">  - Installing pluggy (0.13.1)</span>
+<span class="go">  - Installing py (1.8.1)</span>
+<span class="go">  - Installing shellingham (1.3.2)</span>
+<span class="go">  - Installing wcwidth (0.1.8)</span>
+<span class="go">  - Installing pytest (5.4.1)</span>
+<span class="go">  - Installing typer (0.0.11)</span>
+
+<span class="go">// Activate that new virtual environment</span>
+<span class="gp">$</span> poetry shell
+
+<span class="go">Spawning shell within /home/rick/.cache/pypoetry/virtualenvs/rick-portal-gun-w31dJa0b-py3.6</span>
+
+<span class="go">// Open an editor using this new environment, for example VS Code</span>
+<span class="gp">$</span> code ./
+</code></pre></div>
+
+</div>
+
+<p>You can see that you have a generated project structure that looks like:</p>
+<div class="highlight"><pre><span></span><code>.
+├── poetry.lock
+├── pyproject.toml
+├── README.rst
+├── rick_portal_gun
+│   └── __init__.py
+└── tests
+    ├── __init__.py
+    └── test_rick_portal_gun.py
+</code></pre></div>
+<h2 id="create-your-app">Create your app<a class="headerlink" href="#create-your-app" title="Permanent link">&para;</a></h2>
+<p>Now let's create an extremely simple <strong>Typer</strong> app.</p>
+<p>Create a file <code>rick_portal_gun/main.py</code> with:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">import</span> <span class="nn">typer</span>
+
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">typer</span><span class="o">.</span><span class="n">Typer</span><span class="p">()</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">callback</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">callback</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Awesome Portal Gun</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">shoot</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Shoot the portal gun</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;Shooting portal gun&quot;</span><span class="p">)</span>
+
+
+<span class="nd">@app</span><span class="o">.</span><span class="n">command</span><span class="p">()</span>
+<span class="k">def</span> <span class="nf">load</span><span class="p">():</span>
+    <span class="sd">&quot;&quot;&quot;</span>
+<span class="sd">    Load the portal gun</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+    <span class="n">typer</span><span class="o">.</span><span class="n">echo</span><span class="p">(</span><span class="s2">&quot;Loading portal gun&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>As we are creating an installable Python package, there's no need to add a section with <code>if __name__ == "__main__:</code>.</p>
+</div>
+<h2 id="modify-the-readme">Modify the README<a class="headerlink" href="#modify-the-readme" title="Permanent link">&para;</a></h2>
+<p>Let's change the README. By default it's a file <code>README.rst</code>.</p>
+<p>Let's change it to <code>README.md</code>. So, change the extension from <code>.rst</code> to <code>.md</code>.</p>
+<p>So that we can use Markdown instead of reStructuredText.</p>
+<p>And change the file to have something like:</p>
+<div class="highlight"><pre><span></span><code># Portal Gun
+
+The awesome Portal Gun
+</code></pre></div>
+<h2 id="modify-your-project-metadata">Modify your project metadata<a class="headerlink" href="#modify-your-project-metadata" title="Permanent link">&para;</a></h2>
+<p>Edit your file <code>pyproject.toml</code>.</p>
+<p>It would look something like:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</code></pre></div>
+<p>We changed the default README, so let's make it use the new <code>README.md</code>.</p>
+<p>Add the line:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+<span class="hll"><span class="n">readme</span> <span class="o">=</span> <span class="s">&quot;README.md&quot;</span>
+</span>
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</code></pre></div>
+<h2 id="add-a-script">Add a "script"<a class="headerlink" href="#add-a-script" title="Permanent link">&para;</a></h2>
+<p>We are creating a Python package that can be installed with <code>pip install</code>.</p>
+<p>But we want it to provide a CLI program that can be executed in the shell.</p>
+<p>To do that, we add a configuration to the <code>pyproject.toml</code> in the section <code>[tool.poetry.scripts]</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.1.0&quot;</span>
+<span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+<span class="n">readme</span> <span class="o">=</span> <span class="s">&quot;README.md&quot;</span>
+
+<span class="hll"><span class="k">[tool.poetry.scripts]</span>
+</span><span class="hll"><span class="n">rick-portal-gun</span> <span class="o">=</span> <span class="s">&quot;rick_portal_gun.main:app&quot;</span>
+</span>
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</code></pre></div>
+<p>Here's what that line means:</p>
+<p><code>rick-portal-gun</code>: will be the name of the CLI program. That's how we will call it in the terminal once it is installed. Like:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> rick-portal-gun
+
+<span class="go">// Something happens here ✨</span>
+</code></pre></div>
+
+</div>
+
+<p><code>rick_portal_gun.main</code>, in the part <code>"rick_portal_gun.main:app"</code>, with underscores, refers to the Python module to import. That's what someone would use in a section like:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">rick_portal_gun.main</span> <span class="kn">import</span> <span class="c1"># something goes here</span>
+</code></pre></div>
+<p>The <code>app</code> in <code>"rick_portal_gun.main:app"</code> is the thing to import from the module, and to call as a function, like:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">rick_portal_gun.main</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="p">()</span>
+</code></pre></div>
+<p>That config section tells Poetry that when this package is installed we want it to create a command line program called <code>rick-portal-gun</code>.</p>
+<p>And that the object to call (like a function) is the one in the variable <code>app</code> inside of the module <code>rick_portal_gun.main</code>.</p>
+<h2 id="install-your-package">Install your package<a class="headerlink" href="#install-your-package" title="Permanent link">&para;</a></h2>
+<p>That's what we need to create a package.</p>
+<p>You can now install it:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry install
+
+<span class="go">Installing dependencies from lock file</span>
+
+<span class="go">No dependencies to install or update</span>
+
+<span class="go">  - Installing rick-portal-gun (0.1.0)</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="try-your-cli-program">Try your CLI program<a class="headerlink" href="#try-your-cli-program" title="Permanent link">&para;</a></h2>
+<p>Your package is installed in the environment created by Poetry, but you can already use it.</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="go">// You can use the which program to check which rick-portal-gun program is available (if any)</span>
+<span class="gp">$</span> which rick-portal-gun
+
+<span class="go">// You get the one from your environment</span>
+<span class="go">/home/rick/.cache/pypoetry/virtualenvs/rick-portal-gun-w31dJa0b-py3.6/bin/rick-portal-gun</span>
+
+<span class="go">// Try it</span>
+<span class="gp">$</span> rick-portal-gun
+
+<span class="go">// You get all the standard help</span>
+<span class="go">Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...</span>
+
+<span class="go">  Awesome Portal Gun</span>
+
+<span class="go">Options:</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  load   Load the portal gun</span>
+<span class="go">  shoot  Shoot the portal gun</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="create-a-wheel-package">Create a wheel package<a class="headerlink" href="#create-a-wheel-package" title="Permanent link">&para;</a></h2>
+<p>Python packages have a standard format called a "wheel". It's a file that ends in <code>.whl</code>.</p>
+<p>You can create a wheel with Poetry:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry build
+
+<span class="go">Building rick-portal-gun (0.1.0)</span>
+<span class="go"> - Building sdist</span>
+<span class="go"> - Built rick-portal-gun-0.1.0.tar.gz</span>
+
+<span class="go"> - Building wheel</span>
+<span class="go"> - Built rick_portal_gun-0.1.0-py3-none-any.whl</span>
+</code></pre></div>
+
+</div>
+
+<p>After that, if you check in your project directory, you should now have a couple of extra files at <code>./dist/</code>:</p>
+<div class="highlight"><pre><span></span><code>.
+├── dist
+<span class="hll">│   ├── rick_portal_gun-0.1.0-py3-none-any.whl
+</span><span class="hll">│   └── rick-portal-gun-0.1.0.tar.gz
+</span>├── pyproject.toml
+├── README.md
+├── ...
+</code></pre></div>
+<p>The <code>.whl</code> is the wheel file. You can send that wheel file to anyone and they can use it to install your program (we'll see how to upload it to PyPI in a bit).</p>
+<h2 id="test-your-wheel-package">Test your wheel package<a class="headerlink" href="#test-your-wheel-package" title="Permanent link">&para;</a></h2>
+<p>Now you can open another terminal and install that package from the file for your own user with:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> pip install --user /home/rock/code/rick-portal-gun/dist/rick_portal_gun-0.1.0-py3-none-any.whl
+
+<span class="go">---&gt; 100%</span>
+</code></pre></div>
+
+</div>
+
+<div class="admonition warning">
+<p class="admonition-title">Warning</p>
+<p>The <code>--user</code> is important, that ensures you install it in your user's directory and not in the global system.</p>
+<p>If you installed it in the global system (e.g. with <code>sudo</code>) you could install a version of a library (e.g. a sub-dependency) that is incompatible with your system.</p>
+</div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Bonus points if you use <a href="https://github.com/pipxproject/pipx" class="external-link" target="_blank"><code>pipx</code></a> to install it while keeping an isolated environment for your Python CLI programs 🚀</p>
+</div>
+<p>Now you have your CLI program installed. And you can use it freely:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> rick-portal-gun shoot
+
+<span class="go">// It works 🎉</span>
+<span class="go">Shooting portal gun</span>
+</code></pre></div>
+
+</div>
+
+<p>Having it installed globally (and not in a single environment), you can now install completion globally for it:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> rick-portal-gun --install-completion
+
+<span class="go">zsh completion installed in /home/user/.zshrc.</span>
+<span class="go">Completion will take effect once you restart the terminal.</span>
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>If you want to remove completion you can just delete the added line in that file.</p>
+</div>
+<p>And after you restart the terminal you will get completion for your new CLI program:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+
+<span class="go">// You get completion for your CLI program ✨</span>
+<span class="go">load   -- Load the portal gun</span>
+<span class="go">shoot  -- Shoot the portal gun</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="support-python-m-optional">Support <code>python -m</code> (optional)<a class="headerlink" href="#support-python-m-optional" title="Permanent link">&para;</a></h2>
+<p>You may have seen that you can call many Python modules as scripts with <code>python -m some-module</code>.</p>
+<p>For example, one way to call <code>pip</code> is:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> pip install fastapi
+</code></pre></div>
+
+</div>
+
+<p>But you can also call Python with the <code>-m</code> <em>CLI Option</em> and pass a module for it to execute as if it was a script, like:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> python -m pip install fastapi
+</code></pre></div>
+
+</div>
+
+<p>Here we pass <code>pip</code> as the value for <code>-m</code>, so, Python will execute the module <code>pip</code> as if it was a script. And then it will pass the rest of the <em>CLI Parameters</em> (<code>install fastapi</code>) to it.</p>
+<p>These two are more or less equivalent, the <code>install fastapi</code> will be passed to <code>pip</code>.</p>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>In the case of <code>pip</code>, in many occasions it's actually recommended that you run it with <code>python -m</code>, because if you create a virtual environment with its own <code>python</code>, that will ensure that you use the <code>pip</code> from <em>that</em> environment.</p>
+</div>
+<h3 id="add-a-__main__py">Add a <code>__main__.py</code><a class="headerlink" href="#add-a-__main__py" title="Permanent link">&para;</a></h3>
+<p>You can support that same style of calling the package/module for your own package, simply by adding a file <code>__main__.py</code>.</p>
+<p>Python will look for that file and execute it.</p>
+<p>The file would live right beside <code>__init__.py</code>:</p>
+<div class="highlight"><pre><span></span><code>.
+├── poetry.lock
+├── pyproject.toml
+├── README.rst
+├── rick_portal_gun
+│   ├── __init__.py
+<span class="hll">│   └── __main__.py
+</span>└── tests
+    ├── __init__.py
+    └── test_rick_portal_gun.py
+</code></pre></div>
+<p>No other file has to import it, you don't have to reference it in your <code>pyproject.toml</code> or anything else, it just works by default, as it is standard Python behavior.</p>
+<p>Then in that file you can execute your <strong>Typer</strong> program:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="p">()</span>
+</code></pre></div>
+<p>Now, after installing your package, if you call it with <code>python -m</code> it will work (for the main part):</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> python -m rick_portal_gun
+
+<span class="go">Usage: __main__.py [OPTIONS] COMMAND [ARGS]...</span>
+
+<span class="go">  Awesome Portal Gun</span>
+
+<span class="go">Options:</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  load   Load the portal gun</span>
+<span class="go">  shoot  Shoot the portal gun</span>
+</code></pre></div>
+
+</div>
+
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>Notice that you have to pass the importable version of the package name, so <code>rick_portal_gun</code> instead of <code>rick-portal-gun</code>.</p>
+</div>
+<p>That works! 🚀 Sort of... 🤔</p>
+<p>See the <code>__main__.py</code> in the help instead of <code>rick-portal-gun</code>? We'll fix that next.</p>
+<h3 id="set-a-program-name-in-__main__py">Set a program name in <code>__main__.py</code><a class="headerlink" href="#set-a-program-name-in-__main__py" title="Permanent link">&para;</a></h3>
+<p>We are setting the program name in the file <code>pyproject.toml</code> in the line like:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry.scripts]</span>
+<span class="n">rick-portal-gun</span> <span class="o">=</span> <span class="s">&quot;rick_portal_gun.main:app&quot;</span>
+</code></pre></div>
+<p>But when Python runs our package as a script with <code>python -m</code>, it doesn't have the information of the program name.</p>
+<p>So, to fix the help text to use the correct program name when called with <code>python -m</code>, we can pass it to the app in <code>__main__.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">.main</span> <span class="kn">import</span> <span class="n">app</span>
+<span class="n">app</span><span class="p">(</span><span class="n">prog_name</span><span class="o">=</span><span class="s2">&quot;rick-portal-gun&quot;</span><span class="p">)</span>
+</code></pre></div>
+<div class="admonition tip">
+<p class="admonition-title">Tip</p>
+<p>You can pass all the arguments and keyword arguments you could pass to a Click application, including <code>prog_name</code>.</p>
+</div>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> python -m rick_portal_gun
+
+<span class="go">Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...</span>
+
+<span class="go">  Awesome Portal Gun</span>
+
+<span class="go">Options:</span>
+<span class="go">  --install-completion  Install completion for the current shell.</span>
+<span class="go">  --show-completion     Show completion for the current shell, to copy it or customize the installation.</span>
+
+<span class="go">  --help                Show this message and exit.</span>
+
+<span class="go">Commands:</span>
+<span class="go">  load   Load the portal gun</span>
+<span class="go">  shoot  Shoot the portal gun</span>
+</code></pre></div>
+
+</div>
+
+<p>Great! That works correctly! 🎉 ✅</p>
+<p>Notice that now it uses <code>rick-portal-gun</code> instead of <code>__main__.py</code> in the help.</p>
+<h3 id="autocompletion-and-python-m">Autocompletion and <code>python -m</code><a class="headerlink" href="#autocompletion-and-python-m" title="Permanent link">&para;</a></h3>
+<p>Have in mind that TAB completion (shell auto-completion) won't work when using <code>python -m</code>.</p>
+<p>Auto-completion depends on the name of the program called, it's tied to each specific program name.</p>
+<p>So, to have shell completion for <code>rick-portal-gun</code> you would have to call it directly:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+</code></pre></div>
+
+</div>
+
+<p>But you can still support <code>python -m</code> for the cases where it's useful.</p>
+<h2 id="publish-to-pypi-optional">Publish to PyPI (optional)<a class="headerlink" href="#publish-to-pypi-optional" title="Permanent link">&para;</a></h2>
+<p>You can publish that new package to <a href="https://pypi.org/" class="external-link" target="_blank">PyPI</a> to make it public, so others can install it easily.</p>
+<p>So, go ahead and create an account there (it's free).</p>
+<h3 id="pypi-api-token">PyPI API token<a class="headerlink" href="#pypi-api-token" title="Permanent link">&para;</a></h3>
+<p>To do it, you first need to configure a PyPI auth token.</p>
+<p>Login to <a href="https://pypi.org/" class="external-link" target="_blank">PyPI</a>.</p>
+<p>And then go to <a href="https://pypi.org/manage/account/token/" class="external-link" target="_blank">https://pypi.org/manage/account/token/</a> to create a new token.</p>
+<p>Let's say your new API token is:</p>
+<div class="highlight"><pre><span></span><code>pypi-wubalubadubdub-deadbeef1234
+</code></pre></div>
+<p>Now configure Poetry to use this token with the command <code>poetry config pypi-token.pypi</code>:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry config pypi-token.pypi pypi-wubalubadubdub-deadbeef1234
+<span class="go">// It won&#39;t show any output, but it&#39;s already configured</span>
+</code></pre></div>
+
+</div>
+
+<h3 id="publish-to-pypi">Publish to PyPI<a class="headerlink" href="#publish-to-pypi" title="Permanent link">&para;</a></h3>
+<p>Now you can publish your package with Poetry.</p>
+<p>You could build the package (as we did above) and then publish later, or you could tell poetry to build it before publishing in one go:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry publish --build
+
+<span class="gp">#</span> There are <span class="m">2</span> files ready <span class="k">for</span> publishing. Build anyway? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span> $ yes
+
+<span class="go">---&gt; 100%</span>
+
+<span class="go">Building rick-portal-gun (0.1.0)</span>
+<span class="go"> - Building sdist</span>
+<span class="go"> - Built rick-portal-gun-0.1.0.tar.gz</span>
+
+<span class="go"> - Building wheel</span>
+<span class="go"> - Built rick_portal_gun-0.1.0-py3-none-any.whl</span>
+
+<span class="go">Publishing rick-portal-gun (0.1.0) to PyPI</span>
+<span class="go"> - Uploading rick-portal-gun-0.1.0.tar.gz 100%</span>
+<span class="go"> - Uploading rick_portal_gun-0.1.0-py3-none-any.whl 100%</span>
+</code></pre></div>
+
+</div>
+
+<p>Now you can go to PyPI and check your projects at <a href="https://pypi.org/manage/projects/" class="external-link" target="_blank">https://pypi.org/manage/projects/</a>.</p>
+<p>You should now see your new "rick-portal-gun" package.</p>
+<h3 id="install-from-pypi">Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Permanent link">&para;</a></h3>
+<p>Now to see that we can install it form PyPI, open another terminal, and uninstall the currently installed package.</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> pip uninstall rick-portal-gun
+
+<span class="go">Found existing installation: rick-portal-gun 0.1.0</span>
+<span class="go">Uninstalling rick-portal-gun-0.1.0:</span>
+<span class="go">  Would remove:</span>
+<span class="go">    /home/user/.local/bin/rick-portal-gun</span>
+<span class="go">    /home/user/.local/lib/python3.6/site-packages/rick_portal_gun-0.1.0.dist-info/*</span>
+<span class="go">    /home/user/.local/lib/python3.6/site-packages/rick_portal_gun/*</span>
+<span class="gp">#</span> Proceed <span class="o">(</span>y/n<span class="o">)</span>? $ y
+<span class="go">    Successfully uninstalled rick-portal-gun-0.1.0</span>
+</code></pre></div>
+
+</div>
+
+<p>And now install it again, but this time using just the name, so that <code>pip</code> pulls it from PyPI:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> pip install --user rick-portal-gun
+
+<span class="go">// Notice that it says &quot;Downloading&quot; 🚀</span>
+<span class="go">Collecting rick-portal-gun</span>
+<span class="go">  Downloading rick_portal_gun-0.1.0-py3-none-any.whl (1.8 kB)</span>
+<span class="go">Requirement already satisfied: typer[all]&lt;0.0.12,&gt;=0.0.11 in ./.local/lib/python3.6/site-packages (from rick-portal-gun) (0.0.11)</span>
+<span class="go">Requirement already satisfied: click&lt;7.2.0,&gt;=7.1.1 in ./anaconda3/lib/python3.6/site-packages (from typer[all]&lt;0.0.12,&gt;=0.0.11-&gt;rick-portal-gun) (7.1.1)</span>
+<span class="go">Requirement already satisfied: colorama; extra == &quot;all&quot; in ./anaconda3/lib/python3.6/site-packages (from typer[all]&lt;0.0.12,&gt;=0.0.11-&gt;rick-portal-gun) (0.4.3)</span>
+<span class="go">Requirement already satisfied: shellingham; extra == &quot;all&quot; in ./anaconda3/lib/python3.6/site-packages (from typer[all]&lt;0.0.12,&gt;=0.0.11-&gt;rick-portal-gun) (1.3.1)</span>
+<span class="go">Installing collected packages: rick-portal-gun</span>
+<span class="go">Successfully installed rick-portal-gun-0.1.0</span>
+</code></pre></div>
+
+</div>
+
+<p>And now test the newly installed package from PyPI:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> rick-portal-gun load
+
+<span class="go">// It works! 🎉</span>
+<span class="go">Loading portal gun</span>
+</code></pre></div>
+
+</div>
+
+<h2 id="generate-docs-with-typer-cli-optional">Generate docs with <strong>Typer CLI</strong> (optional)<a class="headerlink" href="#generate-docs-with-typer-cli-optional" title="Permanent link">&para;</a></h2>
+<p>You can install and use <a class="internal-link" href="../../typer-cli/" target="_blank">Typer CLI</a> to generate docs for your package.</p>
+<p>After installing it, you can use it to generate a new <code>README.md</code>:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> typer rick_portal_gun.main utils docs --output README.md --name rick-portal-gun
+
+<span class="go">Docs saved to: README.md</span>
+</code></pre></div>
+
+</div>
+
+<p>You just have to pass it the module to import (<code>rick_portal_gun.main</code>) and it will detect the <code>typer.Typer</code> app automatically.</p>
+<p>By specifying the <code>--name</code> of the program it will be able to use it while generating the docs.</p>
+<h3 id="publish-a-new-version-with-the-docs">Publish a new version with the docs<a class="headerlink" href="#publish-a-new-version-with-the-docs" title="Permanent link">&para;</a></h3>
+<p>Now you can publish a new version with the updated docs.</p>
+<p>For that you need to first increase the version in <code>pyproject.toml</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="k">[tool.poetry]</span>
+<span class="n">name</span> <span class="o">=</span> <span class="s">&quot;rick-portal-gun&quot;</span>
+<span class="hll"><span class="n">version</span> <span class="o">=</span> <span class="s">&quot;0.2.0&quot;</span>
+</span><span class="n">description</span> <span class="o">=</span> <span class="s">&quot;&quot;</span>
+<span class="n">authors</span> <span class="o">=</span> <span class="k">[&quot;Rick Sanchez &lt;rick@example.com&gt;&quot;]</span>
+<span class="n">readme</span> <span class="o">=</span> <span class="s">&quot;README.md&quot;</span>
+
+<span class="k">[tool.poetry.scripts]</span>
+<span class="n">rick-portal-gun</span> <span class="o">=</span> <span class="s">&quot;rick_portal_gun.main:app&quot;</span>
+
+<span class="k">[tool.poetry.dependencies]</span>
+<span class="n">python</span> <span class="o">=</span> <span class="s">&quot;^3.6&quot;</span>
+<span class="n">typer</span> <span class="o">=</span> <span class="p">{</span><span class="n">extras</span> <span class="o">=</span> <span class="p">[</span><span class="s">&quot;all&quot;</span><span class="p">],</span> <span class="n">version</span> <span class="o">=</span> <span class="s">&quot;^0.1.0&quot;</span><span class="p">}</span>
+
+<span class="k">[tool.poetry.dev-dependencies]</span>
+<span class="n">pytest</span> <span class="o">=</span> <span class="s">&quot;^5.2&quot;</span>
+
+<span class="k">[build-system]</span>
+<span class="n">requires</span> <span class="o">=</span> <span class="k">[&quot;poetry&gt;=0.12&quot;]</span>
+<span class="n">build-backend</span> <span class="o">=</span> <span class="s">&quot;poetry.masonry.api&quot;</span>
+</code></pre></div>
+<p>And in the file <code>rick_portal_gun/__init__.py</code>:</p>
+<div class="highlight"><pre><span></span><code><span class="n">__version__</span> <span class="o">=</span> <span class="s1">&#39;0.2.0&#39;</span>
+</code></pre></div>
+<p>And then build and publish again:</p>
+<div class="termy">
+
+<div class="highlight"><pre><span></span><code><span class="gp">$</span> poetry publish --build
+
+<span class="go">---&gt; 100%</span>
+
+<span class="go">Building rick-portal-gun (0.2.0)</span>
+<span class="go"> - Building sdist</span>
+<span class="go"> - Built rick-portal-gun-0.2.0.tar.gz</span>
+
+<span class="go"> - Building wheel</span>
+<span class="go"> - Built rick_portal_gun-0.2.0-py3-none-any.whl</span>
+
+<span class="go">Publishing rick-portal-gun (0.2.0) to PyPI</span>
+<span class="go"> - Uploading rick-portal-gun-0.2.0.tar.gz 100%</span>
+<span class="go"> - Uploading rick_portal_gun-0.2.0-py3-none-any.whl 100%</span>
+</code></pre></div>
+
+</div>
+
+<p>And now you can go to PyPI, to the project page, and reload it, and it will now have your new generated docs.</p>
+<h2 id="whats-next">What's next<a class="headerlink" href="#whats-next" title="Permanent link">&para;</a></h2>
+<p>This is a very simple guide. You could add many more steps.</p>
+<p>For example, you should use <a href="https://git-scm.com/" class="external-link" target="_blank">Git</a>, the version control system, to save your code.</p>
+<p>You can add a lot of extra metadata to your <code>pyproject.toml</code>, check the docs for <a href="https://python-poetry.org/docs/libraries/" class="external-link" target="_blank">Poetry: Libraries</a>.</p>
+<p>You could use <a href="https://github.com/pipxproject/pipx" class="external-link" target="_blank"><code>pipx</code></a> to manage your installed CLI Python programs in isolated environments.</p>
+<p>Maybe use automatic formatting with <a href="https://github.com/psf/black" class="external-link" target="_blank">Black</a>.</p>
+<p>You'll probably want to publish your code as open source to <a href="https://github.com/" class="external-link" target="_blank">GitHub</a>.</p>
+<p>And then you could integrate a <abbr title="Continuous Integration">CI</abbr> tool to run your tests and deploy your package automatically.</p>
+<p>And there's a long etc. But now you have the basics and you can continue on your own 🚀.</p>
+                
+              
+              
+                
+
+
+              
+            </article>
+          </div>
+        </div>
+      </main>
+      
+        
+<footer class="md-footer">
+  
+    <div class="md-footer-nav">
+      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
+        
+          <a href="../using-click/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
+            </div>
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Previous
+                </span>
+                Using Click
+              </div>
+            </div>
+          </a>
+        
+        
+          <a href="../../typer-cli/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
+            <div class="md-footer-nav__title">
+              <div class="md-ellipsis">
+                <span class="md-footer-nav__direction">
+                  Next
+                </span>
+                Typer CLI - completion for small scripts
+              </div>
+            </div>
+            <div class="md-footer-nav__button md-icon">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    </div>
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-footer-copyright">
+        
+        Made with
+        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+          Material for MkDocs
+        </a>
+      </div>
+      
+  <div class="md-footer-social">
+    
+      
+      
+        
+        
+      
+      <a href="https://github.com/wilsonify" target="_blank" rel="noopener" title="github.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 480 512"><path d="M186.1 328.7c0 20.9-10.9 55.1-36.7 55.1s-36.7-34.2-36.7-55.1 10.9-55.1 36.7-55.1 36.7 34.2 36.7 55.1zM480 278.2c0 31.9-3.2 65.7-17.5 95-37.9 76.6-142.1 74.8-216.7 74.8-75.8 0-186.2 2.7-225.6-74.8-14.6-29-20.2-63.1-20.2-95 0-41.9 13.9-81.5 41.5-113.6-5.2-15.8-7.7-32.4-7.7-48.8 0-21.5 4.9-32.3 14.6-51.8 45.3 0 74.3 9 108.8 36 29-6.9 58.8-10 88.7-10 27 0 54.2 2.9 80.4 9.2 34-26.7 63-35.2 107.8-35.2 9.8 19.5 14.6 30.3 14.6 51.8 0 16.4-2.6 32.7-7.7 48.2 27.5 32.4 39 72.3 39 114.2zm-64.3 50.5c0-43.9-26.7-82.6-73.5-82.6-18.9 0-37 3.4-56 6-14.9 2.3-29.8 3.2-45.1 3.2-15.2 0-30.1-.9-45.1-3.2-18.7-2.6-37-6-56-6-46.8 0-73.5 38.7-73.5 82.6 0 87.8 80.4 101.3 150.4 101.3h48.2c70.3 0 150.6-13.4 150.6-101.3zm-82.6-55.1c-25.8 0-36.7 34.2-36.7 55.1s10.9 55.1 36.7 55.1 36.7-34.2 36.7-55.1-10.9-55.1-36.7-55.1z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.linkedin.com/in/tom-andrew-wilson/" target="_blank" rel="noopener" title="www.linkedin.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path d="M416 32H31.9C14.3 32 0 46.5 0 64.3v383.4C0 465.5 14.3 480 31.9 480H416c17.6 0 32-14.5 32-32.3V64.3c0-17.8-14.4-32.3-32-32.3zM135.4 416H69V202.2h66.5V416zm-33.2-243c-21.3 0-38.5-17.3-38.5-38.5S80.9 96 102.2 96c21.2 0 38.5 17.3 38.5 38.5 0 21.3-17.2 38.5-38.5 38.5zm282.1 243h-66.4V312c0-24.8-.5-56.7-34.5-56.7-34.6 0-39.9 27-39.9 54.9V416h-66.4V202.2h63.7v29.2h.9c8.9-16.8 30.6-34.5 62.9-34.5 67.2 0 79.7 44.3 79.7 101.9V416z"/></svg>
+      </a>
+    
+      
+      
+        
+        
+      
+      <a href="https://www.reddit.com/r/wilsonify" target="_blank" rel="noopener" title="www.reddit.com" class="md-footer-social__link">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M201.5 305.5c-13.8 0-24.9-11.1-24.9-24.6 0-13.8 11.1-24.9 24.9-24.9 13.6 0 24.6 11.1 24.6 24.9 0 13.6-11.1 24.6-24.6 24.6zM504 256c0 137-111 248-248 248S8 393 8 256 119 8 256 8s248 111 248 248zm-132.3-41.2c-9.4 0-17.7 3.9-23.8 10-22.4-15.5-52.6-25.5-86.1-26.6l17.4-78.3 55.4 12.5c0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.3 24.9-24.9s-11.1-24.9-24.9-24.9c-9.7 0-18 5.8-22.1 13.8l-61.2-13.6c-3-.8-6.1 1.4-6.9 4.4l-19.1 86.4c-33.2 1.4-63.1 11.3-85.5 26.8-6.1-6.4-14.7-10.2-24.1-10.2-34.9 0-46.3 46.9-14.4 62.8-1.1 5-1.7 10.2-1.7 15.5 0 52.6 59.2 95.2 132 95.2 73.1 0 132.3-42.6 132.3-95.2 0-5.3-.6-10.8-1.9-15.8 31.3-16 19.8-62.5-14.9-62.5zM302.8 331c-18.2 18.2-76.1 17.9-93.6 0-2.2-2.2-6.1-2.2-8.3 0-2.5 2.5-2.5 6.4 0 8.6 22.8 22.8 87.3 22.8 110.2 0 2.5-2.2 2.5-6.1 0-8.6-2.2-2.2-6.1-2.2-8.3 0zm7.7-75c-13.6 0-24.6 11.1-24.6 24.9 0 13.6 11.1 24.6 24.6 24.6 13.8 0 24.9-11.1 24.9-24.6 0-13.8-11-24.9-24.9-24.9z"/></svg>
+      </a>
+    
+  </div>
+
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    
+      <script src="../../assets/javascripts/vendor.08c56446.min.js"></script>
+      <script src="../../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+      
+      <script>
+        app = initialize({
+          base: "../..",
+          features: [],
+          search: Object.assign({
+            worker: "../../assets/javascripts/worker/search.8c7e0a7e.min.js"
+          }, typeof search !== "undefined" && search)
+        })
+      </script>
+      
+        <script src="https://unpkg.com/mermaid@8.4.6/dist/mermaid.min.js"></script>
+      
+        <script src="../../js/termynal.js"></script>
+      
+        <script src="../../js/custom.js"></script>
+      
+    
+  </body>
+</html>
