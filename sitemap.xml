@@ -1,238 +1,238 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"><url>
-     <loc>https://wilsonify.github.io/lyrics/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/features/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/first-steps/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/printing/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/terminating/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/arguments/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/arguments/optional/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/arguments/default/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/arguments/help/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/arguments/envvar/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/arguments/other-uses/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/help/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/required/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/prompt/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/password/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/name/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/callback-and-context/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/version/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/options/autocompletion/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/arguments/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/options/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/help/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/name/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/callback/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/one-or-multiple/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/commands/context/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/number/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/bool/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/uuid/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/datetime/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/enum/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/path/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/parameter-types/file/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/subcommands/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/subcommands/add-typer/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/subcommands/single-file/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/subcommands/nested-subcommands/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/subcommands/callback-override/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/subcommands/name-and-help/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/multiple-values/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/multiple-values/multiple-options/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/multiple-values/options-with-multiple-values/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/multiple-values/arguments-with-multiple-values/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/prompt/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/progressbar/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/app-dir/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/launch/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/testing/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/using-click/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/tutorial/package/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/typer-cli/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/alternatives/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/help-typer/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/contributing/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url><url>
-     <loc>https://wilsonify.github.io/lyrics/release-notes/</loc>
+     <loc>None</loc>
      <lastmod>2020-12-31</lastmod>
      <changefreq>daily</changefreq>
     </url>
