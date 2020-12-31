@@ -1,5 +1,11 @@
 - file: index
 - part: Get started
+  chapters:
+    - file: typer-cli
+    - file: alternatives
+    - file: help-typer
+    - file: contributing
+    - file: release-notes
   sections:
     - file: 02-semiconductor
     - file: features
@@ -59,8 +65,3 @@
     - file: tutorial/testing
     - file: tutorial/using-click
     - file: tutorial/package
-- file: typer-cli
-- file: alternatives
-- file: help-typer
-- file: contributing
-- file: release-notes
