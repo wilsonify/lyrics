@@ -1,6 +1,35 @@
-# lyrics is a project for using Recurrent Neural Networks to generate song lyrics
 
-Inspired by [tensorflow-rnn-shakespeare](https://github.com/martin-gorner/tensorflow-rnn-shakespeare)
+![Logo of Lyrics](img/logo-lyric.png)
+
+<p align="center">
+    <em> generative song lyrics </em>
+</p>
+
+<p align="center">
+<a href="https://github.com/wilsonify/lyrics/actions?query=workflow%3ATest" target="_blank">
+    <img src="https://github.com/wilsonify/lyrics/workflows/Test/badge.svg" alt="Test">
+</a>
+
+<a href="https://github.com/wilsonify/lyrics/actions?query=workflow%3APublish" target="_blank">
+    <img src="https://github.com/wilsonify/lyrics/workflows/Publish/badge.svg" alt="Publish">
+</a>
+
+<a href="https://codecov.io/gh/wilsonify/lyrics" target="_blank">
+    <img src="https://img.shields.io/codecov/c/github/wilsonify/lyrics?color=%2334D058" alt="Coverage">
+</a>
+
+</p>
+
+---
+
+**[Documentation](https://github.wilsonify.io/lyrics)** 
+
+**[Source Code](https://github.com/wilsonify/lyrics)**
+
+---
+
+lyrics is a project for using Recurrent Neural Networks to generate song lyrics inspired by [tensorflow-rnn-shakespeare](https://github.com/martin-gorner/tensorflow-rnn-shakespeare)
+
 
 ## Installation
 You're going to need tensorflow-gpu==1.12 (old).
@@ -9,15 +38,21 @@ which is not officially supported by tensorflow, so compile tensorflow from sour
 
 some notable tensorflow dependencies:
 ```
-nccl==2.2
-cuDNN=7.7
-cuda=9.0
 nvidia-driver-390
+cuda=9.0
+cuDNN=7.7
+nccl==2.2
 ```
+
+### create a virtual environment
 
 ```bash
 python -m virtualenv venv
 source venv/bin/activate
+```
+
+### install dependencies
+```
 python -m pip install pkg/tensorflow-1.12.0-cp36-cp36m-linux_x86_64.whl
 cd src/recurrent
 python -m pip install -r requirements.txt
@@ -25,7 +60,7 @@ python setup.py setup.py install
 cd src/grapheme2phoneme/grapheme2phoneme
 python -m pip install -r requirements.txt
 python -m nltk.downloader cmudict
-python setup.py setup.py install
+python setup.py develop
 ```
 
 ## Usage:
@@ -100,3 +135,23 @@ It is no surprise now, what you see is me
 
 ## Contributing
 Pull requests are welcome.
+
+
+## Requirements
+
+Python 3.6+
+
+
+## Installation
+
+<div class="termy">
+
+```
+pip install lyrics
+```
+
+</div>
+
+## License
+
+This project is licensed under the terms of the MIT license.
