@@ -1,0 +1,8 @@
+wheel
+starlette
+pydantic
+requests
+orjson
+python-multipart
+uvicorn
+fastapi
