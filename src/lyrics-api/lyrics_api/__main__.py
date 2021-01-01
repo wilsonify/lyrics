@@ -17,39 +17,42 @@ That's probably the main visible advantage of FastAPI compared to alternative fr
 (apart from the raw performance).
 """
 
-from typing import Optional
-
 import uvicorn
 from fastapi import FastAPI
-from pydantic import BaseModel
-from pydantic import Field
+from lyrics_api import __version__
+from lyrics_api.model import Phoneme, Grapheme
+
+app = FastAPI(
+    debug=False,
+    title="lyrics",
+    description="access functionality of various consumers",
+    version=__version__,
+    openapi_url="/openapi.json",
+    openapi_tags=None,  # : Optional[List[Dict[str, Any]]]
+    servers=None,  # : Optional[List[Dict[str, Union[str, Any]]]]
+    dependencies=None,  # : Optional[Sequence[Depends]]
+    docs_url="/docs",
+    redoc_url="/redoc",
+)
 
 
-class Phoneme(BaseModel):
-    name: str = Field(example="Phoneme")
-    description: Optional[str] = Field(
-        example="""any of the perceptually distinct units of sound in a specified language that distinguish one word from another,
-         for example p, b, d, and t in the English words pad, pat, bad, and bat."""
-    )
-    text: str = Field(example="Y EH1 S T ER0 D EY2 AO1 L M AY1 T R AH1 B AH0 L Z S IY1 M D S OW1 F AA1 R AH0 W EY1")
-
-
-class Grapheme(BaseModel):
-    name: str = Field(example="Grapheme")
-    description: Optional[str] = Field(example="grapheme is the smallest functional unit of a writing system")
-    text: str = Field(example="yesterday all my troubles seemed so far away")
-
-
-app = FastAPI()
-
-
-@app.post("/grapheme2phoneme", response_model=Phoneme)
-async def create_item(item: Grapheme):
+@app.post(
+    path="/grapheme2phoneme",
+    response_model=Phoneme,
+    summary="Summary: convert graphemes to phonemes",
+    description="Description: convert graphemes (smallest functional unit of a writing system) to phonemes (perceptually distinct units of sound)"
+)
+async def grapheme2phoneme(item: Grapheme):
     return item
 
 
-@app.post("/phoneme2grapheme", response_model=Grapheme)
-async def create_item(item: Phoneme):
+@app.post(
+    path="/phoneme2grapheme",
+    response_model=Grapheme,
+    summary="Summary: convert phonemes to graphemes",
+    description="Description: convert phonemes (perceptually distinct units of sound) to graphemes (smallest functional unit of a writing system)"
+)
+async def phoneme2grapheme(item: Phoneme):
     return item
 
 
