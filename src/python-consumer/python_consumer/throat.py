@@ -1,5 +1,5 @@
 import re
-from grapheme2phoneme.phonemes import (
+from python_consumer.phonemes import (
     phonemes_dictionary,
     rules_English_to_phonemes_special_symbols,
     rules_English_to_phonemes

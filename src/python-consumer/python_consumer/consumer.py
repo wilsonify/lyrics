@@ -5,10 +5,16 @@ from logging.config import dictConfig
 
 import nltk
 import pika
-from grapheme2phoneme import config
-from grapheme2phoneme import throat
+from python_consumer import config
+from python_consumer import throat
 
-arpabet = nltk.corpus.cmudict.dict()
+try:
+    arpabet = nltk.corpus.cmudict.dict()
+except LookupError:
+    import nltk
+
+    nltk.download('cmudict')
+    arpabet = nltk.corpus.cmudict.dict()
 
 
 def reduce_to_string(list_of_lists):
