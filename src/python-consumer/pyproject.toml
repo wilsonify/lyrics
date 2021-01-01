@@ -1,0 +1,22 @@
+[build-system]
+requires = [
+    "flit_core >=2,<4",
+    "pylint",
+    "pytest"
+]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "python_consumer"
+author = "Thomas Wilson"
+author-email = "tom.andrew.wilson@gmail.com"
+home-page = "https://wilsonify.github.io/lyrics"
+classifiers = ["License :: OSI Approved :: MIT License"]
+requires = [
+    "pika >= 1.1.0",
+    "nltk>=3.5.0",
+    "music21>=6.5.0",
+    "matplotlib>=3.3.3",
+    "requests>=2.25.1",
+    "beautifulsoup4>=4.9.3"
+]
