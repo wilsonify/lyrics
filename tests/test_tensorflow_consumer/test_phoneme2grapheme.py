@@ -5,7 +5,7 @@ import pytest
 from phoneme2grapheme import nmt
 
 test_dir = os.path.dirname(__file__)
-data_dir = os.path.join(test_dir, "data")
+data_dir = os.path.join(test_dir, "../data")
 
 
 def test_smoke(logger):

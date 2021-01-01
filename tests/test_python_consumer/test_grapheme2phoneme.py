@@ -1,5 +1,9 @@
 import pytest
-from grapheme2phoneme import consumer
+from python_consumer import consumer
+
+
+def test_smoke():
+    print("is anything on fire?")
 
 
 def test_reduce_to_string(logger):

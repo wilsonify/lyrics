@@ -15,12 +15,12 @@ logging.info("conftest")
 
 @pytest.fixture
 def song_lyrics_dir_path():
-    return os.path.join(dirname, "data", "lyrics")
+    return os.path.join(dirname, "../data", "lyrics")
 
 
 @pytest.fixture
 def song_lyrics_file_path():
-    return os.path.join(dirname, "data", "lyrics", "Across the Universe.txt")
+    return os.path.join(dirname, "../data", "lyrics", "Across the Universe.txt")
 
 
 @pytest.fixture
@@ -95,7 +95,7 @@ def song_lyrics_str(song_lyrics_file_path):
 
 @pytest.fixture
 def phoneme_file_path():
-    return os.path.join(dirname, "data", "phonemes", "Yesterday_phoneme.txt")
+    return os.path.join(dirname, "../data", "phonemes", "Yesterday_phoneme.txt")
 
 
 @pytest.fixture()
