@@ -1,7 +1,7 @@
 from setuptools import setup, find_packages
 
 setup(
-    name='grapheme2phoneme',
+    name='tensorflow_consumer',
     version='0.0.1',
     packages=find_packages(),
     url='',

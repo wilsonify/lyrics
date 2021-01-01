@@ -1,5 +1,5 @@
 """
-train a recurrent neural network
+train a tensorflow_consumer neural network
 
 In TensorFlow 2.0, the built-in LSTM and GRU layers have been updated to leverage CuDNN kernels by default
 when a GPU is available.
