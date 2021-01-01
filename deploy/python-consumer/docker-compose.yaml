@@ -1,0 +1,8 @@
+version: '3'
+services:
+  grapheme2phoneme:
+    build:
+      context: ""
+      dockerfile: ../../src/python-consumer/Dockerfile
+    volumes:
+      - ~/phoneme:/local_data
