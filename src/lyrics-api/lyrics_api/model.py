@@ -10,14 +10,14 @@ from pydantic import BaseModel, Field
 
 
 class Grapheme(BaseModel):
-    name: str = Field(..., example='Grapheme', title='Name')
+    name: str = Field(..., example='Yesterday', title='Name')
     text: str = Field(
         ..., example='yesterday all my troubles seemed so far away', title='Text'
     )
 
 
 class Phoneme(BaseModel):
-    name: str = Field(..., example='Phoneme', title='Name')
+    name: str = Field(..., example='Yesterday', title='Name')
     text: str = Field(
         ...,
         example='Y EH1 S T ER0 D EY2 AO1 L M AY1 T R AH1 B AH0 L Z S IY1 M D S OW1 F AA1 R AH0 W EY1',

@@ -21,6 +21,7 @@ import uvicorn
 from fastapi import FastAPI
 from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme
+from python_consumer import consumer
 
 app = FastAPI(
     debug=False,
@@ -42,8 +43,13 @@ app = FastAPI(
     summary="Summary: convert graphemes to phonemes",
     description="Description: convert graphemes (smallest functional unit of a writing system) to phonemes (perceptually distinct units of sound)"
 )
-async def grapheme2phoneme(item: Grapheme):
-    return item
+async def grapheme2phoneme(input_grapheme: Grapheme):
+    output = consumer.graphemes2phonemes(input_grapheme.text)
+    output = consumer.reduce_to_string(output)
+    return Phoneme(
+        name=input_grapheme.name,
+        text=output
+    )
 
 
 @app.post(
