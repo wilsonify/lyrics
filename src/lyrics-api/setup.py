@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
-
+from lyrics_api import __version__
 setup(
     name='lyrics_api',
-    version='0.1.0',
+    version=__version__,
     packages=find_packages(),
     url='',
     license='',
