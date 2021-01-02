@@ -28,8 +28,8 @@ import matplotlib.ticker as ticker
 import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
-from tensorflow_examples import config
-from tensorflow_examples.examples.convolutional_neural_networks.cifar_cnn import unzip
+from tensorflow_consumer.config import CHECKPOINTS_DIR, DATA_DIR, LOGGING_CONFIG_DICT
+from tensorflow_consumer.utils import unzip
 
 BATCH_SIZE = 64
 EMBEDDING_DIM = 256
@@ -113,25 +113,27 @@ def unicode_to_ascii(s_input):
 def preprocess_sentence(w_input):
     """
     preprocess_sentence
+    creating a space between a word and the punctuation following it
+    eg: "he is a boy." => "he is a boy ."
+    Reference: https://stackoverflow.com/questions/3645931/python-padding-punctuation-with-white-spaces-keeping-punctuation
+
+    replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
+
+    adding a start and an end token to the sentence
+    so that the model know when to start and stop predicting.
+
     :param w_input:
     :return:
     """
     w_input = unicode_to_ascii(w_input.lower().strip())
 
-    # creating a space between a word and the punctuation following it
-    # eg: "he is a boy." => "he is a boy ."
-    # Reference:
-    # https://stackoverflow.com/questions/3645931/python-padding-punctuation-with-white-spaces-keeping-punctuation
     w_input = re.sub(r"([?.!,¿])", r" \1 ", w_input)
     w_input = re.sub(r"""[" ]+""", " ", w_input)
 
-    # replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
     w_input = re.sub(r"[^a-zA-Z?.!,¿]+", " ", w_input)
 
     w_input = w_input.rstrip().strip()
 
-    # adding a start and an end token to the sentence
-    # so that the model know when to start and stop predicting.
     w_input = "<start> " + w_input + " <end>"
     return w_input
 
@@ -193,6 +195,21 @@ class Encoder(tf.keras.Model):
 class BahdanauAttention(tf.keras.layers.Layer):
     """
     The Attention object
+    pseudo-code:
+    #
+    # * `score = FC(tanh(FC(EO) + FC(H)))`
+    # * `attention weights = softmax(score, axis = 1)`.
+    #   Softmax by default is applied on the last axis but here we want to apply it on the *1st axis*,
+    #   since the shape of score is *(batch_size, max_length, hidden_size)*.
+    #   `Max_length` is the length of our input.
+    #   Since we are trying to assign a weight to each input, softmax should be applied on that axis.
+    # * `context vector = sum(attention weights * EO, axis = 1)`. Same reason as above for choosing axis as 1.
+    # * `embedding output` = The input to the decoder X is passed through an embedding layer.
+    # * `merged vector = concat(embedding output, context vector)`
+    # * This merged vector is then given to the GRU
+    #
+    # The shapes of all the vectors at each step have been specified in the comments in the code:
+
     """
 
     def __init__(self, units):
@@ -461,6 +478,20 @@ def translate(
     plot_attention(attention_plot, sentence.split(" "), result.split(" "))
 
 
+def download_data():
+    logging.info("download dataset")
+    os.makedirs(DATA_DIR, exist_ok=True)
+    path_to_zip = tf.keras.utils.get_file(
+        fname=os.path.join(DATA_DIR, "spa-eng.zip"),
+        origin="http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip",
+        extract=True,
+    )
+    logging.info("done downloading dataset")
+    logging.info("extract dataset")
+    unzip(path_to_zip, destination_dir=DATA_DIR)
+    logging.info("done extracting dataset")
+
+
 def main():
     """
     Download dataset
@@ -481,54 +512,19 @@ def main():
     4. Pad each sentence to a maximum length.
     """
     logging.info("main")
-    logging.info("download dataset")
-    os.makedirs(config.DATA_DIR, exist_ok=True)
-    path_to_zip = tf.keras.utils.get_file(
-        fname=os.path.join(config.DATA_DIR, "spa-eng.zip"),
-        origin="http://storage.googleapis.com/download.tensorflow.org/data/spa-eng.zip",
-        extract=True,
-    )
-    logging.info("done downloading dataset")
+    path_to_file = os.path.join(DATA_DIR, "spa-eng", "spa.txt")
+    if not os.path.isfile(path_to_file):
+        download_data()
 
-    logging.info("extract dataset")
-    unzip(path_to_zip, destination_dir=config.DATA_DIR)
-    logging.info("done extracting dataset")
-
-    path_to_file = os.path.join(os.path.dirname(path_to_zip), "spa-eng", "spa.txt")
-
-    logging.info("test sample sentence")
-    en_sentence = u"May I borrow this book?"
-    sp_sentence = u"¿Puedo tomar prestado este libro?"
-    logging.debug("%r", "en_sentence = {}".format(en_sentence))
-    logging.debug("%r", "sp_sentence = {}".format(sp_sentence))
-    logging.debug(
-        "%r",
-        "preprocess_sentence(en_sentence) = {}".format(
-            preprocess_sentence(en_sentence)
-        ),
-    )
-    logging.debug(
-        "%r",
-        "preprocess_sentence(sp_sentence) = {}".format(
-            preprocess_sentence(sp_sentence)
-        ),
-    )
-    logging.info("done with sample sentence")
-
-    logging.info("construct larger dataset")
-    english, spanish = create_dataset(path_to_file, None)
-    logging.debug("%r", "english[-1] = {}".format(english[-1]))
-    logging.debug("%r", "spanish[-1] = {}".format(spanish[-1]))
-    logging.info("done constructing larger dataset")
-
-    logging.info("Limit the size of the dataset to experiment faster (optional)")
     logging.info(
-        "Training on the complete dataset of >100,000 sentences will take a long time.\
-         To train faster, we can limit the size of the dataset to 30,000 sentences \
-         (of course, translation quality degrades with less data):"
+        "%r",
+        f"""Training on the complete dataset of >100,000 sentences will take a long time.
+To train faster, we can limit the size of the dataset to NUM_EXAMPLES = {NUM_EXAMPLES} sentences
+(of course, translation quality degrades with less data):
+"""
     )
 
-    logging.info("Try experimenting with the size of that dataset")
+    logging.info("Try experimenting with the size of that dataset NUM_EXAMPLES")
 
     input_tensor, target_tensor, inp_lang, targ_lang = load_dataset(
         path_to_file, NUM_EXAMPLES
@@ -548,17 +544,9 @@ def main():
 
     logging.info("Show length")
     logging.debug("%r", "len(input_tensor_train) = {}".format(len(input_tensor_train)))
-    logging.debug(
-        "%r", "len(target_tensor_train) = {}".format(len(target_tensor_train))
-    )
+    logging.debug("%r", "len(target_tensor_train) = {}".format(len(target_tensor_train)))
     logging.debug("%r", "len(input_tensor_val) = {}".format(len(input_tensor_val)))
     logging.debug("%r", "len(target_tensor_val) = {}".format(len(target_tensor_val)))
-
-    print("Input Language; index to word mapping")
-    convert(inp_lang, input_tensor_train[0])
-    print()
-    print("Target Language; index to word mapping")
-    convert(targ_lang, target_tensor_train[0])
 
     logging.info("Create a tf.data dataset")
     buffer_size = len(input_tensor_train)
@@ -566,19 +554,9 @@ def main():
     vocab_inp_size = len(inp_lang.word_index) + 1
     vocab_tar_size = len(targ_lang.word_index) + 1
 
-    dataset = (
-        tf.data.Dataset.from_tensor_slices(
-            (input_tensor_train, target_tensor_train)
-        ).shuffle(buffer_size).batch(BATCH_SIZE, drop_remainder=True)
-    )
-
-    example_input_batch, example_target_batch = next(iter(dataset))
-    logging.debug(
-        "%r", "example_input_batch.shape = {}".format(example_input_batch.shape)
-    )
-    logging.debug(
-        "%r", "example_target_batch.shape = {}".format(example_target_batch.shape)
-    )
+    dataset = tf.data.Dataset.from_tensor_slices(
+        (input_tensor_train, target_tensor_train)
+    ).shuffle(buffer_size).batch(BATCH_SIZE, drop_remainder=True)
 
     logging.info("Write the encoder and decoder model")
 
@@ -602,83 +580,18 @@ def main():
          *(batch_size, hidden_size)*."
     )
 
-    # pseudo-code:
-    #
-    # * `score = FC(tanh(FC(EO) + FC(H)))`
-    # * `attention weights = softmax(score, axis = 1)`.
-    #   Softmax by default is applied on the last axis but here we want to apply it on the *1st axis*,
-    #   since the shape of score is *(batch_size, max_length, hidden_size)*.
-    #   `Max_length` is the length of our input.
-    #   Since we are trying to assign a weight to each input, softmax should be applied on that axis.
-    # * `context vector = sum(attention weights * EO, axis = 1)`. Same reason as above for choosing axis as 1.
-    # * `embedding output` = The input to the decoder X is passed through an embedding layer.
-    # * `merged vector = concat(embedding output, context vector)`
-    # * This merged vector is then given to the GRU
-    #
-    # The shapes of all the vectors at each step have been specified in the comments in the code:
-
     encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-
-    logging.info("sample input")
-    sample_hidden = encoder.initialize_hidden_state()
-    sample_output, sample_hidden = encoder.call(example_input_batch, sample_hidden)
-    logging.debug(
-        "%r",
-        "Encoder output shape: (batch size, sequence length, units) {}".format(
-            sample_output.shape
-        ),
-    )
-    logging.debug(
-        "%r",
-        "Encoder Hidden state shape: (batch size, units) {}".format(
-            sample_hidden.shape
-        ),
-    )
-
-    attention_layer = BahdanauAttention(units=NUM_ATTENTION_UNITS)
-    attention_result, attention_weights = attention_layer.call(
-        sample_hidden, sample_output
-    )
-
-    logging.debug(
-        "%r",
-        "attention_result.shape = {} should be (batch size, units)".format(
-            attention_result.shape
-        ),
-    )
-    logging.debug(
-        "%r",
-        "attention_weights.shape = {} should be (batch_size, sequence_length, 1)".format(
-            attention_weights.shape
-        ),
-    )
-
     decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-
-    sample_decoder_output, _, _ = decoder.call(
-        tf.random.uniform((64, 1)), sample_hidden, sample_output
-    )
-
-    print(
-        "Decoder output shape: (batch_size, vocab size) {}".format(
-            sample_decoder_output.shape
-        )
-    )
 
     logging.info("Define the optimizer and the loss function")
 
     optimizer = tf.keras.optimizers.Adam()
-    loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
-        from_logits=True, reduction="none"
-    )
+    loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction="none")
 
     logging.info("Checkpoints (Object-based saving)")
-
-    checkpoint_dir = "./training_checkpoints"
+    checkpoint_dir = os.path.join(CHECKPOINTS_DIR, "training_checkpoints")
     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
-    checkpoint = tf.train.Checkpoint(
-        optimizer=optimizer, encoder=encoder, decoder=decoder
-    )
+    checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
 
     logging.info("Training")
     #
@@ -781,5 +694,5 @@ def main():
 
 
 if __name__ == "__main__":
-    dictConfig(config.LOGGING_CONFIG_DICT)
+    dictConfig(LOGGING_CONFIG_DICT)
     main()
