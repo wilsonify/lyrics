@@ -1,5 +1,5 @@
 import pytest
-from music_examples import music
+from python_consumer import music
 
 
 @pytest.mark.skip(reason="uses an external rendering software")

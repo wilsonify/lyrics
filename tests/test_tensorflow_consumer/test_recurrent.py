@@ -2,10 +2,9 @@ import os
 import unittest
 
 import numpy as np
-import recurrent.utils as txt
 import tensorflow as tf
-from recurrent import utils, config
-from recurrent.rnn_train import load_mnist
+from tensorflow_consumer import utils, config
+from tensorflow_consumer.rnn_train import load_mnist
 
 TST_TXTSIZE = 10000
 TST_SEQLEN = 10
@@ -34,7 +33,7 @@ class RnnMinibatchSequencerTest(unittest.TestCase):
         return nb_errors
 
     def test_sequences(self):
-        for x, y, epoch in txt.rnn_minibatch_sequencer(self.data, TST_BATCHSIZE, TST_SEQLEN, TST_EPOCHS):
+        for x, y, epoch in utils.rnn_minibatch_sequencer(self.data, TST_BATCHSIZE, TST_SEQLEN, TST_EPOCHS):
             for i in range(TST_BATCHSIZE):
                 self.assertListEqual(x[i, 1:].tolist(), y[i, :-1].tolist(),
                                      msg="y sequences must be equal to x sequences shifted by -1")
@@ -45,7 +44,7 @@ class RnnMinibatchSequencerTest(unittest.TestCase):
         prev_y = np.zeros([TST_BATCHSIZE, TST_SEQLEN], np.int32)
         nb_errors = 0
         nb_batches = 0
-        for x, y, epoch in txt.rnn_minibatch_sequencer(self.data, TST_BATCHSIZE, TST_SEQLEN, TST_EPOCHS):
+        for x, y, epoch in utils.rnn_minibatch_sequencer(self.data, TST_BATCHSIZE, TST_SEQLEN, TST_EPOCHS):
             if not start:
                 nb_errors += self.check_seq_batch(prev_x, x)
                 nb_errors += self.check_seq_batch(prev_y, y)
@@ -62,14 +61,14 @@ class RnnMinibatchSequencerTest(unittest.TestCase):
 
 
 def test_encoding(text_known_chars):
-    encoded = txt.encode_text(text_known_chars)
-    decoded = txt.decode_to_text(encoded)
+    encoded = utils.encode_text(text_known_chars)
+    decoded = utils.decode_to_text(encoded)
     assert text_known_chars == decoded
 
 
 def test_unknown_encoding(text_unknown_char):
-    encoded = txt.encode_text(text_unknown_char)
-    decoded = txt.decode_to_text(encoded)
+    encoded = utils.encode_text(text_unknown_char)
+    decoded = utils.decode_to_text(encoded)
     original_fix = text_unknown_char[:-1] + chr(0)
     assert original_fix == decoded
 
@@ -78,7 +77,7 @@ class TxtProgressTest(unittest.TestCase):
     def test_progress_indicator(self):
         print("If the printed output of this test is incorrect, the test will fail. No need to check visually.", end='')
         test_cases = (50, 51, 49, 1, 2, 3, 1000, 333, 101)
-        p = txt.Progress(100)
+        p = utils.Progress(100)
         for maxi in test_cases:
             m, cent = self.check_progress_indicator(p, maxi)
             self.assertEqual(m, maxi, msg="Incorrect number of steps.")
@@ -97,18 +96,18 @@ class TxtProgressTest(unittest.TestCase):
 
 
 def test_read_data_files_codetext(song_lyrics_file_path):
-    codetext, _, _ = txt.read_data_files(song_lyrics_file_path, validation=True)
+    codetext, _, _ = utils.read_data_files(song_lyrics_file_path, validation=True)
     assert len(codetext) == 1281
 
 
 def test_read_data_files_valitext(song_lyrics_dir_path):
     glob_pattern = os.path.join(song_lyrics_dir_path, "*.txt")
-    _, valitext, _ = txt.read_data_files(glob_pattern, validation=True)
+    _, valitext, _ = utils.read_data_files(glob_pattern, validation=True)
     assert len(valitext) == 0
 
 
 def test_read_data_files_bookranges(song_lyrics_file_path):
-    _, _, bookranges = txt.read_data_files(song_lyrics_file_path, validation=True)
+    _, _, bookranges = utils.read_data_files(song_lyrics_file_path, validation=True)
     assert len(bookranges) == 1
 
 

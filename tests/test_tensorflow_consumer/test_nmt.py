@@ -2,9 +2,9 @@ import os
 import pytest
 import tensorflow as tf
 import numpy as np
-from tensorflow_consumer import nmt
+from tensorflow_consumer.translation import nmt
 from tensorflow_consumer.config import DATA_DIR
-from tensorflow_consumer.nmt import BATCH_SIZE, EMBEDDING_DIM, UNITS, NUM_ATTENTION_UNITS
+
 from sklearn.model_selection import train_test_split
 
 dirname = os.path.dirname(__file__)
@@ -32,7 +32,7 @@ def dataset_fixture():
     buffer_size = len(input_tensor)
     return tf.data.Dataset.from_tensor_slices(
         (input_tensor, target_tensor)
-    ).shuffle(buffer_size).batch(BATCH_SIZE, drop_remainder=True)
+    ).shuffle(buffer_size).batch(nmt.BATCH_SIZE, drop_remainder=True)
 
 
 def test_smoke():
@@ -87,8 +87,8 @@ def test_sample(dataset):
     vocab_inp_size = len(inp_lang.word_index) + 1
     vocab_tar_size = len(targ_lang.word_index) + 1
 
-    encoder = nmt.Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = nmt.Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = nmt.Encoder(vocab_inp_size, nmt.EMBEDDING_DIM, nmt.UNITS, nmt.BATCH_SIZE)
+    decoder = nmt.Decoder(vocab_tar_size, nmt.EMBEDDING_DIM, nmt.UNITS, nmt.BATCH_SIZE)
 
     example_input_batch, example_target_batch = next(iter(dataset))
 
@@ -98,7 +98,7 @@ def test_sample(dataset):
     assert sample_output.shape == (64, 7, 1024)
     assert sample_hidden.shape == (64, 1024)
 
-    attention_layer = nmt.BahdanauAttention(units=NUM_ATTENTION_UNITS)
+    attention_layer = nmt.BahdanauAttention(units=nmt.NUM_ATTENTION_UNITS)
     attention_result, attention_weights = attention_layer.call(sample_hidden, sample_output)
 
     assert attention_result.shape == (64, 1024)
