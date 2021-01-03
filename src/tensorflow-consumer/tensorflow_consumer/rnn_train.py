@@ -32,7 +32,7 @@ from logging.config import dictConfig
 
 import numpy as np
 import tensorflow as tf
-from recurrent import config
+from tensorflow_consumer import config
 
 ALPHASIZE = config.ALPHASIZE
 INTERNALSIZE = 5
