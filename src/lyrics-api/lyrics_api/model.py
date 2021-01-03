@@ -20,6 +20,17 @@ class PreprocessedGrapheme(Grapheme):
     )
 
 
+class SpanishGrapheme(BaseModel):
+    text: str = Field(
+        ..., example="¿todavia estan en casa?", title='Text'
+    )
+
+class EnglishGrapheme(BaseModel):
+    text: str = Field(
+        ..., example="are you still at home?", title='Text'
+    )
+
+
 class Phoneme(BaseModel):
     name: str = Field(..., example='Yesterday', title='Name')
     text: str = Field(

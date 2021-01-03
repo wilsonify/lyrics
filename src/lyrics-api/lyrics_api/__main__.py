@@ -16,13 +16,12 @@ And you only have to declare them once.
 That's probably the main visible advantage of FastAPI compared to alternative frameworks
 (apart from the raw performance).
 """
-import os
 import uvicorn
 from fastapi import FastAPI
 from lyrics_api import __version__
-from lyrics_api.model import Phoneme, Grapheme
+from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
 from python_consumer import consumer
-from tensorflow_consumer import nmt
+from tensorflow_consumer import nmt, nmt_translate
 
 app = FastAPI(
     debug=False,
@@ -82,29 +81,16 @@ async def preprocess_sentence(input_grapheme: Grapheme):
 
 
 @app.post(
-    path="/translate_english_to_spanish",
-    response_model=Grapheme,
+    path="/translate_spanish_to_english",
+    response_model=EnglishGrapheme,
     summary="Summary: translate an english sentence to spanish",
     description="""Description:
-    Uses Neural machine translation with attention    
+    Uses Neural machine translation with attention to translate spanish to english    
     """
 )
-async def translate_sentence(input_grapheme: Grapheme):
-    checkpoint_dir = os.path.join(CHECKPOINTS_DIR, "training_checkpoints")
-    checkpoint = tf.train.Checkpoint()
-    checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
-
-    output = nmt.translate(
-        input_grapheme.text,
-        max_length_targ=max_length_targ,
-        max_length_inp=max_length_inp,
-        inp_lang=inp_lang,
-        encoder=encoder,
-        targ_lang=targ_lang,
-        decoder=decoder,
-    )
-
-    return Grapheme(name=input_grapheme.name, text=output)
+async def translate_spanish_to_english(input: SpanishGrapheme):
+    output = nmt_translate.main(input.text)
+    return EnglishGrapheme(text=output)
 
 
 if __name__ == "__main__":
