@@ -239,7 +239,7 @@ if __name__ == "__main__":
         )
     )
 
-    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints"
+    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
     checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
 

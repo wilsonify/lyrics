@@ -43,7 +43,7 @@ def main(sentence):
     encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
     decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
-    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints"
+    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
 
     checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
 
