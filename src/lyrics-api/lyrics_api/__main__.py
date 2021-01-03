@@ -21,7 +21,8 @@ from fastapi import FastAPI
 from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
 from python_consumer import consumer
-from tensorflow_consumer import nmt, nmt_translate
+from tensorflow_consumer.translation import nmt
+from tensorflow_consumer.translation import spa2eng
 
 app = FastAPI(
     debug=False,
@@ -89,7 +90,7 @@ async def preprocess_sentence(input_grapheme: Grapheme):
     """
 )
 async def translate_spanish_to_english(input: SpanishGrapheme):
-    output = nmt_translate.main(input.text)
+    output = spa2eng.nmt_translate.main(input.text)
     return EnglishGrapheme(text=output)
 
 

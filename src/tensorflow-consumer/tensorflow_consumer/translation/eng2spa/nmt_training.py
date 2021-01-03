@@ -21,7 +21,7 @@ import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from tensorflow_consumer.config import DATA_DIR, CHECKPOINTS_DIR
-from tensorflow_consumer.nmt import (
+from tensorflow_consumer.translation.nmt import (
     download_data,
     preprocess_sentence,
     create_dataset,

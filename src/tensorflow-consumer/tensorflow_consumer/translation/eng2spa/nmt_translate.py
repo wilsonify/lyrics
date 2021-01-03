@@ -14,7 +14,7 @@ import os
 
 import tensorflow as tf
 from tensorflow_consumer.config import DATA_DIR, CHECKPOINTS_DIR
-from tensorflow_consumer.nmt import (
+from tensorflow_consumer.translation.nmt import (
     download_data,
     preprocess_sentence,
     load_dataset,
