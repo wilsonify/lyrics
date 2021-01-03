@@ -65,7 +65,7 @@ def train_step(inp, targ, enc_hidden):
 
         dec_hidden = enc_hidden
 
-        dec_input = tf.expand_dims([targ_lang.word_index["<start>"]] * BATCH_SIZE, 1)
+        dec_input = tf.expand_dims([eng_lang.word_index["<start>"]] * BATCH_SIZE, 1)
 
         # Teacher forcing - feeding the target as the next input
         for t in range(1, targ.shape[1]):
@@ -93,7 +93,7 @@ def evaluate(sentence):
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = [spa_lang.word_index[i] for i in sentence.split(" ")]
     inputs = tf.keras.preprocessing.sequence.pad_sequences(
         [inputs], maxlen=max_length_inp, padding="post"
     )
@@ -105,7 +105,7 @@ def evaluate(sentence):
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([targ_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([eng_lang.word_index["<start>"]], 0)
 
     for t in range(max_length_targ):
         predictions, dec_hidden, attention_weights = decoder(
@@ -118,9 +118,9 @@ def evaluate(sentence):
 
         predicted_id = tf.argmax(predictions[0]).numpy()
 
-        result += targ_lang.index_word[predicted_id] + " "
+        result += eng_lang.index_word[predicted_id] + " "
 
-        if targ_lang.index_word[predicted_id] == "<end>":
+        if eng_lang.index_word[predicted_id] == "<end>":
             return result, sentence, attention_plot
 
         # the predicted ID is fed back into the model
@@ -169,49 +169,49 @@ if __name__ == "__main__":
     print(en[-1])
     print(sp[-1])
 
-    input_tensor, target_tensor, inp_lang, targ_lang = load_dataset(
+    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(
         path_to_file, NUM_EXAMPLES
     )
-    max_length_targ, max_length_inp = target_tensor.shape[1], input_tensor.shape[1]
+    max_length_targ, max_length_inp = eng_tensor.shape[1], spa_tensor.shape[1]
     (
-        input_tensor_train,
-        input_tensor_val,
-        target_tensor_train,
-        target_tensor_val,
-    ) = train_test_split(input_tensor, target_tensor, test_size=0.2)
+        spa_tensor_train,
+        spa_tensor_val,
+        eng_tensor_train,
+        eng_tensor_val,
+    ) = train_test_split(spa_tensor, eng_tensor, test_size=0.2)
 
     print(
-        len(input_tensor_train),
-        len(target_tensor_train),
-        len(input_tensor_val),
-        len(target_tensor_val),
+        len(spa_tensor_train),
+        len(eng_tensor_train),
+        len(spa_tensor_val),
+        len(eng_tensor_val),
     )
 
-    print("Input Language; index to word mapping")
-    convert(inp_lang, input_tensor_train[0])
+    print("Spanish Language; index to word mapping")
+    convert(spa_lang, spa_tensor_train[0])
     print()
-    print("Target Language; index to word mapping")
-    convert(targ_lang, target_tensor_train[0])
+    print("English Language; index to word mapping")
+    convert(eng_lang, eng_tensor_train[0])
 
-    BUFFER_SIZE = len(input_tensor_train)
+    BUFFER_SIZE = len(spa_tensor_train)
 
-    steps_per_epoch = len(input_tensor_train) // BATCH_SIZE
+    steps_per_epoch = len(spa_tensor_train) // BATCH_SIZE
 
-    vocab_inp_size = len(inp_lang.word_index) + 1
-    vocab_tar_size = len(targ_lang.word_index) + 1
+    vocab_spa_size = len(spa_lang.word_index) + 1
+    vocab_tar_size = len(eng_lang.word_index) + 1
     dataset = tf.data.Dataset.from_tensor_slices(
-        (input_tensor_train, target_tensor_train)
+        (spa_tensor_train, eng_tensor_train)
     ).shuffle(BUFFER_SIZE)
     dataset = dataset.batch(BATCH_SIZE, drop_remainder=True)
 
-    example_input_batch, example_target_batch = next(iter(dataset))
-    print(example_input_batch.shape, example_target_batch.shape)
+    example_spa_batch, example_eng_batch = next(iter(dataset))
+    print(example_spa_batch.shape, example_eng_batch.shape)
 
-    encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
     decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     sample_hidden = encoder.initialize_hidden_state()
-    sample_output, sample_hidden = encoder(example_input_batch, sample_hidden)
+    sample_output, sample_hidden = encoder(example_spa_batch, sample_hidden)
     print(
         "Encoder output shape: (batch size, sequence length, units) {}".format(
             sample_output.shape
@@ -268,10 +268,10 @@ if __name__ == "__main__":
 
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
-    translate("hace mucho frio aqui.")
+    translate("it's very cold.")
 
-    translate("esta es mi vida.")
+    translate("this is my life.")
 
-    translate("¿todavia estan en casa?")
+    translate("are they still home?")
 
-    translate("trata de averiguarlo.")
+    translate("try to find out.")

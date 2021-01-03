@@ -1,14 +1,12 @@
 """
-trains a sequence to sequence (seq2seq) model for Spanish to English translation.
+trains a sequence to sequence (seq2seq) model for English to Spanish translation.
 This is an advanced example that assumes some knowledge of sequence to sequence models.
 
 After training the model in this notebook, you will be able to input a Spanish sentence,
-such as *"¿todavia estan en casa?"*, and return the English translation: *"are you still at home?"*
+such as *"are you still at home?"* and return the Spanish translation: *"¿todavia estan en casa?"*
 
 The translation quality is reasonable for a toy example, but the generated attention plot is perhaps more interesting.
 This shows which parts of the input sentence has the model's attention while translating:
-
-<img src="https://tensorflow.org/images/spanish-english.png" alt="spanish-english attention plot">
 
 This example takes approximately 10 minutes to run on a single P100 GPU.
 """
@@ -65,17 +63,12 @@ def train_step(inp, targ, enc_hidden):
 
         dec_hidden = enc_hidden
 
-        dec_input = tf.expand_dims([targ_lang.word_index["<start>"]] * BATCH_SIZE, 1)
+        dec_input = tf.expand_dims([eng_lang.word_index["<start>"]] * BATCH_SIZE, 1)
 
-        # Teacher forcing - feeding the target as the next input
         for t in range(1, targ.shape[1]):
-            # passing enc_output to the decoder
-            predictions, dec_hidden, _ = decoder(dec_input, dec_hidden, enc_output)
-
+            predictions, dec_hidden, _ = decoder(dec_input, dec_hidden, enc_output)  # passing enc_output to the decoder
             loss += loss_function(targ[:, t], predictions)
-
-            # using teacher forcing
-            dec_input = tf.expand_dims(targ[:, t], 1)
+            dec_input = tf.expand_dims(targ[:, t], 1)  # Teacher forcing - feeding the target as the next input
 
     batch_loss = loss / int(targ.shape[1])
 
@@ -89,13 +82,13 @@ def train_step(inp, targ, enc_hidden):
 
 
 def evaluate(sentence):
-    attention_plot = np.zeros((max_length_targ, max_length_inp))
+    attention_plot = np.zeros((max_length_eng, max_length_spa))
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
     inputs = tf.keras.preprocessing.sequence.pad_sequences(
-        [inputs], maxlen=max_length_inp, padding="post"
+        [inputs], maxlen=max_length_spa, padding="post"
     )
     inputs = tf.convert_to_tensor(inputs)
 
@@ -105,22 +98,21 @@ def evaluate(sentence):
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([targ_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([eng_lang.word_index["<start>"]], 0)
 
-    for t in range(max_length_targ):
+    for t in range(max_length_eng):
         predictions, dec_hidden, attention_weights = decoder(
             dec_input, dec_hidden, enc_out
         )
 
-        # storing the attention weights to plot later on
-        attention_weights = tf.reshape(attention_weights, (-1,))
+        attention_weights = tf.reshape(attention_weights, (-1,))  # storing the attention weights to plot later on
         attention_plot[t] = attention_weights.numpy()
 
         predicted_id = tf.argmax(predictions[0]).numpy()
 
-        result += targ_lang.index_word[predicted_id] + " "
+        result += eng_lang.index_word[predicted_id] + " "
 
-        if targ_lang.index_word[predicted_id] == "<end>":
+        if eng_lang.index_word[predicted_id] == "<end>":
             return result, sentence, attention_plot
 
         # the predicted ID is fed back into the model
@@ -169,49 +161,49 @@ if __name__ == "__main__":
     print(en[-1])
     print(sp[-1])
 
-    input_tensor, target_tensor, inp_lang, targ_lang = load_dataset(
+    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(
         path_to_file, NUM_EXAMPLES
     )
-    max_length_targ, max_length_inp = target_tensor.shape[1], input_tensor.shape[1]
+    max_length_eng, max_length_spa = eng_tensor.shape[1], spa_tensor.shape[1]
     (
-        input_tensor_train,
-        input_tensor_val,
-        target_tensor_train,
-        target_tensor_val,
-    ) = train_test_split(input_tensor, target_tensor, test_size=0.2)
+        spa_tensor_train,
+        spa_tensor_val,
+        eng_tensor_train,
+        eng_tensor_val,
+    ) = train_test_split(spa_tensor, eng_tensor, test_size=0.2)
 
     print(
-        len(input_tensor_train),
-        len(target_tensor_train),
-        len(input_tensor_val),
-        len(target_tensor_val),
+        len(spa_tensor_train),
+        len(eng_tensor_train),
+        len(spa_tensor_val),
+        len(eng_tensor_val),
     )
 
-    print("Input Language; index to word mapping")
-    convert(inp_lang, input_tensor_train[0])
+    print("spanish Language; index to word mapping")
+    convert(spa_lang, spa_tensor_train[0])
     print()
-    print("Target Language; index to word mapping")
-    convert(targ_lang, target_tensor_train[0])
+    print("english Language; index to word mapping")
+    convert(eng_lang, eng_tensor_train[0])
 
-    BUFFER_SIZE = len(input_tensor_train)
+    BUFFER_SIZE = len(spa_tensor_train)
 
-    steps_per_epoch = len(input_tensor_train) // BATCH_SIZE
+    steps_per_epoch = len(spa_tensor_train) // BATCH_SIZE
 
-    vocab_inp_size = len(inp_lang.word_index) + 1
-    vocab_tar_size = len(targ_lang.word_index) + 1
+    vocab_spa_size = len(spa_lang.word_index) + 1
+    vocab_tar_size = len(eng_lang.word_index) + 1
     dataset = tf.data.Dataset.from_tensor_slices(
-        (input_tensor_train, target_tensor_train)
+        (spa_tensor_train, eng_tensor_train)
     ).shuffle(BUFFER_SIZE)
     dataset = dataset.batch(BATCH_SIZE, drop_remainder=True)
 
-    example_input_batch, example_target_batch = next(iter(dataset))
-    print(example_input_batch.shape, example_target_batch.shape)
+    example_spa_batch, example_eng_batch = next(iter(dataset))
+    print(example_spa_batch.shape, example_eng_batch.shape)
 
-    encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
     decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     sample_hidden = encoder.initialize_hidden_state()
-    sample_output, sample_hidden = encoder(example_input_batch, sample_hidden)
+    sample_output, sample_hidden = encoder(example_spa_batch, sample_hidden)
     print(
         "Encoder output shape: (batch size, sequence length, units) {}".format(
             sample_output.shape
@@ -249,8 +241,8 @@ if __name__ == "__main__":
         enc_hidden = encoder.initialize_hidden_state()
         total_loss = 0
 
-        for (batch, (inp, targ)) in enumerate(dataset.take(steps_per_epoch)):
-            batch_loss = train_step(inp, targ, enc_hidden)
+        for (batch, (spa, eng)) in enumerate(dataset.take(steps_per_epoch)):
+            batch_loss = train_step(spa, eng, enc_hidden)
             total_loss += batch_loss
 
             if batch % 100 == 0:
