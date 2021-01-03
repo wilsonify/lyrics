@@ -4,11 +4,11 @@ from logging.config import dictConfig
 
 import pytest
 import tensorflow as tf
-from recurrent import config
+from tensorflow_consumer import config
 
 dirname = os.path.dirname(__file__)
 parent_dirname = os.path.join(dirname, os.pardir)
-dictConfig(config.logging_config_dict)
+dictConfig(config.LOGGING_CONFIG_DICT)
 logger = logging.getLogger()
 logging.info("conftest")
 

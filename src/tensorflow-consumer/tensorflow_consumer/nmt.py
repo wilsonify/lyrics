@@ -382,6 +382,7 @@ def evaluate(
     attention_plot = np.zeros((max_length_targ, max_length_inp))
 
     sentence = preprocess_sentence(sentence)
+    print(f"sentence = {sentence}")
 
     inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
     inputs = tf.keras.preprocessing.sequence.pad_sequences(
@@ -492,7 +493,7 @@ def download_data():
     logging.info("done extracting dataset")
 
 
-def main():
+def main_train():
     """
     Download dataset
     prepare the dataset
@@ -612,7 +613,7 @@ To train faster, we can limit the size of the dataset to NUM_EXAMPLES = {NUM_EXA
 
         for (batch, (inp, targ)) in enumerate(dataset.take(steps_per_epoch)):
             batch_loss = train_step(
-                inp,
+                inp=inp,
                 targ=targ,
                 targ_lang=targ_lang,
                 encoder=encoder,
@@ -624,31 +625,119 @@ To train faster, we can limit the size of the dataset to NUM_EXAMPLES = {NUM_EXA
             total_loss += batch_loss
 
             if batch % 100 == 0:
-                print(
-                    "Epoch {} Batch {} Loss {:.4f}".format(
-                        epoch + 1, batch, batch_loss.numpy()
-                    )
-                )
-        # saving (checkpoint) the model every 2 epochs
+                print(f"Epoch {epoch + 1} Batch {batch} Loss {batch_loss.numpy():.4f}")
         if (epoch + 1) % 2 == 0:
+            logging.info("saving (checkpoint) the model every 2 epochs")
+            logging.debug(f"checkpoint_prefix = {checkpoint_prefix}")
             checkpoint.save(file_prefix=checkpoint_prefix)
 
-        print("Epoch {} Loss {:.4f}".format(epoch + 1, total_loss / steps_per_epoch))
-        print("Time taken for 1 epoch {} sec\n".format(time.time() - start))
+        loss_per_epoch = total_loss / steps_per_epoch
+        print(f"Epoch {epoch + 1} Loss {loss_per_epoch:.4f}")
+        print(f"Time taken for 1 epoch {time.time() - start} sec\n")
 
+
+def main_translate():
+    """
+    The evaluate function is similar to the training loop, except we don't use *teacher forcing* here.
+    The input to the decoder at each time step is its previous predictions
+    along with the hidden state and the encoder output.
+      * Stop predicting when the model predicts the *end token*.
+      * And store the *attention weights for every time step*.
+
+    Note: The encoder output is calculated only once for one input.
+    Restore the latest checkpoint and test
+    restoring the latest checkpoint in checkpoint_dir
+
+    :return:
+    """
+    path_to_file = os.path.join(DATA_DIR, "spa-eng", "spa.txt")
+    if not os.path.isfile(path_to_file):
+        download_data()
+
+    logging.info(
+        "%r",
+        f"""Training on the complete dataset of >100,000 sentences will take a long time.
+    To train faster, we can limit the size of the dataset to NUM_EXAMPLES = {NUM_EXAMPLES} sentences
+    (of course, translation quality degrades with less data):
+    """
+    )
+
+    logging.info("Try experimenting with the size of that dataset NUM_EXAMPLES")
+
+
+    input_tensor, target_tensor, inp_lang, targ_lang = load_dataset(
+        path_to_file, NUM_EXAMPLES
+    )
+
+    logging.info("Calculate max_length of the target tensors")
+    max_length_targ = max_length(target_tensor)
+    max_length_inp = max_length(input_tensor)
+
+    logging.info("Creating training and validation sets using an 80-20 split")
+    (
+        input_tensor_train,
+        input_tensor_val,
+        target_tensor_train,
+        target_tensor_val
+    ) = train_test_split(input_tensor, target_tensor, test_size=0.2)
+
+    logging.info("Show length")
+    logging.debug("%r", "len(input_tensor_train) = {}".format(len(input_tensor_train)))
+    logging.debug("%r", "len(target_tensor_train) = {}".format(len(target_tensor_train)))
+    logging.debug("%r", "len(input_tensor_val) = {}".format(len(input_tensor_val)))
+    logging.debug("%r", "len(target_tensor_val) = {}".format(len(target_tensor_val)))
+
+    logging.info("Create a tf.data dataset")
+    buffer_size = len(input_tensor_train)
+    steps_per_epoch = len(input_tensor_train) // BATCH_SIZE
+    vocab_inp_size = len(inp_lang.word_index) + 1
+    vocab_tar_size = len(targ_lang.word_index) + 1
+
+    dataset = tf.data.Dataset.from_tensor_slices(
+        (input_tensor_train, target_tensor_train)
+    ).shuffle(buffer_size).batch(BATCH_SIZE, drop_remainder=True)
+
+    logging.info("Write the encoder and decoder model")
+
+    logging.info(
+        "Implement an encoder-decoder model with attention which you can read about in the TensorFlow \
+        [Neural Machine Translation (seq2seq) tutorial](https://github.com/tensorflow/nmt). \
+        This example uses a more recent set of APIs. \
+        This notebook implements the \
+        [attention equations](https://github.com/tensorflow/nmt#background-on-the-attention-mechanism)\
+        from the seq2seq tutorial.\
+        The following diagram shows that each input words is assigned a weight by the attention mechanism \
+        which is then used by the decoder to predict the next word in the sentence.\
+        The below picture and formulas are an example of attention mechanism from \
+        [Luong's paper](https://arxiv.org/abs/1508.04025v5)."
+    )
+
+    logging.info(
+        "The input is put through an encoder model which gives us the encoder output of shape \
+        *(batch_size, max_length, hidden_size)*\
+         and the encoder hidden state of shape \
+         *(batch_size, hidden_size)*."
+    )
+
+    encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+
+    logging.info("Define the optimizer and the loss function")
+
+    optimizer = tf.keras.optimizers.Adam()
+    loss_object = tf.keras.losses.SparseCategoricalCrossentropy(from_logits=True, reduction="none")
+
+    logging.info("Checkpoints (Object-based saving)")
+    checkpoint_dir = os.path.join(CHECKPOINTS_DIR, "training_checkpoints")
+    checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
+    checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
+
+    logging.info("Loading")
+    logging.info("Checkpoints (Object-based saving)")
+    checkpoint_dir = os.path.join(CHECKPOINTS_DIR, "training_checkpoints")
+    checkpoint = tf.train.Checkpoint()
     logging.info("Translate")
-    #
-    # The evaluate function is similar to the training loop, except we don't use *teacher forcing* here.
-    # The input to the decoder at each time step is its previous predictions
-    # along with the hidden state and the encoder output.
-    # * Stop predicting when the model predicts the *end token*.
-    # * And store the *attention weights for every time step*.
-    #
-    # Note: The encoder output is calculated only once for one input.
 
-    # ## Restore the latest checkpoint and test
-
-    # restoring the latest checkpoint in checkpoint_dir
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
     translate(
@@ -695,4 +784,5 @@ To train faster, we can limit the size of the dataset to NUM_EXAMPLES = {NUM_EXA
 
 if __name__ == "__main__":
     dictConfig(LOGGING_CONFIG_DICT)
-    main()
+    # main_train()
+    main_translate()

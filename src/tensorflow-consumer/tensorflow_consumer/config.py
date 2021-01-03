@@ -1,18 +1,18 @@
 import logging
 import os
 
-home_dir = os.path.expanduser("~")
-project_dir = os.path.join(home_dir, "recurrent_data")
-data_dir = os.path.join(project_dir, "data")
-models_dir = os.path.join(project_dir, "models")
-checkpoints_dir = os.path.join(project_dir, "checkpoints")
-logging_dir = os.path.join(os.getcwd(), "logs")
-training_glob_pattern = os.path.join(data_dir, "beatles_lyrics/*.txt")
+HOME_DIR = os.path.expanduser("~")
+PROJECT_DIR = os.path.join(HOME_DIR, "recurrent_data")
+DATA_DIR = os.path.join(PROJECT_DIR, "data")
+MODELS_DIR = os.path.join(PROJECT_DIR, "models")
+CHECKPOINTS_DIR = os.path.join(PROJECT_DIR, "checkpoints")
+LOGGING_DIR = os.path.join(os.getcwd(), "logs")
+training_glob_pattern = os.path.join(DATA_DIR, "beatles_lyrics/*.txt")
 
 NLAYERS = 3
 INTERNALSIZE = 512
 
-logging_config_dict = dict(
+LOGGING_CONFIG_DICT = dict(
     version=1,
     formatters={
         "simple": {

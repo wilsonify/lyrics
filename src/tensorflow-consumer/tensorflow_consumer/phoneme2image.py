@@ -26,7 +26,7 @@ def main():
     main
     :return:
     """
-    glob_pattern = os.path.join(config.data_dir, "beatles_lyrics_phoneme", "*.txt")
+    glob_pattern = os.path.join(config.DATA_DIR, "beatles_lyrics_phoneme", "*.txt")
     for text_path in glob.glob(glob_pattern):
         logging.info(text_path)
         text_head, _ = os.path.splitext(text_path)
@@ -42,5 +42,5 @@ def main():
 
 
 if __name__ == "__main__":
-    dictConfig(config.logging_config_dict)
+    dictConfig(config.LOGGING_CONFIG_DICT)
     main()

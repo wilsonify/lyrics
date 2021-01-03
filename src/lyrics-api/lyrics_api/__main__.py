@@ -16,12 +16,13 @@ And you only have to declare them once.
 That's probably the main visible advantage of FastAPI compared to alternative frameworks
 (apart from the raw performance).
 """
-
+import os
 import uvicorn
 from fastapi import FastAPI
 from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme
 from python_consumer import consumer
+from tensorflow_consumer import nmt
 
 app = FastAPI(
     debug=False,
@@ -60,6 +61,50 @@ async def grapheme2phoneme(input_grapheme: Grapheme):
 )
 async def phoneme2grapheme(item: Phoneme):
     return item
+
+
+@app.post(
+    path="/preprocess_sentence",
+    response_model=Grapheme,
+    summary="Summary: preprocess a sentence",
+    description="""Description: 
+    create a space between a word and the punctuation following it eg: "he is a boy." => "he is a boy ."    
+    replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
+    add a start and an end token to the sentence so that a model know when to start and stop predicting.
+    """
+)
+async def preprocess_sentence(input_grapheme: Grapheme):
+    output = nmt.preprocess_sentence(input_grapheme.text)
+    return Grapheme(
+        name=input_grapheme.name,
+        text=output
+    )
+
+
+@app.post(
+    path="/translate_english_to_spanish",
+    response_model=Grapheme,
+    summary="Summary: translate an english sentence to spanish",
+    description="""Description:
+    Uses Neural machine translation with attention    
+    """
+)
+async def translate_sentence(input_grapheme: Grapheme):
+    checkpoint_dir = os.path.join(CHECKPOINTS_DIR, "training_checkpoints")
+    checkpoint = tf.train.Checkpoint()
+    checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
+
+    output = nmt.translate(
+        input_grapheme.text,
+        max_length_targ=max_length_targ,
+        max_length_inp=max_length_inp,
+        inp_lang=inp_lang,
+        encoder=encoder,
+        targ_lang=targ_lang,
+        decoder=decoder,
+    )
+
+    return Grapheme(name=input_grapheme.name, text=output)
 
 
 if __name__ == "__main__":

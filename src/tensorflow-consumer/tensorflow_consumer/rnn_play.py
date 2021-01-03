@@ -18,7 +18,7 @@ author = os.getcwd()+'/EmiNN/rnn_train_1490995427-126000000'
 meta   = os.getcwd()+'/BeatlesNN/rnn_train_1491145744-4500000.meta'
 author = os.getcwd()+'/BeatlesNN/rnn_train_1491145744-4500000'
 """
-author = os.path.join(config.checkpoints_dir, 'rnn_train_1568723963-80000000')
+author = os.path.join(config.CHECKPOINTS_DIR, 'rnn_train_1568723963-80000000')
 meta = author + ".meta"
 
 
@@ -76,5 +76,5 @@ def main():
 
 
 if __name__ == "__main__":
-    dictConfig(config.logging_config_dict)
+    dictConfig(config.LOGGING_CONFIG_DICT)
     main()

@@ -19,7 +19,7 @@ def main(glob_pattern):
 
 
 if __name__ == "__main__":
-    dictConfig(config.logging_config_dict)
+    dictConfig(config.LOGGING_CONFIG_DICT)
     logging.debug("amqp_host = {}".format(config.amqp_host))
     logging.debug("amqp_port = {}".format(config.amqp_port))
     logging.debug("routing_key = {}".format(config.routing_key))

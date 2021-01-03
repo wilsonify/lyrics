@@ -11,8 +11,12 @@ from pydantic import BaseModel, Field
 
 class Grapheme(BaseModel):
     name: str = Field(..., example='Yesterday', title='Name')
+    text: str = Field(..., example='yesterday all my troubles seemed so far away', title='Text')
+
+
+class PreprocessedGrapheme(Grapheme):
     text: str = Field(
-        ..., example='yesterday all my troubles seemed so far away', title='Text'
+        ..., example="<start> yesterday all my troubles seemed so far away <end>", title='Text'
     )
 
 

@@ -59,10 +59,10 @@ logging.debug("%r", "DISPLAY_FREQ = {}".format(DISPLAY_FREQ))
 logging.debug("%r", "_50_BATCHES = {}".format(_50_BATCHES))
 logging.debug("%r", "VALI_SEQLEN = {}".format(VALI_SEQLEN))
 
-data_dir = config.data_dir
-models_dir = config.models_dir
+data_dir = config.DATA_DIR
+models_dir = config.MODELS_DIR
 training_glob_pattern = config.training_glob_pattern
-checkpoints_dir = config.checkpoints_dir
+checkpoints_dir = config.CHECKPOINTS_DIR
 
 
 def build_bidirectional_model():
@@ -188,5 +188,5 @@ def main():
 
 
 if __name__ == '__main__':
-    dictConfig(config.logging_config_dict)
+    dictConfig(config.LOGGING_CONFIG_DICT)
     main()

@@ -8,8 +8,8 @@ import sys
 
 import numpy as np
 import tensorflow as tf
-from recurrent import config
-
+from tensorflow_consumer import config
+import tarfile
 
 def encode(phoneme_str):
     """
@@ -473,3 +473,25 @@ def frequency_limiter(n_occurances, multiple=1, modulo=0):
         return i % (multiple * n_occurances) == modulo * multiple
 
     return limit
+
+
+def unzip(file_name, destination_dir):
+    extractor = tarfile.open
+    compression_type = 'gz'
+    read_mode = "r:{}".format(compression_type)
+    if file_name.endswith(".tar.gz"):
+        extractor = tarfile.open
+        compression_type = 'gz'
+        read_mode = "r:{}".format(compression_type)
+    elif file_name.endswith(".tar"):
+        extractor = tarfile.open
+        compression_type = ''
+        read_mode = "r:{}".format(compression_type)
+    elif file_name.endswith(".zip"):
+        import zipfile
+        extractor = zipfile.ZipFile
+        read_mode = 'r'
+
+    open_args = [file_name, read_mode]
+    with extractor(*open_args) as ref:
+        ref.extractall(path=destination_dir)
