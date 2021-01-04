@@ -89,13 +89,13 @@ def train_step(inp, targ, enc_hidden):
 
 
 def evaluate(sentence):
-    attention_plot = np.zeros((max_length_targ, max_length_inp))
+    attention_plot = np.zeros((max_length_spa, max_length_eng))
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [spa_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
     inputs = tf.keras.preprocessing.sequence.pad_sequences(
-        [inputs], maxlen=max_length_inp, padding="post"
+        [inputs], maxlen=max_length_eng, padding="post"
     )
     inputs = tf.convert_to_tensor(inputs)
 
@@ -107,7 +107,7 @@ def evaluate(sentence):
     dec_hidden = enc_hidden
     dec_input = tf.expand_dims([eng_lang.word_index["<start>"]], 0)
 
-    for t in range(max_length_targ):
+    for t in range(max_length_spa):
         predictions, dec_hidden, attention_weights = decoder(
             dec_input, dec_hidden, enc_out
         )
@@ -148,8 +148,8 @@ def plot_attention(attention, sentence, predicted_sentence):
 def translate(sentence):
     result, sentence, attention_plot = evaluate(sentence)
 
-    print("Input: %s" % (sentence))
-    print("Predicted translation: {}".format(result))
+    print(f"Input: {sentence}")
+    print(f"Predicted translation: {result}")
 
     attention_plot = attention_plot[: len(result.split(" ")), : len(sentence.split(" "))]
     plot_attention(attention_plot, sentence.split(" "), result.split(" "))
@@ -169,16 +169,23 @@ if __name__ == "__main__":
     print(en[-1])
     print(sp[-1])
 
-    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(
-        path_to_file, NUM_EXAMPLES
-    )
-    max_length_targ, max_length_inp = eng_tensor.shape[1], spa_tensor.shape[1]
+    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(path_to_file, NUM_EXAMPLES)
+    max_length_eng = eng_tensor.shape[1]
+    max_length_spa = spa_tensor.shape[1]
     (
         spa_tensor_train,
         spa_tensor_val,
         eng_tensor_train,
         eng_tensor_val,
-    ) = train_test_split(spa_tensor, eng_tensor, test_size=0.2)
+    ) = train_test_split(
+        spa_tensor,
+        eng_tensor,
+        test_size=0.2,
+        random_state=None,
+        shuffle=True,
+        stratify=None,
+
+    )
 
     print(
         len(spa_tensor_train),
@@ -198,7 +205,7 @@ if __name__ == "__main__":
     steps_per_epoch = len(spa_tensor_train) // BATCH_SIZE
 
     vocab_spa_size = len(spa_lang.word_index) + 1
-    vocab_tar_size = len(eng_lang.word_index) + 1
+    vocab_eng_size = len(eng_lang.word_index) + 1
     dataset = tf.data.Dataset.from_tensor_slices(
         (spa_tensor_train, eng_tensor_train)
     ).shuffle(BUFFER_SIZE)
@@ -207,37 +214,25 @@ if __name__ == "__main__":
     example_spa_batch, example_eng_batch = next(iter(dataset))
     print(example_spa_batch.shape, example_eng_batch.shape)
 
-    encoder = Encoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_eng_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     sample_hidden = encoder.initialize_hidden_state()
-    sample_output, sample_hidden = encoder(example_spa_batch, sample_hidden)
-    print(
-        "Encoder output shape: (batch size, sequence length, units) {}".format(
-            sample_output.shape
-        )
-    )
-    print("Encoder Hidden state shape: (batch size, units) {}".format(sample_hidden.shape))
+    sample_output, sample_hidden = encoder(example_eng_batch, sample_hidden)
+    print(f"Encoder output shape: (batch size, sequence length, units) {sample_output.shape}")
+    print(f"Encoder Hidden state shape: (batch size, units) {sample_hidden.shape}")
 
     attention_layer = BahdanauAttention(10)
     attention_result, attention_weights = attention_layer(sample_hidden, sample_output)
 
-    print("Attention result shape: (batch size, units) {}".format(attention_result.shape))
-    print(
-        "Attention weights shape: (batch_size, sequence_length, 1) {}".format(
-            attention_weights.shape
-        )
-    )
+    print(f"Attention result shape: (batch size, units) {attention_result.shape}")
+    print(f"Attention weights shape: (batch_size, sequence_length, 1) {attention_weights.shape}")
 
     sample_decoder_output, _, _ = decoder(
         tf.random.uniform((BATCH_SIZE, 1)), sample_hidden, sample_output
     )
 
-    print(
-        "Decoder output shape: (batch_size, vocab size) {}".format(
-            sample_decoder_output.shape
-        )
-    )
+    print(f"Decoder output shape: (batch_size, vocab size) {sample_decoder_output.shape}")
 
     checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
@@ -249,8 +244,12 @@ if __name__ == "__main__":
         enc_hidden = encoder.initialize_hidden_state()
         total_loss = 0
 
-        for (batch, (inp, targ)) in enumerate(dataset.take(steps_per_epoch)):
-            batch_loss = train_step(inp, targ, enc_hidden)
+        for (batch, (spanish, english)) in enumerate(dataset.take(steps_per_epoch)):
+            batch_loss = train_step(
+                inp=english,
+                targ=spanish,
+                enc_hidden=enc_hidden
+            )
             total_loss += batch_loss
 
             if batch % 100 == 0:
@@ -259,12 +258,13 @@ if __name__ == "__main__":
                         epoch + 1, batch, batch_loss.numpy()
                     )
                 )
-        # saving (checkpoint) the model every 2 epochs
+
         if (epoch + 1) % 2 == 0:
+            print("saving checkpoint every 2 epochs")
             checkpoint.save(file_prefix=checkpoint_prefix)
 
-        print("Epoch {} Loss {:.4f}".format(epoch + 1, total_loss / steps_per_epoch))
-        print("Time taken for 1 epoch {} sec\n".format(time.time() - start))
+        print(f"Epoch {epoch + 1} Loss {total_loss / steps_per_epoch:.4f}")
+        print(f"Time taken for 1 epoch {time.time() - start} sec\n")
 
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 

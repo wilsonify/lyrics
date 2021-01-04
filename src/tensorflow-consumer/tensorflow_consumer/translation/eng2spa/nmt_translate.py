@@ -33,15 +33,16 @@ def main(sentence):
     if not os.path.isfile(path_to_file):
         download_data()
 
-    input_tensor, target_tensor, inp_lang, targ_lang = load_dataset(path_to_file, NUM_EXAMPLES)
-    max_length_targ, max_length_inp = target_tensor.shape[1], input_tensor.shape[1]
+    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(path_to_file, NUM_EXAMPLES)
+    max_length_eng = eng_tensor.shape[1]
+    max_length_spa = spa_tensor.shape[1]
 
-    vocab_inp_size = len(inp_lang.word_index) + 1
-    vocab_tar_size = len(targ_lang.word_index) + 1
+    vocab_eng_size = len(eng_lang.word_index) + 1
+    vocab_spa_size = len(spa_lang.word_index) + 1
 
     optimizer = tf.keras.optimizers.Adam()
-    encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_eng_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
 
@@ -51,8 +52,8 @@ def main(sentence):
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
-    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_inp, padding="post")
+    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_eng, padding="post")
     inputs = tf.convert_to_tensor(inputs)
     result = ""
 
@@ -60,12 +61,12 @@ def main(sentence):
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([targ_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([spa_lang.word_index["<start>"]], 0)
 
-    for _ in range(max_length_targ):
+    for _ in range(max_length_spa):
         predictions, dec_hidden, attention_weights = decoder(dec_input, dec_hidden, enc_out)
         predicted_id = tf.argmax(predictions[0]).numpy()
-        result += targ_lang.index_word[predicted_id] + " "
+        result += spa_lang.index_word[predicted_id] + " "
         dec_input = tf.expand_dims([predicted_id], 0)
 
     result_clean = result.replace("<start>", "").replace("<end>", "")
@@ -73,22 +74,22 @@ def main(sentence):
 
 
 if __name__ == "__main__":
-    sentence1 = "hace mucho frio aqui."
+    sentence1 = "it's very cold."  # "hace mucho frio aqui."
     result1 = main(sentence1)
     print(sentence1)
     print(result1)
 
-    sentence2 = "esta es mi vida."
+    sentence2 = "this is my life."  # "esta es mi vida."
     result2 = main(sentence2)
     print(sentence2)
     print(result2)
 
-    sentence3 = "¿todavia estan en casa?"
+    sentence3 = "are they still home?"  # "¿todavia estan en casa?"
     result3 = main(sentence3)
     print(sentence3)
     print(result3)
 
-    sentence4 = "trata de averiguarlo."
+    sentence4 = "try to find out."  # "trata de averiguarlo."
     result4 = main(sentence4)
     print(sentence4)
     print(result4)
