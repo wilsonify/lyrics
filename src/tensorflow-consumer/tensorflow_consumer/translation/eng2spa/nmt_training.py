@@ -89,39 +89,31 @@ def evaluate(sentence):
     sentence = preprocess_sentence(sentence)
 
     inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
-    inputs = tf.keras.preprocessing.sequence.pad_sequences(
-        [inputs], maxlen=max_length_eng, padding="post"
-    )
+    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_eng, padding="post")
     inputs = tf.convert_to_tensor(inputs)
-
     result = ""
 
     hidden = [tf.zeros((1, UNITS))]
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([eng_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([spa_lang.word_index["<start>"]], 0)
 
     for t in range(max_length_spa):
-        predictions, dec_hidden, attention_weights = decoder(
-            dec_input, dec_hidden, enc_out
-        )
+        predictions, dec_hidden, attention_weights = decoder(dec_input, dec_hidden, enc_out)
 
-        # storing the attention weights to plot later on
-        attention_weights = tf.reshape(attention_weights, (-1,))
+        attention_weights = tf.reshape(attention_weights, (-1,))  # storing the attention weights to plot later on
         attention_plot[t] = attention_weights.numpy()
 
         predicted_id = tf.argmax(predictions[0]).numpy()
+        next_word = spa_lang.index_word[predicted_id]
+        result += next_word + " "
+        if next_word == "<end>":
+            break
+        dec_input = tf.expand_dims([predicted_id], 0)  # the predicted ID is fed back into the model
 
-        result += eng_lang.index_word[predicted_id] + " "
-
-        if eng_lang.index_word[predicted_id] == "<end>":
-            return result, sentence, attention_plot
-
-        # the predicted ID is fed back into the model
-        dec_input = tf.expand_dims([predicted_id], 0)
-
-    return result, sentence, attention_plot
+    result_clean = result.replace("<start>", "").replace("<end>", "")
+    return result_clean, sentence, attention_plot
 
 
 def plot_attention(attention, sentence, predicted_sentence):

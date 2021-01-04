@@ -66,7 +66,10 @@ def main(sentence):
     for _ in range(max_length_spa):
         predictions, dec_hidden, attention_weights = decoder(dec_input, dec_hidden, enc_out)
         predicted_id = tf.argmax(predictions[0]).numpy()
-        result += spa_lang.index_word[predicted_id] + " "
+        next_word = spa_lang.index_word[predicted_id]
+        result += next_word + " "
+        if next_word == "<end>":
+            break
         dec_input = tf.expand_dims([predicted_id], 0)
 
     result_clean = result.replace("<start>", "").replace("<end>", "")
