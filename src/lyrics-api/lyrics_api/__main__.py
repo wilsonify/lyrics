@@ -69,7 +69,7 @@ async def phoneme2grapheme(item: Phoneme):
 
 
 @app.post(
-    path="/preprocess_sentence",
+    path="/preprocess-sentence",
     response_model=Grapheme,
     summary="Summary: preprocess a sentence",
     description="""Description: 
@@ -87,7 +87,7 @@ async def preprocess_sentence(input_grapheme: Grapheme):
 
 
 @app.post(
-    path="/translate_spanish_to_english",
+    path="/translate-spanish-to-english",
     response_model=EnglishGrapheme,
     summary="Summary: translate a spanish sentence to english",
     description="""Description:
@@ -100,7 +100,7 @@ async def translate_spanish_to_english(input_grapheme: SpanishGrapheme):
 
 
 @app.post(
-    path="/translate_english_to_spanish",
+    path="/translate-english-to-spanish",
     response_model=SpanishGrapheme,
     summary="Summary: translate an english sentence to spanish",
     description="""Description:
