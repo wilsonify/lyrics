@@ -22,7 +22,8 @@ from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
 from python_consumer import consumer
 from tensorflow_consumer.translation import nmt
-from tensorflow_consumer.translation import spa2eng
+from tensorflow_consumer.translation.eng2spa import eng2spa_translate
+from tensorflow_consumer.translation.spa2eng import spa2eng_translate
 
 app = FastAPI(
     debug=False,
@@ -42,7 +43,9 @@ app = FastAPI(
     path="/grapheme2phoneme",
     response_model=Phoneme,
     summary="Summary: convert graphemes to phonemes",
-    description="Description: convert graphemes (smallest functional unit of a writing system) to phonemes (perceptually distinct units of sound)"
+    description="""Description: 
+    convert graphemes (smallest functional unit of a writing system) to phonemes (perceptually distinct units of sound)
+    """
 )
 async def grapheme2phoneme(input_grapheme: Grapheme):
     output = consumer.graphemes2phonemes(input_grapheme.text)
@@ -57,7 +60,9 @@ async def grapheme2phoneme(input_grapheme: Grapheme):
     path="/phoneme2grapheme",
     response_model=Grapheme,
     summary="Summary: convert phonemes to graphemes",
-    description="Description: convert phonemes (perceptually distinct units of sound) to graphemes (smallest functional unit of a writing system)"
+    description="""Description: 
+    convert phonemes (perceptually distinct units of sound) to graphemes (smallest functional unit of a writing system)
+    """
 )
 async def phoneme2grapheme(item: Phoneme):
     return item
@@ -84,13 +89,26 @@ async def preprocess_sentence(input_grapheme: Grapheme):
 @app.post(
     path="/translate_spanish_to_english",
     response_model=EnglishGrapheme,
-    summary="Summary: translate an english sentence to spanish",
+    summary="Summary: translate a spanish sentence to english",
     description="""Description:
     Uses Neural machine translation with attention to translate spanish to english    
     """
 )
-async def translate_spanish_to_english(input: SpanishGrapheme):
-    output = spa2eng.nmt_translate.main(input.text)
+async def translate_spanish_to_english(input_grapheme: SpanishGrapheme):
+    output = spa2eng_translate.main(input_grapheme.text)
+    return EnglishGrapheme(text=output)
+
+
+@app.post(
+    path="/translate_english_to_spanish",
+    response_model=SpanishGrapheme,
+    summary="Summary: translate an english sentence to spanish",
+    description="""Description:
+    Uses Neural machine translation with attention to translate english to spanish     
+    """
+)
+async def translate_english_to_spanish(input_grapheme: EnglishGrapheme):
+    output = eng2spa_translate.main(input_grapheme.text)
     return EnglishGrapheme(text=output)
 
 
