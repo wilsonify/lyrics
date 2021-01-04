@@ -65,17 +65,12 @@ def train_step(inp, targ, enc_hidden):
 
         dec_hidden = enc_hidden
 
-        dec_input = tf.expand_dims([eng_lang.word_index["<start>"]] * BATCH_SIZE, 1)
+        dec_input = tf.expand_dims([spa_lang.word_index["<start>"]] * BATCH_SIZE, 1)
 
-        # Teacher forcing - feeding the target as the next input
         for t in range(1, targ.shape[1]):
-            # passing enc_output to the decoder
-            predictions, dec_hidden, _ = decoder(dec_input, dec_hidden, enc_output)
-
+            predictions, dec_hidden, _ = decoder(dec_input, dec_hidden, enc_output)  # passing enc_output to the decoder
             loss += loss_function(targ[:, t], predictions)
-
-            # using teacher forcing
-            dec_input = tf.expand_dims(targ[:, t], 1)
+            dec_input = tf.expand_dims(targ[:, t], 1)  # Teacher forcing - feeding the target as the next input
 
     batch_loss = loss / int(targ.shape[1])
 
@@ -228,9 +223,7 @@ if __name__ == "__main__":
     print(f"Attention result shape: (batch size, units) {attention_result.shape}")
     print(f"Attention weights shape: (batch_size, sequence_length, 1) {attention_weights.shape}")
 
-    sample_decoder_output, _, _ = decoder(
-        tf.random.uniform((BATCH_SIZE, 1)), sample_hidden, sample_output
-    )
+    sample_decoder_output, _, _ = decoder(tf.random.uniform(shape=(BATCH_SIZE, 1)), sample_hidden, sample_output)
 
     print(f"Decoder output shape: (batch_size, vocab size) {sample_decoder_output.shape}")
 
@@ -253,11 +246,7 @@ if __name__ == "__main__":
             total_loss += batch_loss
 
             if batch % 100 == 0:
-                print(
-                    "Epoch {} Batch {} Loss {:.4f}".format(
-                        epoch + 1, batch, batch_loss.numpy()
-                    )
-                )
+                print(f"Epoch {epoch + 1} Batch {batch} Loss {batch_loss.numpy():.4f}")
 
         if (epoch + 1) % 2 == 0:
             print("saving checkpoint every 2 epochs")
