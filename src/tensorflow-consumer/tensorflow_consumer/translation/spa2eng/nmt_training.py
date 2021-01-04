@@ -86,7 +86,7 @@ def evaluate(sentence):
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = [spa_lang.word_index[i] for i in sentence.split(" ")]
     inputs = tf.keras.preprocessing.sequence.pad_sequences(
         [inputs], maxlen=max_length_spa, padding="post"
     )
@@ -115,8 +115,7 @@ def evaluate(sentence):
         if eng_lang.index_word[predicted_id] == "<end>":
             return result, sentence, attention_plot
 
-        # the predicted ID is fed back into the model
-        dec_input = tf.expand_dims([predicted_id], 0)
+        dec_input = tf.expand_dims([predicted_id], 0)  # the predicted ID is fed back into the model
 
     return result, sentence, attention_plot
 
