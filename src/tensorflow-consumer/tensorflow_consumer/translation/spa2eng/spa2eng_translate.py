@@ -20,11 +20,14 @@ from tensorflow_consumer.translation.nmt import (
     load_dataset,
     Encoder,
     Decoder,
+)
+from tensorflow_consumer.translation.spa2eng.spa2eng_training import (
+    NUM_EXAMPLES,
     BATCH_SIZE,
     EMBEDDING_DIM,
     UNITS,
 )
-from tensorflow_consumer.translation.spa2eng.spa2eng_training import NUM_EXAMPLES
+
 
 def main(sentence):
     path_to_file = os.path.join(DATA_DIR, "spa-eng", "spa.txt")

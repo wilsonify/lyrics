@@ -28,12 +28,6 @@ import tensorflow as tf
 from tensorflow_consumer.config import DATA_DIR
 from tensorflow_consumer.utils import unzip
 
-BATCH_SIZE = 64
-EMBEDDING_DIM = 256
-UNITS = 1024
-NUM_ATTENTION_UNITS = 10
-EPOCHS = 10
-
 
 def max_length(tensor):
     """

@@ -28,12 +28,15 @@ from tensorflow_consumer.translation.nmt import (
     Encoder,
     Decoder,
     BahdanauAttention,
-    BATCH_SIZE,
-    EMBEDDING_DIM,
-    UNITS,
-    EPOCHS
 
 )
+
+NUM_EXAMPLES = 50000
+BATCH_SIZE = 64
+EMBEDDING_DIM = 256
+UNITS = 1024
+NUM_ATTENTION_UNITS = 10
+EPOCHS = 10
 
 optimizer = tf.keras.optimizers.Adam()
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
@@ -41,7 +44,6 @@ loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
     reduction="none"
 )
 
-NUM_EXAMPLES = 50000
 
 def loss_function(real, pred):
     mask = tf.math.logical_not(tf.math.equal(real, 0))
