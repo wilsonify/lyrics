@@ -33,12 +33,12 @@ from tensorflow_consumer.translation.nmt import (
 
 )
 
-NUM_EXAMPLES = 20000
-BATCH_SIZE = 64
-EMBEDDING_DIM = 256
-UNITS = 1024
+NUM_EXAMPLES = -1
+BATCH_SIZE = 16
+EMBEDDING_DIM = 64
+UNITS = 128
 NUM_ATTENTION_UNITS = 10
-EPOCHS = 10
+EPOCHS = 10000
 
 optimizer = tf.keras.optimizers.Adam()
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
