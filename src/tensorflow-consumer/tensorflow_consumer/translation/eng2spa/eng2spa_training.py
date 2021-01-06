@@ -36,7 +36,7 @@ from tensorflow_consumer.translation.nmt import (
     EPOCHS
 
 )
-NUM_EXAMPLES = 50000
+NUM_EXAMPLES = 25000
 optimizer = tf.keras.optimizers.Adam()
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
     from_logits=True,
