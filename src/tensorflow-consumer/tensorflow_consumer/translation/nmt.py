@@ -31,7 +31,6 @@ from tensorflow_consumer.utils import unzip
 BATCH_SIZE = 64
 EMBEDDING_DIM = 256
 UNITS = 1024
-NUM_EXAMPLES = 50000
 NUM_ATTENTION_UNITS = 10
 EPOCHS = 10
 

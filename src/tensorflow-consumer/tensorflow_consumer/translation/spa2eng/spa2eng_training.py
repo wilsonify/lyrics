@@ -31,7 +31,6 @@ from tensorflow_consumer.translation.nmt import (
     BATCH_SIZE,
     EMBEDDING_DIM,
     UNITS,
-    NUM_EXAMPLES,
     EPOCHS
 
 )
@@ -42,6 +41,7 @@ loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
     reduction="none"
 )
 
+NUM_EXAMPLES = 50000
 
 def loss_function(real, pred):
     mask = tf.math.logical_not(tf.math.equal(real, 0))
