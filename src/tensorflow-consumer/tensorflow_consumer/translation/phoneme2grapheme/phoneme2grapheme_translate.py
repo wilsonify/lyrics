@@ -23,10 +23,10 @@ from tensorflow_consumer.translation.nmt import (
     BATCH_SIZE,
     EMBEDDING_DIM,
     UNITS,
-    NUM_EXAMPLES,
+
 
 )
-
+from tensorflow_consumer.translation.phoneme2grapheme.phoneme2grapheme_training import NUM_EXAMPLES
 
 def main(sentence):
     path_to_file = os.path.join(DATA_DIR, "spa-eng", "spa.txt")
