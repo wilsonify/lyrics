@@ -14,19 +14,18 @@ import os
 
 import tensorflow as tf
 from tensorflow_consumer.config import DATA_DIR, CHECKPOINTS_DIR
-from tensorflow_consumer.translation.eng2spa.eng2spa_training import (
-    NUM_EXAMPLES,
-)
 from tensorflow_consumer.translation.nmt import (
     download_data,
     preprocess_sentence,
     load_dataset,
     Encoder,
     Decoder,
+)
+from tensorflow_consumer.translation.eng2spa.eng2spa_training import (
+    NUM_EXAMPLES,
     BATCH_SIZE,
     EMBEDDING_DIM,
     UNITS,
-
 )
 
 
