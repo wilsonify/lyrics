@@ -1,5 +1,3 @@
-prance
-jupytext
 jupyter-book
 matplotlib
 numpy
