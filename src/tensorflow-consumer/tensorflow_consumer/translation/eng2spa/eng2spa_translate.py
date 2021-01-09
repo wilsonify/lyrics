@@ -11,7 +11,6 @@
 # Note: This example takes approximately 10 minutes to run on a single P100 GPU.
 """
 import os
-
 import tensorflow as tf
 from tensorflow_consumer.config import DATA_DIR, CHECKPOINTS_DIR
 from tensorflow_consumer.translation.nmt import (
@@ -34,7 +33,9 @@ def main(sentence):
     if not os.path.isfile(path_to_file):
         download_data()
 
-    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(path_to_file, NUM_EXAMPLES)
+    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(
+        path_to_file, NUM_EXAMPLES
+    )
     max_length_eng = eng_tensor.shape[1]
     max_length_spa = spa_tensor.shape[1]
 
@@ -47,14 +48,18 @@ def main(sentence):
 
     checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
 
-    checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
+    checkpoint = tf.train.Checkpoint(
+        optimizer=optimizer, encoder=encoder, decoder=decoder
+    )
 
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir)).expect_partial()
 
     sentence = preprocess_sentence(sentence)
 
     inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
-    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_eng, padding="post")
+    inputs = tf.keras.preprocessing.sequence.pad_sequences(
+        [inputs], maxlen=max_length_eng, padding="post"
+    )
     inputs = tf.convert_to_tensor(inputs)
     result = ""
 
@@ -65,7 +70,9 @@ def main(sentence):
     dec_input = tf.expand_dims([spa_lang.word_index["<start>"]], 0)
 
     for _ in range(max_length_spa):
-        predictions, dec_hidden, attention_weights = decoder(dec_input, dec_hidden, enc_out)
+        predictions, dec_hidden, attention_weights = decoder(
+            dec_input, dec_hidden, enc_out
+        )
         predicted_id = tf.argmax(predictions[0]).numpy()
         next_word = spa_lang.index_word[predicted_id]
         result += next_word + " "
@@ -78,6 +85,9 @@ def main(sentence):
 
 
 if __name__ == "__main__":
+    print(f"PATH = {os.getenv('PATH')}")
+    print(f"LD_LIBRARY_PATH = {os.getenv('LD_LIBRARY_PATH')}")
+
     sentence1 = "it's very cold."  # "hace mucho frio aqui."
     result1 = main(sentence1)
     print(sentence1)
