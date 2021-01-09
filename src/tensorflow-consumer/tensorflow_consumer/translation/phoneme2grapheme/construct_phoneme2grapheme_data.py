@@ -27,26 +27,31 @@ phonemefiles = [
 
 total = len(graphemefiles)
 count = 0
-for graphemefile in graphemefiles:
-    count += 1
-    name_match = re.search(
-        string=graphemefile, pattern=f"{DATA_DIR}/beatles_lyrics/(.*)\.txt"
-    )
-    name_str = name_match.group(1)
-    combined_file = f"{DATA_DIR}/beatles_lyrics_combined/{name_str}_combined.txt"
-    if count % 10 == 0:
-        print(f"graphemefile = {graphemefile}")
-        print(f"combined_file = {combined_file}")
-        print(f"{count}/{total} = {count / total:0.2f}")
-    with open(graphemefile, "r") as graphemefile_open:
-        with open(combined_file, "w") as combined_file_open:
-            for line in graphemefile_open.readlines():
-                line = line.replace("\n", "")
-                line = line.replace("Title:", "Title: ")
-                if not line:
-                    continue
-                phonemes_list = consumer.graphemes2phonemes(line)
-                phonemes_str = consumer.reduce_to_string(phonemes_list)
-                line_to_write = f"{line} \t {phonemes_str}"
-                combined_file_open.write(line_to_write)
-                combined_file_open.write("\n")
+full_data_path = f"{DATA_DIR}/beatles_lyrics_combined/grapheme2phoneme.txt"
+with open(full_data_path, "w") as full_data_open:
+    for graphemefile in graphemefiles:
+        count += 1
+        name_match = re.search(
+            string=graphemefile, pattern=f"{DATA_DIR}/beatles_lyrics/(.*)\.txt"
+        )
+        name_str = name_match.group(1)
+        combined_file = f"{DATA_DIR}/beatles_lyrics_combined/{name_str}_combined.txt"
+        if count % 10 == 0:
+            print(f"graphemefile = {graphemefile}")
+            print(f"combined_file = {combined_file}")
+            print(f"{count}/{total} = {count / total:0.2f}")
+        with open(graphemefile, "r") as graphemefile_open:
+            with open(combined_file, "w") as combined_file_open:
+                for line in graphemefile_open.readlines():
+                    line = line.replace("\n", "")
+                    line = line.replace("Title:", "Title: ")
+                    if not line:
+                        continue
+                    phonemes_list = consumer.graphemes2phonemes(line)
+                    phonemes_str = consumer.reduce_to_string(phonemes_list)
+                    line_to_write = f"{line} \t {phonemes_str}"
+                    combined_file_open.write(line_to_write)
+                    combined_file_open.write("\n")
+
+                    full_data_open.write(line_to_write)
+                    full_data_open.write("\n")
