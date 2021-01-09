@@ -1,0 +1,13 @@
+[build-system]
+requires = ["flit_core >=2,<4"]
+build-backend = "flit_core.buildapi"
+
+[tool.flit.metadata]
+module = "tensorflow_consumer"
+author = "Thomas Wilson"
+author-email = "tom.andrew.wilson@gmail.com"
+home-page = "https://wilsonify.github.io/lyrics"
+classifiers = ["License :: OSI Approved :: MIT License"]
+requires = [
+    "tensorflow >= 2.0.0"
+]

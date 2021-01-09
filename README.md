@@ -19,10 +19,10 @@ nvidia-driver-390
 python -m virtualenv venv
 source venv/bin/activate
 python -m pip install pkg/tensorflow-1.12.0-cp36-cp36m-linux_x86_64.whl
-cd src/recurrent
+cd src/tensorflow_consumer
 python -m pip install -r requirements.txt
 python setup.py setup.py install
-cd src/grapheme2phoneme/grapheme2phoneme
+cd src/python_consumer/python_consumer
 python -m pip install -r requirements.txt
 python -m nltk.downloader cmudict
 python setup.py setup.py install

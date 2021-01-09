@@ -1,0 +1,245 @@
+Go.	Ve.
+Go.	Vete.
+Go.	Vaya.
+Go.	Váyase.
+Hi.	Hola.
+Run!	¡Corre!
+Run.	Corred.
+Who?	¿Quién?
+Fire!	¡Fuego!
+Fire!	¡Incendio!
+Fire!	¡Disparad!
+Help!	¡Ayuda!
+Help!	¡Socorro! ¡Auxilio!
+Help!	¡Auxilio!
+Jump!	¡Salta!
+Jump.	Salte.
+Stop!	¡Parad!
+Stop!	¡Para!
+Stop!	¡Pare!
+Wait!	¡Espera!
+Wait.	Esperen.
+Go on.	Continúa.
+Go on.	Continúe.
+Hello!	Hola.
+I ran.	Corrí.
+I ran.	Corría.
+I try.	Lo intento.
+I won!	¡He ganado!
+Oh no!	¡Oh, no!
+Relax.	Tomátelo con soda.
+Smile.	Sonríe.
+Attack!	¡Al ataque!
+Attack!	¡Atacad!
+Get up.	Levanta.
+Go now.	Ve ahora mismo.
+Got it!	¡Lo tengo!
+Got it?	¿Lo pillas?
+Got it?	¿Entendiste?
+He ran.	Él corrió.
+Hop in.	Métete adentro.
+Hug me.	Abrázame.
+I fell.	Me caí.
+I know.	Yo lo sé.
+I left.	Salí.
+I lied.	Mentí.
+I lost.	Perdí.
+I quit.	Dimito.
+I quit.	Renuncié.
+I work.	Estoy trabajando.
+I'm 19.	Tengo diecinueve.
+I'm up.	Estoy levantado.
+Listen.	Escucha.
+Listen.	Escuche.
+Listen.	Escuchen.
+No way!	¡No puede ser!
+No way!	De ninguna manera.
+No way!	¡De ninguna manera!
+No way!	¡Imposible!
+No way!	¡De ningún modo!
+No way!	¡De eso nada!
+No way!	¡Ni cagando!
+No way!	¡Mangos!
+No way!	¡Minga!
+No way!	¡Ni en pedo!
+Really?	¿En serio?
+Really?	¿La verdad?
+Thanks.	¡Gracias!
+Thanks.	Gracias.
+Try it.	Pruébalo.
+We try.	Lo procuramos.
+We won.	Ganamos.
+Why me?	¿Por qué yo?
+Ask Tom.	Pregúntale a Tom.
+Awesome!	¡Órale!
+Be calm.	Mantente en calma.
+Be cool.	Estate tranquilo.
+Be fair.	Sé justo.
+Be kind.	Sean gentiles.
+Be nice.	Sé agradable.
+Beat it.	Pírate.
+Call me.	Llamame.
+Call me.	Llamadme.
+Call me.	Llámame.
+Call us.	Llámanos.
+Come in.	Entre.
+Come in.	Pase.
+Come in.	¡Entren!
+Come on!	¡Órale!
+Come on.	Ándale.
+Come on.	¡Órale!
+Drop it!	Suéltalo.
+Get Tom.	Agarra a Tom.
+Get out!	Bájate.
+Get out.	Salte.
+Get out.	Sal.
+Get out.	Salí.
+Get out.	Salid.
+Get out.	Salgan.
+Go away!	¡Vete de aquí!
+Go away!	¡Lárgate!
+Go away!	¡Salga de aquí!
+Go away!	¡Largo!
+Go away!	¡Vete ya!
+Go away!	¡Órale!
+Go away!	¡A la calle!
+Go away.	¡Vete de aquí!
+Go away.	¡Lárgate!
+Go away.	¡Largo!
+Go away.	¡Vete ya!
+Go away.	¡Órale!
+Go away.	Lárguese.
+Go away.	Váyase.
+Go home.	Vete a casa.
+Go slow.	Vaya despacio.
+Goodbye!	¡Hasta luego!
+Goodbye!	Hasta la vista.
+Goodbye!	¡Chau!
+Hang on!	¡Espera!
+Hang on!	¡Espera un momento!
+Hang on!	¡Un segundo!
+Hang on.	Agarra fuertemente.
+He came.	Él vino.
+He quit.	Él renunció.
+Help me!	Ayúdame.
+Help me.	Ayúdame.
+Help me.	Échame una mano.
+Help me.	Ayudame.
+Help us.	Ayúdanos.
+Hit Tom.	Golpea a Tom.
+Hold it!	Espera.
+Hold on.	Resista.
+Hold on.	Resiste.
+Hold on.	Agarra fuertemente.
+Hug Tom.	Abraza a Tom.
+I agree.	Estoy de acuerdo.
+I agree.	De acuerdo.
+I bowed.	Me incliné.
+I moved.	Me he mudado.
+I moved.	Me mudé.
+I moved.	Me trasladé.
+I moved.	Me he trasladado.
+I slept.	Dormí.
+I tried.	Lo intenté.
+I'll go.	Iré.
+I'm Tom.	Soy Tom.
+I'm fat.	Estoy gordo.
+I'm fat.	Soy gorda.
+I'm fit.	Estoy en forma.
+I'm hit!	Estoy afectado.
+I'm old.	Soy viejo.
+I'm shy.	Soy tímido.
+I'm wet.	Estoy mojada.
+It's OK.	Está bien.
+It's me!	Soy yo.
+It's me.	Soy yo.
+Join us.	Únete a nosotros.
+Join us.	Sé parte nuestra.
+Keep it.	Guárdalo.
+Me, too.	Yo, también.
+Open up.	Abre.
+Perfect!	¡Perfecto!
+See you.	Nos vemos.
+Show me.	Muéstramelo.
+Show me.	Enséñamelo.
+Show me.	Mostrame.
+Shut up!	¡Cierra la boca!
+Shut up!	¡Cerrá el pico!
+Skip it.	Sáltatelo.
+So long.	Hasta la vista.
+So long.	Hasta luego.
+Stop it.	Páralo.
+Stop it.	Deténlo.
+Take it.	Cógelo.
+Tell me.	Decime.
+Tom ate.	Tom comió.
+Tom ran.	Tom corrió.
+Tom won.	Tom ganó.
+Wait up.	Espérame despierto.
+Wake up!	¡Despierta!
+Wake up!	¡Despiértate!
+Wake up!	¡Despertate!
+Wake up.	Despierta.
+Wash up.	Lávate las manos.
+We care.	Nos preocupamos.
+We know.	Lo sabemos.
+We lost.	Perdimos.
+Welcome.	Bienvenidos.
+Welcome.	Bienvenidas.
+Who ate?	¿Quién comió?
+Who ran?	¿Quién corría?
+Who ran?	¿Quién corrió?
+Who won?	¿Quién ganó?
+Who won?	¿Quién ha ganado?
+Why not?	¿Por qué no?
+You run.	Corre.
+You won.	Has ganado.
+Tu inglés es gramaticalmente correcto, pero a veces lo que dices no suena como lo que un nativo diría.
+I have Japanese and Chinese friends who speak to each other in English since that is the only language they have in common.	Yo tengo amigos japoneses y chinos que se hablan entre ellos en inglés dado que esa es la única lengua que tienen en común.
+All the doctors say that I shouldn't drink coffee, but, despite that, I do have a bit now and then when I'm in good company.	Todos los doctores dicen que yo no debo tomar café, y sin embargo bebo un poco de vez en cuando en buena compañía.
+Make a good translation of the sentence that you are translating. Don't let translations into other languages influence you.	Haz una buena traducción de la oración que estás traduciendo. No dejes que las traducciones a otras lenguas te influencien.
+One thing I don't like about the iPad is that you can't easily install apps that aren't available through Apple's App Store.	Una cosa que no me gusta acerca del iPad es que no puedes instalar fácilmente apps que no estén disponibles a través del App Store de Apple.
+"Jingle Bells," a popular song around Christmas time, is not really a Christmas song. The lyrics say nothing about Christmas.	"Jingle Bells," la popular canción en tiempos navideños, en realidad no es una canción navideña. La letra no dice nada sobre navidad.
+"Jingle Bells," a popular song around Christmas time, is not really a Christmas song. The lyrics say nothing about Christmas.	"Jingle Bells", la famosa canción navideña, en realidad no tiene nada de navideña. El texto no hace mención alguna de la Navidad.
+I used to watch this anime a lot when I was a kid, but I can't quite remember what happened to the hero in the final episode.	Solía ver harto este animé cuando era niño, pero no recuerdo bien qué le pasaba al héroe en el último capítulo.
+If your company primarily does business with America, then you should be studying English with a native speaker from America.	Si tu compañía primordialmente hace negocios con Estados Unidos, entonces debes de estudiar inglés con un hablante nativo de Estados Unidos.
+The English language is undoubtedly the easiest and at the same time the most efficient means of international communication.	La lengua inglesa es sin lugar a dudas la más fácil y al mismo tiempo la más eficiente forma de comunicación internacional.
+Instead of giving each other Christmas presents this year, we donated the amount we would have spent on presents to a charity.	En lugar de hacernos mutuamente regalos de Navidad este año, donamos la cantidad que habríamos gastado en regalos para obras de caridad.
+Singer and actress Selena Gomez started her career at age seven on the children's public television show "Barney and Friends."	La cantante y actriz Selena Gomez empezó su carrera a los siete años en el espectáculo infantil de la televisión pública "Barney y amigos".
+A good newspaper reporter takes advantage of what he learns from any source, even the "little bird told him so" type of source.	Un buen reportero se aprovecha de lo que obtiene de cualquier fuente, incluso de las del tipo "me lo ha dicho un pajarito".
+Food prices are at their highest level since the United Nations Food and Agriculture Organization began keeping records in 1990.	El precio de los alimentos está en su nivel más alto desde que la Organización de Comida y Agricultura de las Naciones Unidas comenzó a registrarlos en 1990.
+I've heard that it's impossible to sound like a native speaker unless one starts speaking the language before the age of twelve.	Oí que es imposible sonar como un hablante nativo a menos que uno empiece a hablar la lengua antes de los doce años.
+No matter what your profession, or how happy you may be in it, there are moments when you wish you had chosen some other career.	Sea cual sea tu profesión y lo feliz que seas en ella, habrá momentos en los que desearás haber elegido otra carrera.
+When Tom was a kid, he used to collect his father's cigarette butts until he had enough tobacco to roll a cigarette for himself.	De chaval, Tom solía coger las colillas de su padre hasta juntar suficiente tabaco para poderse liar un cigarrillo.
+When Tom was a kid, he used to collect his father's cigarette butts until he had enough tobacco to roll a cigarette for himself.	De chaval, Tom solía coger las colillas de su padre hasta juntar suficiente tabaco para poder liarse un cigarrillo.
+Satellite imagery is being used in an effort to narrow down the area in the Indian Ocean where floating debris has been observed.	Se están usando imágenes de satélite en un intento de reducir el área del océano Índico donde se han observado restos flotantes.
+Honey, I know the budget is tight, but do you think we could splurge a bit and have a night out at a fancy restaurant this weekend?	Cariño. Sé que el presupuesto es apretado pero, ¿crees que podríamos despilfarrar un poco y salir una noche a un restaurante lujoso este fin de semana?
+Tom went to a fortune teller at the town fair and was told that someone would come into his life whose first name started with "M".	Tom fue a una adivina en la feria de la ciudad, la cual le dijo que alguien cuyo nombre empezaba con "M" iba a aparecer en su vida.
+A committee is a group of people who individually can do nothing, but who, as a group, can meet and decide that nothing can be done.	Un comité es un grupo de personas que aisladamente nada pueden hacer, pero que como grupo pueden reunirse y decidir que nada puede hacerse.
+Oh, sure, I studied English in my school days. But it wasn't until two or three years ago that I really started taking it seriously.	Oh, por supuesto, estudié inglés en la escuela. Pero no fue hasta hace un par de años o tres que realmente empecé a tomármelo en serio.
+In 1964, Roger Miller agreed to record sixteen songs. One of those songs was "Dang Me." It became his first number one selling record.	En 1964, Roger Miller acordó grabar dieciséis canciones. Una de esas canciones fue "Maldíceme". Se convirtió en su primer número uno de ventas.
+Tom hadn't washed clothes in a long time, so he searched through his dirty clothes to see if there was something clean enough to wear.	Ya desde hace mucho tiempo que Tom no lavaba ropa, así que él buscaba en su ropa sucia para ver si había algo lo suficientemente limpio que pudiera ponerse.
+One way to lower the number of errors in the Tatoeba Corpus would be to encourage people to only translate into their native languages.	Una forma de reducir el número de errores en el Corpus de Tatoeba sería fomentar que la gente tradujera únicamente a su lengua materna.
+I want a religion that respects the differences that exist between people and that states that each individual has their own personality.	Quiero una religión que respete las diferencias que existen entre la gente y que afirme que cada individuo tiene su propia personalidad.
+She has a boyfriend she's been going out with since high school, but she feels their relationship is in a rut, so she's become discontented.	Ella tiene un novio con el que ha estado saliendo desde el instituto, pero siente que su relación está estancada, así que ha terminado en un estado de apatía.
+Always use distilled water in steam irons because using ordinary water will cause a mineral build-up over time that will clog the steam holes.	Usa siempre agua destilada en las planchas de vapor, porque el agua común y corriente con el tiempo provocará que una acumulación de minerales tape los huecos de vapor.
+I think it's a shame that some foreign language teachers were able to graduate from college without ever having studied with a native speaker.	Creo que es una vergüenza que algunos profesores de lengua extranjera hayan podido graduarse de la universidad sin nunca haber estudiado con un hablante nativo.
+You can fool some of the people all of the time, and all of the people some of the time, but you can't fool all of the people all of the time.	Se puede engañar a algunas personas durante todo el tiempo y a todas las personas por algún tiempo, pero no se puede engañar a todo el mundo todo el tiempo.
+If you translate from your second language into your own native language, rather than the other way around, you're less likely to make mistakes.	Si traduces desde tu segunda lengua a tu lengua materna, más que al revés, es menos probable que cometas fallos.
+People speak so much about the need for leaving a better planet for our children, and forget the urgency of leaving better children for our planet.	La gente habla tanto de que necesitan dejar un mejor planeta para nuestros hijos, y se olvidan de la urgencia de dejar mejores niños para nuestro planeta.
+The Australian Prime Minister has said that he does not intend to engage in megaphone diplomacy with Egypt over the jailing of an Australian journalist.	El primer ministro australiano ha dicho que no va a iniciar una escaramuza diplomática por el encarcelamiento de un periodista australiano.
+You may not learn to speak as well as a native speaker, but you should be able to speak well enough that native speakers will understand what you have to say.	Puede que no aprendas a hablar tan bien como un hablante nativo, pero deberías ser capaz de hablar lo suficientemente bien para que los hablantes nativos entiendan lo que tengas que decir.
+If a person has not had a chance to acquire his target language by the time he's an adult, he's unlikely to be able to reach native speaker level in that language.	Si una persona no ha tenido la oportunidad de adquirir su lengua meta antes de llegar a adulto, es improbable que llegue a alcanzar el nivel de un hablante nativo en esa lengua.
+It's still too hard to find a job. And even if you have a job, chances are you're having a tougher time paying the rising costs of everything from groceries to gas.	Todavía es demasiado difícil encontrar un trabajo. E incluso si tienes un trabajo, lo más probable es que las pases canutas para pagar el coste cada vez mayor de todo, desde la comida hasta el gas.
+You can't easily put photos on an iPad from more than one computer. However, you can email photos to yourself from various computers and download these photos to your iPad.	Usted no puede poner fácilmente fotografías en un iPad de más de una computadora. Sin embargo, puede enviarse fotografías de varias computadoras y descargarlas a su iPad.
+You can't view Flash content on an iPad. However, you can easily email yourself the URLs of these web pages and view that content on your regular computer when you get home.	Usted no puede ver contenido Flash en un iPad. Sin embargo, puede enviarse el URL de esas páginas web y ver el contenido en su computadora ordinaria al llegar a su hogar.
+You can't view Flash content on an iPad. However, you can easily email yourself the URLs of these web pages and view that content on your regular computer when you get home.	No puedes ver contenido en Flash en un iPad. Sin embargo, puedes fácilmente enviarte por correo electrónico las URL's de esas páginas web y ver el contenido en tu computadora cuando llegas a casa.
+A mistake young people often make is to start learning too many languages at the same time, as they underestimate the difficulties and overestimate their own ability to learn them.	Un error que cometen a menudo los jóvenes es el de comenzar a aprender demasiadas lenguas al mismo tiempo, porque subestiman sus dificultades y sobrestiman sus propias capacidades para aprenderlas.
+No matter how much you try to convince people that chocolate is vanilla, it'll still be chocolate, even though you may manage to convince yourself and a few others that it's vanilla.	No importa cuánto insistas en convencer a la gente de que el chocolate es vainilla, seguirá siendo chocolate, aunque puede que te convenzas a ti mismo y a algunos otros de que es vainilla.
+In 1969, Roger Miller recorded a song called "You Don't Want My Love." Today, this song is better known as "In the Summer Time." It's the first song he wrote and sang that became popular.	En 1969, Roger Miller grabó una canción llamada "Tú no quieres mi amor". Hoy, esta canción es más conocida como "En el verano". Es la primera canción que escribió y cantó que se convirtió popular.
+A child who is a native speaker usually knows many things about his or her language that a non-native speaker who has been studying for years still does not know and perhaps will never know.	Un niño que es hablante nativo normalmente sabe muchas cosas acerca de su lengua que un hablante no nativo que lo haya estado estudiando durante muchos años no sabe todavía y que quizá no sabrá nunca.
+There are four main causes of alcohol-related death. Injury from car accidents or violence is one. Diseases like cirrhosis of the liver, cancer, heart and blood system diseases are the others.	Hay cuatro causas principales de muertes relacionadas con el alcohol. Lesión por un accidente automovilístico o violencia es una. Enfermedades como cirrosis del hígado, cáncer, enfermedades del corazón y del sistema circulatorio son las otras.
+There are mothers and fathers who will lie awake after the children fall asleep and wonder how they'll make the mortgage, or pay their doctor's bills, or save enough for their child's college education.	Hay madres y padres que se quedan despiertos después de que sus hijos se hayan dormido y se preguntan cómo conseguir pagar la hipoteca o las facturas del médico, o cómo ahorrar el suficiente dinero para la educación universitaria de sus hijos.
+A carbon footprint is the amount of carbon dioxide pollution that we produce as a result of our activities. Some people try to reduce their carbon footprint because they are concerned about climate change.	Una huella de carbono es la cantidad de contaminación de dióxido de carbono que producimos como producto de nuestras actividades. Algunas personas intentan reducir su huella de carbono porque están preocupados acerca del cambio climático.
+Since there are usually multiple websites on any given topic, I usually just click the back button when I arrive on any webpage that has pop-up advertising. I just go to the next page found by Google and hope for something less irritating.	Como suele haber varias páginas web sobre cualquier tema, normalmente sólo le doy al botón de retroceso cuando entro en una página web que tiene anuncios en ventanas emergentes. Simplemente voy a la siguiente página encontrada por Google y espero encontrar algo menos irritante.
+If you want to sound like a native speaker, you must be willing to practice saying the same sentence over and over in the same way that banjo players practice the same phrase over and over until they can play it correctly and at the desired tempo.	Si quieres sonar como un hablante nativo, debes estar dispuesto a practicar diciendo la misma frase una y otra vez de la misma manera en que un músico de banjo practica el mismo fraseo una y otra vez hasta que lo puedan tocar correctamente y en el tiempo esperado.
