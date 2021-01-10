@@ -186,7 +186,7 @@ if __name__ == "__main__":
     steps_per_epoch = len(phone_tensor_train) // BATCH_SIZE
 
     vocab_phone_size = len(phone_lang.word_index) + 1
-    vocab_tar_size = len(graph_lang.word_index) + 1
+    vocab_graph_size = len(graph_lang.word_index) + 1
     dataset = tf.data.Dataset.from_tensor_slices(
         (phone_tensor_train, graph_tensor_train)
     ).shuffle(BUFFER_SIZE)
@@ -196,36 +196,22 @@ if __name__ == "__main__":
     print(example_phone_batch.shape, example_graph_batch.shape)
 
     encoder = Encoder(vocab_phone_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_graph_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     sample_hidden = encoder.initialize_hidden_state()
     sample_output, sample_hidden = encoder(example_phone_batch, sample_hidden)
-    print(
-        "Encoder output shape: (batch size, sequence length, units) {}".format(
-            sample_output.shape
-        )
-    )
-    print("Encoder Hidden state shape: (batch size, units) {}".format(sample_hidden.shape))
+    print(f"Encoder output shape: (batch size, sequence length, units) {sample_output.shape}")
+    print(f"Encoder Hidden state shape: (batch size, units) {sample_hidden.shape}")
 
     attention_layer = BahdanauAttention(10)
     attention_result, attention_weights = attention_layer(sample_hidden, sample_output)
 
     print("Attention result shape: (batch size, units) {}".format(attention_result.shape))
-    print(
-        "Attention weights shape: (batch_size, sequence_length, 1) {}".format(
-            attention_weights.shape
-        )
-    )
+    print(f"Attention weights shape: (batch_size, sequence_length, 1) {attention_weights.shape}")
 
-    sample_decoder_output, _, _ = decoder(
-        tf.random.uniform((BATCH_SIZE, 1)), sample_hidden, sample_output
-    )
+    sample_decoder_output, _, _ = decoder(tf.random.uniform((BATCH_SIZE, 1)), sample_hidden, sample_output)
 
-    print(
-        "Decoder output shape: (batch_size, vocab size) {}".format(
-            sample_decoder_output.shape
-        )
-    )
+    print(f"Decoder output shape: (batch_size, vocab size) {sample_decoder_output.shape}")
 
     checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/spa2eng"
     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
