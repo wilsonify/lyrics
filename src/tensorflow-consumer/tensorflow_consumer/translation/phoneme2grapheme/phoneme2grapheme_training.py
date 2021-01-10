@@ -31,12 +31,12 @@ from tensorflow_consumer.translation.nmt import (
 
 )
 
-NUM_EXAMPLES = -1
-BATCH_SIZE = 16
-EMBEDDING_DIM = 64
-UNITS = 128
+NUM_EXAMPLES = 50000
+BATCH_SIZE = 64
+EMBEDDING_DIM = 256
+UNITS = 1024
 NUM_ATTENTION_UNITS = 10
-EPOCHS = 10000
+EPOCHS = 10
 
 optimizer = tf.keras.optimizers.Adam()
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
@@ -157,70 +157,77 @@ if __name__ == "__main__":
     print(graph[-1])
     print(phone[-1])
 
-    graph_tensor, phone_tensor, graph_lang, phone_lang = load_dataset(path_to_file, NUM_EXAMPLES)
-    max_length_phone = phone_tensor.shape[1]
-    max_length_graph = graph_tensor.shape[1]
+    phone_tensor, graph_tensor, phone_lang, graph_lang = load_dataset(
+        path_to_file, NUM_EXAMPLES
+    )
+    max_length_graph, max_length_phone = graph_tensor.shape[1], phone_tensor.shape[1]
     (
-        graph_tensor_train,
-        graph_tensor_val,
         phone_tensor_train,
         phone_tensor_val,
-    ) = train_test_split(
-        graph_tensor,
-        phone_tensor,
-        test_size=0.2,
-        random_state=None,
-        shuffle=True,
-        stratify=None,
-
-    )
+        graph_tensor_train,
+        graph_tensor_val,
+    ) = train_test_split(phone_tensor, graph_tensor, test_size=0.2)
 
     print(
-        len(graph_tensor_train),
         len(phone_tensor_train),
-        len(graph_tensor_val),
+        len(graph_tensor_train),
         len(phone_tensor_val),
+        len(graph_tensor_val),
     )
 
-    print("Graphemes; index to word mapping")
-    convert(graph_lang, graph_tensor_train[0])
-    print()
-    print("Phonemes Language; index to word mapping")
+    print("spanish Language; index to word mapping")
     convert(phone_lang, phone_tensor_train[0])
+    print()
+    print("english Language; index to word mapping")
+    convert(graph_lang, graph_tensor_train[0])
 
-    BUFFER_SIZE = len(graph_tensor_train)
+    BUFFER_SIZE = len(phone_tensor_train)
 
-    steps_per_epoch = len(graph_tensor_train) // BATCH_SIZE
+    steps_per_epoch = len(phone_tensor_train) // BATCH_SIZE
 
-    vocab_graph_size = len(graph_lang.word_index) + 1
     vocab_phone_size = len(phone_lang.word_index) + 1
+    vocab_tar_size = len(graph_lang.word_index) + 1
     dataset = tf.data.Dataset.from_tensor_slices(
-        (graph_tensor_train, phone_tensor_train)
+        (phone_tensor_train, graph_tensor_train)
     ).shuffle(BUFFER_SIZE)
     dataset = dataset.batch(BATCH_SIZE, drop_remainder=True)
 
-    example_graph_batch, example_phone_batch = next(iter(dataset))
-    print(example_graph_batch.shape, example_phone_batch.shape)
+    example_phone_batch, example_graph_batch = next(iter(dataset))
+    print(example_phone_batch.shape, example_graph_batch.shape)
 
     encoder = Encoder(vocab_phone_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_graph_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     sample_hidden = encoder.initialize_hidden_state()
     sample_output, sample_hidden = encoder(example_phone_batch, sample_hidden)
-    print(f"Encoder output shape: (batch size, sequence length, units) {sample_output.shape}")
-    print(f"Encoder Hidden state shape: (batch size, units) {sample_hidden.shape}")
+    print(
+        "Encoder output shape: (batch size, sequence length, units) {}".format(
+            sample_output.shape
+        )
+    )
+    print("Encoder Hidden state shape: (batch size, units) {}".format(sample_hidden.shape))
 
     attention_layer = BahdanauAttention(10)
     attention_result, attention_weights = attention_layer(sample_hidden, sample_output)
 
-    print(f"Attention result shape: (batch size, units) {attention_result.shape}")
-    print(f"Attention weights shape: (batch_size, sequence_length, 1) {attention_weights.shape}")
+    print("Attention result shape: (batch size, units) {}".format(attention_result.shape))
+    print(
+        "Attention weights shape: (batch_size, sequence_length, 1) {}".format(
+            attention_weights.shape
+        )
+    )
 
-    sample_decoder_output, _, _ = decoder(tf.random.uniform(shape=(BATCH_SIZE, 1)), sample_hidden, sample_output)
+    sample_decoder_output, _, _ = decoder(
+        tf.random.uniform((BATCH_SIZE, 1)), sample_hidden, sample_output
+    )
 
-    print(f"Decoder output shape: (batch_size, vocab size) {sample_decoder_output.shape}")
+    print(
+        "Decoder output shape: (batch_size, vocab size) {}".format(
+            sample_decoder_output.shape
+        )
+    )
 
-    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/phoneme2grapheme"
+    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/spa2eng"
     checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
     checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
 
@@ -230,19 +237,14 @@ if __name__ == "__main__":
         enc_hidden = encoder.initialize_hidden_state()
         total_loss = 0
 
-        for (batch, (spanish, english)) in enumerate(dataset.take(steps_per_epoch)):
-            batch_loss = train_step(
-                inp=english,
-                targ=spanish,
-                enc_hidden=enc_hidden
-            )
+        for (batch, (spa, eng)) in enumerate(dataset.take(steps_per_epoch)):
+            batch_loss = train_step(spa, eng, enc_hidden)
             total_loss += batch_loss
 
             if batch % 100 == 0:
                 print(f"Epoch {epoch + 1} Batch {batch} Loss {batch_loss.numpy():.4f}")
 
         if (epoch + 1) % 2 == 0:
-            print("saving checkpoint every 2 epochs")
             checkpoint.save(file_prefix=checkpoint_prefix)
 
         print(f"Epoch {epoch + 1} Loss {total_loss / steps_per_epoch:.4f}")
