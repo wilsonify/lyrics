@@ -66,7 +66,10 @@ async def grapheme2phoneme(input_grapheme: Grapheme):
 )
 async def phoneme2grapheme(input_phoneme: Phoneme):
     output = phoneme2grapheme_translate.main(input_phoneme.text)
-    return Grapheme(text=output)
+    return Grapheme(
+        name=input_phoneme.name,
+        text=output
+    )
 
 
 @app.post(
