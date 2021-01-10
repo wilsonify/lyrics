@@ -27,19 +27,14 @@ from tensorflow_consumer.translation.phoneme2grapheme.phoneme2grapheme_training 
     UNITS,
 )
 
+checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/phoneme2grapheme"
 
 def main(sentence):
     path_to_file = os.path.join(DATA_DIR, "beatles_lyrics_combined", "grapheme2phoneme.txt")
 
-    graph_tensor, phone_tensor, graph_lang, phone_lang = load_dataset(
+    phone_tensor, graph_tensor, phone_lang, graph_lang = load_dataset(
         path_to_file, NUM_EXAMPLES
     )
-
-    print("Graphemes; index to word mapping")
-    convert(graph_lang, graph_tensor[0])
-    print()
-    print("Phonemes Language; index to word mapping")
-    convert(phone_lang, phone_tensor[0])
 
     max_length_phone = phone_tensor.shape[1]
     max_length_graph = graph_tensor.shape[1]
@@ -51,7 +46,7 @@ def main(sentence):
     encoder = Encoder(vocab_phone_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
     decoder = Decoder(vocab_graph_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
-    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
+
 
     checkpoint = tf.train.Checkpoint(
         optimizer=optimizer, encoder=encoder, decoder=decoder

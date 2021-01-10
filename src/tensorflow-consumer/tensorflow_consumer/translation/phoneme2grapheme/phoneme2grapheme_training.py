@@ -38,6 +38,9 @@ UNITS = 128
 NUM_ATTENTION_UNITS = 10
 EPOCHS = 10000
 
+checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/phoneme2grapheme"
+checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
+
 optimizer = tf.keras.optimizers.Adam()
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
     from_logits=True,
@@ -213,8 +216,6 @@ if __name__ == "__main__":
 
     print(f"Decoder output shape: (batch_size, vocab size) {sample_decoder_output.shape}")
 
-    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/spa2eng"
-    checkpoint_prefix = os.path.join(checkpoint_dir, "ckpt")
     checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
 
     for epoch in range(EPOCHS):
@@ -235,7 +236,6 @@ if __name__ == "__main__":
 
         print(f"Epoch {epoch + 1} Loss {total_loss / steps_per_epoch:.4f}")
         print(f"Time taken for 1 epoch {time.time() - start} sec\n")
-
 
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
