@@ -11,7 +11,6 @@
 # Note: This example takes approximately 10 minutes to run on a single P100 GPU.
 """
 import os
-
 import tensorflow as tf
 from tensorflow_consumer.config import DATA_DIR, CHECKPOINTS_DIR
 from tensorflow_consumer.translation.nmt import (
@@ -30,30 +29,35 @@ from tensorflow_consumer.translation.phoneme2grapheme.phoneme2grapheme_training 
 
 
 def main(sentence):
-    path_to_file = os.path.join(DATA_DIR, "spa-eng", "spa.txt")
-    if not os.path.isfile(path_to_file):
-        download_data()
+    path_to_file = os.path.join(DATA_DIR, "beatles_lyrics_combined", "grapheme2phoneme.txt")
 
-    input_tensor, target_tensor, inp_lang, targ_lang = load_dataset(path_to_file, NUM_EXAMPLES)
-    max_length_targ, max_length_inp = target_tensor.shape[1], input_tensor.shape[1]
+    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(
+        path_to_file, NUM_EXAMPLES
+    )
+    max_length_eng = eng_tensor.shape[1]
+    max_length_spa = spa_tensor.shape[1]
 
-    vocab_inp_size = len(inp_lang.word_index) + 1
-    vocab_tar_size = len(targ_lang.word_index) + 1
+    vocab_eng_size = len(eng_lang.word_index) + 1
+    vocab_spa_size = len(spa_lang.word_index) + 1
 
     optimizer = tf.keras.optimizers.Adam()
-    encoder = Encoder(vocab_inp_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_tar_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_eng_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
-    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/phoneme2grapheme"
+    checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
 
-    checkpoint = tf.train.Checkpoint(optimizer=optimizer, encoder=encoder, decoder=decoder)
+    checkpoint = tf.train.Checkpoint(
+        optimizer=optimizer, encoder=encoder, decoder=decoder
+    )
 
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir)).expect_partial()
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [inp_lang.word_index[i] for i in sentence.split(" ")]
-    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_inp, padding="post")
+    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = tf.keras.preprocessing.sequence.pad_sequences(
+        [inputs], maxlen=max_length_eng, padding="post"
+    )
     inputs = tf.convert_to_tensor(inputs)
     result = ""
 
@@ -61,12 +65,17 @@ def main(sentence):
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([targ_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([spa_lang.word_index["<start>"]], 0)
 
-    for _ in range(max_length_targ):
-        predictions, dec_hidden, attention_weights = decoder(dec_input, dec_hidden, enc_out)
+    for _ in range(max_length_spa):
+        predictions, dec_hidden, attention_weights = decoder(
+            dec_input, dec_hidden, enc_out
+        )
         predicted_id = tf.argmax(predictions[0]).numpy()
-        result += targ_lang.index_word[predicted_id] + " "
+        next_word = spa_lang.index_word[predicted_id]
+        result += next_word + " "
+        if next_word == "<end>":
+            break
         dec_input = tf.expand_dims([predicted_id], 0)
 
     result_clean = result.replace("<start>", "").replace("<end>", "")
@@ -74,22 +83,25 @@ def main(sentence):
 
 
 if __name__ == "__main__":
-    sentence1 = "hace mucho frio aqui."
+    print(f"PATH = {os.getenv('PATH')}")
+    print(f"LD_LIBRARY_PATH = {os.getenv('LD_LIBRARY_PATH')}")
+
+    sentence1 = "IH1 T S V EH1 R IY0 K OW1 L D"
     result1 = main(sentence1)
     print(sentence1)
     print(result1)
 
-    sentence2 = "esta es mi vida."
+    sentence2 = "B IY1 P BEEPM B IY1 P B IY1 P Y AE1"
     result2 = main(sentence2)
     print(sentence2)
     print(result2)
 
-    sentence3 = "¿todavia estan en casa?"
+    sentence3 = "AA1 R DH EY1 S T IH1 L HH OW1 M"
     result3 = main(sentence3)
     print(sentence3)
     print(result3)
 
-    sentence4 = "trata de averiguarlo."
+    sentence4 = "W AH1 T AY1 G AA1 T AH0 D UW1 T UW1 G EH1 T IH1 T TH R UW1 T UW1 Y UW1 IH1 M S UW2 P ER0 HH Y UW1 M AH0 N IH1 N AH0 V EY2 T IH0 V AH0 N D IH1 M M EY1 D AH1 V R AH1 B ER0"
     result4 = main(sentence4)
     print(sentence4)
     print(result4)
