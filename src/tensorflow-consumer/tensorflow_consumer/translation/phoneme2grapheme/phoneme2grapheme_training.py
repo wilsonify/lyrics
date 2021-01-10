@@ -31,12 +31,12 @@ from tensorflow_consumer.translation.nmt import (
 
 )
 
-NUM_EXAMPLES = 50000
-BATCH_SIZE = 64
-EMBEDDING_DIM = 256
-UNITS = 1024
+NUM_EXAMPLES = -1
+BATCH_SIZE = 16
+EMBEDDING_DIM = 64
+UNITS = 128
 NUM_ATTENTION_UNITS = 10
-EPOCHS = 10
+EPOCHS = 10000
 
 optimizer = tf.keras.optimizers.Adam()
 loss_object = tf.keras.losses.SparseCategoricalCrossentropy(
@@ -128,8 +128,8 @@ def plot_attention(attention, sentence, predicted_sentence):
 
     ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
     ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
-
-    plt.show()
+    os.makedirs(f"{DATA_DIR}/plots", exist_ok=True)
+    plt.savefig(f"{DATA_DIR}/plots/{sentence[:10]}.png")
 
 
 def translate(sentence):
@@ -235,6 +235,7 @@ if __name__ == "__main__":
 
         print(f"Epoch {epoch + 1} Loss {total_loss / steps_per_epoch:.4f}")
         print(f"Time taken for 1 epoch {time.time() - start} sec\n")
+
 
     checkpoint.restore(tf.train.latest_checkpoint(checkpoint_dir))
 
