@@ -18,7 +18,7 @@ from tensorflow_consumer.translation.nmt import (
     preprocess_sentence,
     load_dataset,
     Encoder,
-    Decoder,
+    Decoder, convert,
 )
 from tensorflow_consumer.translation.phoneme2grapheme.phoneme2grapheme_training import (
     NUM_EXAMPLES,
@@ -31,18 +31,25 @@ from tensorflow_consumer.translation.phoneme2grapheme.phoneme2grapheme_training 
 def main(sentence):
     path_to_file = os.path.join(DATA_DIR, "beatles_lyrics_combined", "grapheme2phoneme.txt")
 
-    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(
+    graph_tensor, phone_tensor, graph_lang, phone_lang = load_dataset(
         path_to_file, NUM_EXAMPLES
     )
-    max_length_eng = eng_tensor.shape[1]
-    max_length_spa = spa_tensor.shape[1]
 
-    vocab_eng_size = len(eng_lang.word_index) + 1
-    vocab_spa_size = len(spa_lang.word_index) + 1
+    print("Graphemes; index to word mapping")
+    convert(graph_lang, graph_tensor[0])
+    print()
+    print("Phonemes Language; index to word mapping")
+    convert(phone_lang, phone_tensor[0])
+
+    max_length_phone = phone_tensor.shape[1]
+    max_length_graph = graph_tensor.shape[1]
+
+    vocab_phone_size = len(phone_lang.word_index) + 1
+    vocab_graph_size = len(graph_lang.word_index) + 1
 
     optimizer = tf.keras.optimizers.Adam()
-    encoder = Encoder(vocab_eng_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_phone_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_graph_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     checkpoint_dir = f"{CHECKPOINTS_DIR}/training_checkpoints/eng2spa"
 
@@ -54,9 +61,9 @@ def main(sentence):
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = [phone_lang.word_index[i] for i in sentence.split(" ")]
     inputs = tf.keras.preprocessing.sequence.pad_sequences(
-        [inputs], maxlen=max_length_eng, padding="post"
+        [inputs], maxlen=max_length_phone, padding="post"
     )
     inputs = tf.convert_to_tensor(inputs)
     result = ""
@@ -65,14 +72,14 @@ def main(sentence):
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([spa_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([graph_lang.word_index["<start>"]], 0)
 
-    for _ in range(max_length_spa):
+    for _ in range(max_length_graph):
         predictions, dec_hidden, attention_weights = decoder(
             dec_input, dec_hidden, enc_out
         )
         predicted_id = tf.argmax(predictions[0]).numpy()
-        next_word = spa_lang.index_word[predicted_id]
+        next_word = graph_lang.index_word[predicted_id]
         result += next_word + " "
         if next_word == "<end>":
             break

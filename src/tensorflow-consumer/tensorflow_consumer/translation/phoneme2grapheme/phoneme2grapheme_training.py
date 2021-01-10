@@ -65,7 +65,7 @@ def train_step(inp, targ, enc_hidden):
 
         dec_hidden = enc_hidden
 
-        dec_input = tf.expand_dims([spa_lang.word_index["<start>"]] * BATCH_SIZE, 1)
+        dec_input = tf.expand_dims([graph_lang.word_index["<start>"]] * BATCH_SIZE, 1)
 
         for t in range(1, targ.shape[1]):
             predictions, dec_hidden, _ = decoder(dec_input, dec_hidden, enc_output)  # passing enc_output to the decoder
@@ -84,12 +84,12 @@ def train_step(inp, targ, enc_hidden):
 
 
 def evaluate(sentence):
-    attention_plot = np.zeros((max_length_spa, max_length_eng))
+    attention_plot = np.zeros((max_length_graph, max_length_phone))
 
     sentence = preprocess_sentence(sentence)
 
-    inputs = [eng_lang.word_index[i] for i in sentence.split(" ")]
-    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_eng, padding="post")
+    inputs = [phone_lang.word_index[i] for i in sentence.split(" ")]
+    inputs = tf.keras.preprocessing.sequence.pad_sequences([inputs], maxlen=max_length_phone, padding="post")
     inputs = tf.convert_to_tensor(inputs)
     result = ""
 
@@ -97,16 +97,16 @@ def evaluate(sentence):
     enc_out, enc_hidden = encoder(inputs, hidden)
 
     dec_hidden = enc_hidden
-    dec_input = tf.expand_dims([spa_lang.word_index["<start>"]], 0)
+    dec_input = tf.expand_dims([graph_lang.word_index["<start>"]], 0)
 
-    for t in range(max_length_spa):
+    for t in range(max_length_graph):
         predictions, dec_hidden, attention_weights = decoder(dec_input, dec_hidden, enc_out)
 
         attention_weights = tf.reshape(attention_weights, (-1,))  # storing the attention weights to plot later on
         attention_plot[t] = attention_weights.numpy()
 
         predicted_id = tf.argmax(predictions[0]).numpy()
-        next_word = spa_lang.index_word[predicted_id]
+        next_word = graph_lang.index_word[predicted_id]
         result += next_word + " "
         if next_word == "<end>":
             break
@@ -153,21 +153,21 @@ if __name__ == "__main__":
     print(preprocess_sentence(grapheme_sentence))
     print(preprocess_sentence(phoneme_sentence).encode("utf-8"))
 
-    en, sp = create_dataset(path_to_file, NUM_EXAMPLES)
-    print(en[-1])
-    print(sp[-1])
+    graph, phone = create_dataset(path_to_file, NUM_EXAMPLES)
+    print(graph[-1])
+    print(phone[-1])
 
-    spa_tensor, eng_tensor, spa_lang, eng_lang = load_dataset(path_to_file, NUM_EXAMPLES)
-    max_length_eng = eng_tensor.shape[1]
-    max_length_spa = spa_tensor.shape[1]
+    graph_tensor, phone_tensor, graph_lang, phone_lang = load_dataset(path_to_file, NUM_EXAMPLES)
+    max_length_phone = phone_tensor.shape[1]
+    max_length_graph = graph_tensor.shape[1]
     (
-        spa_tensor_train,
-        spa_tensor_val,
-        eng_tensor_train,
-        eng_tensor_val,
+        graph_tensor_train,
+        graph_tensor_val,
+        phone_tensor_train,
+        phone_tensor_val,
     ) = train_test_split(
-        spa_tensor,
-        eng_tensor,
+        graph_tensor,
+        phone_tensor,
         test_size=0.2,
         random_state=None,
         shuffle=True,
@@ -176,37 +176,37 @@ if __name__ == "__main__":
     )
 
     print(
-        len(spa_tensor_train),
-        len(eng_tensor_train),
-        len(spa_tensor_val),
-        len(eng_tensor_val),
+        len(graph_tensor_train),
+        len(phone_tensor_train),
+        len(graph_tensor_val),
+        len(phone_tensor_val),
     )
 
-    print("Spanish Language; index to word mapping")
-    convert(spa_lang, spa_tensor_train[0])
+    print("Graphemes; index to word mapping")
+    convert(graph_lang, graph_tensor_train[0])
     print()
-    print("English Language; index to word mapping")
-    convert(eng_lang, eng_tensor_train[0])
+    print("Phonemes Language; index to word mapping")
+    convert(phone_lang, phone_tensor_train[0])
 
-    BUFFER_SIZE = len(spa_tensor_train)
+    BUFFER_SIZE = len(graph_tensor_train)
 
-    steps_per_epoch = len(spa_tensor_train) // BATCH_SIZE
+    steps_per_epoch = len(graph_tensor_train) // BATCH_SIZE
 
-    vocab_spa_size = len(spa_lang.word_index) + 1
-    vocab_eng_size = len(eng_lang.word_index) + 1
+    vocab_graph_size = len(graph_lang.word_index) + 1
+    vocab_phone_size = len(phone_lang.word_index) + 1
     dataset = tf.data.Dataset.from_tensor_slices(
-        (spa_tensor_train, eng_tensor_train)
+        (graph_tensor_train, phone_tensor_train)
     ).shuffle(BUFFER_SIZE)
     dataset = dataset.batch(BATCH_SIZE, drop_remainder=True)
 
-    example_spa_batch, example_eng_batch = next(iter(dataset))
-    print(example_spa_batch.shape, example_eng_batch.shape)
+    example_graph_batch, example_phone_batch = next(iter(dataset))
+    print(example_graph_batch.shape, example_phone_batch.shape)
 
-    encoder = Encoder(vocab_eng_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
-    decoder = Decoder(vocab_spa_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    encoder = Encoder(vocab_phone_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
+    decoder = Decoder(vocab_graph_size, EMBEDDING_DIM, UNITS, BATCH_SIZE)
 
     sample_hidden = encoder.initialize_hidden_state()
-    sample_output, sample_hidden = encoder(example_eng_batch, sample_hidden)
+    sample_output, sample_hidden = encoder(example_phone_batch, sample_hidden)
     print(f"Encoder output shape: (batch size, sequence length, units) {sample_output.shape}")
     print(f"Encoder Hidden state shape: (batch size, units) {sample_hidden.shape}")
 
