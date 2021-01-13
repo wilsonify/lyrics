@@ -3,7 +3,6 @@ Run FastAPI behind an ASGI server
 """
 import uvicorn
 
-
 if __name__ == "__main__":
     uvicorn.run(
         app="lyrics_api.controller:app",
