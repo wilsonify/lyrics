@@ -59,31 +59,6 @@ def graphemes2phonemes(body):
     return result
 
 
-def create_connection_channel():
-    logging.info("create_connection_channel")
-
-    connection = pika.BlockingConnection(config.connection_parameters)
-
-    channel = connection.channel()
-    channel.basic_qos(prefetch_count=1)
-
-    channel.exchange_declare(exchange=config.try_exchange, exchange_type="topic")
-    channel.exchange_declare(exchange=config.done_exchange, exchange_type="topic")
-    channel.exchange_declare(exchange=config.fail_exchange, exchange_type="topic")
-
-    channel.queue_declare(config.try_exchange, durable=True, exclusive=False, auto_delete=False)
-    channel.queue_declare(config.done_exchange, durable=True, exclusive=False, auto_delete=False)
-    channel.queue_declare(config.fail_exchange, durable=True, exclusive=False, auto_delete=False)
-
-    channel.queue_bind(queue=config.try_exchange, exchange=config.try_exchange, routing_key="green")
-    channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key="green")
-    channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key="green")
-
-    return channel
-
-
-# noinspection PyBroadException
-# noinspection PyPep8
 def route_callback(ch, method, properties, body):
     logging.info("route_callback")
 
@@ -106,8 +81,27 @@ def route_callback(ch, method, properties, body):
         )
 
 
-def process_payload(payload):
-    logging.info("process_payload")
+def grapheme2phoneme(payload):
+    text_str = payload['text']
+    result_str = ""
+    for line in text_str.split('\n'):
+        logging.debug("line = {}".format(line))
+        if line.startswith("Title:"):
+            continue
+        elif re.search(string=line, pattern=r"\[.+\]"):
+            result_str += line + "\n"
+            continue
+        else:
+            grapheme = line
+            phonemes = graphemes2phonemes(grapheme)
+            logging.debug("grapheme = {}".format(grapheme))
+            logging.debug("phonemes = {}".format(phonemes))
+            result_str += reduce_to_string(phonemes) + "\n"
+    return result_str
+
+
+def grapheme2phoneme_file(payload):
+    logging.info("grapheme2phoneme")
     payload_head, payload_tail = os.path.splitext(payload)
     payload_head_head, payload_head_tail = os.path.split(payload_head)
     result_file_name = payload_head_tail + '_phoneme.txt'
@@ -148,16 +142,36 @@ def callback(ch, method, properties, body):
     payload = body.decode("utf-8")
     logging.debug("payload = {}".format(payload))
     logging.debug("payload has type {}".format(type(payload)))
-
-    process_payload(payload)
-
+    strategy = body['strategy']
+    if strategy == 'reduce_to_string':
+        reduce_to_string(payload)
+    elif strategy == 'grapheme2phoneme':
+        grapheme2phoneme(payload)
 
 def main():
     logging.info("main")
-    channel = create_connection_channel()
+    connection = pika.BlockingConnection(config.connection_parameters)
+
+    channel = connection.channel()
+    channel.basic_qos(prefetch_count=1)
+
+    channel.exchange_declare(exchange=config.try_exchange, exchange_type="topic")
+    channel.exchange_declare(exchange=config.done_exchange, exchange_type="topic")
+    channel.exchange_declare(exchange=config.fail_exchange, exchange_type="topic")
+
+    channel.queue_declare(config.try_exchange, durable=True, exclusive=False, auto_delete=False)
+    channel.queue_declare(config.done_exchange, durable=True, exclusive=False, auto_delete=False)
+    channel.queue_declare(config.fail_exchange, durable=True, exclusive=False, auto_delete=False)
+
+    channel.queue_bind(queue=config.try_exchange, exchange=config.try_exchange, routing_key="green")
+    channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key="green")
+    channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key="green")
+
     print(" [*] Waiting for logs. To exit press CTRL+C")
     channel.basic_consume(
-        queue=config.try_exchange, on_message_callback=route_callback, auto_ack=True
+        queue=config.try_exchange,
+        on_message_callback=route_callback,
+        auto_ack=True
     )
 
     channel.start_consuming()
