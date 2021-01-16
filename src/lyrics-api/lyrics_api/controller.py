@@ -16,7 +16,7 @@ And you only have to declare them once.
 That's probably the main visible advantage of FastAPI compared to alternative frameworks
 (apart from the raw performance).
 """
-from fastapi import FastAPI
+from fastapi import FastAPI, HTTPException
 from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
 from python_consumer import consumer
@@ -24,6 +24,57 @@ from tensorflow_consumer.translation import nmt
 from tensorflow_consumer.translation.eng2spa import eng2spa_translate
 from tensorflow_consumer.translation.spa2eng import spa2eng_translate
 from tensorflow_consumer.translation.phoneme2grapheme import phoneme2grapheme_translate
+import pika
+import uuid
+
+
+class RemoteProcedure():
+    def __init__(self, routing_key):
+        self.host = 'localhost'
+        self.port = 5672
+        self.credentials = pika.PlainCredentials(username='guest', password='guest')
+        self.connection_parameters = pika.ConnectionParameters(
+            host=self.host,
+            port=self.port,
+            credentials=self.credentials,
+            heartbeat=10,
+            blocked_connection_timeout=100,
+        )
+        self.connection = pika.BlockingConnection(parameters=self.connection_parameters)
+        self.channel = self.connection.channel()
+        self.channel.basic_qos(prefetch_count=1)
+        self.corr_id = str(uuid.uuid4())
+        self.response = None
+        self.routing_key = routing_key
+
+    def on_response(self, ch, method, props, body):
+        if self.corr_id == props.correlation_id:
+            self.response = body
+
+    def call(self, body_new):
+        new_queue_method_frame = self.channel.queue_declare(queue='', exclusive=True)
+        properties = pika.BasicProperties(
+            reply_to=new_queue_method_frame.method.queue,
+            correlation_id=self.corr_id,
+        )
+
+        self.channel.basic_publish(
+            exchange='',
+            routing_key=self.routing_key,
+            properties=properties,
+            body=body_new
+        )
+
+        self.channel.basic_consume(
+            queue=new_queue_method_frame,
+            on_message_callback=self.on_response,
+            auto_ack=True
+        )
+
+        while self.response is None:
+            self.connection.process_data_events()
+        return self.response
+
 
 app = FastAPI(
     debug=False,
@@ -45,14 +96,22 @@ app = FastAPI(
     summary="Summary: convert graphemes to phonemes",
     description="""Description: 
     convert graphemes (smallest functional unit of a writing system) to phonemes (perceptually distinct units of sound)
-    """
+    """,
 )
 async def grapheme2phoneme(input_grapheme: Grapheme):
-    output = consumer.graphemes2phonemes(input_grapheme.text)
-    output = consumer.reduce_to_string(output)
+    request_body = {
+        'strategy': grapheme2phoneme,
+        'text': grapheme2phoneme.text
+    }
+    rpc = RemoteProcedure(routing_key='python')
+    response_body = rpc.call(request_body)
+    status_code = response_body['status_code']
+    if response_body['status_code'] != 200:
+        status_detail = response_body['detail']
+        raise HTTPException(status_code=status_code, detail=status_detail)
     return Phoneme(
         name=input_grapheme.name,
-        text=output
+        text=response_body['output']
     )
 
 
