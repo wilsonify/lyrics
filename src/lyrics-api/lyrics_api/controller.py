@@ -19,7 +19,6 @@ That's probably the main visible advantage of FastAPI compared to alternative fr
 from fastapi import FastAPI, HTTPException
 from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
-from python_consumer import consumer
 from tensorflow_consumer.translation import nmt
 from tensorflow_consumer.translation.eng2spa import eng2spa_translate
 from tensorflow_consumer.translation.spa2eng import spa2eng_translate
