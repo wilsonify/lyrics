@@ -6,7 +6,8 @@ from tensorflow_consumer import config
 from tensorflow_consumer.strategies import (
     Strategy,
     default,
-    eng2spa
+    eng2spa,
+    spa2eng
 )
 
 
@@ -24,9 +25,9 @@ def callback(ch, method, properties, body):
     strategy = body['strategy']
     strat = Strategy(default)
     if strategy == 'eng2spa':
-        strat = Strategy(eng2spa)
+        strat = Strategy(function=eng2spa, channel=ch, method=method, props=properties)
     if strategy == 'spa2eng':
-        strat = Strategy(eng2spa)
+        strat = Strategy(function=spa2eng, channel=ch, method=method, props=properties)
     strat.execute()
 
 

@@ -10,21 +10,14 @@ from tensorflow_consumer.translation.spa2eng import spa2eng_translate
 class Strategy:
     """The Strategy Pattern class"""
 
-    def __init__(self, function):
+    def __init__(self, function, channel, method, props):
         self.name = "Default Strategy"
         self.execute = MethodType(function, self)
-        self.connection = pika.BlockingConnection(config.connection_parameters)
-        self.channel = self.connection.channel()
-        self.channel.basic_qos(prefetch_count=1)
-        self.reply_to = None
-        self.correlation_id = None
-        self.properties = None
-        self.channel.basic_consume(queue=f'try_{config.routing_key}', on_message_callback=self.on_request)
-
-    def on_request(self, ch, method, props, body):
+        self.channel = channel
+        self.method = method
+        self.props = props
         self.reply_to = props.reply_to
         self.correlation_id = props.correlation_id
-        self.properties = pika.BasicProperties(correlation_id=self.correlation_id)
 
 
 def default(self, payload):
@@ -43,6 +36,7 @@ def eng2spa(self, payload):
         properties=self.properties,
         body=json.dumps(response).encode("utf-8")
     )
+
 
 def spa2eng(self, payload):
     text_str = payload['text']
