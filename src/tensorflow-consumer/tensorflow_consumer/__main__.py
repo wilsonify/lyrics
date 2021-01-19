@@ -23,12 +23,12 @@ def callback(ch, method, properties, body):
     logging.debug("payload = {}".format(payload))
     logging.debug("payload has type {}".format(type(payload)))
     strategy = body['strategy']
-    strat = Strategy(default)
+    current_strategy = Strategy(default)
     if strategy == 'eng2spa':
-        strat = Strategy(function=eng2spa, channel=ch, method=method, props=properties)
+        current_strategy = Strategy(function=eng2spa, channel=ch, method=method, props=properties)
     if strategy == 'spa2eng':
-        strat = Strategy(function=spa2eng, channel=ch, method=method, props=properties)
-    strat.execute()
+        current_strategy = Strategy(function=spa2eng, channel=ch, method=method, props=properties)
+    current_strategy.execute()
 
 
 def route_callback(ch, method, properties, body):
@@ -41,7 +41,8 @@ def route_callback(ch, method, properties, body):
             exchange=config.done_exchange,
             routing_key=config.routing_key,
             properties=properties,
-            body=body)
+            body=body
+        )
 
     except:
         body['status_code'] = 400
