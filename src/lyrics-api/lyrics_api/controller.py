@@ -16,6 +16,8 @@ And you only have to declare them once.
 That's probably the main visible advantage of FastAPI compared to alternative frameworks
 (apart from the raw performance).
 """
+import json
+
 from fastapi import FastAPI, HTTPException
 from lyrics_api import __version__
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
@@ -30,7 +32,7 @@ import uuid
 class RemoteProcedure():
     def __init__(self, routing_key):
         self.host = 'localhost'
-        self.port = 5672
+        self.port = 32777  # 5672
         self.credentials = pika.PlainCredentials(username='guest', password='guest')
         self.connection_parameters = pika.ConnectionParameters(
             host=self.host,
@@ -46,28 +48,29 @@ class RemoteProcedure():
         self.response = None
         self.routing_key = routing_key
 
-    def on_response(self, ch, method, props, body):
-        if self.corr_id == props.correlation_id:
-            self.response = body
-
-    def call(self, body_new):
         new_queue_method_frame = self.channel.queue_declare(queue='', exclusive=True)
-        properties = pika.BasicProperties(
+        self.properties = pika.BasicProperties(
             reply_to=new_queue_method_frame.method.queue,
             correlation_id=self.corr_id,
         )
 
-        self.channel.basic_publish(
-            exchange='',
-            routing_key=self.routing_key,
-            properties=properties,
-            body=body_new
-        )
-
         self.channel.basic_consume(
-            queue=new_queue_method_frame,
+            queue=new_queue_method_frame.method.queue,
             on_message_callback=self.on_response,
             auto_ack=True
+        )
+
+    def on_response(self, ch, method, props, body):
+        if self.corr_id == props.correlation_id:
+            self.response = json.loads(body.decode("utf-8"))
+
+    def call(self, body_new):
+
+        self.channel.basic_publish(
+            exchange=f'try_{self.routing_key}',
+            routing_key=self.routing_key,
+            properties=self.properties,
+            body=json.dumps(body_new).encode("utf-8")
         )
 
         while self.response is None:
@@ -99,8 +102,8 @@ app = FastAPI(
 )
 async def grapheme2phoneme(input_grapheme: Grapheme):
     request_body = {
-        'strategy': grapheme2phoneme,
-        'text': grapheme2phoneme.text
+        'strategy': "grapheme2phoneme",
+        'text': input_grapheme.text
     }
     rpc = RemoteProcedure(routing_key='python')
     response_body = rpc.call(request_body)
