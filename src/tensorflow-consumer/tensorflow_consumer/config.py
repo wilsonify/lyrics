@@ -83,7 +83,7 @@ logging_config_dict = dict(
 
 amqp_host = os.getenv("AMQP_HOST", "localhost")
 amqp_port = os.getenv("AMQP_PORT", 32777)
-routing_key = "green"
+routing_key = os.getenv("AMQP_ROUTING_KEY", "tensorflow")
 try_exchange = "try_{}".format(routing_key)
 done_exchange = "done_{}".format(routing_key)
 fail_exchange = "fail_{}".format(routing_key)

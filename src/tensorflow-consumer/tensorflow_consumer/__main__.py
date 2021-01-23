@@ -70,17 +70,16 @@ def main():
     channel.queue_declare(config.done_exchange, durable=True, exclusive=False, auto_delete=False)
     channel.queue_declare(config.fail_exchange, durable=True, exclusive=False, auto_delete=False)
 
-    channel.queue_bind(queue=config.try_exchange, exchange=config.try_exchange, routing_key="green")
-    channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key="green")
-    channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key="green")
+    channel.queue_bind(queue=config.try_exchange, exchange=config.try_exchange, routing_key=config.routing_key)
+    channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key=config.routing_key)
+    channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key=config.routing_key)
 
-    print(" [*] Waiting for logs. To exit press CTRL+C")
+    print(" tensorflow consumer is waiting for messages ")
     channel.basic_consume(
         queue=config.try_exchange,
         on_message_callback=route_callback,
         auto_ack=True
     )
-
     channel.start_consuming()
 
 
