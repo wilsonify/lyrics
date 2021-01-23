@@ -10,14 +10,13 @@ from python_consumer.strategies import (
 )
 
 
-def callback(ch, method, properties, body):
-    logging.info("callback")
+def route_callback(ch, method, properties, body):
+    logging.info("route_callback")
     logging.debug("ch={}".format(ch))
     logging.debug("properties={}".format(properties))
     logging.debug("key={}".format(method.routing_key))
     logging.debug("body={}".format(body))
     logging.debug("body has type {}".format(type(body)))
-
     payload = body.decode("utf-8")
     logging.debug("payload = {}".format(payload))
     logging.debug("payload has type {}".format(type(payload)))
@@ -25,21 +24,15 @@ def callback(ch, method, properties, body):
     strat = Strategy(default)
     if strategy == 'grapheme2phoneme':
         strat = Strategy(grapheme2phoneme)
-    strat.execute()
-
-
-def route_callback(ch, method, properties, body):
-    logging.info("route_callback")
-
     try:
-        callback(ch, method, properties, body)
+        strat.execute()
         logging.info("done")
         ch.basic_publish(
             exchange=config.done_exchange,
             routing_key=config.routing_key,
             properties=properties,
-            body=body)
-
+            body=body
+        )
     except:
         body['status_code'] = 400
         logging.exception("failed to consume message")
@@ -49,6 +42,13 @@ def route_callback(ch, method, properties, body):
             properties=properties,
             body=body
         )
+        if properties.reply_to is not None:
+            ch.basic_publish(
+                exchange=properties.reply_to,
+                routing_key=config.routing_key,
+                properties=pika.BasicProperties(correlation_id=properties.correlation_id),
+                body=body
+            )
     logging.info("waiting for more messages")
 
 
