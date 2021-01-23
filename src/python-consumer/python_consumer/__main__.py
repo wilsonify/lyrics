@@ -49,6 +49,7 @@ def route_callback(ch, method, properties, body):
             properties=properties,
             body=body
         )
+    logging.info("waiting for more messages")
 
 
 def main():
@@ -70,7 +71,7 @@ def main():
     channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key="green")
     channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key="green")
 
-    print(" [*] Waiting for logs. To exit press CTRL+C")
+    print(" python-consumer is waiting for messages")
     channel.basic_consume(
         queue=config.try_exchange,
         on_message_callback=route_callback,
