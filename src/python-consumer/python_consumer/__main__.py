@@ -1,3 +1,4 @@
+import json
 import logging
 from logging.config import dictConfig
 
@@ -17,15 +18,16 @@ def route_callback(ch, method, properties, body):
     logging.debug("key={}".format(method.routing_key))
     logging.debug("body={}".format(body))
     logging.debug("body has type {}".format(type(body)))
-    payload = body.decode("utf-8")
+    payload = json.loads(body.decode("utf-8"))
     logging.debug("payload = {}".format(payload))
     logging.debug("payload has type {}".format(type(payload)))
-    strategy = body['strategy']
-    strat = Strategy(default)
+
+    strategy = payload['strategy']
+    strat = Strategy(default, channel=ch, method=method, props=properties)
     if strategy == 'grapheme2phoneme':
-        strat = Strategy(grapheme2phoneme)
+        strat = Strategy(grapheme2phoneme, channel=ch, method=method, props=properties)
     try:
-        strat.execute()
+        strat.execute(payload)
         logging.info("done")
         ch.basic_publish(
             exchange=config.done_exchange,
@@ -34,7 +36,8 @@ def route_callback(ch, method, properties, body):
             body=body
         )
     except:
-        body['status_code'] = 400
+
+        payload['status_code'] = 400
         logging.exception("failed to consume message")
         ch.basic_publish(
             exchange=config.fail_exchange,
@@ -47,7 +50,7 @@ def route_callback(ch, method, properties, body):
                 exchange=properties.reply_to,
                 routing_key=config.routing_key,
                 properties=pika.BasicProperties(correlation_id=properties.correlation_id),
-                body=body
+                body=json.dumps(payload).encode('utf-8')
             )
     logging.info("waiting for more messages")
 
