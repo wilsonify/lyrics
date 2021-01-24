@@ -1,3 +1,4 @@
+import json
 from types import MethodType
 
 import pika
@@ -27,7 +28,7 @@ def grapheme2phoneme(self, payload):
     response = {"text": result_str, "status_code": 200}
     self.channel.basic_publish(
         exchange='',
-        routing_key=self.props.reply_to,
+        routing_key=str(self.props.reply_to),
         properties=pika.BasicProperties(correlation_id=self.props.correlation_id),
-        body=str(response)
+        body=json.dumps(response).encode("utf-8")
     )
