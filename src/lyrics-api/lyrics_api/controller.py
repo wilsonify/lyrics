@@ -17,6 +17,7 @@ That's probably the main visible advantage of FastAPI compared to alternative fr
 (apart from the raw performance).
 """
 import json
+import logging
 
 from fastapi import FastAPI, HTTPException
 from lyrics_api import __version__
@@ -49,28 +50,40 @@ class RemoteProcedure():
         self.routing_key = routing_key
 
         new_queue_method_frame = self.channel.queue_declare(queue='', exclusive=True)
+        self.reply_to_queue = new_queue_method_frame.method.queue
         self.properties = pika.BasicProperties(
-            reply_to=new_queue_method_frame.method.queue,
+            reply_to=self.reply_to_queue,
             correlation_id=self.corr_id,
         )
+        self.declare()
 
-        self.channel.basic_consume(
-            queue=new_queue_method_frame.method.queue,
-            on_message_callback=self.on_response,
-            auto_ack=True
-        )
+    def declare(self):
+        route = "python"
+        self.channel.exchange_declare(exchange=f"try_{route}", exchange_type="topic")
+        self.channel.queue_declare(f"try_{route}", durable=True, exclusive=False, auto_delete=False)
+        self.channel.queue_bind(queue=f"try_{route}", exchange=f"try_{route}", routing_key=route)
+        route = "tensorflow"
+        self.channel.exchange_declare(exchange=f"try_{route}", exchange_type="topic")
+        self.channel.queue_declare(f"try_{route}", durable=True, exclusive=False, auto_delete=False)
+        self.channel.queue_bind(queue=f"try_{route}", exchange=f"try_{route}", routing_key=route)
 
     def on_response(self, ch, method, props, body):
         if self.corr_id == props.correlation_id:
             self.response = json.loads(body.decode("utf-8"))
 
     def call(self, body_new):
+        logging.debug(f"body_new = {body_new}")
 
         self.channel.basic_publish(
             exchange=f'try_{self.routing_key}',
             routing_key=self.routing_key,
-            properties=self.properties,
             body=json.dumps(body_new).encode("utf-8")
+        )
+
+        self.channel.basic_consume(
+            queue=self.reply_to_queue,
+            on_message_callback=self.on_response,
+            auto_ack=True
         )
 
         while self.response is None:
