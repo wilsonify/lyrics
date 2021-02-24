@@ -2,17 +2,30 @@ version: '3'
 services:
   some-rabbitmq:
     image: rabbitmq:3-management-alpine
-    hostname: rabbit-host
+    volumes:
+      - "./enabled_plugins:/etc/rabbitmq/enabled_plugins"
     restart: unless-stopped
     ports:
-     - "32779:4369"
-     - "32778:5671"
-     - "32777:5672"
-     - "32776:15671"
      - "32775:15672"
   python-consumer:
+    depends_on: [some-rabbitmq]
     build:
       context: ../../src/python-consumer
-      dockerfile: ../../src/python-consumer/Dockerfile
+      dockerfile: Dockerfile
     volumes:
       - ~/phoneme:/local_data
+    restart: unless-stopped
+    environment:
+      - AMQP_HOST=some-rabbitmq
+      - AMQP_PORT=5672
+  tensorflow-consumer:
+    depends_on: [some-rabbitmq]
+    build:
+      context: ../../src/tensorflow-consumer
+      dockerfile: Dockerfile
+    volumes:
+      - ~/phoneme:/local_data
+    restart: unless-stopped
+    environment:
+      - AMQP_HOST=some-rabbitmq
+      - AMQP_PORT=5672

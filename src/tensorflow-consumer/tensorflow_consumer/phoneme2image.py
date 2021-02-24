@@ -8,8 +8,8 @@ import os
 from logging.config import dictConfig
 
 import tensorflow as tf
-from recurrent import config
-from recurrent.utils import encode, decode
+from tensorflow_consumer import config
+from tensorflow_consumer.utils import encode, decode
 
 
 def text_string_to_image(text_str):

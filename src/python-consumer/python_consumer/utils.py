@@ -1,8 +1,6 @@
 import logging
 import os
 import re
-from logging.config import dictConfig
-
 import nltk
 import pika
 from python_consumer import config
@@ -34,8 +32,6 @@ def reduce_to_string(list_of_lists):
 def word2phoneme(grapheme):
     grapheme = grapheme.lower()
     grapheme = re.sub(pattern=r'\W+', repl="", string=grapheme)
-    # noinspection PyUnusedLocal
-    phoneme = grapheme
     try:
         phoneme = arpabet[grapheme][0]
     except (KeyError, IndexError):
@@ -59,55 +55,20 @@ def graphemes2phonemes(body):
     return result
 
 
-def create_connection_channel():
-    logging.info("create_connection_channel")
-
-    connection = pika.BlockingConnection(config.connection_parameters)
-
-    channel = connection.channel()
-    channel.basic_qos(prefetch_count=1)
-
-    channel.exchange_declare(exchange=config.try_exchange, exchange_type="topic")
-    channel.exchange_declare(exchange=config.done_exchange, exchange_type="topic")
-    channel.exchange_declare(exchange=config.fail_exchange, exchange_type="topic")
-
-    channel.queue_declare(config.try_exchange, durable=True, exclusive=False, auto_delete=False)
-    channel.queue_declare(config.done_exchange, durable=True, exclusive=False, auto_delete=False)
-    channel.queue_declare(config.fail_exchange, durable=True, exclusive=False, auto_delete=False)
-
-    channel.queue_bind(queue=config.try_exchange, exchange=config.try_exchange, routing_key="green")
-    channel.queue_bind(queue=config.done_exchange, exchange=config.done_exchange, routing_key="green")
-    channel.queue_bind(queue=config.fail_exchange, exchange=config.fail_exchange, routing_key="green")
-
-    return channel
 
 
-# noinspection PyBroadException
-# noinspection PyPep8
-def route_callback(ch, method, properties, body):
-    logging.info("route_callback")
-
-    try:
-        callback(ch, method, properties, body)
-        logging.info("done")
-        ch.basic_publish(
-            exchange=config.done_exchange,
-            routing_key=config.routing_key,
-            properties=properties,
-            body=body)
-
-    except:
-        logging.exception("failed to consume message")
-        ch.basic_publish(
-            exchange=config.fail_exchange,
-            routing_key=config.routing_key,
-            properties=properties,
-            body=body
-        )
 
 
-def process_payload(payload):
-    logging.info("process_payload")
+
+
+def grapheme2phoneme_str(grapheme):
+    phonemes_list = graphemes2phonemes(grapheme)
+    phoneme = reduce_to_string(phonemes_list)
+    return phoneme
+
+
+def grapheme2phoneme_file(payload):
+    logging.info("grapheme2phoneme")
     payload_head, payload_tail = os.path.splitext(payload)
     payload_head_head, payload_head_tail = os.path.split(payload_head)
     result_file_name = payload_head_tail + '_phoneme.txt'
@@ -137,32 +98,6 @@ def process_payload(payload):
     return result
 
 
-def callback(ch, method, properties, body):
-    logging.info("callback")
-    logging.debug("ch={}".format(ch))
-    logging.debug("properties={}".format(properties))
-    logging.debug("key={}".format(method.routing_key))
-    logging.debug("body={}".format(body))
-    logging.debug("body has type {}".format(type(body)))
-
-    payload = body.decode("utf-8")
-    logging.debug("payload = {}".format(payload))
-    logging.debug("payload has type {}".format(type(payload)))
-
-    process_payload(payload)
 
 
-def main():
-    logging.info("main")
-    channel = create_connection_channel()
-    print(" [*] Waiting for logs. To exit press CTRL+C")
-    channel.basic_consume(
-        queue=config.try_exchange, on_message_callback=route_callback, auto_ack=True
-    )
 
-    channel.start_consuming()
-
-
-if __name__ == "__main__":
-    dictConfig(config.logging_config_dict)
-    main()
