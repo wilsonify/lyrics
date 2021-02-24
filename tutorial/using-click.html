@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A single app with both Click and Typer &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -1370,7 +1370,7 @@ If you want to learn more about this check the section <a class="reference inter
 <p>And that way, our <strong>Typer</strong> app will have a subcommand <code class="docutils literal notranslate"><span class="pre">top</span></code> built with Typer, and a subcommand <code class="docutils literal notranslate"><span class="pre">hello</span></code> built with Click.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">// Notice we have both subcommands, top and hello</span>
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
@@ -1388,12 +1388,12 @@ If you want to learn more about this check the section <a class="reference inter
 <span class="go">  top    Top level command, form Typer</span>
 
 <span class="go">// Call the Typer part</span>
-<span class="gp">$</span> python main.py top
+<span class="gp">$ </span>python main.py top
 
 <span class="go">The Typer app is at the top level</span>
 
 <span class="go">// Call the Click part</span>
-<span class="gp">$</span> python main.py hello --name Camila
+<span class="gp">$ </span>python main.py hello --name Camila
 
 <span class="go">Hello Camila!</span>
 </pre></div>
@@ -1412,7 +1412,7 @@ If you want to learn more about this check the section <a class="reference inter
 <p>And then we call the <em>original Click</em> app, not the Typer app.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">// We get our Typer app down there in the sub command</span>
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
@@ -1427,12 +1427,12 @@ If you want to learn more about this check the section <a class="reference inter
 
 
 <span class="go">// Use the Click part</span>
-<span class="gp">$</span> python main.py initdb
+<span class="gp">$ </span>python main.py initdb
 
 <span class="go">Initialized the database</span>
 
 <span class="go">// And use the Typer part</span>
-<span class="gp">$</span> python main.py sub
+<span class="gp">$ </span>python main.py sub
 
 <span class="go">Typer is now below Click, the Click app is the top level</span>
 </pre></div>
@@ -1501,7 +1501,7 @@ You can read more about using the context in the docs: <a class="reference inter
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

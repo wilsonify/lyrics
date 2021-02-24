@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>The simplest example &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -1327,14 +1327,14 @@ You will learn more about <code class="docutils literal notranslate"><span class
 <p>Copy that to a file <code class="docutils literal notranslate"><span class="pre">main.py</span></code>.</p>
 <p>Test it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">Hello World</span>
 
 <span class="go">// It just prints &quot;Hello World&quot;.</span>
 
 <span class="go">// Now check the --help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS]</span>
 
@@ -1372,7 +1372,7 @@ first-steps.md  intro.md
 </pre></div>
 </div>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">// If you run it without the argument, it shows a nice error</span>
 <span class="go">Usage: main.py [OPTIONS] NAME</span>
@@ -1381,14 +1381,14 @@ first-steps.md  intro.md
 <span class="go">Error: Missing argument &#39;NAME&#39;.</span>
 
 <span class="go">// Now pass that NAME CLI argument</span>
-<span class="gp">$</span> python main.py Camila
+<span class="gp">$ </span>python main.py Camila
 
 <span class="go">Hello Camila</span>
 
 <span class="go">// Here &quot;Camila&quot; is the CLI argument</span>
 
 <span class="go">// To pass a name with spaces for the same CLI argument, use quotes</span>
-<span class="gp">$</span> python main.py <span class="s2">&quot;Camila Gutiérrez&quot;</span>
+<span class="gp">$ </span>python main.py <span class="s2">&quot;Camila Gutiérrez&quot;</span>
 
 <span class="go">Hello Camila Gutiérrez</span>
 </pre></div>
@@ -1406,7 +1406,7 @@ If you need to pass a single value that contains spaces to a <em>CLI argument</e
 </div>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the main --help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] NAME LASTNAME</span>
 
@@ -1422,7 +1422,7 @@ If you need to pass a single value that contains spaces to a <em>CLI argument</e
 <span class="go">// There are now 2 CLI arguments, name and lastname</span>
 
 <span class="go">// Now pass a single name argument</span>
-<span class="gp">$</span> python main.py Camila
+<span class="gp">$ </span>python main.py Camila
 
 <span class="go">Usage: main.py [OPTIONS] NAME LASTNAME</span>
 <span class="go">Try &quot;main.py --help&quot; for help.</span>
@@ -1430,7 +1430,7 @@ If you need to pass a single value that contains spaces to a <em>CLI argument</e
 <span class="go">Error: Missing argument &#39;LASTNAME&#39;.</span>
 
 <span class="go">// These 2 arguments are required, so, pass both:</span>
-<span class="gp">$</span> python main.py Camila Gutiérrez
+<span class="gp">$ </span>python main.py Camila Gutiérrez
 
 <span class="go">Hello Camila Gutiérrez</span>
 </pre></div>
@@ -1452,7 +1452,7 @@ your app wouldn&#39;t have a way to know which is the `name` and which the `last
 <h1>What is a <strong>CLI option</strong><a class="headerlink" href="#what-is-a-cli-option" title="Permalink to this headline">¶</a></h1>
 <p>Here we will use the word <strong>CLI option</strong> to refer to <em>CLI parameters</em> passed to the CLI application with a specific name. For example, if you go to your terminal and type:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ls ./myproject --size
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls ./myproject --size
 
 <span class="go">12 first-steps.md   4 intro.md</span>
 </pre></div>
@@ -1468,7 +1468,7 @@ your app wouldn&#39;t have a way to know which is the `name` and which the `last
 <p>A <em>CLI option</em> like <code class="docutils literal notranslate"><span class="pre">--size</span></code> doesn’t depend on the order like a <em>CLI argument</em>.</p>
 <p>So, if you put the <code class="docutils literal notranslate"><span class="pre">--size</span></code> <em>before</em> the <em>CLI argument</em>, it still works (in fact, that’s the most common way of doing it):</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> ls --size ./myproject
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>ls --size ./myproject
 
 <span class="go">12 first-steps.md   4 intro.md</span>
 </pre></div>
@@ -1505,7 +1505,7 @@ In this example above the <em>CLI option</em> <code class="docutils literal notr
 <p>Here <code class="docutils literal notranslate"><span class="pre">formal</span></code> is a <code class="docutils literal notranslate"><span class="pre">bool</span></code> that is <code class="docutils literal notranslate"><span class="pre">False</span></code> by default.</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Get the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] NAME LASTNAME</span>
 
@@ -1525,21 +1525,21 @@ In this example above the <em>CLI option</em> <code class="docutils literal notr
 Notice that it automatically creates a <code class="docutils literal notranslate"><span class="pre">--formal</span></code> and a <code class="docutils literal notranslate"><span class="pre">--no-formal</span></code> because it detected that <code class="docutils literal notranslate"><span class="pre">formal</span></code> is a <code class="docutils literal notranslate"><span class="pre">bool</span></code>.</p>
 <p>Now call it normally:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py Camila Gutiérrez
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py Camila Gutiérrez
 
 <span class="go">Hello Camila Gutiérrez</span>
 
 <span class="go">// But if you pass --formal</span>
-<span class="gp">$</span> python main.py Camila Gutiérrez --formal
+<span class="gp">$ </span>python main.py Camila Gutiérrez --formal
 
 <span class="go">Good day Ms. Camila Gutiérrez.</span>
 
 <span class="go">// And as --formal is a CLI option you can put it anywhere in this command</span>
-<span class="gp">$</span> python main.py Camila --formal Gutiérrez
+<span class="gp">$ </span>python main.py Camila --formal Gutiérrez
 
 <span class="go">Good day Ms. Camila Gutiérrez.</span>
 
-<span class="gp">$</span> python main.py --formal Camila Gutiérrez
+<span class="gp">$ </span>python main.py --formal Camila Gutiérrez
 
 <span class="go">Good day Ms. Camila Gutiérrez.</span>
 </pre></div>
@@ -1554,7 +1554,7 @@ Notice that it automatically creates a <code class="docutils literal notranslate
 </div>
 <p>As <code class="docutils literal notranslate"><span class="pre">lastname</span></code> now has a default value of <code class="docutils literal notranslate"><span class="pre">&quot;&quot;</span></code> (an empty string) it is no longer required in the function, and <strong>Typer</strong> will now by default make it an optional <em>CLI option</em>.</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] NAME</span>
 
@@ -1577,12 +1577,12 @@ Notice the <code class="docutils literal notranslate"><span class="pre">--lastna
 </div>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Call it without a --lastname</span>
-<span class="gp">$</span> python main.py Camila
+<span class="gp">$ </span>python main.py Camila
 
 <span class="go">Hello Camila</span>
 
 <span class="go">// Pass the --lastname</span>
-<span class="gp">$</span> python main.py Camila --lastname Gutiérrez
+<span class="gp">$ </span>python main.py Camila --lastname Gutiérrez
 
 <span class="go">Hello Camila Gutiérrez</span>
 </pre></div>
@@ -1592,7 +1592,7 @@ Notice the <code class="docutils literal notranslate"><span class="pre">--lastna
 Notice that “<code class="docutils literal notranslate"><span class="pre">Gutiérrez</span></code>” is at the right side of <code class="docutils literal notranslate"><span class="pre">--lastname</span></code>. A <em>CLI option</em> with a value takes as its value whatever is at the <em>right side</em>.</p>
 <p>And as <code class="docutils literal notranslate"><span class="pre">--lastname</span></code> is now a <em>CLI option</em> that doesn’t depend on the order, you can pass it before the name:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --lastname Gutiérrez Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --lastname Gutiérrez Camila
 
 <span class="go">// and it will still work normally</span>
 <span class="go">Hello Camila Gutiérrez</span>
@@ -1608,7 +1608,7 @@ Notice that “<code class="docutils literal notranslate"><span class="pre">Guti
 </div>
 <p>Now see it with the <code class="docutils literal notranslate"><span class="pre">--help</span></code> option:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] NAME</span>
 
@@ -1695,7 +1695,7 @@ person = bring_person(&quot;Camila&quot;, lastname=&quot;Gutiérrez&quot;)
 <p><strong>Typer CLI</strong> is a tool to run your <strong>Typer</strong> scripts giving you ✨ auto completion ✨ in your terminal.</p>
 <p>As an alternative to running with Python:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">Hello World</span>
 </pre></div>
@@ -1703,7 +1703,7 @@ person = bring_person(&quot;Camila&quot;, lastname=&quot;Gutiérrez&quot;)
 </div>
 <p>You can run with <strong>Typer CLI</strong>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer main.py run
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer main.py run
 
 <span class="go">Hello World</span>
 </pre></div>
@@ -1767,7 +1767,7 @@ Your CLI application built with <strong>Typer</strong> won’t need <a class="re
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

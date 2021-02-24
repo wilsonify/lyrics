@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>CLI option short names &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1306,7 +1306,7 @@ That&#39;s a &quot;positional argument&quot; in a function.
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice the --name instead of --user-name</span>
 <span class="go">Usage: main.py [OPTIONS]</span>
@@ -1318,7 +1318,7 @@ That&#39;s a &quot;positional argument&quot; in a function.
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python --name Camila
+<span class="gp">$ </span>python --name Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1330,12 +1330,12 @@ That&#39;s a &quot;positional argument&quot; in a function.
 <p>For example, the <code class="docutils literal notranslate"><span class="pre">ls</span></code> program has a <em>CLI option</em> named <code class="docutils literal notranslate"><span class="pre">--size</span></code>, and the same <em>CLI option</em> also has a short name <code class="docutils literal notranslate"><span class="pre">-s</span></code>:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// With the long name --size</span>
-<span class="gp">$</span> ls ./myproject --size
+<span class="gp">$ </span>ls ./myproject --size
 
 <span class="go">12 first-steps.md   4 intro.md</span>
 
 <span class="go">// With the short name -s</span>
-<span class="gp">$</span> ls ./myproject -s
+<span class="gp">$ </span>ls ./myproject -s
 
 <span class="go">12 first-steps.md   4 intro.md</span>
 
@@ -1359,22 +1359,22 @@ That&#39;s a &quot;positional argument&quot; in a function.
 <p>So, you can put them together with <code class="docutils literal notranslate"><span class="pre">-sh</span></code> or <code class="docutils literal notranslate"><span class="pre">-hs</span></code>:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Call ls with long CLI options</span>
-<span class="gp">$</span> ls --size --human
+<span class="gp">$ </span>ls --size --human
 
 <span class="go">12K first-steps.md   4.0K intro.md</span>
 
 <span class="go">// Now with short versions</span>
-<span class="gp">$</span> ls -s -h
+<span class="gp">$ </span>ls -s -h
 
 <span class="go">12K first-steps.md   4.0K intro.md</span>
 
 <span class="go">// And with short versions together</span>
-<span class="gp">$</span> ls -sh
+<span class="gp">$ </span>ls -sh
 
 <span class="go">12K first-steps.md   4.0K intro.md</span>
 
 <span class="go">// Order in short versions doesn&#39;t matter</span>
-<span class="gp">$</span> ls -hs
+<span class="gp">$ </span>ls -hs
 
 <span class="go">12K first-steps.md   4.0K intro.md</span>
 
@@ -1400,14 +1400,14 @@ That&#39;s a &quot;positional argument&quot; in a function.
 </ul>
 <p>For example:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> tar -xvf myproject.tar.gz
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>tar -xvf myproject.tar.gz
 
 <span class="go">myproject/</span>
 <span class="go">myproject/first-steps.md</span>
 <span class="go">myproject/intro.md</span>
 
 <span class="go">// But if you put the -f before</span>
-<span class="gp">$</span> tar -fxv myproject.tar.gz
+<span class="gp">$ </span>tar -fxv myproject.tar.gz
 
 <span class="go">// You get an ugly error</span>
 <span class="go">tar: You must specify one of the blah, blah, error, error</span>
@@ -1433,7 +1433,7 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice the two CLI option names -n and --name</span>
 <span class="go">Usage: main.py [OPTIONS]</span>
@@ -1445,7 +1445,7 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Try the short version</span>
-<span class="gp">$</span> python main.py -n Camila
+<span class="gp">$ </span>python main.py -n Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1460,7 +1460,7 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice there&#39;s no --name nor --user-name, only -n</span>
 <span class="go">Usage: main.py [OPTIONS]</span>
@@ -1472,7 +1472,7 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python main.py -n Camila
+<span class="gp">$ </span>python main.py -n Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1487,7 +1487,7 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice that we have the long version --user-name back</span>
 <span class="go">// and we also have the short version -n</span>
@@ -1500,12 +1500,12 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python main.py --user-name Camila
+<span class="gp">$ </span>python main.py --user-name Camila
 
 <span class="go">Hello Camila</span>
 
 <span class="go">// And try the short version</span>
-<span class="gp">$</span> python main.py -n Camila
+<span class="gp">$ </span>python main.py -n Camila
 </pre></div>
 </div>
 </div>
@@ -1521,7 +1521,7 @@ Remember the <em>positional</em> function arguments are those that don’t have 
 Notice that, again, we are declaring the long and short version of the <em>CLI option</em> names.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// We now have short versions -n and -f</span>
 <span class="go">// And also long versions --name and --formal</span>
@@ -1535,13 +1535,13 @@ Notice that, again, we are declaring the long and short version of the <em>CLI o
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Try the short versions</span>
-<span class="gp">$</span> python main.py -n Camila -f
+<span class="gp">$ </span>python main.py -n Camila -f
 
 <span class="go">Good day Ms. Camila.</span>
 
 <span class="go">// And try the 2 short versions together</span>
 <span class="go">// See how -n has to go last, to be able to get the value</span>
-<span class="gp">$</span> python main.py -fn Camila
+<span class="gp">$ </span>python main.py -fn Camila
 
 <span class="go">Good day Ms. Camila.</span>
 </pre></div>
@@ -1599,7 +1599,7 @@ Notice that, again, we are declaring the long and short version of the <em>CLI o
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

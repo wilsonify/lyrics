@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Case insensitive Enum choices &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1226,7 +1226,7 @@ Notice that the function parameter <code class="docutils literal notranslate"><s
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice the predefined values [simple|conv|lstm]</span>
 <span class="go">Usage: main.py [OPTIONS]</span>
@@ -1238,12 +1238,12 @@ Notice that the function parameter <code class="docutils literal notranslate"><s
 <span class="go">  --help                        Show this message and exit.</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python main.py --network conv
+<span class="gp">$ </span>python main.py --network conv
 
 <span class="go">Training neural network of type: conv</span>
 
 <span class="go">// Invalid value</span>
-<span class="gp">$</span> python main.py --network capsule
+<span class="gp">$ </span>python main.py --network capsule
 
 <span class="go">Usage: main.py [OPTIONS]</span>
 <span class="go">Try &quot;main.py --help&quot; for help.</span>
@@ -1261,12 +1261,12 @@ Notice that the function parameter <code class="docutils literal notranslate"><s
 <p>And then the values of the <code class="docutils literal notranslate"><span class="pre">Enum</span></code> will be checked no matter if lower case, upper case, or a mix:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Notice the upper case CONV</span>
-<span class="gp">$</span> python main.py --network CONV
+<span class="gp">$ </span>python main.py --network CONV
 
 <span class="go">Training neural network of type: conv</span>
 
 <span class="go">// A mix also works</span>
-<span class="gp">$</span> python main.py --network LsTm
+<span class="gp">$ </span>python main.py --network LsTm
 
 <span class="go">Training neural network of type: lstm</span>
 </pre></div>
@@ -1323,7 +1323,7 @@ Notice that the function parameter <code class="docutils literal notranslate"><s
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Path validations &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1244,26 +1244,26 @@
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// No config</span>
-<span class="gp">$</span> python main.py
+<span class="gp">$ </span>python main.py
 
 <span class="go">No config file</span>
 <span class="go">Aborted!</span>
 
 <span class="go">// Pass a config that doesn&#39;t exist</span>
-<span class="gp">$</span> python main.py --config config.txt
+<span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">The config doesn&#39;t exist</span>
 
 <span class="go">// Now create a quick config</span>
-<span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;some settings&quot;</span> &gt; config.txt
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;some settings&quot;</span> &gt; config.txt
 
 <span class="go">// And try again</span>
-<span class="gp">$</span> python main.py --config config.txt
+<span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Config file contents: some settings</span>
 
 <span class="go">// And with a directory</span>
-<span class="gp">$</span> python main.py --config ./
+<span class="gp">$ </span>python main.py --config ./
 
 <span class="go">Config is a directory, will use all its config files</span>
 </pre></div>
@@ -1290,7 +1290,7 @@ All these parameters come directly from <a href="https://click.palletsprojects.c
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --config config.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Usage: main.py [OPTIONS]</span>
 <span class="go">Try &quot;main.py --help&quot; for help.</span>
@@ -1298,15 +1298,15 @@ All these parameters come directly from <a href="https://click.palletsprojects.c
 <span class="go">Error: Invalid value for &#39;--config&#39;: File &#39;config.txt&#39; does not exist.</span>
 
 <span class="go">// Now create a quick config</span>
-<span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;some settings&quot;</span> &gt; config.txt
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;some settings&quot;</span> &gt; config.txt
 
 <span class="go">// And try again</span>
-<span class="gp">$</span> python main.py --config config.txt
+<span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Config file contents: some settings</span>
 
 <span class="go">// And with a directory</span>
-<span class="gp">$</span> python main.py --config ./
+<span class="gp">$ </span>python main.py --config ./
 
 <span class="go">Usage: main.py [OPTIONS]</span>
 <span class="go">Try &quot;main.py --help&quot; for help.</span>
@@ -1378,7 +1378,7 @@ You probably won’t need these configurations at first, you may want to skip it
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>One command and one callback &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1241,7 +1241,7 @@
 <p><strong>Typer</strong> is smart enough to create a CLI application with that single function as the main CLI application, not as a command/subcommand:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Without a CLI argument</span>
-<span class="gp">$</span> python main.py
+<span class="gp">$ </span>python main.py
 
 <span class="go">Usage: main.py [OPTIONS] NAME</span>
 <span class="go">Try &quot;main.py --help&quot; for help.</span>
@@ -1249,12 +1249,12 @@
 <span class="go">Error: Missing argument &#39;NAME&#39;.</span>
 
 <span class="go">// With the NAME CLI argument</span>
-<span class="gp">$</span> python main.py Camila
+<span class="gp">$ </span>python main.py Camila
 
 <span class="go">Hello Camila</span>
 
 <span class="go">// Asking for help</span>
-<span class="gp">$</span> python main.py
+<span class="gp">$ </span>python main.py
 
 <span class="go">Usage: main.py [OPTIONS] NAME</span>
 
@@ -1274,7 +1274,7 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
 <p>Here we have 2 commands <code class="docutils literal notranslate"><span class="pre">create</span></code> and <code class="docutils literal notranslate"><span class="pre">delete</span></code>:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1288,11 +1288,11 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
 <span class="go">  delete</span>
 
 <span class="go">// Test the commands</span>
-<span class="gp">$</span> python main.py create
+<span class="gp">$ </span>python main.py create
 
 <span class="go">Creating user: Hiro Hamada</span>
 
-<span class="gp">$</span> python main.py delete
+<span class="gp">$ </span>python main.py delete
 
 <span class="go">Deleting user: Hiro Hamada</span>
 </pre></div>
@@ -1308,7 +1308,7 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice the single command create</span>
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
@@ -1322,7 +1322,7 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
 <span class="go">  create</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python main.py create
+<span class="gp">$ </span>python main.py create
 
 <span class="go">Creating user: Hiro Hamada</span>
 </pre></div>
@@ -1337,7 +1337,7 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
 </div>
 <p>And now the docstring from the callback will be used as the help text:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice the help text from the docstring</span>
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
@@ -1355,7 +1355,7 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
 <span class="go">  create</span>
 
 <span class="go">// And it still works the same, the callback does nothing</span>
-<span class="gp">$</span> python main.py create
+<span class="gp">$ </span>python main.py create
 
 <span class="go">Creating user: Hiro Hamada</span>
 </pre></div>
@@ -1412,7 +1412,7 @@ Notice that it doesn’t show a command <code class="docutils literal notranslat
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

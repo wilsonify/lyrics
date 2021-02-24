@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Typer CLI &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="./" src="_static/documentation_options.js"></script>
     <script src="_static/jquery.js"></script>
@@ -1420,7 +1420,7 @@
 <p><strong>Typer CLI</strong> is a command line application to run simple programs created with <strong>Typer</strong>, with completion in your terminal 🚀.</p>
 <p>You use <strong>Typer CLI</strong> in your terminal, to run your scripts (as an alternative to calling <code class="docutils literal notranslate"><span class="pre">python</span></code> directly). Like in:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer my_script.py run
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer my_script.py run
 
 <span class="go">Hello World</span>
 </pre></div>
@@ -1434,7 +1434,7 @@
 <h3>Install<a class="headerlink" href="#install" title="Permalink to this headline">¶</a></h3>
 <p>Install <strong>Typer CLI</strong>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install typer-cli
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install typer-cli
 <span class="go">---&gt; 100%</span>
 <span class="go">Successfully installed typer-cli</span>
 </pre></div>
@@ -1443,7 +1443,7 @@
 <p>That creates a <code class="docutils literal notranslate"><span class="pre">typer</span></code> command you can call in your terminal, much like <code class="docutils literal notranslate"><span class="pre">python</span></code>, <code class="docutils literal notranslate"><span class="pre">git</span></code>, or <code class="docutils literal notranslate"><span class="pre">echo</span></code>.</p>
 <p>You can then install completion for it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer --install-completion
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer --install-completion
 
 <span class="go">zsh completion installed in /home/user/.bashrc.</span>
 <span class="go">Completion will take effect once you restart the terminal.</span>
@@ -1483,7 +1483,7 @@
 </div>
 <p>For it to work, you would also install <strong>Typer</strong>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install typer
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install typer
 <span class="go">---&gt; 100%</span>
 <span class="go">Successfully installed typer</span>
 </pre></div>
@@ -1494,15 +1494,15 @@
 <h3>Run with Python<a class="headerlink" href="#run-with-python" title="Permalink to this headline">¶</a></h3>
 <p>Then you could run your script with normal Python:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python my_custom_script.py hello
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python my_custom_script.py hello
 
 <span class="go">Hello World!</span>
 
-<span class="gp">$</span> python my_custom_script.py hello --name Camila
+<span class="gp">$ </span>python my_custom_script.py hello --name Camila
 
 <span class="go">Hello Camila!</span>
 
-<span class="gp">$</span> python my_custom_script.py bye --name Camila
+<span class="gp">$ </span>python my_custom_script.py bye --name Camila
 
 <span class="go">Bye Camila</span>
 </pre></div>
@@ -1516,15 +1516,15 @@
 <p>Here’s where <strong>Typer CLI</strong> is useful.</p>
 <p>You can also run the same script with the <code class="docutils literal notranslate"><span class="pre">typer</span></code> command you get after installing <code class="docutils literal notranslate"><span class="pre">typer-cli</span></code>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer my_custom_script.py run hello
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer my_custom_script.py run hello
 
 <span class="go">Hello World!</span>
 
-<span class="gp">$</span> typer my_custom_script.py run hello --name Camila
+<span class="gp">$ </span>typer my_custom_script.py run hello --name Camila
 
 <span class="go">Hello Camila!</span>
 
-<span class="gp">$</span> typer my_custom_script.py run bye --name Camila
+<span class="gp">$ </span>typer my_custom_script.py run bye --name Camila
 
 <span class="go">Bye Camila</span>
 </pre></div>
@@ -1560,7 +1560,7 @@
 </div>
 <p>Then you can call it with:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer main.py run --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer main.py run --help
 <span class="go">Usage: typer run [OPTIONS]</span>
 
 <span class="go">  Say hi to someone, by default to the World.</span>
@@ -1569,7 +1569,7 @@
 <span class="go">  --name TEXT</span>
 <span class="go">  --help       Show this message and exit.</span>
 
-<span class="gp">$</span> typer main.py run --name Camila
+<span class="gp">$ </span>typer main.py run --name Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1582,14 +1582,14 @@
 <p>Instead of a file path you can pass a module (possibly in a package) to import.</p>
 <p>For example:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer my_package.main run --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer my_package.main run --help
 <span class="go">Usage: typer run [OPTIONS]</span>
 
 <span class="go">Options:</span>
 <span class="go">  --name TEXT</span>
 <span class="go">  --help       Show this message and exit.</span>
 
-<span class="gp">$</span> typer my_package.main run --name Camila
+<span class="gp">$ </span>typer my_package.main run --name Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1632,18 +1632,18 @@
 <p>You can use the subcommand <code class="docutils literal notranslate"><span class="pre">utils</span></code>.</p>
 <p>And then the subcommand <code class="docutils literal notranslate"><span class="pre">docs</span></code>.</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer some_script.py utils docs
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer some_script.py utils docs
 </pre></div>
 </div>
 </div>
 <p><strong>Options</strong>:</p>
 <ul class="simple">
 <li><p><code class="docutils literal notranslate"><span class="pre">--name</span> <span class="pre">TEXT</span></code>: The name of the CLI program to use in docs.</p></li>
-<li><p><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">FILE</span></code>: An output file to write docs to, like README.md.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">--output</span> <span class="pre">FILE</span></code>: An output file to write docs to, like <a class="reference external" href="http://README.md">README.md</a>.</p></li>
 </ul>
 <p>For example:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer my_package.main utils docs --name awesome-cli --output README.md
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer my_package.main utils docs --name awesome-cli --output README.md
 
 <span class="go">Docs saved to: README.md</span>
 </pre></div>
@@ -1660,7 +1660,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">awesome-cli</span></code><a class="headerlink" href="#awesome-cli" title="Permalink to this headline">¶</a></h2>
 <p>Awesome CLI user manager.</p>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> awesome-cli <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>awesome-cli <span class="o">[</span>OPTIONS<span class="o">]</span> COMMAND <span class="o">[</span>ARGS<span class="o">]</span>...
 </pre></div>
 </div>
 <p><strong>Options</strong>:</p>
@@ -1681,7 +1681,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">awesome-cli</span> <span class="pre">create</span></code><a class="headerlink" href="#awesome-cli-create" title="Permalink to this headline">¶</a></h2>
 <p>Create a new user with USERNAME.</p>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> awesome-cli create <span class="o">[</span>OPTIONS<span class="o">]</span> USERNAME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>awesome-cli create <span class="o">[</span>OPTIONS<span class="o">]</span> USERNAME
 </pre></div>
 </div>
 <p><strong>Options</strong>:</p>
@@ -1694,7 +1694,7 @@
 <p>Delete a user with USERNAME.</p>
 <p>If –force is not used, will ask for confirmation.</p>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> awesome-cli delete <span class="o">[</span>OPTIONS<span class="o">]</span> USERNAME
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>awesome-cli delete <span class="o">[</span>OPTIONS<span class="o">]</span> USERNAME
 </pre></div>
 </div>
 <p><strong>Options</strong>:</p>
@@ -1708,7 +1708,7 @@
 <p>Delete ALL users in the database.</p>
 <p>If –force is not used, will ask for confirmation.</p>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> awesome-cli delete-all <span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>awesome-cli delete-all <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Options</strong>:</p>
@@ -1721,7 +1721,7 @@
 <h2><code class="docutils literal notranslate"><span class="pre">awesome-cli</span> <span class="pre">init</span></code><a class="headerlink" href="#awesome-cli-init" title="Permalink to this headline">¶</a></h2>
 <p>Initialize the users database.</p>
 <p><strong>Usage</strong>:</p>
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> awesome-cli init <span class="o">[</span>OPTIONS<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>awesome-cli init <span class="o">[</span>OPTIONS<span class="o">]</span>
 </pre></div>
 </div>
 <p><strong>Options</strong>:</p>
@@ -1785,7 +1785,7 @@
     </div>
 
     
-  <script src="_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

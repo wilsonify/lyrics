@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FileText reading &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1344,13 +1344,13 @@ In most of the cases you are probably fine just using <code class="docutils lite
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Create a quick text config</span>
-<span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;some settings&quot;</span> &gt; config.txt
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;some settings&quot;</span> &gt; config.txt
 
 <span class="go">// Add another line to the config to test it</span>
-<span class="gp">$</span> <span class="nb">echo</span> <span class="s2">&quot;some more settings&quot;</span> &gt;&gt; config.txt
+<span class="gp">$ </span><span class="nb">echo</span> <span class="s2">&quot;some more settings&quot;</span> &gt;&gt; config.txt
 
 <span class="go">// Now run your program</span>
-<span class="gp">$</span> python main.py --config config.txt
+<span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Config line: some settings</span>
 
@@ -1373,12 +1373,12 @@ In most of the cases you are probably fine just using <code class="docutils lite
 <p>…not to write binary <code class="docutils literal notranslate"><span class="pre">bytes</span></code>.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --config text.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --config text.txt
 
 <span class="go">Config written</span>
 
 <span class="go">// Check the contents of the file</span>
-<span class="gp">$</span> cat text.txt
+<span class="gp">$ </span>cat text.txt
 
 <span class="go">Some config written by the app</span>
 </pre></div>
@@ -1400,7 +1400,7 @@ In most of the cases you are probably fine just using <code class="docutils lite
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --file lena.jpg
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --file lena.jpg
 
 <span class="go">Processed bytes total: 512</span>
 <span class="go">Processed bytes total: 1024</span>
@@ -1421,12 +1421,12 @@ In most of the cases you are probably fine just using <code class="docutils lite
 </pre></div>
 </div>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --file binary.dat
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --file binary.dat
 
 <span class="go">Binary file written</span>
 
 <span class="go">// Check the binary file was created</span>
-<span class="gp">$</span> ls ./binary.dat
+<span class="gp">$ </span>ls ./binary.dat
 
 <span class="go">./binary.dat</span>
 </pre></div>
@@ -1477,21 +1477,21 @@ In most of the cases you are probably fine just using <code class="docutils lite
 As you are manually setting <code class="docutils literal notranslate"><span class="pre">mode=&quot;a&quot;</span></code>, you can use <code class="docutils literal notranslate"><span class="pre">typer.FileText</span></code> or <code class="docutils literal notranslate"><span class="pre">typer.FileTextWrite</span></code>, both will work.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --config config.txt
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Config line written</span>
 
 <span class="go">// Run your program a couple more times to see how it appends instead of overwriting</span>
-<span class="gp">$</span> python main.py --config config.txt
+<span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Config line written</span>
 
-<span class="gp">$</span> python main.py --config config.txt
+<span class="gp">$ </span>python main.py --config config.txt
 
 <span class="go">Config line written</span>
 
 <span class="go">// Check the contents of the file, it should have each of the 3 lines appended</span>
-<span class="gp">$</span> cat config.txt
+<span class="gp">$ </span>cat config.txt
 
 <span class="go">This is a single line</span>
 <span class="go">This is a single line</span>
@@ -1563,7 +1563,7 @@ These are technical details about why the different types/classes provided by <s
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

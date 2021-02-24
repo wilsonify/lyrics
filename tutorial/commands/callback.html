@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Adding a callback on creation &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1263,7 +1263,7 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice the main help text, extracted from the callback function: &quot;Manage users in the awesome CLI app.&quot;</span>
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
@@ -1283,12 +1283,12 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <span class="go">// Check the new top level CLI option --verbose</span>
 
 <span class="go">// Try it normally</span>
-<span class="gp">$</span> python main.py create Camila
+<span class="gp">$ </span>python main.py create Camila
 
 <span class="go">Creating user: Camila</span>
 
 <span class="go">// And now with --verbose</span>
-<span class="gp">$</span> python main.py --verbose create Camila
+<span class="gp">$ </span>python main.py --verbose create Camila
 
 <span class="go">Will write verbose output</span>
 <span class="go">About to create a user</span>
@@ -1296,7 +1296,7 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <span class="go">Just created a user</span>
 
 <span class="go">// Notice that --verbose belongs to the callback, it has to go before create or delete ⛔️</span>
-<span class="gp">$</span> python main.py create --verbose Camila
+<span class="gp">$ </span>python main.py create --verbose Camila
 
 <span class="go">Usage: main.py create [OPTIONS] USERNAME</span>
 <span class="go">Try &quot;main.py create --help&quot; for help.</span>
@@ -1314,7 +1314,7 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <p>That achieves the same as with <code class="docutils literal notranslate"><span class="pre">&#64;app.callback()</span></code>.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py create Camila
 
 <span class="go">Running a command</span>
 <span class="go">Creating user: Camila</span>
@@ -1331,7 +1331,7 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <p>Now <code class="docutils literal notranslate"><span class="pre">new_callback()</span></code> will be the one used.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py create Camila
 
 <span class="go">// Notice that the message is the one from new_callback()</span>
 <span class="go">Override callback, running a command</span>
@@ -1350,7 +1350,7 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <p>Now the callback will be used mainly to extract the docstring for the help text.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --help
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --help
 
 <span class="go">// Notice all the help text extracted from the callback docstring</span>
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
@@ -1370,7 +1370,7 @@ After getting the <code class="docutils literal notranslate"><span class="pre">-
 <span class="go">  create</span>
 
 <span class="go">// And it just works as normally</span>
-<span class="gp">$</span> python main.py create Camila
+<span class="gp">$ </span>python main.py create Camila
 
 <span class="go">Creating user: Camila</span>
 </pre></div>
@@ -1445,7 +1445,7 @@ When using Click, it converts that <code class="docutils literal notranslate"><s
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

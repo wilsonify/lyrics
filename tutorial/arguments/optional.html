@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>An alternative CLI argument declaration &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1252,13 +1252,13 @@
 <p>As an example of how it could be useful, let’s see how the <code class="docutils literal notranslate"><span class="pre">ls</span></code> CLI program works.</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// If you just type</span>
-<span class="gp">$</span> ls
+<span class="gp">$ </span>ls
 
 <span class="go">// ls will &quot;list&quot; the files and directories in the current directory</span>
 <span class="go">typer  tests  README.md  LICENSE</span>
 
 <span class="go">// But it also receives an optional CLI argument</span>
-<span class="gp">$</span> ls ./tests/
+<span class="gp">$ </span>ls ./tests/
 
 <span class="go">// And then ls will list the files and directories inside of that directory from the CLI argument</span>
 <span class="go">__init__.py  test_tutorial</span>
@@ -1292,7 +1292,7 @@
 If you hadn’t seen that <code class="docutils literal notranslate"><span class="pre">...</span></code> before: it is a special single value, it is <a href="https://docs.python.org/3/library/constants.html#Ellipsis" class="external-link" target="_blank">part of Python and is called “Ellipsis”</a>.</p>
 <p>All we did there achieves the same thing as before, a <strong>required</strong> <em>CLI argument</em>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">Usage: main.py [OPTIONS] NAME</span>
 <span class="go">Try &quot;main.py --help&quot; for help.</span>
@@ -1322,7 +1322,7 @@ By using <code class="docutils literal notranslate"><span class="pre">Optional</
 <p>Check the help:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// First check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] [NAME]</span>
 
@@ -1344,12 +1344,12 @@ Notice that <code class="docutils literal notranslate"><span class="pre">NAME</s
 <p>Now run it and test it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// With no CLI argument</span>
-<span class="gp">$</span> python main.py
+<span class="gp">$ </span>python main.py
 
 <span class="go">Hello World!</span>
 
 <span class="go">// With one optional CLI argument</span>
-<span class="gp">$</span> python main.py Camila
+<span class="gp">$ </span>python main.py Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1408,7 +1408,7 @@ Notice that “<code class="docutils literal notranslate"><span class="pre">Cami
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Multiple environment variables &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1242,7 +1242,7 @@
 <p>In this case, the <em>CLI argument</em> <code class="docutils literal notranslate"><span class="pre">name</span></code> will have a default value of <code class="docutils literal notranslate"><span class="pre">&quot;World&quot;</span></code>, but will also read any value passed to the environment variable <code class="docutils literal notranslate"><span class="pre">AWESOME_NAME</span></code> if no value is provided in the command line:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] [NAME]</span>
 
@@ -1255,22 +1255,22 @@
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Call it without a CLI argument</span>
-<span class="gp">$</span> python main.py
+<span class="gp">$ </span>python main.py
 
 <span class="go">Hello Mr. World</span>
 
 <span class="go">// Now pass a value for the CLI argument</span>
-<span class="gp">$</span> python main.py Czernobog
+<span class="gp">$ </span>python main.py Czernobog
 
 <span class="go">Hello Mr. Czernobog</span>
 
 <span class="go">// And now use the environment variable</span>
-<span class="gp">$</span> <span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py
+<span class="gp">$ </span><span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py
 
 <span class="go">Hello Mr. Wednesday</span>
 
 <span class="go">// CLI arguments take precedence over env vars</span>
-<span class="gp">$</span> <span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py Czernobog
+<span class="gp">$ </span><span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py Czernobog
 
 <span class="go">Hello Mr. Czernobog</span>
 </pre></div>
@@ -1285,7 +1285,7 @@
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] [NAME]</span>
 
@@ -1298,12 +1298,12 @@
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// Try the first env var</span>
-<span class="gp">$</span> <span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py
+<span class="gp">$ </span><span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py
 
 <span class="go">Hello Mr. Wednesday</span>
 
 <span class="go">// Try the second env var</span>
-<span class="gp">$</span> <span class="nv">GOD_NAME</span><span class="o">=</span>Anubis python main.py
+<span class="gp">$ </span><span class="nv">GOD_NAME</span><span class="o">=</span>Anubis python main.py
 
 <span class="go">Hello Mr. Anubis</span>
 </pre></div>
@@ -1319,7 +1319,7 @@
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">//Check the help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">// It won&#39;t show the env var</span>
 <span class="go">Usage: main.py [OPTIONS] [NAME]</span>
@@ -1333,7 +1333,7 @@
 <span class="go">  --help                Show this message and exit.</span>
 
 <span class="go">// But it will still be able to use it</span>
-<span class="gp">$</span> <span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py
+<span class="gp">$ </span><span class="nv">AWESOME_NAME</span><span class="o">=</span>Wednesday python main.py
 
 <span class="go">Hello Mr. Wednesday</span>
 </pre></div>
@@ -1395,7 +1395,7 @@ In Click applications the env vars are hidden by default. 🙈</p>
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

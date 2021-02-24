@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Getting the context &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1257,13 +1257,13 @@
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py create Camila
 
 <span class="go">// We get the message from the callback</span>
 <span class="go">About to execute command: create</span>
 <span class="go">Creating user: Camila</span>
 
-<span class="gp">$</span> python main.py delete Camila
+<span class="gp">$ </span>python main.py delete Camila
 
 <span class="go">// We get the message from the callback, this time with delete</span>
 <span class="go">About to execute command: delete</span>
@@ -1282,13 +1282,13 @@
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">// The callback is executed, we don&#39;t get the default help message</span>
 <span class="go">Initializing database</span>
 
 <span class="go">// Try with a command</span>
-<span class="gp">$</span> python main.py create Camila
+<span class="gp">$ </span>python main.py create Camila
 
 <span class="go">// The callback is still executed</span>
 <span class="go">Initializing database</span>
@@ -1307,13 +1307,13 @@
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py
 
 <span class="go">// The callback is executed</span>
 <span class="go">Initializing database</span>
 
 <span class="go">// Check it with a subcommand</span>
-<span class="gp">$</span> python main.py create Camila
+<span class="gp">$ </span>python main.py create Camila
 
 <span class="go">// This time the callback is not executed</span>
 <span class="go">Creating user: Camila</span>
@@ -1331,7 +1331,7 @@
 </pre></div>
 </div>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --name Camila --city Berlin
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --name Camila --city Berlin
 
 <span class="go">Got extra arg: --name</span>
 <span class="go">Got extra arg: Camila</span>
@@ -1393,7 +1393,7 @@ Notice that it saves all the extra <em>CLI parameters</em> as a raw <code class=
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

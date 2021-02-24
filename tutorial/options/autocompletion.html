@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Review completion &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1313,20 +1313,20 @@
 <p>And let’s try it with <strong>Typer CLI</strong> to get completion:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Hit the TAB key in your keyboard below where you see the: [TAB]</span>
-<span class="gp">$</span> typer ./main.py <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// Depending on your terminal/shell you will get some completion like this ✨</span>
 <span class="go">run    -- Run the provided Typer app.</span>
 <span class="go">utils  -- Extra utility commands for Typer apps.</span>
 
 <span class="go">// Then try with &quot;run&quot; and --</span>
-<span class="gp">$</span> typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// You will get completion for --name, depending on your terminal it will look something like this</span>
 <span class="go">--name  -- The name to say hi to.</span>
 
 <span class="go">// And you can run it as if it was with Python directly</span>
-<span class="gp">$</span> typer ./main.py run --name Camila
+<span class="gp">$ </span>typer ./main.py run --name Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1343,7 +1343,7 @@
 <p>We return a <code class="docutils literal notranslate"><span class="pre">list</span></code> of strings from the <code class="docutils literal notranslate"><span class="pre">complete_name()</span></code> function.</p>
 <p>And then we get those values when using completion:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// We get the values returned from the function 🎉</span>
 <span class="go">Camila     Carlos     Sebastian</span>
@@ -1363,7 +1363,7 @@
 </div>
 <p>Now let’s try it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// We get the values returned from the function that start with Ca 🎉</span>
 <span class="go">Camila     Carlos</span>
@@ -1403,7 +1403,7 @@ The help text will be visible in Zsh, Fish, and PowerShell.</p>
 </div>
 <p>If you have a shell like Zsh, it would look like:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// We get the completion items with their help text 🎉</span>
 <span class="go">Camila     -- The reader of books.</span>
@@ -1447,7 +1447,7 @@ You will learn more about <em>CLI parameters</em> with multiple values later in 
 </div>
 <p>And then we can use it like:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name Camila --name Sebastian
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name Camila --name Sebastian
 
 <span class="go">Hello Camila</span>
 <span class="go">Hello Sebastian</span>
@@ -1469,7 +1469,7 @@ You will learn more about <em>CLI parameters</em> with multiple values later in 
 <p>And then we <code class="docutils literal notranslate"><span class="pre">yield</span></code> each item that has not being used yet.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// The first time we trigger completion, we get all the names</span>
 <span class="go">Camila     -- The reader of books.</span>
@@ -1477,14 +1477,14 @@ You will learn more about <em>CLI parameters</em> with multiple values later in 
 <span class="go">Sebastian  -- The type hints guy.</span>
 
 <span class="go">// Add a name and trigger completion again</span>
-<span class="gp">$</span> typer ./main.py run --name Sebastian --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py run --name Sebastian --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// Now we get completion only for the names we haven&#39;t used 🎉</span>
 <span class="go">Camila  -- The reader of books.</span>
 <span class="go">Carlos  -- The writer of scripts.</span>
 
 <span class="go">// And if we add another of the available names:</span>
-<span class="gp">$</span> typer ./main.py run --name Sebastian --name Camila --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py run --name Sebastian --name Camila --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// We get completion for the only available one</span>
 <span class="go">Carlos  -- The writer of scripts.</span>
@@ -1524,7 +1524,7 @@ Here we name the list of all the raw <em>CLI parameters</em> <code class="docuti
 </div>
 <p>And then we just print it to “standard error”.</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// First we see the raw CLI parameters</span>
 <span class="go">[&#39;./main.py&#39;, &#39;run&#39;, &#39;--name&#39;]</span>
@@ -1551,7 +1551,7 @@ This is a very simple (and quite useless) example, just so you know how it works
 </div>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --name <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// First we see the raw CLI parameters</span>
 <span class="go">[&#39;./main.py&#39;, &#39;run&#39;, &#39;--name&#39;]</span>
@@ -1561,7 +1561,7 @@ This is a very simple (and quite useless) example, just so you know how it works
 <span class="go">Carlos     -- The writer of scripts.</span>
 <span class="go">Sebastian  -- The type hints guy.</span>
 
-<span class="gp">$</span> typer ./main.py run --name Sebastian --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py run --name Sebastian --name Ca<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// Again, we see the raw CLI parameters</span>
 <span class="go">[&#39;./main.py&#39;, &#39;run&#39;, &#39;--name&#39;, &#39;Sebastian&#39;, &#39;--name&#39;]</span>
@@ -1634,7 +1634,7 @@ This is a very simple (and quite useless) example, just so you know how it works
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

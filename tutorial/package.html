@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Prerequisites &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
     <script src="../_static/jquery.js"></script>
@@ -1390,7 +1390,7 @@ If you already have a favorite way of creating Python packages, feel free to ski
 <p>So, if your name is Rick, we’ll call it <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>.</p>
 <p>Create a project with Poetry:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry new rick-portal-gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry new rick-portal-gun
 
 <span class="go">Created package rick_portal_gun in rick-portal-gun</span>
 
@@ -1404,7 +1404,7 @@ If you already have a favorite way of creating Python packages, feel free to ski
 <h1>Dependencies and environment<a class="headerlink" href="#dependencies-and-environment" title="Permalink to this headline">¶</a></h1>
 <p>Add <code class="docutils literal notranslate"><span class="pre">typer[all]</span></code> to your dependencies:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry add typer<span class="o">[</span>all<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry add typer<span class="o">[</span>all<span class="o">]</span>
 
 <span class="go">// It creates a virtual environment for your project</span>
 <span class="go">Creating virtualenv rick-portal-gun-w31dJa0b-py3.6 in /home/rick/.cache/pypoetry/virtualenvs</span>
@@ -1436,12 +1436,12 @@ If you already have a favorite way of creating Python packages, feel free to ski
 <span class="go">  - Installing typer (0.0.11)</span>
 
 <span class="go">// Activate that new virtual environment</span>
-<span class="gp">$</span> poetry shell
+<span class="gp">$ </span>poetry shell
 
 <span class="go">Spawning shell within /home/rick/.cache/pypoetry/virtualenvs/rick-portal-gun-w31dJa0b-py3.6</span>
 
 <span class="go">// Open an editor using this new environment, for example VS Code</span>
-<span class="gp">$</span> code ./
+<span class="gp">$ </span>code ./
 </pre></div>
 </div>
 </div>
@@ -1500,7 +1500,7 @@ As we are creating an installable Python package, there’s no need to add a sec
 <p>Let’s change it to <code class="docutils literal notranslate"><span class="pre">README.md</span></code>. So, change the extension from <code class="docutils literal notranslate"><span class="pre">.rst</span></code> to <code class="docutils literal notranslate"><span class="pre">.md</span></code>.</p>
 <p>So that we can use Markdown instead of reStructuredText.</p>
 <p>And change the file to have something like:</p>
-<div class="highlight-Markdown notranslate"><div class="highlight"><pre><span></span># Portal Gun
+<div class="highlight-Markdown notranslate"><div class="highlight"><pre><span></span><span class="gh"># Portal Gun</span>
 
 The awesome Portal Gun
 </pre></div>
@@ -1580,7 +1580,7 @@ The awesome Portal Gun
 <p>Here’s what that line means:</p>
 <p><code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code>: will be the name of the CLI program. That’s how we will call it in the terminal once it is installed. Like:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rick-portal-gun
 
 <span class="go">// Something happens here ✨</span>
 </pre></div>
@@ -1603,7 +1603,7 @@ The awesome Portal Gun
 <p>That’s what we need to create a package.</p>
 <p>You can now install it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry install
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry install
 
 <span class="go">Installing dependencies from lock file</span>
 
@@ -1619,13 +1619,13 @@ The awesome Portal Gun
 <p>Your package is installed in the environment created by Poetry, but you can already use it.</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// You can use the which program to check which rick-portal-gun program is available (if any)</span>
-<span class="gp">$</span> which rick-portal-gun
+<span class="gp">$ </span>which rick-portal-gun
 
 <span class="go">// You get the one from your environment</span>
 <span class="go">/home/rick/.cache/pypoetry/virtualenvs/rick-portal-gun-w31dJa0b-py3.6/bin/rick-portal-gun</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> rick-portal-gun
+<span class="gp">$ </span>rick-portal-gun
 
 <span class="go">// You get all the standard help</span>
 <span class="go">Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...</span>
@@ -1650,7 +1650,7 @@ The awesome Portal Gun
 <p>Python packages have a standard format called a “wheel”. It’s a file that ends in <code class="docutils literal notranslate"><span class="pre">.whl</span></code>.</p>
 <p>You can create a wheel with Poetry:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry build
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry build
 
 <span class="go">Building rick-portal-gun (0.1.0)</span>
 <span class="go"> - Building sdist</span>
@@ -1677,7 +1677,7 @@ The awesome Portal Gun
 <h1>Test your wheel package<a class="headerlink" href="#test-your-wheel-package" title="Permalink to this headline">¶</a></h1>
 <p>Now you can open another terminal and install that package from the file for your own user with:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user /home/rock/code/rick-portal-gun/dist/rick_portal_gun-0.1.0-py3-none-any.whl
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user /home/rock/code/rick-portal-gun/dist/rick_portal_gun-0.1.0-py3-none-any.whl
 
 <span class="go">---&gt; 100%</span>
 </pre></div>
@@ -1692,7 +1692,7 @@ The <code class="docutils literal notranslate"><span class="pre">--user</span></
 Bonus points if you use <a href="https://github.com/pipxproject/pipx" class="external-link" target="_blank"><code class="docutils literal notranslate"><span class="pre">pipx</span></code></a> to install it while keeping an isolated environment for your Python CLI programs 🚀</p>
 <p>Now you have your CLI program installed. And you can use it freely:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun shoot
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rick-portal-gun shoot
 
 <span class="go">// It works 🎉</span>
 <span class="go">Shooting portal gun</span>
@@ -1701,7 +1701,7 @@ Bonus points if you use <a href="https://github.com/pipxproject/pipx" class="ext
 </div>
 <p>Having it installed globally (and not in a single environment), you can now install completion globally for it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun --install-completion
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rick-portal-gun --install-completion
 
 <span class="go">zsh completion installed in /home/user/.zshrc.</span>
 <span class="go">Completion will take effect once you restart the terminal.</span>
@@ -1712,7 +1712,7 @@ Bonus points if you use <a href="https://github.com/pipxproject/pipx" class="ext
 If you want to remove completion you can just delete the added line in that file.</p>
 <p>And after you restart the terminal you will get completion for your new CLI program:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// You get completion for your CLI program ✨</span>
 <span class="go">load   -- Load the portal gun</span>
@@ -1726,13 +1726,13 @@ If you want to remove completion you can just delete the added line in that file
 <p>You may have seen that you can call many Python modules as scripts with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span> <span class="pre">some-module</span></code>.</p>
 <p>For example, one way to call <code class="docutils literal notranslate"><span class="pre">pip</span></code> is:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install fastapi
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install fastapi
 </pre></div>
 </div>
 </div>
 <p>But you can also call Python with the <code class="docutils literal notranslate"><span class="pre">-m</span></code> <em>CLI Option</em> and pass a module for it to execute as if it was a script, like:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m pip install fastapi
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m pip install fastapi
 </pre></div>
 </div>
 </div>
@@ -1765,7 +1765,7 @@ In the case of <code class="docutils literal notranslate"><span class="pre">pip<
 </div>
 <p>Now, after installing your package, if you call it with <code class="docutils literal notranslate"><span class="pre">python</span> <span class="pre">-m</span></code> it will work (for the main part):</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m rick_portal_gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m rick_portal_gun
 
 <span class="go">Usage: __main__.py [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1804,7 +1804,7 @@ Notice that you have to pass the importable version of the package name, so <cod
 <p>!!! tip
 You can pass all the arguments and keyword arguments you could pass to a Click application, including <code class="docutils literal notranslate"><span class="pre">prog_name</span></code>.</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python -m rick_portal_gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python -m rick_portal_gun
 
 <span class="go">Usage: rick-portal-gun [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1831,7 +1831,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 <p>Auto-completion depends on the name of the program called, it’s tied to each specific program name.</p>
 <p>So, to have shell completion for <code class="docutils literal notranslate"><span class="pre">rick-portal-gun</span></code> you would have to call it directly:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rick-portal-gun <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 </pre></div>
 </div>
 </div>
@@ -1853,7 +1853,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 </div>
 <p>Now configure Poetry to use this token with the command <code class="docutils literal notranslate"><span class="pre">poetry</span> <span class="pre">config</span> <span class="pre">pypi-token.pypi</span></code>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry config pypi-token.pypi pypi-wubalubadubdub-deadbeef1234
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry config pypi-token.pypi pypi-wubalubadubdub-deadbeef1234
 <span class="go">// It won&#39;t show any output, but it&#39;s already configured</span>
 </pre></div>
 </div>
@@ -1864,9 +1864,9 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 <p>Now you can publish your package with Poetry.</p>
 <p>You could build the package (as we did above) and then publish later, or you could tell poetry to build it before publishing in one go:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry publish --build
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry publish --build
 
-<span class="gp">#</span> There are <span class="m">2</span> files ready <span class="k">for</span> publishing. Build anyway? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span> $ yes
+<span class="gp"># </span>There are <span class="m">2</span> files ready <span class="k">for</span> publishing. Build anyway? <span class="o">(</span>yes/no<span class="o">)</span> <span class="o">[</span>no<span class="o">]</span> $ yes
 
 <span class="go">---&gt; 100%</span>
 
@@ -1890,7 +1890,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 <h2>Install from PyPI<a class="headerlink" href="#install-from-pypi" title="Permalink to this headline">¶</a></h2>
 <p>Now to see that we can install it form PyPI, open another terminal, and uninstall the currently installed package.</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip uninstall rick-portal-gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip uninstall rick-portal-gun
 
 <span class="go">Found existing installation: rick-portal-gun 0.1.0</span>
 <span class="go">Uninstalling rick-portal-gun-0.1.0:</span>
@@ -1898,14 +1898,14 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 <span class="go">    /home/user/.local/bin/rick-portal-gun</span>
 <span class="go">    /home/user/.local/lib/python3.6/site-packages/rick_portal_gun-0.1.0.dist-info/*</span>
 <span class="go">    /home/user/.local/lib/python3.6/site-packages/rick_portal_gun/*</span>
-<span class="gp">#</span> Proceed <span class="o">(</span>y/n<span class="o">)</span>? $ y
+<span class="gp"># </span>Proceed <span class="o">(</span>y/n<span class="o">)</span>? $ y
 <span class="go">    Successfully uninstalled rick-portal-gun-0.1.0</span>
 </pre></div>
 </div>
 </div>
 <p>And now install it again, but this time using just the name, so that <code class="docutils literal notranslate"><span class="pre">pip</span></code> pulls it from PyPI:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> pip install --user rick-portal-gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>pip install --user rick-portal-gun
 
 <span class="go">// Notice that it says &quot;Downloading&quot; 🚀</span>
 <span class="go">Collecting rick-portal-gun</span>
@@ -1921,7 +1921,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 </div>
 <p>And now test the newly installed package from PyPI:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> rick-portal-gun load
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>rick-portal-gun load
 
 <span class="go">// It works! 🎉</span>
 <span class="go">Loading portal gun</span>
@@ -1935,7 +1935,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 <p>You can install and use <a class="reference internal" href="../typer-cli.html"><span class="doc std std-doc">Typer CLI</span></a>{.internal-link target=_blank} to generate docs for your package.</p>
 <p>After installing it, you can use it to generate a new <code class="docutils literal notranslate"><span class="pre">README.md</span></code>:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer rick_portal_gun.main utils docs --output README.md --name rick-portal-gun
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer rick_portal_gun.main utils docs --output README.md --name rick-portal-gun
 
 <span class="go">Docs saved to: README.md</span>
 </pre></div>
@@ -1975,7 +1975,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
 </div>
 <p>And then build and publish again:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> poetry publish --build
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>poetry publish --build
 
 <span class="go">---&gt; 100%</span>
 
@@ -2055,7 +2055,7 @@ You can pass all the arguments and keyword arguments you could pass to a Click a
     </div>
 
     
-  <script src="../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

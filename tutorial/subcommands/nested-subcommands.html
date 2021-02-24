@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>A CLI app for reigns &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1267,7 +1267,7 @@
 <p>This is already a simple <em>CLI program</em> to manage reigns:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python reigns.py --help
+<span class="gp">$ </span>python reigns.py --help
 
 <span class="go">Usage: reigns.py [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1281,11 +1281,11 @@
 <span class="go">  destroy</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python reigns.py conquer Cintra
+<span class="gp">$ </span>python reigns.py conquer Cintra
 
 <span class="go">Conquering reign: Cintra</span>
 
-<span class="gp">$</span> python reigns.py destroy Mordor
+<span class="gp">$ </span>python reigns.py destroy Mordor
 
 <span class="go">Destroying reign: Mordor</span>
 </pre></div>
@@ -1301,7 +1301,7 @@
 <p>With it, you can manage towns:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python towns.py --help
+<span class="gp">$ </span>python towns.py --help
 
 <span class="go">Usage: towns.py [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1315,11 +1315,11 @@
 <span class="go">  found</span>
 
 <span class="go">// Try it</span>
-<span class="gp">$</span> python towns.py found <span class="s2">&quot;New Asgard&quot;</span>
+<span class="gp">$ </span>python towns.py found <span class="s2">&quot;New Asgard&quot;</span>
 
 <span class="go">Founding town: New Asgard</span>
 
-<span class="gp">$</span> python towns.py burn Vizima
+<span class="gp">$ </span>python towns.py burn Vizima
 
 <span class="go">Burning town: Vizima</span>
 </pre></div>
@@ -1336,7 +1336,7 @@
 <p>Check it:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the help</span>
-<span class="gp">$</span> python lands.py --help
+<span class="gp">$ </span>python lands.py --help
 
 <span class="go">Usage: lands.py [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1350,7 +1350,7 @@
 <span class="go">  towns</span>
 
 <span class="go">// We still have the help for reigns</span>
-<span class="gp">$</span> python lands.py reigns --help
+<span class="gp">$ </span>python lands.py reigns --help
 
 <span class="go">Usage: lands.py reigns [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1362,7 +1362,7 @@
 <span class="go">  destroy</span>
 
 <span class="go">// And the help for towns</span>
-<span class="gp">$</span> python lands.py towns --help
+<span class="gp">$ </span>python lands.py towns --help
 
 <span class="go">Usage: lands.py towns [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1378,20 +1378,20 @@
 <p>Now try it, manage the lands through the CLI:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Try the reigns command</span>
-<span class="gp">$</span> python lands.py reigns conquer Gondor
+<span class="gp">$ </span>python lands.py reigns conquer Gondor
 
 <span class="go">Conquering reign: Gondor</span>
 
-<span class="gp">$</span> python lands.py reigns destroy Nilfgaard
+<span class="gp">$ </span>python lands.py reigns destroy Nilfgaard
 
 <span class="go">Destroying reign: Nilfgaard</span>
 
 <span class="go">// Try the towns command</span>
-<span class="gp">$</span> python lands.py towns found Springfield
+<span class="gp">$ </span>python lands.py towns found Springfield
 
 <span class="go">Founding town: Springfield</span>
 
-<span class="gp">$</span> python lands.py towns burn Atlantis
+<span class="gp">$ </span>python lands.py towns burn Atlantis
 
 <span class="go">Burning town: Atlantis</span>
 </pre></div>
@@ -1441,7 +1441,7 @@
 <p>And now we have everything in a single <em>CLI program</em>:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Check the main help</span>
-<span class="gp">$</span> python main.py --help
+<span class="gp">$ </span>python main.py --help
 
 <span class="go">Usage: main.py [OPTIONS] COMMAND [ARGS]...</span>
 
@@ -1456,22 +1456,22 @@
 <span class="go">  users</span>
 
 <span class="go">// Try some users commands</span>
-<span class="gp">$</span> python main.py users create Camila
+<span class="gp">$ </span>python main.py users create Camila
 
 <span class="go">Creating user: Camila</span>
 
 <span class="go">// Now try some items commands</span>
-<span class="gp">$</span> python main.py items create Sword
+<span class="gp">$ </span>python main.py items create Sword
 
 <span class="go">Creating item: Sword</span>
 
 <span class="go">// And now some lands commands for reigns</span>
-<span class="gp">$</span> python main.py lands reigns conquer Gondor
+<span class="gp">$ </span>python main.py lands reigns conquer Gondor
 
 <span class="go">Conquering reign: Gondor</span>
 
 <span class="go">// And for towns</span>
-<span class="gp">$</span> python main.py lands towns found Cartagena
+<span class="gp">$ </span>python main.py lands towns found Cartagena
 
 <span class="go">Founding town: Cartagena</span>
 </pre></div>
@@ -1571,7 +1571,7 @@ Auto completion helps a lot, specially with complex programs.</p>
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

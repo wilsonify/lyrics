@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Add a callback on creation &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1248,7 +1248,7 @@
 <p>In this case it doesn’t define any <em>CLI parameters</em>, it just writes a message.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py users create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py users create Camila
 
 <span class="go">// Notice the first message is not created by the command function but by the callback</span>
 <span class="go">Running a users command</span>
@@ -1265,7 +1265,7 @@
 <p>This achieves exactly the same as above, it’s just another place to add the callback.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py users create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py users create Camila
 
 <span class="go">Running a users command</span>
 <span class="go">Creating user: Camila</span>
@@ -1284,7 +1284,7 @@
 <p>As <code class="docutils literal notranslate"><span class="pre">&#64;app.callback()</span></code> takes precedence over <code class="docutils literal notranslate"><span class="pre">typer.Typer(callback=some_function)</span></code>, now our CLI app will use this new callback.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py users create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py users create Camila
 
 <span class="go">// Notice the message from the new callback</span>
 <span class="go">Callback override, running users command</span>
@@ -1304,7 +1304,7 @@
 <p>Now when you use the CLI program it will use the new callback function <code class="docutils literal notranslate"><span class="pre">callback_for_add_typer()</span></code>.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python users create Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python users create Camila
 
 <span class="go">// Notice the message from the callback added in add_typer()</span>
 <span class="go">I have the high land! Running users command</span>
@@ -1362,7 +1362,7 @@
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     

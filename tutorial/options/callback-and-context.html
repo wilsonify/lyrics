@@ -7,7 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Validate CLI parameters &#8212; lyrics</title>
     
-  <link rel="stylesheet" href="../../_static/css/index.73d71520a4ca3b99cfee5594769eaaae.css">
+  <link rel="stylesheet" href="../../_static/css/index.f658d18f9b420779cfdf24aa0a7e2d77.css">
 
     
   <link rel="stylesheet"
@@ -34,7 +34,7 @@
     <link rel="stylesheet" type="text/css" href="../../_static/panels-main.c949a650a448cc0ae9fd3441c0e17fb0.css" />
     <link rel="stylesheet" type="text/css" href="../../_static/panels-variables.06eb56fa6e07937060861dad626602ad.css" />
     
-  <link rel="preload" as="script" href="../../_static/js/index.3da636dd464baa7582d2.js">
+  <link rel="preload" as="script" href="../../_static/js/index.d3f166471bb80abb5163.js">
 
     <script id="documentation_options" data-url_root="../../" src="../../_static/documentation_options.js"></script>
     <script src="../../_static/jquery.js"></script>
@@ -1316,11 +1316,11 @@
 <p>The <code class="docutils literal notranslate"><span class="pre">BadParameter</span></code> exception is special, it shows the error with the parameter that generated it.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --name Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --name Camila
 
 <span class="go">Hello Camila</span>
 
-<span class="gp">$</span> python main.py --name Rick
+<span class="gp">$ </span>python main.py --name Rick
 
 <span class="go">Usage: main.py [OPTIONS]</span>
 
@@ -1338,14 +1338,14 @@
 <p>To check it quickly without creating a new Python package, install <a class="reference internal" href="../../typer-cli.html"><span class="doc std std-doc">Typer CLI</span></a>{.internal-link target=_blank} and use it with the previous script:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Hit the TAB key in your keyboard below where you see the: [TAB]</span>
-<span class="gp">$</span> typer ./main.py <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py <span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// Depending on your terminal/shell you will get some completion like this ✨</span>
 <span class="go">run    -- Run the provided Typer app.</span>
 <span class="go">utils  -- Extra utility commands for Typer apps.</span>
 
 <span class="go">// Then try with &quot;run&quot; and --help</span>
-<span class="gp">$</span> typer ./main.py run --help
+<span class="gp">$ </span>typer ./main.py run --help
 
 <span class="go">// You get a help text with your CLI options as you normally would</span>
 <span class="go">Usage: typer run [OPTIONS]</span>
@@ -1357,14 +1357,14 @@
 <span class="go">  --help       Show this message and exit.</span>
 
 <span class="go">// Then try completion with your program</span>
-<span class="gp">$</span> typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// You get completion for CLI options</span>
 <span class="go">--help  -- Show this message and exit.</span>
 <span class="go">--name</span>
 
 <span class="go">// And you can run it as if it was with Python directly</span>
-<span class="gp">$</span> typer ./main.py run --name Camila
+<span class="gp">$ </span>typer ./main.py run --name Camila
 
 <span class="go">Hello Camila</span>
 </pre></div>
@@ -1385,13 +1385,13 @@
 <p>It will look something like:</p>
 <div class="termy">
 <div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="go">// Run it normally</span>
-<span class="gp">$</span> typer ./main.py run --name Camila
+<span class="gp">$ </span>typer ./main.py run --name Camila
 
 <span class="go">// See the extra message &quot;Validating name&quot;</span>
 <span class="go">Validating name</span>
 <span class="go">Hello Camila</span>
 
-<span class="gp">$</span> typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<span class="gp">$ </span>typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// Some weird broken error message ⛔️</span>
 <span class="gp gp-VirtualEnv">(eval)</span><span class="go">:1: command not found: Validating</span>
@@ -1414,14 +1414,14 @@
 <p>That’s all is needed to fix completion 🚀</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>typer ./main.py run --<span class="o">[</span>TAB<span class="o">][</span>TAB<span class="o">]</span>
 
 <span class="go">// Now it works correctly 🎉</span>
 <span class="go">--help  -- Show this message and exit.</span>
 <span class="go">--name</span>
 
 <span class="go">// And you can call it normally</span>
-<span class="gp">$</span> typer ./main.py run --name Camila
+<span class="gp">$ </span>typer ./main.py run --name Camila
 
 <span class="go">Validating name</span>
 <span class="go">Hello Camila</span>
@@ -1440,7 +1440,7 @@
 <p>For example if you had a callback that could be used by several <em>CLI parameters</em>, that way the callback could know which parameter is each time.</p>
 <p>Check it:</p>
 <div class="termy">
-<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$</span> python main.py --name Camila
+<div class="highlight-console notranslate"><div class="highlight"><pre><span></span><span class="gp">$ </span>python main.py --name Camila
 
 <span class="go">Validating param: name</span>
 <span class="go">Hello Camila</span>
@@ -1521,7 +1521,7 @@
     </div>
 
     
-  <script src="../../_static/js/index.3da636dd464baa7582d2.js"></script>
+  <script src="../../_static/js/index.d3f166471bb80abb5163.js"></script>
 
 
     
