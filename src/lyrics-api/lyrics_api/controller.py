@@ -18,36 +18,41 @@ That's probably the main visible advantage of FastAPI compared to alternative fr
 """
 import json
 import logging
+import uuid
 
+import pika
 from fastapi import FastAPI, HTTPException
-from lyrics_api import __version__
+from lyrics_api import __version__, AMQP_HOST, AMQP_PORT, AMQP_PASSWORD, AMQP_USERNAME
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
 from tensorflow_consumer.translation import nmt
 from tensorflow_consumer.translation.eng2spa import eng2spa_translate
-from tensorflow_consumer.translation.spa2eng import spa2eng_translate
 from tensorflow_consumer.translation.phoneme2grapheme import phoneme2grapheme_translate
-import pika
-import uuid
+from tensorflow_consumer.translation.spa2eng import spa2eng_translate
 
 
 class RemoteProcedure():
+    """
+    sending and receiving results of a remote procedure call
+    """
+    credentials = pika.PlainCredentials(
+        username=AMQP_USERNAME,
+        password=AMQP_PASSWORD
+    )
+    connection_parameters = pika.ConnectionParameters(
+        host=AMQP_HOST,
+        port=AMQP_PORT,  # default is 5672
+        credentials=credentials,
+        heartbeat=10,
+        blocked_connection_timeout=100,
+    )
+
     def __init__(self, routing_key):
-        self.host = 'localhost'
-        self.port = 32777  # 5672
-        self.credentials = pika.PlainCredentials(username='guest', password='guest')
-        self.connection_parameters = pika.ConnectionParameters(
-            host=self.host,
-            port=self.port,
-            credentials=self.credentials,
-            heartbeat=10,
-            blocked_connection_timeout=100,
-        )
         self.connection = pika.BlockingConnection(parameters=self.connection_parameters)
         self.channel = self.connection.channel()
         self.channel.basic_qos(prefetch_count=1)
+        self.routing_key = routing_key
         self.corr_id = str(uuid.uuid4())
         self.response = None
-        self.routing_key = routing_key
 
         new_queue_method_frame = self.channel.queue_declare(queue='', exclusive=True)
         self.reply_to_queue = new_queue_method_frame.method.queue
@@ -58,6 +63,9 @@ class RemoteProcedure():
         self.declare()
 
     def declare(self):
+        """
+        make sure exchange and queue exist
+        """
         route = "python"
         self.channel.exchange_declare(exchange=f"try_{route}", exchange_type="topic")
         self.channel.queue_declare(f"try_{route}", durable=True, exclusive=False, auto_delete=False)
@@ -67,12 +75,21 @@ class RemoteProcedure():
         self.channel.queue_declare(f"try_{route}", durable=True, exclusive=False, auto_delete=False)
         self.channel.queue_bind(queue=f"try_{route}", exchange=f"try_{route}", routing_key=route)
 
-    def on_response(self, ch, method, props, body):
+    def on_response(self, channel, method, props, body):
+        """
+        what to do when you get a repsponse
+        """
+        logging.debug("%r", f"ch={channel}")
+        logging.debug("%r", f"ch={method}")
+
         if self.corr_id == props.correlation_id:
             self.response = json.loads(body.decode("utf-8"))
 
     def call(self, body_new):
-        logging.debug(f"body_new = {body_new}")
+        """
+        send message wait for response
+        """
+        logging.debug("%r", f"body_new = {body_new}")
 
         self.channel.basic_publish(
             exchange=f'try_{self.routing_key}',
@@ -109,11 +126,14 @@ app = FastAPI(
     path="/grapheme2phoneme",
     response_model=Phoneme,
     summary="Summary: convert graphemes to phonemes",
-    description="""Description: 
+    description="""Description:
     convert graphemes (smallest functional unit of a writing system) to phonemes (perceptually distinct units of sound)
     """,
 )
 async def grapheme2phoneme(input_grapheme: Grapheme):
+    """
+    convert a grapheme to a phoneme
+    """
     request_body = {
         'strategy': "grapheme2phoneme",
         'text': input_grapheme.text
@@ -134,11 +154,14 @@ async def grapheme2phoneme(input_grapheme: Grapheme):
     path="/phoneme2grapheme",
     response_model=Grapheme,
     summary="Summary: convert phonemes to graphemes",
-    description="""Description: 
+    description="""Description:
     convert phonemes (perceptually distinct units of sound) to graphemes (smallest functional unit of a writing system)
     """
 )
 async def phoneme2grapheme(input_phoneme: Phoneme):
+    """
+    convert a phoneme to grapheme
+    """
     output = phoneme2grapheme_translate.main(input_phoneme.text)
     return Grapheme(
         name=input_phoneme.name,
@@ -150,13 +173,16 @@ async def phoneme2grapheme(input_phoneme: Phoneme):
     path="/preprocess-sentence",
     response_model=Grapheme,
     summary="Summary: preprocess a sentence",
-    description="""Description: 
+    description="""Description:
     create a space between a word and the punctuation following it eg: "he is a boy." => "he is a boy ."    
     replacing everything with space except (a-z, A-Z, ".", "?", "!", ",")
     add a start and an end token to the sentence so that a model know when to start and stop predicting.
     """
 )
 async def preprocess_sentence(input_grapheme: Grapheme):
+    """
+    preprocess a sentence
+    """
     output = nmt.preprocess_sentence(input_grapheme.text)
     return Grapheme(
         name=input_grapheme.name,
@@ -173,6 +199,9 @@ async def preprocess_sentence(input_grapheme: Grapheme):
     """
 )
 async def translate_spanish_to_english(input_grapheme: SpanishGrapheme):
+    """
+    translate spanish to english
+    """
     output = spa2eng_translate.main(input_grapheme.text)
     return EnglishGrapheme(text=output)
 
@@ -186,5 +215,8 @@ async def translate_spanish_to_english(input_grapheme: SpanishGrapheme):
     """
 )
 async def translate_english_to_spanish(input_grapheme: EnglishGrapheme):
+    """
+    translate english to spanish
+    """
     output = eng2spa_translate.main(input_grapheme.text)
     return EnglishGrapheme(text=output)
