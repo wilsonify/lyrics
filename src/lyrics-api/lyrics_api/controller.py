@@ -24,10 +24,6 @@ import pika
 from fastapi import FastAPI, HTTPException
 from lyrics_api import __version__, AMQP_HOST, AMQP_PORT, AMQP_PASSWORD, AMQP_USERNAME
 from lyrics_api.model import Phoneme, Grapheme, SpanishGrapheme, EnglishGrapheme
-from tensorflow_consumer.translation import nmt
-from tensorflow_consumer.translation.eng2spa import eng2spa_translate
-from tensorflow_consumer.translation.phoneme2grapheme import phoneme2grapheme_translate
-from tensorflow_consumer.translation.spa2eng import spa2eng_translate
 
 
 class RemoteProcedure():
@@ -134,20 +130,6 @@ async def grapheme2phoneme(input_grapheme: Grapheme):
     """
     convert a grapheme to a phoneme
     """
-    request_body = {
-        'strategy': "grapheme2phoneme",
-        'text': input_grapheme.text
-    }
-    rpc = RemoteProcedure(routing_key='python')
-    response_body = rpc.call(request_body)
-    status_code = response_body['status_code']
-    if response_body['status_code'] != 200:
-        status_detail = response_body['detail']
-        raise HTTPException(status_code=status_code, detail=status_detail)
-    return Phoneme(
-        name=input_grapheme.name,
-        text=response_body['output']
-    )
 
 
 @app.post(
@@ -162,10 +144,18 @@ async def phoneme2grapheme(input_phoneme: Phoneme):
     """
     convert a phoneme to grapheme
     """
-    output = phoneme2grapheme_translate.main(input_phoneme.text)
-    return Grapheme(
-        name=input_phoneme.name,
-        text=output
+    request_body = {
+        'strategy': "phoneme2grapheme",
+        'text': input_phoneme.text
+    }
+    rpc = RemoteProcedure(routing_key='python')
+    response_body = rpc.call(request_body)
+    status_code = response_body['status_code']
+    if response_body['status_code'] != 200:
+        status_detail = response_body['detail']
+        raise HTTPException(status_code=status_code, detail=status_detail)
+    return EnglishGrapheme(
+        text=response_body['output']
     )
 
 
@@ -183,10 +173,19 @@ async def preprocess_sentence(input_grapheme: Grapheme):
     """
     preprocess a sentence
     """
-    output = nmt.preprocess_sentence(input_grapheme.text)
-    return Grapheme(
-        name=input_grapheme.name,
-        text=output
+
+    request_body = {
+        'strategy': "preprocess_sentence",
+        'text': input_grapheme.text
+    }
+    rpc = RemoteProcedure(routing_key='python')
+    response_body = rpc.call(request_body)
+    status_code = response_body['status_code']
+    if response_body['status_code'] != 200:
+        status_detail = response_body['detail']
+        raise HTTPException(status_code=status_code, detail=status_detail)
+    return EnglishGrapheme(
+        text=response_body['output']
     )
 
 
@@ -202,8 +201,20 @@ async def translate_spanish_to_english(input_grapheme: SpanishGrapheme):
     """
     translate spanish to english
     """
-    output = spa2eng_translate.main(input_grapheme.text)
-    return EnglishGrapheme(text=output)
+
+    request_body = {
+        'strategy': "spanish_to_english",
+        'text': input_grapheme.text
+    }
+    rpc = RemoteProcedure(routing_key='python')
+    response_body = rpc.call(request_body)
+    status_code = response_body['status_code']
+    if response_body['status_code'] != 200:
+        status_detail = response_body['detail']
+        raise HTTPException(status_code=status_code, detail=status_detail)
+    return EnglishGrapheme(
+        text=response_body['output']
+    )
 
 
 @app.post(
@@ -218,5 +229,21 @@ async def translate_english_to_spanish(input_grapheme: EnglishGrapheme):
     """
     translate english to spanish
     """
-    output = eng2spa_translate.main(input_grapheme.text)
-    return EnglishGrapheme(text=output)
+
+    request_body = {
+        'strategy': "english_to_spanish",
+        'text': input_grapheme.text
+    }
+    rpc = RemoteProcedure(routing_key='python')
+    response_body = rpc.call(request_body)
+    status_code = response_body['status_code']
+    if response_body['status_code'] != 200:
+        status_detail = response_body['detail']
+        raise HTTPException(status_code=status_code, detail=status_detail)
+    return EnglishGrapheme(
+        text=response_body['output']
+    )
+
+
+if __name__ == "__main__":
+    print("I'm the main")
