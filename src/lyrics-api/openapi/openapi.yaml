@@ -1,0 +1,176 @@
+openapi: 3.0.2
+info:
+  title: Data Science API
+  version: 1.0.0
+  description: A REST API for data science tasks
+  contact:
+    name: John Doe
+    email: john.doe@example.com
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+servers:
+  - url: http://localhost:8080
+paths:
+  /preprocess:
+    post:
+      summary: Preprocess a dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: number
+                missing_values:
+                  type: string
+                  enum:
+                    - remove
+                    - mean
+                normalize:
+                  type: boolean
+              required:
+                - data
+      responses:
+        200:
+          description: Preprocessed data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+  /train:
+    post:
+      summary: Train a model on a dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: number
+                label:
+                  type: array
+                  items:
+                    type: number
+                algorithm:
+                  type: string
+                  enum:
+                    - svm
+                    - random_forest
+              required:
+                - data
+                - label
+                - algorithm
+      responses:
+        200:
+          description: Trained model
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  model:
+                    type: object
+                    properties:
+                      ...
+  /predict:
+    post:
+      summary: Make predictions using a trained model
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                model:
+                  type: object
+                  properties:
+                    ...
+                data:
+                  type: array
+                  items:
+                    type: array
+                    items:
+                      type: number
+              required:
+                - model
+                - data
+      responses:
+        200:
+          description: Predictions
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  prediction:
+                    type: array
+                    items:
+                      type: number
+  /evaluate:
+    post:
+      summary: Evaluate a model on a dataset
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                data
+
+  /warm_start_train:
+      post:
+        summary: Update a trained model with new training data
+        requestBody:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  model:
+                    type: object
+                    properties:
+                      ...
+                  data:
+                    type: array
+                    items:
+                      type: array
+                      items:
+                        type: number
+                  label:
+                    type: array
+                    items:
+                      type: number
+                required:
+                  - model
+                  - data
+                  - label
+        responses:
+          200:
+            description: Updated model
+            content:
+              application/json:
+                schema:
+                  type: object
+                  properties:
+                    model:
+                      type: object
+                      properties:
+                        ...
