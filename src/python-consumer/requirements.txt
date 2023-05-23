@@ -2,5 +2,5 @@ pika
 nltk
 music21
 matplotlib
-requests==2.25.1
+requests==2.31.0
 beautifulsoup4==4.9.3
