@@ -1,11 +1,12 @@
 import os
+
+import numpy as np
 import pytest
 import tensorflow as tf
-import numpy as np
-from tensorflow_consumer.translation import nmt
-from tensorflow_consumer.config import DATA_DIR
 
-from sklearn.model_selection import train_test_split
+from tensorflow_consumer.config import DATA_DIR
+from tensorflow_consumer.translation import nmt
+from tensorflow_consumer.translation.nmt import read_lines, lines_to_wordpairs, lines_to_wordpairs2, lines_to_wordpairs3
 
 dirname = os.path.dirname(__file__)
 parent_dirname = os.path.abspath(os.path.join(dirname, os.pardir))
@@ -107,3 +108,63 @@ def test_sample(dataset):
     sample_decoder_output, _, _ = decoder.call(tf.random.uniform((64, 1)), sample_hidden, sample_output)
 
     assert sample_decoder_output.shape == (64, 71)
+
+
+def test_lines_to_wordpairs():
+    path_to_file = os.path.join(parent_dirname, "data", "spa-eng", "spa-sample.txt")
+    lines = read_lines(path_to_file)
+    result = lines_to_wordpairs(lines, 10)
+    assert list(result) == [(
+        '<start> go . <end>', '<start> go . <end>', '<start> go . <end>', '<start> go . <end>', '<start> hi . <end>',
+        '<start> run ! <end>', '<start> run . <end>', '<start> who ? <end>', '<start> fire ! <end>',
+        '<start> fire ! <end>'
+    ), (
+        '<start> ve . <end>', '<start> vete . <end>', '<start> vaya . <end>', '<start> vayase . <end>',
+        '<start> hola . <end>', '<start> corre ! <end>', '<start> corred . <end>',
+        '<start> ¿ quien ? <end>', '<start> fuego ! <end>', '<start> incendio ! <end>'
+    )]
+
+
+def test_lines_to_wordpairs2():
+    path_to_file = os.path.join(parent_dirname, "data", "spa-eng", "spa-sample.txt")
+    lines = read_lines(path_to_file)
+    assert lines[:10] == [
+        'Go.\tVe.',
+        'Go.\tVete.',
+        'Go.\tVaya.',
+        'Go.\tVáyase.',
+        'Hi.\tHola.',
+        'Run!\t¡Corre!',
+        'Run.\tCorred.',
+        'Who?\t¿Quién?',
+        'Fire!\t¡Fuego!',
+        'Fire!\t¡Incendio!'
+    ]
+    result = lines_to_wordpairs2(lines, 10)
+    assert list(result) == [(
+        '<start> go . <end>', '<start> go . <end>', '<start> go . <end>', '<start> go . <end>', '<start> hi . <end>',
+        '<start> run ! <end>', '<start> run . <end>', '<start> who ? <end>', '<start> fire ! <end>',
+        '<start> fire ! <end>'
+    ), (
+        '<start> ve . <end>', '<start> vete . <end>', '<start> vaya . <end>', '<start> vayase . <end>',
+        '<start> hola . <end>', '<start> corre ! <end>', '<start> corred . <end>',
+        '<start> ¿ quien ? <end>', '<start> fuego ! <end>', '<start> incendio ! <end>'
+    )]
+
+
+def test_lines_to_wordpairs3():
+    path_to_file = os.path.join(parent_dirname, "data", "spa-eng", "spa-sample.txt")
+    lines = read_lines(path_to_file)
+    result = lines_to_wordpairs3(lines, 10)
+    assert result == [
+        ['<start> go . <end>', '<start> ve . <end>'],
+        ['<start> go . <end>', '<start> vete . <end>'],
+        ['<start> go . <end>', '<start> vaya . <end>'],
+        ['<start> go . <end>', '<start> vayase . <end>'],
+        ['<start> hi . <end>', '<start> hola . <end>'],
+        ['<start> run ! <end>', '<start> corre ! <end>'],
+        ['<start> run . <end>', '<start> corred . <end>'],
+        ['<start> who ? <end>', '<start> ¿ quien ? <end>'],
+        ['<start> fire ! <end>', '<start> fuego ! <end>'],
+        ['<start> fire ! <end>', '<start> incendio ! <end>']
+    ]

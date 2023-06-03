@@ -25,6 +25,7 @@ import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import numpy as np
 import tensorflow as tf
+
 from tensorflow_consumer.config import DATA_DIR
 from tensorflow_consumer.utils import unzip
 
@@ -71,6 +72,43 @@ def load_dataset(path, num_examples=None):
     target_tensor, targ_lang_tokenizer = tokenize(targ_lang)
 
     return input_tensor, target_tensor, inp_lang_tokenizer, targ_lang_tokenizer
+
+
+def read_lines(path):
+    lines = io.open(path, encoding="UTF-8").read().strip().split("\n")
+    return lines
+
+
+def lines_to_wordpairs(lines, num_examples):
+    word_pairs = [[preprocess_sentence(words) for words in line.split("\t")] for line in lines[:num_examples]]
+    return zip(*word_pairs)
+
+
+def lines_to_wordpairs2(lines, num_examples):
+    word_pairs = []
+    for line in lines[:num_examples]:
+        line1, line2 = line.split("\t")
+        line1 = preprocess_sentence(line1)
+        line2 = preprocess_sentence(line2)
+        word_pairs.append([line1, line2])
+    result = [[], []]
+    for pair in word_pairs:
+        result[0] += [pair[0]]
+        result[1] += [pair[1]]
+    result[0] = tuple(result[0])
+    result[1] = tuple(result[1])
+    result = tuple(result)
+    return result
+
+
+def lines_to_wordpairs3(lines, num_examples):
+    word_pairs = []
+    for line in lines[:num_examples]:
+        line1, line2 = line.split("\t")
+        line1 = preprocess_sentence(line1)
+        line2 = preprocess_sentence(line2)
+        word_pairs.append([line1, line2])
+    return word_pairs
 
 
 def create_dataset(path, num_examples):
