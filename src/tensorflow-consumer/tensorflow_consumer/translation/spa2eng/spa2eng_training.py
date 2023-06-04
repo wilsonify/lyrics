@@ -13,11 +13,11 @@ This example takes approximately 10 minutes to run on a single P100 GPU.
 import os
 import time
 
-import matplotlib.pyplot as plt
-import matplotlib.ticker as ticker
 import numpy as np
 import tensorflow as tf
 from sklearn.model_selection import train_test_split
+
+from plotting_consumer.plot_attention import plot_attention
 from tensorflow_consumer.config import DATA_DIR, CHECKPOINTS_DIR
 from tensorflow_consumer.translation.nmt import (
     download_data,
@@ -120,22 +120,6 @@ def evaluate(sentence):
         dec_input = tf.expand_dims([predicted_id], 0)  # the predicted ID is fed back into the model
 
     return result, sentence, attention_plot
-
-
-def plot_attention(attention, sentence, predicted_sentence):
-    fig = plt.figure(figsize=(10, 10))
-    ax = fig.add_subplot(1, 1, 1)
-    ax.matshow(attention, cmap="viridis")
-
-    fontdict = {"fontsize": 14}
-
-    ax.set_xticklabels([""] + sentence, fontdict=fontdict, rotation=90)
-    ax.set_yticklabels([""] + predicted_sentence, fontdict=fontdict)
-
-    ax.xaxis.set_major_locator(ticker.MultipleLocator(1))
-    ax.yaxis.set_major_locator(ticker.MultipleLocator(1))
-
-    plt.show()
 
 
 def translate(sentence):
