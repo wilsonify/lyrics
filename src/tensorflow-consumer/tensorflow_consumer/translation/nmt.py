@@ -75,7 +75,9 @@ def load_dataset(path, num_examples=None):
 
 
 def read_lines(path):
-    lines = io.open(path, encoding="UTF-8").read().strip().split("\n")
+    lines = io.open(path, encoding="UTF-8").read()
+    lines = lines.strip()
+    lines = lines.split("\n")
     return lines
 
 
@@ -112,18 +114,9 @@ def lines_to_wordpairs3(lines, num_examples):
 
 
 def create_dataset(path, num_examples):
-    """
-    1. Remove the accents
-    2. Clean the sentences
-    3. Return word pairs in the format: [ENGLISH, SPANISH]
-    """
     logging.info("create_dataset")
-    lines = io.open(path, encoding="UTF-8").read().strip().split("\n")
-
-    word_pairs = [
-        [preprocess_sentence(w) for w in l.split("\t")] for l in lines[:num_examples]
-    ]
-
+    lines = read_lines(path)
+    word_pairs = lines_to_wordpairs(lines, num_examples)
     return zip(*word_pairs)
 
 
@@ -133,9 +126,7 @@ def unicode_to_ascii(s_input):
     :param s_input:
     :return:
     """
-    return "".join(
-        c for c in unicodedata.normalize("NFD", s_input) if unicodedata.category(c) != "Mn"
-    )
+    return "".join(c for c in unicodedata.normalize("NFD", s_input) if unicodedata.category(c) != "Mn")
 
 
 def preprocess_sentence(w_input):
@@ -154,14 +145,10 @@ def preprocess_sentence(w_input):
     :return:
     """
     w_input = unicode_to_ascii(w_input.lower().strip())
-
     w_input = re.sub(r"([?.!,¿])", r" \1 ", w_input)
     w_input = re.sub(r"""[" ]+""", " ", w_input)
-
     w_input = re.sub(r"[^a-zA-Z?.!,¿]+", " ", w_input)
-
     w_input = w_input.rstrip().strip()
-
     w_input = "<start> " + w_input + " <end>"
     return w_input
 
@@ -223,20 +210,20 @@ class Encoder(tf.keras.Model):
 class BahdanauAttention(tf.keras.layers.Layer):
     """
     The Attention object
-    pseudo-code:
-    #
-    # * `score = FC(tanh(FC(EO) + FC(H)))`
-    # * `attention weights = softmax(score, axis = 1)`.
-    #   Softmax by default is applied on the last axis but here we want to apply it on the *1st axis*,
-    #   since the shape of score is *(batch_size, max_length, hidden_size)*.
-    #   `Max_length` is the length of our input.
-    #   Since we are trying to assign a weight to each input, softmax should be applied on that axis.
-    # * `context vector = sum(attention weights * EO, axis = 1)`. Same reason as above for choosing axis as 1.
-    # * `embedding output` = The input to the decoder X is passed through an embedding layer.
-    # * `merged vector = concat(embedding output, context vector)`
-    # * This merged vector is then given to the GRU
-    #
-    # The shapes of all the vectors at each step have been specified in the comments in the code:
+    score = FC(tanh(FC(EO) + FC(H)))
+    attention weights = softmax(score, axis = 1)
+    Softmax by default is applied on the last axis but here we want to apply it on the *1st axis*,
+    since the shape of score is *(batch_size, max_length, hidden_size)*.
+    `Max_length` is the length of our input.
+    Since we are trying to assign a weight to each input, softmax should be applied on that axis.
+
+    context vector = sum(attention weights * EO, axis = 1)
+    Same reason as above for choosing axis as 1.
+
+    embedding output = The input to the decoder X is passed through an embedding layer.
+    merged vector = concat(embedding output, context vector)
+    This merged vector is then given to the GRU
+    The shapes of all the vectors at each step have been specified in the comments in the code:
 
     """
 
